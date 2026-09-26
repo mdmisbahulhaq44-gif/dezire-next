@@ -55,7 +55,9 @@ export default async function HomePage() {
   return (
     <div>
       <HeroCarousel slides={heroSlides} />
-      <CategoryTiles categories={categories} />
+      <div style={{ paddingTop: 14 }}>
+        <CategoryTiles categories={categories} />
+      </div>
 
       <div style={{ padding: "30px 5% 10px" }}>
         <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
