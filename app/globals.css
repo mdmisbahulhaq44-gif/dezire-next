@@ -1,11 +1,93 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root{
+--black:#111;
+--white:#fff;
+--cream:#faf9f6;
+--line:#e9e7e2;
+--muted:#777;
+--gold:#b89545;
+--red:#d33;
+--teal:#1a5c4a;
 }
-
-body {
-  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
-  color: #111;
-  background: #fff;
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+-webkit-tap-highlight-color:transparent;
+-webkit-touch-callout:none
 }
+html{scroll-behavior:smooth}
+body{
+color:var(--black);
+background:#fff;
+overflow-x:hidden;
+padding-bottom:calc(64px + env(safe-area-inset-bottom))
+}
+button,input{font-family:inherit}
+button,a{-webkit-tap-highlight-color:transparent;outline:none}
+button:focus,a:focus{outline:none}
+nav.topNav{
+height:46px;padding:0 4%;
+display:flex;align-items:center;
+justify-content:space-between;
+border-bottom:1px solid rgba(255,255,255,.4);
+position:sticky;top:0;z-index:100;
+background:rgba(255,255,255,.65);
+backdrop-filter:blur(20px) saturate(180%);
+-webkit-backdrop-filter:blur(20px) saturate(180%);
+box-shadow:0 1px 20px rgba(0,0,0,.04)
+}
+.navLeft,.navRightIcons{
+display:flex;align-items:center;gap:16px;
+flex:1
+}
+.navRightIcons{justify-content:flex-end}
+.hamburgerBtn{
+background:none;border:0;
+cursor:pointer;padding:6px;color:#111;
+display:flex;flex-direction:column;gap:4px;
+width:24px
+}
+.hamburgerBtn span{
+display:block;height:2px;width:100%;
+background:#111
+}
+.logo{
+font-size:20px;font-weight:600;
+letter-spacing:4px;
+text-align:center
+}
+.iconbtn{
+background:none;border:0;
+width:34px;height:34px;
+cursor:pointer;font-size:19px;
+position:relative;color:#111;
+display:inline-flex;align-items:center;justify-content:center
+}
+.cartCount{
+position:absolute;top:-4px;right:-2px;
+background:var(--red);color:#fff;
+font-size:9px;font-weight:700;
+width:16px;height:16px;border-radius:50%;
+display:flex;align-items:center;justify-content:center
+}
+.bottomNav{
+position:fixed;bottom:0;left:0;right:0;
+background:rgba(255,255,255,.7);
+backdrop-filter:blur(20px) saturate(180%);
+-webkit-backdrop-filter:blur(20px) saturate(180%);
+border-top:1px solid rgba(255,255,255,.5);
+box-shadow:0 -1px 20px rgba(0,0,0,.04);
+display:flex;
+z-index:200;
+padding-bottom:env(safe-area-inset-bottom)
+}
+.bottomNav button{
+flex:1;background:none;border:0;
+display:flex;flex-direction:column;align-items:center;
+gap:3px;padding:9px 0 8px;
+font-size:9px;letter-spacing:.5px;
+color:#888;cursor:pointer;position:relative
+}
+.bottomNav button .bnIcon{line-height:1;position:relative;display:inline-flex}
+.bottomNav button .bnIcon svg{display:block}
+.bottomNav button.active{color:#111}
