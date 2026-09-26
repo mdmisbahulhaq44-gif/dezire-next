@@ -1,34 +1,71 @@
 import { supabase } from "../lib/supabaseClient"
+import HeroCarousel from "../components/HeroCarousel"
+import CategoryTiles from "../components/CategoryTiles"
+import ProductGrid from "../components/ProductGrid"
+
+const DEFAULT_HERO_SLIDES = [
+  { image: "https://res.cloudinary.com/dtdztxbfg/image/upload/v1789381873/IMG_20260914_161653_hbvxqq.png" }
+]
+
+const DEFAULT_HOME_CATEGORIES = [
+  { name: "Women", subtitle: "Discover Collection", image: "" },
+  { name: "Men", subtitle: "Shop Men", image: "" },
+  { name: "New In", subtitle: "Latest Arrivals", image: "" },
+  { name: "Accessories", subtitle: "Complete Your Look", image: "" }
+]
 
 export default async function HomePage() {
-  let productCount = null
-  let errorMessage = null
+  let heroSlides = DEFAULT_HERO_SLIDES
+  let categories = DEFAULT_HOME_CATEGORIES
+  let products = []
 
   try {
-    const { data, error } = await supabase.from("products").select("id")
-    if (error) throw error
-    productCount = data.length
+    const { data: settings } = await supabase
+      .from("settings")
+      .select("key,value")
+      .in("key", ["hero_slides", "homepage_categories"])
+
+    const heroRow = settings?.find(s => s.key === "hero_slides")
+    const catRow = settings?.find(s => s.key === "homepage_categories")
+
+    if (heroRow?.value) {
+      try {
+        const parsed = JSON.parse(heroRow.value)
+        if (Array.isArray(parsed) && parsed.length) heroSlides = parsed
+      } catch (e) {}
+    }
+    if (catRow?.value) {
+      try {
+        const parsed = JSON.parse(catRow.value)
+        if (Array.isArray(parsed) && parsed.length) categories = parsed
+      } catch (e) {}
+    }
+
+    const { data: productRows } = await supabase
+      .from("products")
+      .select("id,name,price,old,badge,imgs,stock,created_at")
+      .order("created_at", { ascending: false })
+      .limit(8)
+
+    products = productRows || []
   } catch (e) {
-    errorMessage = e.message
+    console.error("Homepage data fetch failed:", e)
   }
 
   return (
-    <main style={{ maxWidth: 480, margin: "0 auto", padding: "40px 20px", textAlign: "center" }}>
-      <h1 style={{ fontSize: 28, letterSpacing: 2 }}>DEZIRE</h1>
-      <p style={{ color: "#888", marginTop: 4 }}>Next.js Phase 0 checkpoint</p>
+    <div>
+      <HeroCarousel slides={heroSlides} />
+      <CategoryTiles categories={categories} />
 
-      <div style={{ marginTop: 32, padding: 20, border: "1px solid #eee", borderRadius: 12 }}>
-        {errorMessage ? (
-          <p style={{ color: "crimson" }}>Supabase connection failed: {errorMessage}</p>
-        ) : (
-          <p>Connected to Supabase - <b>{productCount}</b> products found in the catalog.</p>
-        )}
+      <div style={{ padding: "30px 5% 10px" }}>
+        <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
+          New Arrivals
+        </h2>
       </div>
 
-      <p style={{ color: "#888", marginTop: 24, fontSize: 14, lineHeight: 1.6 }}>
-        If the count above matches the real product catalog, both pieces are working. Phase 1
-        replaces this page with the real homepage design.
-      </p>
-    </main>
+      <div style={{ padding: "0 5% 40px" }}>
+        <ProductGrid products={products} />
+      </div>
+    </div>
   )
-}
+                   }
