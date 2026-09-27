@@ -40,4 +40,4 @@ export default async function ProductPage({ params }) {
   const related = (twin ? [twin] : []).concat(rest).slice(0, 4)
 
   return <ProductDetail product={product} related={related} />
-    }
+}
