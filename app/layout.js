@@ -7,6 +7,7 @@ import CartFab from "../components/CartFab"
 import CartPanel from "../components/CartPanel"
 import WishlistPanel from "../components/WishlistPanel"
 import ShopOverlay from "../components/ShopOverlay"
+import Toast from "../components/Toast"
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
           <ShopOverlay />
           <CartPanel />
           <WishlistPanel />
+          <Toast />
         </ShopProvider>
       </body>
     </html>
