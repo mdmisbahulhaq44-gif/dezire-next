@@ -475,3 +475,5 @@ display:none
 .toast.show{display:block}
 
 .product{text-decoration:none;color:inherit;display:block}
+
+.category{text-decoration:none;color:inherit}
