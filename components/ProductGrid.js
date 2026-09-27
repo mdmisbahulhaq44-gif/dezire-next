@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { cldOpt, cldSrcset } from "../lib/cloudinary"
 
 export default function ProductGrid({ products }) {
@@ -12,7 +13,7 @@ export default function ProductGrid({ products }) {
         const lowStock = p.stock !== null && p.stock !== undefined && p.stock > 0 && p.stock <= 5
 
         return (
-          <div className="product" key={p.id}>
+          <Link href={`/product/${p.id}`} className="product" key={p.id}>
             <div className="productImage">
               {p.badge && (
                 <span className={`badge ${p.badge.toLowerCase() === "sale" ? "sale" : ""}`}>{p.badge}</span>
@@ -38,9 +39,9 @@ export default function ProductGrid({ products }) {
             {lowStock && (
               <div style={{ fontSize: 11, color: "var(--red)", marginTop: 3 }}>Only {p.stock} left</div>
             )}
-          </div>
+          </Link>
         )
       })}
     </div>
   )
-}
+                    }
