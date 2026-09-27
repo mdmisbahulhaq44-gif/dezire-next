@@ -6,6 +6,7 @@ import { ShopProvider } from "../components/ShopContext"
 import CartFab from "../components/CartFab"
 import CartPanel from "../components/CartPanel"
 import WishlistPanel from "../components/WishlistPanel"
+import SearchPanel from "../components/SearchPanel"
 import ShopOverlay from "../components/ShopOverlay"
 import Toast from "../components/Toast"
 
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
           <ShopOverlay />
           <CartPanel />
           <WishlistPanel />
+          <SearchPanel />
           <Toast />
         </ShopProvider>
       </body>

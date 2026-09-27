@@ -5,7 +5,7 @@ import { useShop } from './ShopContext'
 
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const { cartCount, openCart, openWishlist } = useShop()
+  const { cartCount, openCart, openWishlist, openSearch } = useShop()
 
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? 'hidden' : ''
@@ -24,7 +24,7 @@ export default function Header() {
         <div className="logo">DEZIRE</div>
 
         <div className="navRightIcons">
-          <button className="iconbtn" aria-label="Search">⌕</button>
+          <button className="iconbtn" aria-label="Search" onClick={openSearch}>⌕</button>
           <button className="iconbtn" aria-label="Wishlist" onClick={openWishlist}>♡</button>
           <button className="iconbtn" aria-label="Cart" onClick={openCart} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
