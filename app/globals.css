@@ -228,3 +228,20 @@ color:#999;text-decoration:line-through;
 font-size:11px;margin-left:6px
 }
 .empty{padding:60px 20px;text-align:center;color:var(--muted)}
+
+nav{
+height:46px;padding:0 4%;
+display:flex;align-items:center;
+justify-content:space-between;
+border-bottom:1px solid rgba(255,255,255,.4);
+position:sticky;top:0;z-index:100;
+background:rgba(255,255,255,.65);
+backdrop-filter:blur(20px) saturate(180%);
+-webkit-backdrop-filter:blur(20px) saturate(180%);
+box-shadow:0 1px 20px rgba(0,0,0,.04)
+}
+
+@media (max-width:600px){
+nav{padding:0 18px}
+.logo{font-size:18px;letter-spacing:3px}
+}
