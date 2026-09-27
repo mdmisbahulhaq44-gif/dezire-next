@@ -1,9 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useShop } from './ShopContext'
 
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const { cartCount, openCart, openWishlist } = useShop()
 
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? 'hidden' : ''
@@ -23,13 +25,13 @@ export default function Header() {
 
         <div className="navRightIcons">
           <button className="iconbtn" aria-label="Search">⌕</button>
-          <button className="iconbtn" aria-label="Wishlist">♡</button>
-          <button className="iconbtn" aria-label="Cart" style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+          <button className="iconbtn" aria-label="Wishlist" onClick={openWishlist}>♡</button>
+          <button className="iconbtn" aria-label="Cart" onClick={openCart} style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
               <path d="M6 8h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"/>
               <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
             </svg>
-            <span className="cartCount" id="cartCountTop" style={{ display: 'none' }}>0</span>
+            <span className="cartCount" style={{ display: cartCount > 0 ? 'flex' : 'none' }}>{cartCount}</span>
           </button>
         </div>
       </nav>
