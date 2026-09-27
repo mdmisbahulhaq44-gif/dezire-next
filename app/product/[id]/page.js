@@ -4,14 +4,20 @@ import ProductDetail from "../../../components/ProductDetail"
 export default async function ProductPage({ params }) {
   const { id } = params
 
-  const { data: product } = await supabase
+  const { data: product, error } = await supabase
     .from("products")
     .select("*")
     .eq("id", id)
     .single()
 
   if (!product) {
-    return <div className="empty" style={{ padding: "80px 20px" }}>Product not found.</div>
+    return (
+      <div className="empty" style={{ padding: "80px 20px" }}>
+        Product not found.<br /><br />
+        <small>id: {id}</small><br />
+        <small>error: {error ? error.message : "none"}</small>
+      </div>
+    )
   }
 
   const { data: sameCategory } = await supabase
