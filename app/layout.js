@@ -2,6 +2,11 @@ import { Quicksand } from "next/font/google"
 import "./globals.css"
 import Header from "../components/Header"
 import BottomNav from "../components/BottomNav"
+import { ShopProvider } from "../components/ShopContext"
+import CartFab from "../components/CartFab"
+import CartPanel from "../components/CartPanel"
+import WishlistPanel from "../components/WishlistPanel"
+import ShopOverlay from "../components/ShopOverlay"
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -18,9 +23,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={quicksand.className}>
-        <Header />
-        {children}
-        <BottomNav />
+        <ShopProvider>
+          <Header />
+          {children}
+          <BottomNav />
+          <CartFab />
+          <ShopOverlay />
+          <CartPanel />
+          <WishlistPanel />
+        </ShopProvider>
       </body>
     </html>
   )
