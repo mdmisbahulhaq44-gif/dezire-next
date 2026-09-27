@@ -1,4 +1,10 @@
+'use client'
+
+import { useShop } from './ShopContext'
+
 export default function BottomNav() {
+  const { cartCount, openCart } = useShop()
+
   return (
     <div className="bottomNav">
       <button className="active">
@@ -22,13 +28,13 @@ export default function BottomNav() {
         </span>
         Category
       </button>
-      <button>
+      <button onClick={openCart}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <path d="M6 8h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"/>
             <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
           </svg>
-          <span className="cartCount" style={{ display: "none" }}>0</span>
+          <span className="cartCount" style={{ display: cartCount > 0 ? "flex" : "none" }}>{cartCount}</span>
         </span>
         Cart
       </button>
@@ -53,4 +59,4 @@ export default function BottomNav() {
       </button>
     </div>
   )
-}
+          }
