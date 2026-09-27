@@ -58,6 +58,7 @@ export function ShopProvider({ children }) {
     activePanel,
     openCart: () => setActivePanel('cart'),
     openWishlist: () => setActivePanel('wishlist'),
+    openSearch: () => setActivePanel('search'),
     closePanel: () => setActivePanel(null),
     addToCart,
     changeQty,
