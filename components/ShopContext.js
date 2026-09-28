@@ -85,6 +85,7 @@ export function ShopProvider({ children }) {
     openCheckout: () => setActivePanel('checkout'),
     openAccount: () => setActivePanel('account'),
     openReset: () => setActivePanel('reset'),
+    openTrack: () => setActivePanel('track'),
     openSuccess: () => setActivePanel('success'),
     closePanel: () => setActivePanel(null),
     addToCart,

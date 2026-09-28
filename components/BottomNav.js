@@ -5,7 +5,7 @@ import { useShop } from './ShopContext'
 
 export default function BottomNav() {
   const router = useRouter()
-  const { cartCount, openCart, openAccount } = useShop()
+  const { cartCount, openCart, openAccount, openTrack } = useShop()
 
   return (
     <div className="bottomNav">
@@ -40,7 +40,7 @@ export default function BottomNav() {
         </span>
         Cart
       </button>
-      <button>
+      <button onClick={openTrack}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <path d="M21 8 12 3 3 8l9 5 9-5Z"/>
