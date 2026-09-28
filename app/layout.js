@@ -9,6 +9,7 @@ import CartPanel from "../components/CartPanel"
 import CheckoutPanel from "../components/CheckoutPanel"
 import WishlistPanel from "../components/WishlistPanel"
 import SearchPanel from "../components/SearchPanel"
+import AccountPanel from "../components/AccountPanel"
 import ShopOverlay from "../components/ShopOverlay"
 import Toast from "../components/Toast"
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children, modal }) {
           <CheckoutPanel />
           <WishlistPanel />
           <SearchPanel />
+          <AccountPanel />
           <Toast />
         </ShopProvider>
       </body>
