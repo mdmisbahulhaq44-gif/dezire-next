@@ -8,24 +8,19 @@
 --red:#d33;
 --teal:#1a5c4a;
 }
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
--webkit-tap-highlight-color:transparent;
--webkit-touch-callout:none
-}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
 html{scroll-behavior:smooth}
 body{
+font-family:Quicksand,sans-serif;
 color:var(--black);
 background:#fff;
-overflow-x:hidden;
-padding-bottom:calc(64px + env(safe-area-inset-bottom))
+overflow-x:hidden
 }
 button,input{font-family:inherit}
 button,a{-webkit-tap-highlight-color:transparent;outline:none}
 button:focus,a:focus{outline:none}
-nav.topNav{
+
+nav{
 height:46px;padding:0 4%;
 display:flex;align-items:center;
 justify-content:space-between;
@@ -36,14 +31,17 @@ backdrop-filter:blur(20px) saturate(180%);
 -webkit-backdrop-filter:blur(20px) saturate(180%);
 box-shadow:0 1px 20px rgba(0,0,0,.04)
 }
-.navLeft,.navRightIcons{
+
+.navLeft, .navRightIcons{
 display:flex;align-items:center;gap:16px;
 flex:1
 }
 .navRightIcons{justify-content:flex-end}
+
 .hamburgerBtn{
 background:none;border:0;
-cursor:pointer;padding:6px;color:#111;
+font-size:22px;cursor:pointer;
+padding:6px;color:#111;
 display:flex;flex-direction:column;gap:4px;
 width:24px
 }
@@ -51,17 +49,27 @@ width:24px
 display:block;height:2px;width:100%;
 background:#111
 }
+
 .logo{
 font-size:20px;font-weight:600;
 letter-spacing:4px;
 text-align:center
 }
+.logo img{height:28px;display:block;margin:0 auto}
+
+.navlinks{
+display:flex;gap:30px;list-style:none
+}
+.navlinks a{
+text-decoration:none;color:#222;
+font-size:12px;letter-spacing:1.5px
+}
+.navright{display:flex;gap:8px}
 .iconbtn{
 background:none;border:0;
 width:34px;height:34px;
 cursor:pointer;font-size:19px;
-position:relative;color:#111;
-display:inline-flex;align-items:center;justify-content:center
+position:relative;color:#111
 }
 .cartCount{
 position:absolute;top:-4px;right:-2px;
@@ -70,6 +78,27 @@ font-size:9px;font-weight:700;
 width:16px;height:16px;border-radius:50%;
 display:flex;align-items:center;justify-content:center
 }
+
+.catTabBar{
+display:flex;
+border-bottom:1px solid var(--line);
+background:#fafafa;
+overflow-x:auto;
+white-space:nowrap
+}
+.catTabBar button{
+flex:1;background:none;border:0;
+padding:14px 10px;
+font-size:11px;font-weight:600;letter-spacing:1px;
+color:#333;cursor:pointer;
+border-right:1px solid var(--line)
+}
+.catTabBar button:last-child{border-right:0}
+.catTabBar button:first-child{
+background:#111;color:#fff
+}
+
+/* BOTTOM MOBILE NAV — Fabrilife style */
 .bottomNav{
 position:fixed;bottom:0;left:0;right:0;
 background:rgba(255,255,255,.7);
@@ -91,6 +120,28 @@ color:#888;cursor:pointer;position:relative
 .bottomNav button .bnIcon{line-height:1;position:relative;display:inline-flex}
 .bottomNav button .bnIcon svg{display:block}
 .bottomNav button.active{color:#111}
+body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+
+/* DRAWER MENU */
+.drawer{
+position:fixed;top:0;bottom:0;left:0;
+width:min(300px,80vw);
+background:#fff;
+z-index:501;
+transform:translateX(-100%);
+transition:transform .3s ease;
+will-change:transform;
+padding:25px 22px;
+overflow:auto
+}
+.drawer.show{transform:translateX(0);box-shadow:2px 0 30px rgba(0,0,0,.08)}
+.drawer a{
+display:block;padding:14px 0;
+text-decoration:none;color:#111;
+font-size:14px;letter-spacing:1px;
+border-bottom:1px solid rgba(0,0,0,.08)
+}
+
 .heroCarousel{
 position:relative;
 width:100%;
@@ -138,6 +189,62 @@ transition:.2s;
 cursor:pointer
 }
 .heroDots span.active{background:#fff;width:18px;border-radius:5px}
+
+.heroText{max-width:650px}
+.tag{
+font-size:11px;letter-spacing:4px;
+margin-bottom:20px
+}
+.hero h1{
+font-size:clamp(45px,7vw,86px);
+line-height:.95;
+font-weight:800;
+margin-bottom:25px
+}
+.hero p{
+max-width:500px;
+line-height:1.8;
+font-size:15px;
+margin-bottom:32px
+}
+.btn{
+display:inline-block;
+padding:15px 30px;
+border:0;
+background:#111;color:white;
+text-decoration:none;
+font-size:11px;
+font-weight:700;
+letter-spacing:2px;
+cursor:pointer;
+border-radius:30px
+}
+.btn.light{
+background:white;color:#111
+}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+.section{padding:75px 5%}
+.heading{
+display:flex;
+justify-content:space-between;
+align-items:end;
+margin-bottom:35px
+}
+.small{
+font-size:10px;
+letter-spacing:3px;
+color:var(--gold);
+font-weight:700;
+margin-bottom:8px
+}
+.heading h2{
+font-size:38px;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:1px
+}
+
 .categories{
 display:grid;
 grid-template-columns:1fr;
@@ -180,6 +287,79 @@ margin-top:4px;color:rgba(255,255,255,.95);
 font-weight:500;
 text-shadow:0 1px 3px rgba(0,0,0,.5)
 }
+
+.hubTiles{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px
+}
+.hubTiles .category{
+aspect-ratio:3/4;
+padding:14px;
+border-radius:18px
+}
+.hubTiles .catText{
+display:inline-block;
+max-width:100%;
+background:rgba(0,0,0,.3);
+backdrop-filter:blur(3px);
+-webkit-backdrop-filter:blur(3px);
+border-radius:8px;
+padding:6px 10px
+}
+.hubTiles .catText h3{
+font-size:11px;letter-spacing:.5px;
+display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+overflow:hidden
+}
+.hubTiles .catText span{font-size:9px}
+
+/* Single-product hub tiles (leaf groups) — shown as a plain card with
+   the image on top and the name/price below it, like a normal product
+   card, instead of text stacked over the photo. */
+.hubTiles .leafTile{
+background:none;padding:0;display:block;
+aspect-ratio:auto;color:#111;border-radius:0
+}
+.hubTiles .leafTile:after{display:none}
+.hubTiles .leafImg{
+aspect-ratio:3/4;
+background:#f4f4f4 no-repeat center/cover;
+border-radius:6px
+}
+.hubTiles .leafInfo{padding:10px 2px 0}
+.hubTiles .leafInfo h3{
+font-size:12.5px;font-weight:400;letter-spacing:0;
+text-transform:none;color:#333;
+margin-bottom:3px;
+display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+overflow:hidden;
+line-height:1.35;
+min-height:2.7em
+}
+.hubTiles .leafInfo .leafPrice{font-weight:700;font-size:13.5px;color:#111}
+
+.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:14px}
+.breadcrumb a{color:var(--muted);text-decoration:none}
+.breadcrumb a:hover{color:#111}
+
+.filters{
+display:flex;gap:8px;
+margin-bottom:30px;
+flex-wrap:wrap
+}
+.filter{
+border:1px solid var(--line);
+background:white;
+padding:9px 17px;
+border-radius:30px;
+font-size:11px;
+cursor:pointer
+}
+.filter.active,.filter:hover{
+background:#111;color:white;border-color:#111
+}
+
 .products{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -198,9 +378,28 @@ justify-content:center
 }
 .productImage img{
 width:100%;height:100%;
-object-fit:cover
+object-fit:cover;
+transition:transform .4s ease
 }
-.placeholder{font-size:55px}
+.product:hover .productImage img{
+transform:scale(1.06)
+}
+
+@keyframes skeletonPulse{
+0%{opacity:.6} 50%{opacity:1} 100%{opacity:.6}
+}
+.skeletonCard .productImage{
+background:#eee;
+animation:skeletonPulse 1.4s ease-in-out infinite
+}
+.skeletonLine{
+height:12px;background:#eee;border-radius:4px;margin-top:12px;
+animation:skeletonPulse 1.4s ease-in-out infinite
+}
+.skeletonLine.short{width:60%}
+.placeholder{
+font-size:55px
+}
 .badge{
 position:absolute;
 top:12px;left:12px;
@@ -222,43 +421,105 @@ overflow:hidden;
 line-height:1.35;
 min-height:2.7em
 }
+.brand{display:none}
 .price{font-weight:700;font-size:13.5px;color:#111}
 .old{
 color:#999;text-decoration:line-through;
 font-size:11px;margin-left:6px
 }
-.empty{padding:60px 20px;text-align:center;color:var(--muted)}
 
-nav{
-height:46px;padding:0 4%;
-display:flex;align-items:center;
-justify-content:space-between;
-border-bottom:1px solid rgba(255,255,255,.4);
-position:sticky;top:0;z-index:100;
-background:rgba(255,255,255,.65);
-backdrop-filter:blur(20px) saturate(180%);
--webkit-backdrop-filter:blur(20px) saturate(180%);
-box-shadow:0 1px 20px rgba(0,0,0,.04)
+.promo{
+margin:20px 5% 75px;
+padding:70px 7%;
+border-radius:18px;
+background:#111;color:white
 }
-
-@media (max-width:600px){
-nav{padding:0 18px}
-.logo{font-size:18px;letter-spacing:3px}
+.promo h2{
+font-size:45px;
+font-weight:800;
+margin-bottom:15px
 }
-/* HAMBURGER */
-.hamburgerBtn{
-background:none;border:0;
-font-size:22px;cursor:pointer;
-padding:6px;color:#111;
-display:flex;flex-direction:column;gap:4px;
-width:24px
-}
-.hamburgerBtn span{
-display:block;height:2px;width:100%;
-background:#111
+.promo p{
+color:#bbb;
+margin-bottom:25px
 }
 
-/* OVERLAY */
+.features{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:18px 5% 22px;
+border-top:1px solid var(--line);
+border-bottom:1px solid var(--line)
+}
+.feature{
+flex:1 0 auto;
+min-width:130px;
+padding:14px 16px;
+border-radius:14px;
+background:var(--cream);
+display:flex;
+align-items:center;
+gap:10px
+}
+.feature .featIcon{
+width:36px;height:36px;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:16px;flex-shrink:0;
+background:linear-gradient(135deg,#f5e6d3,#e8c9a8)
+}
+.feature b{display:block;font-size:12px;margin-bottom:2px}
+.feature span{
+font-size:9.5px;color:var(--muted);
+line-height:1.4;
+display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden
+}
+
+.news{
+background:#f5f4f1;
+padding:70px 20px;
+text-align:center
+}
+.news h2{font-size:35px;margin-bottom:10px}
+.news p{color:var(--muted);margin-bottom:25px}
+.newsform{
+max-width:450px;margin:auto;
+display:flex
+}
+.newsform input{
+flex:1;padding:15px;
+border:1px solid #ddd;
+outline:none
+}
+.newsform button{
+padding:15px 25px;
+border:0;background:#111;color:white;
+font-weight:700
+}
+
+footer{
+background:#111;color:white;
+padding:65px 5% 35px
+}
+.footergrid{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+gap:40px;
+margin-bottom:45px
+}
+footer h3{margin-bottom:15px}
+footer p,footer a{
+color:#999;font-size:12px;
+line-height:2;
+text-decoration:none
+}
+.copy{
+border-top:1px solid #333;
+padding-top:25px;
+color:#777;font-size:11px
+}
+
+/* OVERLAYS */
 .overlay{
 position:fixed;inset:0;
 background:rgba(0,0,0,.35);
@@ -269,32 +530,6 @@ display:none
 }
 .overlay.show{display:block}
 
-/* DRAWER MENU */
-.drawer{
-position:fixed;top:0;bottom:0;left:0;
-width:min(300px,80vw);
-background:#fff;
-z-index:501;
-transform:translateX(-100%);
-transition:transform .3s ease;
-will-change:transform;
-padding:25px 22px;
-overflow:auto
-}
-.drawer.show{transform:translateX(0);box-shadow:2px 0 30px rgba(0,0,0,.08)}
-.drawer a{
-display:block;padding:14px 0;
-text-decoration:none;color:#111;
-font-size:14px;letter-spacing:1px;
-border-bottom:1px solid rgba(0,0,0,.08)
-}
-.close{
-border:0;background:#f4f4f4;
-width:34px;height:34px;
-border-radius:50%;cursor:pointer
-}
-
-/* PANELS (cart, wishlist, etc.) */
 .panel{
 position:fixed;top:0;bottom:0;
 right:0;width:min(430px,100%);
@@ -312,6 +547,93 @@ left:0;right:auto;
 transform:translateX(-100%)
 }
 .panel.left.show{transform:translateX(0);box-shadow:2px 0 30px rgba(0,0,0,.08)}
+
+/* Product detail specifically opens as a plain full-page swap (fade +
+subtle slide, no full directional drawer) — closer to how a real page
+navigation feels, rather than a side drawer. Slowed down and eased (was
+a flat 0.18s fade) so it reads as a smooth transition instead of an
+abrupt on/off flash. Other panels (cart, wishlist, login, ...) keep the
+normal slide-in-from-right drawer behavior above. */
+#productPanel{transform:translateY(14px);opacity:0;pointer-events:none;transition:opacity .38s cubic-bezier(.22,.61,.36,1),transform .38s cubic-bezier(.22,.61,.36,1)}
+#productPanel.show{transform:translateY(0);opacity:1;pointer-events:auto;box-shadow:none}
+
+/* Where the native View Transitions API is available, it takes over
+entirely (see withViewTransition() in the JS) — the browser cross-fades
+a before/after screenshot of the whole page itself, which is a closer
+match to a real page navigation than any hand-written CSS transition
+can be. Turning our own opacity/transform transition off here for that
+case avoids the two visibly fighting each other. */
+@supports (view-transition-name: none){
+#productPanel, #productPanel.show{transition:none}
+::view-transition-old(root),
+::view-transition-new(root){
+animation-duration:.32s;
+animation-timing-function:cubic-bezier(.22,.61,.36,1);
+}
+}
+
+.pdCartFab{
+position:fixed;
+left:22px;
+/* Always the same distance above where the bottom nav sits (64px tall +
+safe-area), whether or not the nav is actually visible right now — so the
+button never overlaps the nav on Home/Category, and stays in the exact
+same on-screen spot when the nav is hidden (e.g. on the product page). */
+bottom:calc(64px + env(safe-area-inset-bottom) + 14px);
+width:52px;height:52px;
+background:#fff;
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 6px 16px rgba(0,0,0,.2);
+z-index:510;
+border:1px solid #eee;cursor:pointer
+}
+.pdCartFab:active{transform:scale(0.94)}
+.pdCartFab .fabCount{
+position:absolute;top:-4px;left:-4px;
+background:#111;color:#fff;
+font-size:10px;font-weight:700;
+width:18px;height:18px;border-radius:50%;
+display:flex;align-items:center;justify-content:center
+}
+
+.trackStep{display:flex;gap:14px}
+.trackStep .trackDot{
+width:26px;height:26px;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:13px;flex-shrink:0;font-weight:700
+}
+.trackStep .trackLine{
+width:2px;flex:1;margin:2px 0;min-height:24px
+}
+.trackStep.done .trackDot{background:#1c8a45;color:#fff}
+.trackStep.done .trackLine{background:#1c8a45}
+.trackStep.current .trackDot{background:#111;color:#fff}
+.trackStep.current .trackLine{background:#e2e2e2}
+.trackStep.pending .trackDot{background:#eee;color:#aaa}
+.trackStep.pending .trackLine{background:#e2e2e2}
+.trackStepCol{display:flex;flex-direction:column;align-items:center}
+.trackStepBody{padding-bottom:22px}
+.trackStepBody .trackTitle{font-weight:700;font-size:14px}
+.trackStepBody .trackDesc{font-size:12px;color:var(--muted);margin-top:3px}
+.trackStepBody .trackTime{font-size:10px;color:#bbb;margin-top:2px}
+
+.riderPhoneRow{
+display:inline-flex;align-items:center;gap:7px;
+margin-top:6px
+}
+.riderPhoneNum{
+color:var(--black);font-weight:500;font-size:13px;
+text-decoration:none
+}
+.copyIconBtn{
+background:none;border:1px solid var(--line);border-radius:6px;
+width:24px;height:24px;
+display:flex;align-items:center;justify-content:center;
+color:#555;cursor:pointer;flex-shrink:0
+}
+.copyIconBtn:active{background:var(--cream)}
+
 .panelHead{
 display:flex;
 justify-content:space-between;
@@ -320,26 +642,184 @@ border-bottom:1px solid rgba(0,0,0,.08);
 padding-bottom:18px;
 margin-bottom:25px
 }
+.close{
+border:0;background:#f4f4f4;
+width:34px;height:34px;
+border-radius:50%;cursor:pointer
+}
 
-/* BUTTONS */
-.btn{
-display:inline-block;
-padding:15px 30px;
-border:0;
-background:#111;color:white;
-text-decoration:none;
-font-size:11px;
-font-weight:700;
-letter-spacing:2px;
+.form{
+display:flex;
+flex-direction:column;
+gap:12px
+}
+.form input,.form select,.form textarea{
+padding:14px;
+border:1px solid #ddd;
+outline:none;
+border-radius:14px;
+font-size:13px;
+width:100%
+}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:#111}
+.form textarea{resize:vertical;min-height:70px}
+.form label{font-size:11px;letter-spacing:1px;color:var(--muted);margin-bottom:-6px}
+.radioRow{display:flex;gap:16px;font-size:13px}
+
+/* Clean bordered "pick" buttons — used for Delivery Method and Address
+Type so they read exactly like the Region/City/Area pickerField buttons
+above them, instead of a separate boxed-list style. */
+.optionPick{
+display:flex;align-items:center;gap:10px;
+padding:14px;
+border:1.5px solid #bbb;
+border-radius:14px;
 cursor:pointer;
-border-radius:30px
+transition:border-color .15s ease,background .15s ease
 }
-.btn.light{
-background:white;color:#111
-}
-.btn:disabled{opacity:.5;cursor:not-allowed}
+.optionPick:has(input:checked){border-color:#222;background:#f7f7f5}
+.optionPick input[type="radio"]{width:17px;height:17px;accent-color:#222;flex-shrink:0;cursor:pointer}
+.optionPick .opIcon{display:flex;flex-shrink:0;color:#333}
+.optionPick .opTitle{font-size:13px;font-weight:600;color:#111}
+.radioRow label{display:flex;align-items:center;gap:6px;color:#111;letter-spacing:0}
 
-/* CART ITEMS */
+/* Delivery/payment method rows — one bordered box per group, rows
+divided by hairlines instead of each option being its own separate
+pill, so the two sections read as calm, organized lists rather than a
+scatter of differently-styled controls. */
+.methodBox{
+border:1.5px solid #ddd;
+border-radius:14px;
+overflow:hidden
+}
+.methodRow{
+display:flex;align-items:center;gap:12px;
+padding:11px 14px;
+border-bottom:1px solid #eee;
+cursor:pointer
+}
+.methodRow:last-child{border-bottom:0}
+.methodRow input[type="radio"]{
+width:17px;height:17px;
+accent-color:#222;
+flex-shrink:0;
+cursor:pointer
+}
+.methodRow .methodBody{flex:1;min-width:0}
+.methodRow .methodTitle{font-size:13.5px;font-weight:600;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.methodRow .methodDesc{font-size:11.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+.methodRow .methodRight{font-size:12.5px;font-weight:600;color:var(--muted);flex-shrink:0;text-align:right}
+.methodRow{transition:background .15s ease}
+.methodRow:has(input:checked){background:#f7faf8}
+
+/* Payment Method — plain expanding list (reference-style): radio + title
+on one line, a light description panel that opens only for the selected
+option. Delivery Method above keeps the old boxed .methodRow style;
+this is scoped to payment only so nothing else on the page changes. */
+.payMethodList{border-top:1px solid var(--line)}
+.payOption{display:block;padding:14px 2px;border-bottom:1px solid var(--line);cursor:pointer}
+.payOptionHead{display:flex;align-items:center;gap:10px}
+.payOptionHead input[type=radio]{width:19px;height:19px;accent-color:#222;flex-shrink:0}
+.payOptionTitle{font-size:15.5px;font-weight:600;color:#222}
+.payOptionDesc{display:none;margin:10px 0 0 29px;background:#f7f7f5;border-radius:8px;padding:12px 14px;font-size:12.5px;color:var(--muted)}
+.payOption:has(input:checked) .payOptionDesc{display:block}
+.paymentLogosRow{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:12px;min-height:32px}
+.paymentLogosRow img{height:28px;max-width:100px;object-fit:contain;display:block}
+.payLogo{display:block;height:24px;margin-top:8px}
+
+.pickerField{
+display:flex;align-items:center;justify-content:space-between;
+padding:14px;
+border:1.5px solid #bbb;
+border-radius:14px;
+font-size:13px;
+width:100%;
+background:white;
+text-align:left;
+color:#111;
+cursor:pointer;
+transition:border-color .15s ease
+}
+.pickerField:active,.pickerField:focus{border-color:#111}
+.pickerField.placeholder{color:#777}
+.pickerField:disabled{opacity:.45;cursor:not-allowed;background:#fafafa}
+.pickerField .chev{color:#555;font-size:12px;margin-left:8px}
+
+#coSubArea{display:none !important}
+.pickerSheet{
+position:fixed;top:0;left:0;right:0;
+height:100dvh;
+background:white;
+z-index:600;
+display:none;
+flex-direction:column
+}
+.pickerSheet.open{display:flex}
+.pickerSheetHead{
+padding:16px 18px 12px;
+border-bottom:1px solid var(--line);
+flex-shrink:0
+}
+.pickerSheetHead h2{font-size:16px;margin-bottom:12px}
+.pickerSearchBox{
+position:relative
+}
+.pickerSearchBox input{
+width:100%;
+padding:13px 16px 13px 40px;
+border:1px solid #ddd;
+border-radius:30px;
+font-size:13px;
+outline:none;
+background:#fafafa
+}
+.pickerSearchBox input:focus{border-color:#111;background:white}
+.pickerSearchBox::before{
+content:"⌕";
+position:absolute;left:15px;top:50%;transform:translateY(-50%);
+font-size:16px;color:#999
+}
+.pickerSheetClose{
+position:absolute;top:14px;right:16px;
+width:32px;height:32px;border-radius:50%;
+background:#f4f4f4;border:0;
+font-size:16px;cursor:pointer
+}
+.pickerList{
+flex:1;overflow-y:auto;
+padding:6px 8px 30px
+}
+.pickerRow{
+display:flex;align-items:center;justify-content:space-between;
+padding:15px 14px;
+border-radius:12px;
+cursor:pointer;
+font-size:14px
+}
+.pickerRow:hover,.pickerRow:active{background:#f7f7f7}
+.pickerRow.selected{background:#111;color:white}
+.pickerRow .check{color:var(--gold);font-weight:800}
+.pickerRow.selected .check{color:white}
+.pickerEmpty{
+text-align:center;color:var(--muted);
+padding:40px 20px;font-size:13px
+}
+
+.accountTabs{
+display:flex;
+margin-bottom:25px;
+border-bottom:1px solid #ddd
+}
+.accountTabs button{
+flex:1;padding:13px;
+border:0;background:white;
+cursor:pointer
+}
+.accountTabs button.active{
+font-weight:700;
+border-bottom:2px solid #111
+}
+
 .cartItem{
 display:flex;
 gap:12px;
@@ -370,30 +850,44 @@ cursor:pointer;font-size:13px;line-height:1
 background:none;border:0;color:var(--red);
 font-size:11px;cursor:pointer;text-decoration:underline
 }
+
+.sizePillRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pdSizeSelect{
+width:100%;margin-top:8px;
+padding:14px 40px 14px 16px;
+border:1px solid #d6d6d6;border-radius:4px;
+font-size:14px;color:#333;background:#fff;
+-webkit-appearance:none;appearance:none;
+background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>');
+background-repeat:no-repeat;background-position:right 14px center;
+cursor:pointer
+}
+.pdSizeSelect:focus{border-color:#111;outline:none}
+.pdSizeClear{
+display:inline-block;margin-top:8px;
+font-size:10px;letter-spacing:1px;color:var(--muted);
+text-decoration:underline;text-transform:uppercase;
+background:none;border:0;padding:0;cursor:pointer
+}
+.sizePill{
+border:1px solid var(--line);background:#fff;color:#111;
+min-width:42px;height:38px;padding:0 12px;border-radius:8px;
+font-size:13px;font-weight:600;cursor:pointer;letter-spacing:0.5px
+}
+.sizePill.active{background:#111;color:#fff;border-color:#111}
+.sizePill.disabled{color:#ccc;border-color:#eee;cursor:not-allowed;text-decoration:line-through}
+.sizeChartRow{cursor:pointer}
+.sizeChartRow:active{background:var(--cream)}
+.sizeChartRow.selected td:first-child{color:var(--gold)}
+
+.empty{
+text-align:center;
+padding:60px 10px;
+color:#888
+}
+
 .summaryRow{display:flex;justify-content:space-between;font-size:13px;margin-bottom:10px;color:#444}
 .summaryRow.total{font-size:16px;font-weight:800;color:#111;margin-top:15px}
-
-/* CART FAB */
-.pdCartFab{
-position:fixed;
-left:22px;
-bottom:calc(64px + env(safe-area-inset-bottom) + 14px);
-width:52px;height:52px;
-background:#fff;
-border-radius:50%;
-display:flex;align-items:center;justify-content:center;
-box-shadow:0 6px 16px rgba(0,0,0,.2);
-z-index:510;
-border:1px solid #eee;cursor:pointer
-}
-.pdCartFab:active{transform:scale(0.94)}
-.pdCartFab .fabCount{
-position:absolute;top:-4px;left:-4px;
-background:#111;color:#fff;
-font-size:10px;font-weight:700;
-width:18px;height:18px;border-radius:50%;
-display:flex;align-items:center;justify-content:center
-}
 
 /* PRODUCT DETAIL GALLERY */
 .pdGallery{
@@ -437,26 +931,6 @@ transition:.2s
 }
 .pdDots span.active{background:#fff;width:18px;border-radius:5px}
 
-.pdSizeSelect{
-width:100%;margin-top:8px;
-padding:14px 40px 14px 16px;
-border:1px solid #d6d6d6;border-radius:4px;
-font-size:14px;color:#333;background:#fff;
--webkit-appearance:none;appearance:none;
-background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%23555" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>');
-background-repeat:no-repeat;background-position:right 14px center;
-cursor:pointer
-}
-.pdSizeSelect:focus{border-color:#111;outline:none}
-.pdSizeClear{
-display:inline-block;margin-top:8px;
-font-size:10px;letter-spacing:1px;color:var(--muted);
-text-decoration:underline;text-transform:uppercase;
-background:none;border:0;padding:0;cursor:pointer
-}
-
-.brand{display:none}
-
 .toast{
 position:fixed;
 bottom:25px;
@@ -474,38 +948,186 @@ display:none
 }
 .toast.show{display:block}
 
-.product{text-decoration:none;color:inherit;display:block}
-
-.category{text-decoration:none;color:inherit}
-
-.form{
+/* ADMIN */
+#adminPage{display:none}
+.admin{
+min-height:100vh;
+background:#f5f5f5;
+display:flex
+}
+.adminSide{
+width:240px;
+background:#111;color:white;
+padding:25px;
+min-height:100vh
+}
+.adminLogo{
+font-size:20px;font-weight:800;
+margin-bottom:45px
+}
+.adminSide button{
+display:flex;align-items:center;gap:10px;
+width:100%;
+text-align:left;
+padding:13px 10px;
+background:none;border:0;
+color:#aaa;cursor:pointer;
+margin-bottom:4px;
+border-radius:7px;
+font-size:13px
+}
+.adminSide button:hover,
+.adminSide button.active{
+background:#292929;color:white
+}
+.adminSide button.soon{
+color:#555;cursor:default;
+justify-content:space-between
+}
+.adminSide button.soon:hover{background:none}
+.adminSide button.soon span.tag{
+font-size:9px;background:#292929;color:#888;
+padding:2px 7px;border-radius:20px;letter-spacing:0.5px
+}
+.adminMain{
+flex:1;padding:35px;
+min-width:0;overflow-x:hidden
+}
+.adminTop{
 display:flex;
-flex-direction:column;
-gap:12px
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px
 }
-.form input,.form select,.form textarea{
-padding:14px;
-border:1px solid #ddd;
-outline:none;
-border-radius:14px;
-font-size:13px;
-width:100%
+.dashboard{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px
 }
-.form input:focus,.form select:focus,.form textarea:focus{border-color:#111}
-
-.filters{
-display:flex;gap:8px;
-margin-bottom:30px;
-flex-wrap:wrap
-}
-.filter{
-border:1px solid var(--line);
+.stat{
 background:white;
-padding:9px 17px;
-border-radius:30px;
-font-size:11px;
+padding:22px 25px;
+border-radius:14px;
+border:1px solid #eee;
+display:flex;align-items:center;gap:16px;
+transition:box-shadow .2s ease;
+min-width:0
+}
+.stat:hover{box-shadow:0 6px 20px rgba(0,0,0,.06)}
+.stat .statIcon{
+width:44px;height:44px;border-radius:12px;
+display:flex;align-items:center;justify-content:center;
+font-size:19px;flex-shrink:0
+}
+.stat>div{min-width:0}
+.stat small{color:#888;letter-spacing:0.5px;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.stat h2{margin-top:4px;font-size:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adminTable{
+margin-top:25px;
+background:white;
+padding:25px;
+border-radius:14px;
+border:1px solid #eee;
+overflow:auto
+}
+table{
+width:100%;
+border-collapse:collapse;
+font-size:12px
+}
+th{
+padding:12px 14px;
+text-align:left;
+border-bottom:2px solid #eee;
+color:#888;font-size:10px;
+letter-spacing:0.5px;text-transform:uppercase
+}
+td{
+padding:14px;
+text-align:left;
+border-bottom:1px solid #f2f2f2
+}
+tbody tr:hover td{background:#fafafa}
+.adminBack{
+background:#111;color:white;
+border:0;padding:10px 18px;
+border-radius:20px;
 cursor:pointer
 }
-.filter.active,.filter:hover{
-background:#111;color:white;border-color:#111
+.statusBadge{
+display:inline-block;padding:4px 11px;
+border-radius:20px;font-size:10px;
+font-weight:700;letter-spacing:0.4px
 }
+.statusBadge.pending{background:#fff3d6;color:#966600}
+.statusBadge.processing{background:#dceaff;color:#1a5bb8}
+.statusBadge.shipped{background:#e9ddff;color:#6934c9}
+.statusBadge.delivered{background:#dcf5e3;color:#1c8a45}
+.statusBadge.cancelled{background:#fde0e0;color:#c0392b}
+.adminSearchRow{
+display:flex;gap:10px;margin-bottom:18px
+}
+.adminSearchRow input{
+flex:1;padding:11px 15px;border:1px solid var(--line);
+border-radius:10px;font-size:13px;background:#fafafa
+}
+
+.admin{overflow-x:hidden}
+
+@media(min-width:901px){
+.products{grid-template-columns:repeat(4,1fr);gap:22px}
+}
+
+@media(max-width:900px){
+.navlinks{display:none}
+.footergrid{grid-template-columns:1fr 1fr}
+.dashboard{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:600px){
+nav{padding:0 18px}
+.logo{font-size:18px;letter-spacing:3px}
+.section{padding:55px 18px}
+.catText h3{font-size:15px;letter-spacing:1.5px}
+.products{gap:12px}
+.heading h2{font-size:28px}
+.promo{margin:10px 18px 55px;padding:45px 25px}
+.promo h2{font-size:32px}
+.footergrid{grid-template-columns:1fr}
+.admin{display:block}
+.adminSide{
+width:100%;
+display:flex;
+overflow-x:auto;
+padding:14px 14px 10px;
+gap:6px;
+min-height:auto;
+position:sticky;top:0;z-index:50
+}
+.adminLogo{display:none}
+.adminSide button{
+white-space:nowrap;
+width:auto;flex-shrink:0;
+margin-bottom:0;
+padding:9px 16px;
+font-size:12px
+}
+.adminMain{padding:20px}
+.dashboard{gap:10px}
+.stat{padding:14px 12px;gap:10px}
+.stat .statIcon{width:36px;height:36px;font-size:15px;border-radius:10px}
+.stat h2{font-size:16px;margin-top:2px}
+.dashRecentOrders{padding:18px 14px}
+.dashRecentOrders table{table-layout:fixed}
+.dashRecentOrders th,.dashRecentOrders td{padding:10px 6px;font-size:11px}
+.dashRecentOrders th:nth-child(1),.dashRecentOrders td:nth-child(1){width:34%}
+.dashRecentOrders th:nth-child(2),.dashRecentOrders td:nth-child(2){width:36%}
+.dashRecentOrders th:nth-child(3),.dashRecentOrders td:nth-child(3){width:30%}
+}
+@media(max-width:900px){#testimonialsWrap{grid-template-columns:1fr}}
+
+/* ---- Next.js adapters (the only non-original rules) ----
+   Original used <button>/<div> with inline onclick; Next.js <Link> renders <a>,
+   so these keep links looking exactly like the original elements. */
+a.product{text-decoration:none;color:inherit;display:block}
+a.category{text-decoration:none;color:inherit}
