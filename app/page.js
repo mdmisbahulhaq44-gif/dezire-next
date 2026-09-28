@@ -18,6 +18,7 @@ export default async function HomePage() {
   let heroSlides = DEFAULT_HERO_SLIDES
   let categories = DEFAULT_HOME_CATEGORIES
   let products = []
+  let reviews = []
 
   try {
     const { data: settings } = await supabase
@@ -48,6 +49,17 @@ export default async function HomePage() {
       .limit(8)
 
     products = productRows || []
+
+    const { data: reviewRows } = await supabase
+      .from("reviews")
+      .select("name,rating,comment")
+      .gte("rating", 4)
+      .not("comment", "is", null)
+      .neq("comment", "")
+      .order("created_at", { ascending: false })
+      .limit(3)
+
+    reviews = reviewRows || []
   } catch (e) {
     console.error("Homepage data fetch failed:", e)
   }
@@ -68,6 +80,67 @@ export default async function HomePage() {
       <div style={{ padding: "0 5% 40px" }}>
         <ProductGrid products={products} />
       </div>
+
+      <section className="features">
+        <div className="feature">
+          <div style={{ fontSize: 25 }}>🚚</div>
+          <div>
+            <b>Fast Delivery</b>
+            <span>Nationwide delivery across Bangladesh.</span>
+          </div>
+        </div>
+
+        <div className="feature">
+          <div style={{ fontSize: 25 }}>↩️</div>
+          <div>
+            <b>Easy Returns</b>
+            <span>Simple return experience for eligible products.</span>
+          </div>
+        </div>
+
+        <div className="feature">
+          <div style={{ fontSize: 25 }}>🔒</div>
+          <div>
+            <b>Secure Checkout</b>
+            <span>Your customer information stays protected.</span>
+          </div>
+        </div>
+
+        <div className="feature">
+          <div style={{ fontSize: 25 }}>💬</div>
+          <div>
+            <b>Customer Support</b>
+            <span>We're here to help with your orders.</span>
+          </div>
+        </div>
+      </section>
+
+      {reviews.length > 0 && (
+        <>
+          <section className="section" id="testimonials" style={{ paddingBottom: 0 }}>
+            <div className="heading">
+              <div>
+                <h2>What Our Customers Say</h2>
+              </div>
+            </div>
+            <div id="testimonialsWrap" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+              {reviews.map((r, i) => {
+                const n = Math.round(r.rating)
+                return (
+                  <div key={i} style={{ border: "1px solid var(--line)", borderRadius: 12, padding: 22 }}>
+                    <div style={{ color: "var(--gold)", fontSize: 14, marginBottom: 10 }}>
+                      {"★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n)}
+                    </div>
+                    <p style={{ fontSize: 13, color: "#444", lineHeight: 1.7, marginBottom: 14 }}>{'"' + r.comment + '"'}</p>
+                    <div style={{ fontSize: 12, fontWeight: 700 }}>{"— " + r.name}</div>
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+          <style>{"@media(max-width:900px){#testimonialsWrap{grid-template-columns:1fr}}"}</style>
+        </>
+      )}
     </div>
   )
 }

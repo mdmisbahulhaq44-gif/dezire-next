@@ -1,10 +1,14 @@
+"use client"
+
 import Link from "next/link"
+import { useShop } from "./ShopContext"
 
 // Static pages (contact / terms / refund / privacy) still live on the old
 // GitHub Pages site until they are migrated, so link there for now.
 const OLD = "https://mdmisbahulhaq44-gif.github.io"
 
 export default function Footer() {
+  const { openAbout, openTrack } = useShop()
   return (
     <footer>
       <div className="footergrid">
@@ -15,7 +19,7 @@ export default function Footer() {
             Discover our latest collections and find
             your signature style.
           </p>
-          <p>About Us</p>
+          <p><a href="#" onClick={e => { e.preventDefault(); openAbout() }}>About Us</a></p>
         </div>
 
         <div>
@@ -31,7 +35,7 @@ export default function Footer() {
           <p><a href={`${OLD}/contact.html`}>Contact Us</a></p>
           <p><a href={`${OLD}/terms.html`}>Shipping</a></p>
           <p><a href={`${OLD}/refund-policy.html`}>Returns</a></p>
-          <p>Track Order</p>
+          <p onClick={openTrack} style={{ cursor: "pointer" }}>Track Order</p>
         </div>
 
         <div>
