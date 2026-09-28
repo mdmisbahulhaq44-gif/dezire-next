@@ -24,7 +24,7 @@ export default function ProductDetail({ product, related }) {
   const chartSizes = Object.keys(chart)
   const hasChart = chartSizes.length > 0
 
-  const [shown, setShown] = useState(false)
+  const shown = true
   const [index, setIndex] = useState(0)
   const [size, setSize] = useState('')
   const [qty, setQty] = useState(1)
@@ -38,11 +38,6 @@ export default function ProductDetail({ product, related }) {
   const inStock = Number(product.stock) > 0
   const lowStock = inStock && Number(product.stock) <= 5
   const measurements = size && chart[size] ? Object.entries(chart[size]) : []
-
-  useEffect(() => {
-    const t = requestAnimationFrame(() => setShown(true))
-    return () => cancelAnimationFrame(t)
-  }, [])
 
   const loadReviews = useCallback(async () => {
     const { data, error } = await supabase
@@ -127,7 +122,7 @@ export default function ProductDetail({ product, related }) {
 
   return (
     <>
-      <div className={`panel${shown ? ' show' : ''}`} id="productPanel">
+      <div className={`panel${shown ? ' show' : ''}`} id="productPanel" style={{ overscrollBehavior: 'contain' }}>
         <div className="panelHead">
           <h2>Product Details</h2>
           <button className="close" onClick={closeProduct}>×</button>
@@ -227,7 +222,7 @@ export default function ProductDetail({ product, related }) {
           {related.length > 0 && (
             <div style={{ borderTop: '1px solid rgba(0,0,0,.08)', marginTop: 30, paddingTop: 20 }}>
               <div style={{ fontSize: 11, letterSpacing: 2, color: 'var(--muted)', marginBottom: 14 }}>YOU MAY ALSO LIKE</div>
-              <ProductGrid products={related} />
+              <ProductGrid products={related} replaceLinks />
             </div>
           )}
 

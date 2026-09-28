@@ -23,13 +23,14 @@ export const metadata = {
   description: "DEZIRE - Premium men's and women's clothing in Bangladesh."
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, modal }) {
   return (
     <html lang="en">
       <body className={quicksand.className}>
         <ShopProvider>
           <Header />
           {children}
+          {modal}
           <Footer />
           <BottomNav />
           <CartFab />

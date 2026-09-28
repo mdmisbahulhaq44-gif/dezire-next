@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { cldOpt, cldSrcset } from "../lib/cloudinary"
 
-export default function ProductGrid({ products }) {
+export default function ProductGrid({ products, replaceLinks }) {
   if (!products.length) {
     return <div className="empty">No products available right now.</div>
   }
@@ -13,7 +13,7 @@ export default function ProductGrid({ products }) {
         const lowStock = p.stock !== null && p.stock !== undefined && p.stock > 0 && p.stock <= 5
 
         return (
-          <Link href={`/product/${p.id}`} className="product" key={p.id}>
+          <Link href={`/product/${p.id}`} className="product" key={p.id} replace={replaceLinks}>
             <div className="productImage">
               {p.badge && (
                 <span className={`badge ${p.badge.toLowerCase() === "sale" ? "sale" : ""}`}>{p.badge}</span>
