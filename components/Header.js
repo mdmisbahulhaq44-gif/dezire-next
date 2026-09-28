@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useShop } from './ShopContext'
 
 export default function Header() {
-  const { cartCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer, openTrack } = useShop()
+  const { cartCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer, openTrack, openAbout } = useShop()
 
   return (
     <>
@@ -41,7 +41,7 @@ export default function Header() {
         <Link href="/shop/men" onClick={closeDrawer}>Men</Link>
         <Link href="/#women" onClick={closeDrawer}>Accessories</Link>
         <Link href="/#new" onClick={closeDrawer}>Sale</Link>
-        <a href="#" onClick={e => { e.preventDefault(); closeDrawer() }}>About Us</a>
+        <a href="#" onClick={e => { e.preventDefault(); closeDrawer(); openAbout() }}>About Us</a>
         <a href="#" onClick={e => { e.preventDefault(); closeDrawer(); openTrack() }}>Track Order</a>
       </div>
     </>
