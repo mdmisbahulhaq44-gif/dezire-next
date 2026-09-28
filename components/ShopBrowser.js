@@ -21,7 +21,7 @@ const pillStyle = {
   background: 'white'
 }
 
-export default function ShopBrowser({ products, heading, initialGender }) {
+export default function ShopBrowser({ products, heading, initialGender, hideGenderTabs, breadcrumb }) {
   const [gender, setGender] = useState(initialGender || 'ALL')
   const [sort, setSort] = useState('newest')
   const [boxOpen, setBoxOpen] = useState(false)
@@ -84,13 +84,14 @@ export default function ShopBrowser({ products, heading, initialGender }) {
   return (
     <div>
       <div style={{ padding: '30px 5% 10px' }}>
+        {breadcrumb}
         <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1 }}>
           {heading}
         </h2>
       </div>
 
       <div style={{ padding: '0 5% 40px' }}>
-        <div className="filters" style={{ marginBottom: 16 }}>
+        <div className="filters" style={{ marginBottom: 16, display: hideGenderTabs ? "none" : undefined }}>
           {[['ALL', 'ALL'], ['men', 'MEN'], ['women', 'WOMEN']].map(([val, label]) => (
             <button
               key={val}

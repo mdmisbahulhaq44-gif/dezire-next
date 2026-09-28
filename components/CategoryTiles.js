@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { cldOpt } from "../lib/cloudinary"
+import { buildShopPath } from "../lib/categories"
 
 export default function CategoryTiles({ categories }) {
   return (
@@ -11,7 +12,10 @@ export default function CategoryTiles({ categories }) {
         if (gender) params.set("gender", gender)
         if (category) params.set("cat", category)
         const qs = params.toString()
-        const href = "/shop" + (qs ? `?${qs}` : "")
+        const href =
+          gender === "men" || gender === "women"
+            ? buildShopPath(gender, category.split("/").map(s => s.trim()).filter(Boolean))
+            : "/shop" + (qs ? `?${qs}` : "")
 
         return (
           <Link
