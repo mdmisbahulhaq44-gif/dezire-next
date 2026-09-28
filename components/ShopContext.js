@@ -11,6 +11,7 @@ export function ShopProvider({ children }) {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [toastMsg, setToastMsg] = useState('')
   const [toastShow, setToastShow] = useState(false)
+  const [lastOrder, setLastOrder] = useState(null)
   const toastTimer = useRef(null)
 
   useEffect(() => { setCart(getCart()) }, [])
@@ -66,6 +67,10 @@ export function ShopProvider({ children }) {
     persist(cart.filter(i => !(i.id === id && (i.size || null) === (size || null))))
   }
 
+  function clearCart() {
+    persist([])
+  }
+
   const value = {
     cart,
     cartCount: cartCount(cart),
@@ -77,10 +82,15 @@ export function ShopProvider({ children }) {
     openCart: () => setActivePanel('cart'),
     openWishlist: () => setActivePanel('wishlist'),
     openSearch: () => setActivePanel('search'),
+    openCheckout: () => setActivePanel('checkout'),
+    openSuccess: () => setActivePanel('success'),
     closePanel: () => setActivePanel(null),
     addToCart,
     changeQty,
     removeFromCart,
+    clearCart,
+    lastOrder,
+    setLastOrder,
     toastMsg,
     toastShow,
     showToast

@@ -4,7 +4,7 @@ import { useShop } from './ShopContext'
 import { cldOpt } from '../lib/cloudinary'
 
 export default function CartPanel() {
-  const { cart, cartSubtotal, activePanel, closePanel, changeQty, removeFromCart } = useShop()
+  const { cart, cartSubtotal, activePanel, closePanel, changeQty, removeFromCart, openCheckout } = useShop()
   const show = activePanel === 'cart'
 
   return (
@@ -48,7 +48,7 @@ export default function CartPanel() {
         <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 10 }} onClick={closePanel}>
           CONTINUE SHOPPING
         </button>
-        <button className="btn light" style={{ border: '1.5px solid #111', padding: '14px 46px' }} disabled={cart.length === 0}>
+        <button className="btn light" style={{ border: '1.5px solid #111', padding: '14px 46px' }} disabled={cart.length === 0} onClick={openCheckout}>
           CHECKOUT
         </button>
       </div>
