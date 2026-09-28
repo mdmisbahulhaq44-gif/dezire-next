@@ -1,35 +1,56 @@
 import { supabase } from "../../../lib/supabaseClient"
 import ProductDetail from "../../../components/ProductDetail"
+import { cldOpt } from "../../../lib/cloudinary"
+
+const CARD_FIELDS = "id,name,brand,price,old,badge,imgs,stock,color_name,color_group"
+
+export async function generateMetadata({ params }) {
+  const { id } = await params
+  const { data: p } = await supabase
+    .from("products")
+    .select("id,name,brand,price,stock,imgs")
+    .eq("id", id)
+    .maybeSingle()
+  if (!p) return { title: "Product not found — DEZIRE" }
+
+  const firstImg = p.imgs ? p.imgs.split(",")[0].trim() : ""
+  const title = `${p.name} — DEZIRE`
+  const description = `${p.name}${p.brand ? " by " + p.brand : ""} — ৳${Number(p.price).toLocaleString()} at DEZIRE. ${Number(p.stock) > 0 ? "In stock now" : "Currently out of stock"}, nationwide cash-on-delivery in Bangladesh.`
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      ...(firstImg ? { images: [cldOpt(firstImg, 1200)] } : {})
+    }
+  }
+}
 
 export default async function ProductPage({ params }) {
   const { id } = await params
 
-  const { data: product, error } = await supabase
+  const { data: product } = await supabase
     .from("products")
     .select("*")
     .eq("id", id)
-    .single()
+    .maybeSingle()
 
   if (!product) {
-    return (
-      <div className="empty" style={{ padding: "80px 20px" }}>
-        Product not found.<br /><br />
-        <small>id: {id}</small><br />
-        <small>error: {error ? error.message : "none"}</small>
-      </div>
-    )
+    return <div className="empty" style={{ padding: "80px 20px" }}>Product not found.</div>
   }
 
   const { data: sameCategory } = await supabase
     .from("products")
-    .select("id,name,price,old,badge,imgs,stock")
+    .select(CARD_FIELDS)
     .eq("cat", product.cat)
     .neq("id", product.id)
-    .limit(8)
+    .order("created_at", { ascending: false })
+    .limit(12)
 
   const { data: twinRows } = await supabase
     .from("products")
-    .select("id,name,price,old,badge,imgs,stock")
+    .select(CARD_FIELDS)
     .eq("name", product.name)
     .neq("id", product.id)
     .neq("gender", product.gender)
@@ -39,5 +60,30 @@ export default async function ProductPage({ params }) {
   const rest = (sameCategory || []).filter(p => p.id !== twin?.id)
   const related = (twin ? [twin] : []).concat(rest).slice(0, 4)
 
-  return <ProductDetail product={product} related={related} />
+  // Schema.org Product block (name, image, price, stock) for Google rich results.
+  const images = (product.imgs ? product.imgs.split(",").map(s => s.trim()).filter(Boolean) : []).map(u => cldOpt(u, 1200))
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    image: images,
+    brand: { "@type": "Brand", name: product.brand || "DEZIRE" },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "BDT",
+      price: String(product.price),
+      availability: Number(product.stock) > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      ...(process.env.NEXT_PUBLIC_SITE_URL ? { url: `${process.env.NEXT_PUBLIC_SITE_URL}/product/${product.id}` } : {})
+    }
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
+      <ProductDetail key={product.id} product={product} related={related} />
+    </>
+  )
 }

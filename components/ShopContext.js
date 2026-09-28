@@ -33,7 +33,7 @@ export function ShopProvider({ children }) {
     toastTimer.current = setTimeout(() => setToastShow(false), 2500)
   }
 
-  function addToCart(product, size = null) {
+  function addToCart(product, size = null, qty = 1) {
     if (Number(product.stock) <= 0) {
       showToast('This item is out of stock.')
       return
@@ -41,7 +41,7 @@ export function ShopProvider({ children }) {
     const existing = cart.find(i => i.id === product.id && (i.size || null) === size)
     let next
     if (existing) {
-      next = cart.map(i => i === existing ? { ...i, qty: i.qty + 1 } : i)
+      next = cart.map(i => i === existing ? { ...i, qty: i.qty + qty } : i)
     } else {
       next = [...cart, {
         id: product.id,
@@ -49,7 +49,7 @@ export function ShopProvider({ children }) {
         price: Number(product.price),
         imgs: product.imgs,
         size,
-        qty: 1
+        qty
       }]
     }
     persist(next)
@@ -83,6 +83,7 @@ export function ShopProvider({ children }) {
     openWishlist: () => setActivePanel('wishlist'),
     openSearch: () => setActivePanel('search'),
     openCheckout: () => setActivePanel('checkout'),
+    openAccount: () => setActivePanel('account'),
     openSuccess: () => setActivePanel('success'),
     closePanel: () => setActivePanel(null),
     addToCart,
