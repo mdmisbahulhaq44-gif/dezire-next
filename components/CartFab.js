@@ -3,7 +3,8 @@
 import { useShop } from './ShopContext'
 
 export default function CartFab() {
-  const { cartCount, openCart } = useShop()
+  const { cartCount, openCart, activePanel, drawerOpen } = useShop()
+  if (activePanel || drawerOpen) return null
   return (
     <button type="button" className="pdCartFab" onClick={openCart} title="View cart" aria-label="View cart">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
@@ -13,4 +14,4 @@ export default function CartFab() {
       {cartCount > 0 && <span className="fabCount">{cartCount}</span>}
     </button>
   )
-      }
+}

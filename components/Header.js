@@ -1,22 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { useShop } from './ShopContext'
 
 export default function Header() {
-  const [drawerOpen, setDrawerOpen] = useState(false)
-  const { cartCount, openCart, openWishlist, openSearch } = useShop()
-
-  useEffect(() => {
-    document.body.style.overflow = drawerOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [drawerOpen])
+  const { cartCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer } = useShop()
 
   return (
     <>
       <nav>
         <div className="navLeft">
-          <button className="hamburgerBtn" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
+          <button className="hamburgerBtn" onClick={openDrawer} aria-label="Open menu">
             <span></span><span></span><span></span>
           </button>
         </div>
@@ -36,19 +29,19 @@ export default function Header() {
         </div>
       </nav>
 
-      <div className={`overlay${drawerOpen ? ' show' : ''}`} onClick={() => setDrawerOpen(false)}></div>
+      <div className={`overlay${drawerOpen ? ' show' : ''}`} onClick={closeDrawer}></div>
       <div className={`drawer${drawerOpen ? ' show' : ''}`}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 25 }}>
           <div className="logo" style={{ fontSize: 18 }}>DEZIRE</div>
-          <button className="close" onClick={() => setDrawerOpen(false)}>×</button>
+          <button className="close" onClick={closeDrawer}>×</button>
         </div>
-        <a href="#new" onClick={() => setDrawerOpen(false)}>New Arrivals</a>
-        <a href="#women" onClick={() => setDrawerOpen(false)}>Women</a>
-        <a href="#men" onClick={() => setDrawerOpen(false)}>Men</a>
-        <a href="#accessories" onClick={() => setDrawerOpen(false)}>Accessories</a>
-        <a href="#new" onClick={() => setDrawerOpen(false)}>Sale</a>
-        <a href="#" onClick={() => setDrawerOpen(false)}>About Us</a>
-        <a href="#" onClick={() => setDrawerOpen(false)}>Track Order</a>
+        <a href="#new" onClick={closeDrawer}>New Arrivals</a>
+        <a href="#women" onClick={closeDrawer}>Women</a>
+        <a href="#men" onClick={closeDrawer}>Men</a>
+        <a href="#accessories" onClick={closeDrawer}>Accessories</a>
+        <a href="#new" onClick={closeDrawer}>Sale</a>
+        <a href="#" onClick={closeDrawer}>About Us</a>
+        <a href="#" onClick={closeDrawer}>Track Order</a>
       </div>
     </>
   )
