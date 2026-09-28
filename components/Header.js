@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useShop } from './ShopContext'
 
 export default function Header() {
@@ -35,13 +36,13 @@ export default function Header() {
           <div className="logo" style={{ fontSize: 18 }}>DEZIRE</div>
           <button className="close" onClick={closeDrawer}>×</button>
         </div>
-        <a href="#new" onClick={closeDrawer}>New Arrivals</a>
-        <a href="#women" onClick={closeDrawer}>Women</a>
-        <a href="#men" onClick={closeDrawer}>Men</a>
-        <a href="#accessories" onClick={closeDrawer}>Accessories</a>
-        <a href="#new" onClick={closeDrawer}>Sale</a>
-        <a href="#" onClick={closeDrawer}>About Us</a>
-        <a href="#" onClick={closeDrawer}>Track Order</a>
+        <Link href="/#new" onClick={closeDrawer}>New Arrivals</Link>
+        <Link href="/#women" onClick={closeDrawer}>Women</Link>
+        <Link href="/#women" onClick={closeDrawer}>Men</Link>
+        <Link href="/#women" onClick={closeDrawer}>Accessories</Link>
+        <Link href="/#new" onClick={closeDrawer}>Sale</Link>
+        <a href="#" onClick={e => { e.preventDefault(); closeDrawer() }}>About Us</a>
+        <a href="#" onClick={e => { e.preventDefault(); closeDrawer() }}>Track Order</a>
       </div>
     </>
   )

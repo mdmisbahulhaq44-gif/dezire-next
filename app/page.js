@@ -55,11 +55,11 @@ export default async function HomePage() {
   return (
     <div>
       <HeroCarousel slides={heroSlides} />
-      <div style={{ paddingTop: 14 }}>
+      <div id="women" style={{ paddingTop: 14, scrollMarginTop: 46 }}>
         <CategoryTiles categories={categories} />
       </div>
 
-      <div style={{ padding: "30px 5% 10px" }}>
+      <div id="new" style={{ padding: "30px 5% 10px", scrollMarginTop: 46 }}>
         <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
           New Arrivals
         </h2>
@@ -70,4 +70,4 @@ export default async function HomePage() {
       </div>
     </div>
   )
-                   }
+}

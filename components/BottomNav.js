@@ -1,13 +1,15 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useShop } from './ShopContext'
 
 export default function BottomNav() {
+  const router = useRouter()
   const { cartCount, openCart } = useShop()
 
   return (
     <div className="bottomNav">
-      <button className="active">
+      <button className="active" onClick={() => { router.push('/'); window.scrollTo(0, 0) }}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <path d="M3 10.5 12 3l9 7.5"/>
@@ -17,7 +19,7 @@ export default function BottomNav() {
         </span>
         Home
       </button>
-      <button>
+      <button onClick={() => router.push('/#new')}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <rect x="3.5" y="3.5" width="7" height="7" rx="1"/>
@@ -59,4 +61,4 @@ export default function BottomNav() {
       </button>
     </div>
   )
-          }
+}
