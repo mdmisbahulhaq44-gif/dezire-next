@@ -2,6 +2,7 @@ import { Quicksand } from "next/font/google"
 import "./globals.css"
 import Header from "../components/Header"
 import BottomNav from "../components/BottomNav"
+import Footer from "../components/Footer"
 import { ShopProvider } from "../components/ShopContext"
 import CartFab from "../components/CartFab"
 import CartPanel from "../components/CartPanel"
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         <ShopProvider>
           <Header />
           {children}
+          <Footer />
           <BottomNav />
           <CartFab />
           <ShopOverlay />
