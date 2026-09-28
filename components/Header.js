@@ -37,8 +37,8 @@ export default function Header() {
           <button className="close" onClick={closeDrawer}>×</button>
         </div>
         <Link href="/#new" onClick={closeDrawer}>New Arrivals</Link>
-        <Link href="/#women" onClick={closeDrawer}>Women</Link>
-        <Link href="/#women" onClick={closeDrawer}>Men</Link>
+        <Link href="/shop/women" onClick={closeDrawer}>Women</Link>
+        <Link href="/shop/men" onClick={closeDrawer}>Men</Link>
         <Link href="/#women" onClick={closeDrawer}>Accessories</Link>
         <Link href="/#new" onClick={closeDrawer}>Sale</Link>
         <a href="#" onClick={e => { e.preventDefault(); closeDrawer() }}>About Us</a>
