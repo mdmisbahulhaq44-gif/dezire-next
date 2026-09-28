@@ -1130,4 +1130,4 @@ font-size:12px
    Original used <button>/<div> with inline onclick; Next.js <Link> renders <a>,
    so these keep links looking exactly like the original elements. */
 a.product{text-decoration:none;color:inherit;display:block}
-a.category{text-decoration:none;color:inherit}
+a.category{text-decoration:none;color:#fff}
