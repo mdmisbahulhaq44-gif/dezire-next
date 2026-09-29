@@ -15,6 +15,7 @@ import AboutUsPanel from "../components/AboutUsPanel"
 import ShopOverlay from "../components/ShopOverlay"
 import Toast from "../components/Toast"
 import Analytics from "../components/Analytics"
+import NavTransition from "../components/NavTransition"
 import ServiceWorkerRegister from "../components/ServiceWorkerRegister"
 
 const quicksand = Quicksand({
@@ -52,6 +53,7 @@ export default function RootLayout({ children, modal }) {
           <AboutUsPanel />
           <Toast />
           <Analytics />
+          <NavTransition />
           <ServiceWorkerRegister />
         </ShopProvider>
       </body>

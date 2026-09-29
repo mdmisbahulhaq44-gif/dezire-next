@@ -14,7 +14,7 @@ export default function ProductGrid({ products, replaceLinks }) {
         const lowStock = p.stock !== null && p.stock !== undefined && p.stock > 0 && p.stock <= 5
 
         return (
-          <Link href={`/product/${p.id}`} className="product" key={p.id} replace={replaceLinks}>
+          <Link href={`/product/${p.id}`} className="product" key={p.id} replace={replaceLinks} data-replace={replaceLinks ? "1" : undefined}>
             <div className="productImage" style={{ position: "relative" }}>
               {p.badge && (
                 <span className={`badge ${p.badge.toLowerCase() === "sale" ? "sale" : ""}`}>{p.badge}</span>
