@@ -3,7 +3,7 @@
 --white:#fff;
 --cream:#faf9f6;
 --line:#e9e7e2;
---muted:#777;
+--muted:#666;
 --gold:#b89545;
 --red:#d33;
 --teal:#1a5c4a;
@@ -424,7 +424,7 @@ min-height:2.7em
 .brand{display:none}
 .price{font-weight:700;font-size:13.5px;color:#111}
 .old{
-color:#999;text-decoration:line-through;
+color:#595959;text-decoration:line-through;
 font-size:11px;margin-left:6px
 }
 

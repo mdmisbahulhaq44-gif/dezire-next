@@ -319,28 +319,28 @@ export default function CheckoutPanel() {
 
           {method === 'home_delivery' ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <label>REGION</label>
-              <select value={region} onChange={e => onRegion(e.target.value)}>
+              <label htmlFor="coRegion">REGION</label>
+              <select id="coRegion" aria-label="Select Region" value={region} onChange={e => onRegion(e.target.value)}>
                 <option value="">Select Region</option>
                 {regions.map(r => <option key={r.id} value={r.label}>{r.label}</option>)}
               </select>
 
-              <label>CITY</label>
-              <select value={city} onChange={e => onCity(e.target.value)} disabled={!cities.length}>
+              <label htmlFor="coCity">CITY</label>
+              <select id="coCity" aria-label="Select City" value={city} onChange={e => onCity(e.target.value)} disabled={!cities.length}>
                 <option value="">Select City</option>
                 {cities.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
               </select>
 
-              <label>AREA</label>
-              <select value={area} onChange={e => onArea(e.target.value)} disabled={!areas.length}>
+              <label htmlFor="coArea">AREA</label>
+              <select id="coArea" aria-label="Select Area" value={area} onChange={e => onArea(e.target.value)} disabled={!areas.length}>
                 <option value="">Select Area</option>
                 {areas.map(a => <option key={a.id} value={a.label}>{a.label}</option>)}
               </select>
 
               {areas.length > 0 && (
                 <>
-                  <label>{city === DHAKA_CITY ? 'SUB AREA (OPTIONAL)' : 'UNION'}</label>
-                  <select value={subArea} onChange={e => setSubArea(e.target.value)} disabled={!subAreas.length}>
+                  <label htmlFor="coSubArea">{city === DHAKA_CITY ? 'SUB AREA (OPTIONAL)' : 'UNION'}</label>
+                  <select id="coSubArea" aria-label={city === DHAKA_CITY ? 'Select Subarea' : 'Select Union'} value={subArea} onChange={e => setSubArea(e.target.value)} disabled={!subAreas.length}>
                     <option value="">{city === DHAKA_CITY ? 'Select Subarea' : 'Select Union'}</option>
                     {subAreas.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>

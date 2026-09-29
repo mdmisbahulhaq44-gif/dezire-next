@@ -35,8 +35,10 @@ export default function RootLayout({ children, modal }) {
       <body className={quicksand.className}>
         <ShopProvider>
           <Header />
-          {children}
-          {modal}
+          <main id="main-content">
+            {children}
+            {modal}
+          </main>
           <Footer />
           <BottomNav />
           <CartFab />
