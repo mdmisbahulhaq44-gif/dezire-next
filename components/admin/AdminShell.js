@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import AdminDashboard from './AdminDashboard'
 import AdminProducts from './AdminProducts'
 import AdminOrders from './AdminOrders'
+import AdminCustomers from './AdminCustomers'
 
 const SECTIONS = [
   { key: 'dashboard', label: '📊 Dashboard' },
@@ -25,6 +26,7 @@ const TITLES = {
 export default function AdminShell() {
   const router = useRouter()
   const [section, setSection] = useState('dashboard')
+  const [ordersSearch, setOrdersSearch] = useState('')
 
   return (
     <div className="admin">
@@ -52,8 +54,8 @@ export default function AdminShell() {
 
         {section === 'dashboard' && <AdminDashboard onNav={setSection} />}
         {section === 'products' && <AdminProducts />}
-        {section === 'orders' && <AdminOrders />}
-        {section === 'customers' && <div className="adminTable"><h2>Customers</h2><p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 10 }}>Coming next.</p></div>}
+        {section === 'orders' && <AdminOrders initialSearch={ordersSearch} />}
+        {section === 'customers' && <AdminCustomers onViewOrders={phone => { setOrdersSearch(phone); setSection('orders') }} />}
         {section === 'settings' && <div className="adminTable"><h2>Site Settings</h2><p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 10 }}>Coming next.</p></div>}
       </main>
     </div>

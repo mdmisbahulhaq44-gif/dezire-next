@@ -76,10 +76,10 @@ function ProductChips({ items, allProducts }) {
   )
 }
 
-export default function AdminOrders() {
+export default function AdminOrders({ initialSearch }) {
   const { showToast } = useShop()
   const [cache, setCache] = useState(null)
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(initialSearch || '')
   const [allProducts, setAllProducts] = useState([])
 
   async function load() {
@@ -97,6 +97,7 @@ export default function AdminOrders() {
   }
 
   useEffect(() => { load() }, [])
+  useEffect(() => { if (initialSearch) setSearch(initialSearch) }, [initialSearch])
 
   const list = useMemo(() => {
     if (!cache) return []
