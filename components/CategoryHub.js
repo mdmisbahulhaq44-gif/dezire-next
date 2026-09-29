@@ -13,7 +13,7 @@ export default function CategoryHub({ gender, path, heading, subs }) {
           {subs.map(s => (
             <Link
               key={s.seg}
-              href={buildShopPath(gender, [...path, s.seg])}
+              href={s.count === 1 && s.id ? `/product/${s.id}` : buildShopPath(gender, [...path, s.seg])}
               className="category"
               style={
                 s.image
