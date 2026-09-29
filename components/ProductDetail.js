@@ -52,6 +52,12 @@ export default function ProductDetail({ product, related }) {
 
   useEffect(() => { loadReviews() }, [loadReviews])
 
+  useEffect(() => {
+    if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_ids: [String(product.id)], content_type: 'product', content_name: product.name, value: Number(product.price), currency: 'BDT' })
+    if (typeof window.gtag === 'function') window.gtag('event', 'view_item', { currency: 'BDT', value: Number(product.price), items: [{ item_id: String(product.id), item_name: product.name, price: Number(product.price) }] })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product.id])
+
   const list = Array.isArray(reviews) ? reviews : null
   const avg = list && list.length ? list.reduce((s, r) => s + r.rating, 0) / list.length : 0
 

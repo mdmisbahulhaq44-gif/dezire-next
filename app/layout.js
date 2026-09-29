@@ -14,6 +14,7 @@ import TrackOrderPanel from "../components/TrackOrderPanel"
 import AboutUsPanel from "../components/AboutUsPanel"
 import ShopOverlay from "../components/ShopOverlay"
 import Toast from "../components/Toast"
+import Analytics from "../components/Analytics"
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({ children, modal }) {
           <TrackOrderPanel />
           <AboutUsPanel />
           <Toast />
+          <Analytics />
         </ShopProvider>
       </body>
     </html>

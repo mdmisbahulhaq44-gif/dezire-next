@@ -233,6 +233,9 @@ export default function CheckoutPanel() {
 
       const purchaseTotal = cartSubtotal - discount + charge
 
+      if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: purchaseTotal, currency: 'BDT', content_ids: cart.map(i => String(i.id)), content_type: 'product', num_items: cart.reduce((s, i) => s + i.qty, 0) })
+      if (typeof window.gtag === 'function') window.gtag('event', 'purchase', { transaction_id: orderRef, value: purchaseTotal, currency: 'BDT', items: cart.map(i => ({ item_id: String(i.id), item_name: i.name, price: i.price, quantity: i.qty })) })
+
       if (payment === 'ONLINE') {
         try {
           const { data: chargeData, error: chargeError } = await supabase.functions.invoke('create-charge', {

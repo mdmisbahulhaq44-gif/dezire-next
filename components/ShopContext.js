@@ -54,6 +54,9 @@ export function ShopProvider({ children }) {
     }
     persist(next)
     showToast(product.name + (size ? ` (Size: ${size})` : '') + ' added to cart')
+
+    if (typeof window.fbq === 'function') window.fbq('track', 'AddToCart', { content_ids: [String(product.id)], content_type: 'product', content_name: product.name, value: Number(product.price), currency: 'BDT' })
+    if (typeof window.gtag === 'function') window.gtag('event', 'add_to_cart', { currency: 'BDT', value: Number(product.price), items: [{ item_id: String(product.id), item_name: product.name, price: Number(product.price) }] })
   }
 
   function changeQty(id, size, delta) {
