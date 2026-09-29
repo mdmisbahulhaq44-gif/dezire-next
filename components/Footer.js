@@ -35,9 +35,9 @@ export default function Footer() {
 
         <div>
           <h3>HELP</h3>
-          <p><a href={`${OLD}/contact.html`}>Contact Us</a></p>
-          <p><a href={`${OLD}/terms.html`}>Shipping</a></p>
-          <p><a href={`${OLD}/refund-policy.html`}>Returns</a></p>
+          <p><a href="/contact">Contact Us</a></p>
+          <p><a href="/terms">Shipping</a></p>
+          <p><a href="/refund-policy">Returns</a></p>
           <p onClick={openTrack} style={{ cursor: "pointer" }}>Track Order</p>
         </div>
 
@@ -51,8 +51,8 @@ export default function Footer() {
 
       <div className="copy">
         © 2026 DEZIRE. All rights reserved. ·{" "}
-        <a href={`${OLD}/privacy.html`} style={{ color: "#999" }}>Privacy Policy</a> ·{" "}
-        <a href={`${OLD}/terms.html`} style={{ color: "#999" }}>Terms &amp; Conditions</a>
+        <a href="/privacy" style={{ color: "#999" }}>Privacy Policy</a> ·{" "}
+        <a href="/terms" style={{ color: "#999" }}>Terms &amp; Conditions</a>
       </div>
     </footer>
   )
