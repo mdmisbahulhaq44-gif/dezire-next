@@ -4,6 +4,7 @@ import { capitalize, getSubcategories, getProductsAtPath, buildShopPath } from "
 import Breadcrumb from "../../../../components/Breadcrumb"
 import CategoryHub from "../../../../components/CategoryHub"
 import ShopBrowser from "../../../../components/ShopBrowser"
+export const revalidate = 60
 
 function dec(s) {
   try { return decodeURIComponent(s) } catch (e) { return s }
