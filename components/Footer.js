@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useShop } from "./ShopContext"
+import { usePathname } from "next/navigation"
 
 // Static pages (contact / terms / refund / privacy) still live on the old
 // GitHub Pages site until they are migrated, so link there for now.
@@ -9,6 +10,8 @@ const OLD = "https://mdmisbahulhaq44-gif.github.io"
 
 export default function Footer() {
   const { openAbout, openTrack } = useShop()
+  const pathname = usePathname()
+  if (["/contact", "/terms", "/refund-policy", "/privacy"].includes(pathname)) return null
   return (
     <footer>
       <div className="footergrid">

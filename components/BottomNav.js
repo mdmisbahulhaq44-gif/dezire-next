@@ -2,10 +2,13 @@
 
 import { useRouter } from 'next/navigation'
 import { useShop } from './ShopContext'
+import { usePathname } from 'next/navigation'
 
 export default function BottomNav() {
   const router = useRouter()
   const { cartCount, openCart, openAccount, openTrack } = useShop()
+  const pathname = usePathname()
+  if (['/contact', '/terms', '/refund-policy', '/privacy'].includes(pathname)) return null
 
   return (
     <div className="bottomNav">

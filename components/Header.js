@@ -2,9 +2,12 @@
 
 import Link from 'next/link'
 import { useShop } from './ShopContext'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const { cartCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer, openTrack, openAbout } = useShop()
+  const pathname = usePathname()
+  if (['/contact', '/terms', '/refund-policy', '/privacy'].includes(pathname)) return null
 
   return (
     <>
