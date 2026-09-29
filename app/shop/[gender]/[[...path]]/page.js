@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation"
-import { supabase } from "../../../../lib/supabaseClient"
+import { supabaseServer as supabase } from "../../../../lib/supabaseServer"
 import { capitalize, getSubcategories, getProductsAtPath, buildShopPath } from "../../../../lib/categories"
 import Breadcrumb from "../../../../components/Breadcrumb"
 import CategoryHub from "../../../../components/CategoryHub"
