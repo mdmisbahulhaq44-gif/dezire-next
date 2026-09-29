@@ -1275,3 +1275,7 @@ a.category{text-decoration:none;color:#fff}
           color: var(--gold);
         }
       
+
+/* Smooth product panel open */
+@keyframes pdIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+#productPanel.show{animation:pdIn .38s cubic-bezier(.22,.61,.36,1) backwards}
