@@ -15,6 +15,7 @@ import AboutUsPanel from "../components/AboutUsPanel"
 import ShopOverlay from "../components/ShopOverlay"
 import Toast from "../components/Toast"
 import Analytics from "../components/Analytics"
+import ServiceWorkerRegister from "../components/ServiceWorkerRegister"
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -24,7 +25,8 @@ const quicksand = Quicksand({
 
 export const metadata = {
   title: "DEZIRE - Premium Fashion in Bangladesh",
-  description: "DEZIRE - Premium men's and women's clothing in Bangladesh."
+  description: "DEZIRE - Premium men's and women's clothing in Bangladesh.",
+  manifest: "/manifest.json"
 }
 
 export default function RootLayout({ children, modal }) {
@@ -48,6 +50,7 @@ export default function RootLayout({ children, modal }) {
           <AboutUsPanel />
           <Toast />
           <Analytics />
+          <ServiceWorkerRegister />
         </ShopProvider>
       </body>
     </html>
