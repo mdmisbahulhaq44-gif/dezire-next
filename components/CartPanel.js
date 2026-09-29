@@ -2,6 +2,7 @@
 
 import { useShop } from './ShopContext'
 import { cldOpt } from '../lib/cloudinary'
+import Image from 'next/image'
 
 export default function CartPanel() {
   const { cart, cartSubtotal, activePanel, closePanel, changeQty, removeFromCart, openCheckout } = useShop()
@@ -20,9 +21,9 @@ export default function CartPanel() {
         ) : (
           cart.map((i, idx) => (
             <div className="cartItem" key={idx}>
-              <div className="cartImg">
+              <div className="cartImg" style={{ position: 'relative' }}>
                 {i.imgs
-                  ? <img src={cldOpt(i.imgs.split(',')[0].trim(), 200)} loading="lazy" decoding="async" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+                  ? <Image src={cldOpt(i.imgs.split(',')[0].trim(), 200)} alt="" fill sizes="70px" style={{ objectFit: 'cover' }} loading="lazy" quality={75} />
                   : '🛍️'}
               </div>
               <div className="cartInfo">

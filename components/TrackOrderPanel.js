@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
+import Image from 'next/image'
 
 const ACTIVE_ORDER_STATUSES = new Set(['pending', 'processing', 'shipped'])
 
@@ -340,8 +341,8 @@ export default function TrackOrderPanel() {
           return (
             <div key={idx} style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,.08)', cursor: 'pointer' }}
               onClick={() => { closePanel(); router.push(`/product/${r.product_id}`) }}>
-              <div style={{ width: 52, height: 62, background: 'var(--cream)', borderRadius: 10, overflow: 'hidden', flexShrink: 0 }}>
-                {img ? <img src={cldOpt(img, 150)} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : null}
+              <div style={{ width: 52, height: 62, background: 'var(--cream)', borderRadius: 10, overflow: 'hidden', flexShrink: 0, position: 'relative' }}>
+                {img ? <Image src={cldOpt(img, 150)} alt="" fill sizes="52px" style={{ objectFit: 'cover' }} loading="lazy" quality={75} /> : null}
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{label}</div>
