@@ -1131,3 +1131,148 @@ font-size:12px
    so these keep links looking exactly like the original elements. */
 a.product{text-decoration:none;color:inherit;display:block}
 a.category{text-decoration:none;color:#fff}
+
+/* StaticPage */
+.staticPage {
+          --black: #111;
+          --white: #fff;
+          --cream: #faf9f6;
+          --line: #e9e7e2;
+          --muted: #777;
+          --gold: #b89545;
+          font-family: Jost, Arial, sans-serif;
+          color: var(--black);
+          background: var(--cream);
+          line-height: 1.7;
+          min-height: 100vh;
+        }.staticPage header {
+          padding: 18px 6%;
+          background: var(--black);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }.staticPage header a {
+          color: var(--white);
+          text-decoration: none;
+          font-weight: 600;
+          letter-spacing: 3px;
+          font-size: 18px;
+        }.staticPage header .back {
+          font-size: 12px;
+          letter-spacing: 1px;
+          color: #ccc;
+          font-weight: 400;
+        }.staticPage main {
+          max-width: 760px;
+          margin: 0 auto;
+          padding: 40px 6% 80px;
+        }.staticPage main h1 {
+          font-size: 26px;
+          letter-spacing: 0.5px;
+          margin-bottom: 6px;
+        }.staticPage main .updated {
+          color: var(--muted);
+          font-size: 12px;
+          margin-bottom: 32px;
+        }.staticPage main .sub {
+          color: var(--muted);
+          font-size: 14px;
+          margin-bottom: 32px;
+        }.staticPage main h2 {
+          font-size: 16px;
+          margin: 32px 0 10px;
+          color: var(--black);
+          border-left: 3px solid var(--gold);
+          padding-left: 10px;
+        }.staticPage main p,
+.staticPage main li {
+          font-size: 14.5px;
+          color: #333;
+          margin-bottom: 10px;
+        }.staticPage main ul {
+          padding-left: 20px;
+          margin-bottom: 10px;
+        }.staticPage main table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 14px 0;
+          font-size: 14px;
+        }.staticPage main td,
+.staticPage main th {
+          border: 1px solid var(--line);
+          padding: 8px 12px;
+          text-align: left;
+        }.staticPage main th {
+          background: #f1efe9;
+        }.staticPage main a {
+          color: var(--gold);
+        }.staticPage main .highlight {
+          background: #fff;
+          border: 1px solid var(--line);
+          border-left: 4px solid var(--gold);
+          padding: 16px 18px;
+          margin: 20px 0;
+          border-radius: 4px;
+        }.staticPage main .highlight strong {
+          color: var(--black);
+        }.staticPage main .addr {
+          margin-top: 32px;
+          padding: 20px;
+          background: #fff;
+          border: 1px solid var(--line);
+          border-radius: 8px;
+        }.staticPage main .addr h2 {
+          font-size: 14px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--muted);
+          margin-bottom: 8px;
+          border-left: none;
+          padding-left: 0;
+        }.staticPage main .cards {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+        @media (min-width: 600px) {.staticPage main .cards {
+            grid-template-columns: 1fr 1fr;
+          }
+        }.staticPage main .card {
+          background: #fff;
+          border: 1px solid var(--line);
+          border-radius: 8px;
+          padding: 20px;
+          text-decoration: none;
+          color: var(--black);
+          display: flex;
+          gap: 14px;
+          align-items: center;
+        }.staticPage main .card .icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: var(--gold);
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          flex-shrink: 0;
+        }.staticPage main .card .label {
+          font-size: 12px;
+          letter-spacing: 1px;
+          color: var(--muted);
+          text-transform: uppercase;
+        }.staticPage main .card .value {
+          font-size: 15px;
+          font-weight: 600;
+        }.staticPage footer {
+          text-align: center;
+          padding: 30px 6%;
+          color: var(--muted);
+          font-size: 12px;
+          border-top: 1px solid var(--line);
+        }.staticPage footer a {
+          color: var(--gold);
+        }
+      

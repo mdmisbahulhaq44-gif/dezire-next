@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useShop } from './ShopContext'
 import ProductGrid from './ProductGrid'
 import { supabase } from '../lib/supabaseClient'
+import Image from 'next/image'
 import { cldOpt } from '../lib/cloudinary'
 
 const LABELS = { waist: 'Waist', length: 'Length', hip: 'Hip', leg_opening: 'Leg Opening', chest: 'Chest', shoulder: 'Shoulder', sleeve: 'Sleeve' }
@@ -137,8 +138,18 @@ export default function ProductDetail({ product, related }) {
         <div className="pdGallery" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
           <div className="pdGalleryTrack" style={{ transform: `translateX(-${index * 100}%)` }}>
             {images.length ? images.map((url, i) => (
-              <div className="pdSlide" key={i}>
-                <img src={cldOpt(url, 900)} alt={product.name} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+              <div className="pdSlide" key={i} style={{ position: 'relative' }}>
+                <Image
+                  src={cldOpt(url, 900)}
+                  alt={product.name}
+                  fill
+                  sizes="(min-width: 901px) 400px, 100vw"
+                  style={{ objectFit: 'cover' }}
+                  priority={i === 0}
+                  fetchPriority={i === 0 ? 'high' : 'auto'}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  quality={75}
+                />
               </div>
             )) : (
               <div className="pdSlide">👕</div>
