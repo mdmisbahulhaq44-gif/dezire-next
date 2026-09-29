@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { cldOpt, cldSrcset } from "../lib/cloudinary"
+import Image from "next/image"
+import { cldOpt } from "../lib/cloudinary"
 
 export default function HeroCarousel({ slides }) {
   const [index, setIndex] = useState(0)
@@ -26,15 +27,17 @@ export default function HeroCarousel({ slides }) {
     <div className="heroCarousel">
       <div className="heroTrack" style={{ transform: `translateX(-${index * 100}%)` }}>
         {slides.map((s, i) => (
-          <div className="heroSlide" key={i}>
-            <img
-              src={cldOpt(s.image, 900)}
-              srcSet={cldSrcset(s.image, [600, 900, 1200])}
-              sizes="100vw"
+          <div className="heroSlide" key={i} style={{ position: "relative" }}>
+            <Image
+              src={cldOpt(s.image, 1200)}
               alt=""
-              loading={i === 0 ? "eager" : "lazy"}
+              fill
+              sizes="100vw"
+              style={{ objectFit: "cover" }}
+              priority={i === 0}
               fetchPriority={i === 0 ? "high" : "auto"}
-              decoding="async"
+              loading={i === 0 ? "eager" : "lazy"}
+              quality={75}
             />
           </div>
         ))}

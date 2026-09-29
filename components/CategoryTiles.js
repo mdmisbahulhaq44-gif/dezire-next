@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { cldOpt } from "../lib/cloudinary"
 import { buildShopPath } from "../lib/categories"
 
@@ -23,11 +24,22 @@ export default function CategoryTiles({ categories }) {
             key={i}
             className="category"
             style={{
-              backgroundImage: c.image ? `url('${cldOpt(c.image, 700)}')` : undefined,
+              position: "relative",
               background: c.image ? undefined : "#1a1a1a"
             }}
           >
-            <div className="catText">
+            {c.image && (
+              <Image
+                src={cldOpt(c.image, 700)}
+                alt=""
+                fill
+                sizes="(min-width:901px) 25vw, 50vw"
+                style={{ objectFit: "cover", zIndex: 0 }}
+                loading="lazy"
+                quality={75}
+              />
+            )}
+            <div className="catText" style={{ position: "relative", zIndex: 1 }}>
               <h3>{c.name || ""}</h3>
               <span>{c.subtitle || ""}</span>
             </div>

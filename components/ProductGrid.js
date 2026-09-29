@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { cldOpt, cldSrcset } from "../lib/cloudinary"
+import Image from "next/image"
+import { cldOpt } from "../lib/cloudinary"
 
 export default function ProductGrid({ products, replaceLinks }) {
   if (!products.length) {
@@ -14,18 +15,19 @@ export default function ProductGrid({ products, replaceLinks }) {
 
         return (
           <Link href={`/product/${p.id}`} className="product" key={p.id} replace={replaceLinks}>
-            <div className="productImage">
+            <div className="productImage" style={{ position: "relative" }}>
               {p.badge && (
                 <span className={`badge ${p.badge.toLowerCase() === "sale" ? "sale" : ""}`}>{p.badge}</span>
               )}
               {firstImg ? (
-                <img
+                <Image
                   src={cldOpt(firstImg, 500)}
-                  srcSet={cldSrcset(firstImg, [250, 400, 500])}
-                  sizes="(min-width:901px) 25vw, 50vw"
                   alt={p.name}
+                  fill
+                  sizes="(min-width:901px) 25vw, 50vw"
+                  style={{ objectFit: "cover" }}
                   loading="lazy"
-                  decoding="async"
+                  quality={75}
                 />
               ) : (
                 <div className="placeholder">👕</div>
@@ -44,4 +46,4 @@ export default function ProductGrid({ products, replaceLinks }) {
       })}
     </div>
   )
-                    }
+}
