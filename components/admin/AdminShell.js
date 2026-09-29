@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import AdminDashboard from './AdminDashboard'
 import AdminProducts from './AdminProducts'
+import AdminOrders from './AdminOrders'
 
 const SECTIONS = [
   { key: 'dashboard', label: '📊 Dashboard' },
@@ -51,7 +52,7 @@ export default function AdminShell() {
 
         {section === 'dashboard' && <AdminDashboard onNav={setSection} />}
         {section === 'products' && <AdminProducts />}
-        {section === 'orders' && <div className="adminTable"><h2>Orders</h2><p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 10 }}>Coming next.</p></div>}
+        {section === 'orders' && <AdminOrders />}
         {section === 'customers' && <div className="adminTable"><h2>Customers</h2><p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 10 }}>Coming next.</p></div>}
         {section === 'settings' && <div className="adminTable"><h2>Site Settings</h2><p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 10 }}>Coming next.</p></div>}
       </main>
