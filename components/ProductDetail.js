@@ -63,8 +63,12 @@ export default function ProductDetail({ product, related }) {
   const avg = list && list.length ? list.reduce((s, r) => s + r.rating, 0) / list.length : 0
 
   function closeProduct() {
-    if (window.history.length > 1) router.back()
-    else router.push('/')
+    // Always use the browser's native back navigation so the shopper
+    // returns to exactly where they were (Shop or Home, same scroll
+    // position) instead of being redirected to Home. If there's truly no
+    // history to go back to (e.g. the product was opened via a shared
+    // link in a fresh tab), this is a harmless no-op.
+    router.back()
   }
 
   function slide(dir) {
