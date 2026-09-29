@@ -6,6 +6,7 @@ import AdminDashboard from './AdminDashboard'
 import AdminProducts from './AdminProducts'
 import AdminOrders from './AdminOrders'
 import AdminCustomers from './AdminCustomers'
+import AdminSettings from './AdminSettings'
 
 const SECTIONS = [
   { key: 'dashboard', label: '📊 Dashboard' },
@@ -56,7 +57,7 @@ export default function AdminShell() {
         {section === 'products' && <AdminProducts />}
         {section === 'orders' && <AdminOrders initialSearch={ordersSearch} />}
         {section === 'customers' && <AdminCustomers onViewOrders={phone => { setOrdersSearch(phone); setSection('orders') }} />}
-        {section === 'settings' && <div className="adminTable"><h2>Site Settings</h2><p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 10 }}>Coming next.</p></div>}
+        {section === 'settings' && <AdminSettings />}
       </main>
     </div>
   )
