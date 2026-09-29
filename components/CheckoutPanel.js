@@ -25,7 +25,7 @@ const officeIcon = (
 )
 
 export default function CheckoutPanel() {
-  const { cart, cartSubtotal, activePanel, closePanel, clearCart, showToast, setLastOrder, openSuccess, lastOrder } = useShop()
+  const { cart, cartSubtotal, activePanel, closePanel, clearCart, showToast, setLastOrder, openSuccess, lastOrder, paymentReturn } = useShop()
   const show = activePanel === 'checkout'
   const showSuccess = activePanel === 'success'
 
@@ -429,10 +429,38 @@ export default function CheckoutPanel() {
 
       <div className={`panel${showSuccess ? ' show' : ''}`}>
         <div className="panelHead">
-          <h2>Order Placed!</h2>
+          <h2>{paymentReturn ? (paymentReturn.isPaid ? 'Payment Successful!' : 'Payment Not Completed') : 'Order Placed!'}</h2>
           <button className="close" onClick={closePanel}>×</button>
         </div>
-        {lastOrder && (
+        {paymentReturn && (
+          <div style={{ textAlign: 'center', padding: '10px 0' }}>
+            <div style={{
+              width: 64, height: 64, borderRadius: '50%',
+              background: paymentReturn.isPaid ? 'rgba(26,92,74,.08)' : 'rgba(217,119,6,.1)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px'
+            }}>
+              {paymentReturn.isPaid ? (
+                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#1a5c4a" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+              ) : (
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#d97706" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 9v4" /><path d="M12 17h.01" /><circle cx="12" cy="12" r="9" /></svg>
+              )}
+            </div>
+            <p style={{ fontSize: 13, marginBottom: 20 }}>
+              {paymentReturn.isPaid
+                ? <>Your payment has been received and your order is confirmed.<br />We'll contact you shortly.</>
+                : <>Your order is saved, but the payment wasn't completed.<br />You can retry payment or contact us to arrange Cash on Delivery.</>}
+            </p>
+            <div style={{ textAlign: 'left' }}>
+              <div className="summaryRow"><span>Order ID</span><b>#{paymentReturn.orderRef}</b></div>
+              <div className="summaryRow"><span>Total Amount</span><b>৳{paymentReturn.total.toLocaleString()}</b></div>
+              <div className="summaryRow"><span>Delivery</span><b>{paymentReturn.methodLabel}</b></div>
+            </div>
+            <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginTop: 16 }} onClick={closePanel}>
+              CONTINUE SHOPPING
+            </button>
+          </div>
+        )}
+        {!paymentReturn && lastOrder && (
           <div style={{ textAlign: 'center', padding: '10px 0' }}>
             <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(46,125,50,.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
               <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#2e7d32" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>

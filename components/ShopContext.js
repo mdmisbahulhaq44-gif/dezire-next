@@ -12,6 +12,7 @@ export function ShopProvider({ children }) {
   const [toastMsg, setToastMsg] = useState('')
   const [toastShow, setToastShow] = useState(false)
   const [lastOrder, setLastOrder] = useState(null)
+  const [paymentReturn, setPaymentReturn] = useState(null)
   const toastTimer = useRef(null)
 
   useEffect(() => { setCart(getCart()) }, [])
@@ -98,6 +99,8 @@ export function ShopProvider({ children }) {
     clearCart,
     lastOrder,
     setLastOrder,
+    paymentReturn,
+    setPaymentReturn,
     toastMsg,
     toastShow,
     showToast

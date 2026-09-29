@@ -2,6 +2,7 @@ import { supabase } from "../lib/supabaseClient"
 import HeroCarousel from "../components/HeroCarousel"
 import CategoryTiles from "../components/CategoryTiles"
 import ProductGrid from "../components/ProductGrid"
+import PaymentReturnCheck from "../components/PaymentReturnCheck"
 
 const DEFAULT_HERO_SLIDES = [
   { image: "https://res.cloudinary.com/dtdztxbfg/image/upload/v1789381873/IMG_20260914_161653_hbvxqq.png" }
@@ -66,6 +67,7 @@ export default async function HomePage() {
 
   return (
     <div>
+      <PaymentReturnCheck />
       <HeroCarousel slides={heroSlides} />
       <div id="women" style={{ paddingTop: 14, scrollMarginTop: 46 }}>
         <CategoryTiles categories={categories} />
