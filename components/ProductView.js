@@ -1,15 +1,12 @@
 import { supabase } from "../lib/supabaseClient"
+import { getProduct } from "../lib/getProduct"
 import ProductDetail from "./ProductDetail"
 import { cldOpt } from "../lib/cloudinary"
 
 const CARD_FIELDS = "id,name,brand,price,old,badge,imgs,stock,color_name,color_group"
 
 export default async function ProductView({ id }) {
-  const { data: product } = await supabase
-    .from("products")
-    .select("*")
-    .eq("id", id)
-    .maybeSingle()
+  const product = await getProduct(id)
 
   if (!product) {
     return <div className="empty" style={{ padding: "80px 20px" }}>Product not found.</div>
@@ -24,7 +21,6 @@ export default async function ProductView({ id }) {
   const rest = (sameCategory || []).filter(p => p.id !== twin?.id)
   const related = (twin ? [twin] : []).concat(rest).slice(0, 4)
 
-  // Schema.org Product block (name, image, price, stock) for Google rich results.
   const images = (product.imgs ? product.imgs.split(",").map(s => s.trim()).filter(Boolean) : []).map(u => cldOpt(u, 1200))
   const jsonLd = {
     "@context": "https://schema.org",
