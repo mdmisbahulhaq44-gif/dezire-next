@@ -104,12 +104,19 @@ export default function AdminDashboard({ onNav }) {
                   {o._items.map((it, i) => {
                     const p = imgById[it.product_id]
                     return (
-                      <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginRight: 8 }}>
+                      <a
+                        key={i}
+                        href={it.product_id ? `/product/${it.product_id}` : undefined}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="View product (opens in a new tab)"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginRight: 8, textDecoration: 'none', color: 'inherit' }}
+                      >
                         <span style={{ width: 24, height: 30, background: 'var(--cream)', borderRadius: 6, overflow: 'hidden', display: 'inline-block' }}>
                           {p?.imgs ? <img src={cldOpt(p.imgs.split(',')[0].trim(), 80)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : null}
                         </span>
-                        <span style={{ fontSize: 11 }}>{p?.name || '—'}{it.qty > 1 ? ` ×${it.qty}` : ''}</span>
-                      </span>
+                        <span style={{ fontSize: 11, textDecoration: 'underline', textDecorationColor: 'var(--line)' }}>{p?.name || '—'}{it.qty > 1 ? ` ×${it.qty}` : ''}</span>
+                      </a>
                     )
                   })}
                 </td>

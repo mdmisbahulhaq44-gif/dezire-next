@@ -64,12 +64,19 @@ function ProductChips({ items, allProducts }) {
         const name = p ? p.name : 'Product'
         const img = p ? (p.imgs || '').split(',')[0]?.trim() : ''
         return (
-          <div key={it.product_id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '2px 0' }}>
+          <a
+            key={it.product_id}
+            href={`/product/${it.product_id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '2px 0', textDecoration: 'none', color: 'inherit' }}
+            title="View product (opens in a new tab)"
+          >
             <div style={{ width: 44, height: 52, borderRadius: 6, overflow: 'hidden', background: 'var(--cream)', flexShrink: 0 }}>
               {img ? <img src={cldOpt(img, 100)} style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : null}
             </div>
-            <span style={{ fontSize: 12, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 140, lineHeight: 1.3 }}>{name}</span>
-          </div>
+            <span style={{ fontSize: 12, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 140, lineHeight: 1.3, textDecoration: 'underline', textDecorationColor: 'var(--line)' }}>{name}</span>
+          </a>
         )
       })}
     </>
