@@ -15,21 +15,10 @@ export default async function ProductView({ id }) {
     return <div className="empty" style={{ padding: "80px 20px" }}>Product not found.</div>
   }
 
-  const { data: sameCategory } = await supabase
-    .from("products")
-    .select(CARD_FIELDS)
-    .eq("cat", product.cat)
-    .neq("id", product.id)
-    .order("created_at", { ascending: false })
-    .limit(12)
-
-  const { data: twinRows } = await supabase
-    .from("products")
-    .select(CARD_FIELDS)
-    .eq("name", product.name)
-    .neq("id", product.id)
-    .neq("gender", product.gender)
-    .limit(1)
+  const [{ data: sameCategory }, { data: twinRows }] = await Promise.all([
+    supabase.from("products").select(CARD_FIELDS).eq("cat", product.cat).neq("id", product.id).order("created_at", { ascending: false }).limit(12),
+    supabase.from("products").select(CARD_FIELDS).eq("name", product.name).neq("id", product.id).neq("gender", product.gender).limit(1)
+  ])
 
   const twin = twinRows?.[0] || null
   const rest = (sameCategory || []).filter(p => p.id !== twin?.id)
