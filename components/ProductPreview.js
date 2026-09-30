@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { usePathname, useRouter } from 'next/navigation'
 import { cldOpt } from '../lib/cloudinary'
 
@@ -32,7 +33,14 @@ export default function ProductPreview() {
       let data
       try { data = JSON.parse(a.dataset.preview) } catch (err) { return }
       closeAfter.current = false
-      setP(data)
+      const target = url.pathname
+      const show = () => {
+        if (location.pathname === target) return
+        flushSync(() => setP(data))
+      }
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (document.startViewTransition && !reduced) document.startViewTransition(show)
+      else show()
       clearTimeout(timer.current)
       // Safety net: never leave the preview stuck if navigation fails
       timer.current = setTimeout(() => setP(null), 12000)
