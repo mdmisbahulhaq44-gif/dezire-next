@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 import { usePathname, useRouter } from 'next/navigation'
 import { cldOpt } from '../lib/cloudinary'
+import { closeWithFade } from '../lib/closeWithFade'
 
 // Shows the product panel INSTANTLY when a product card is tapped, using the
 // data the card already has (name, price, photo). The real panel (fetched
@@ -62,7 +63,7 @@ export default function ProductPreview() {
     setP(null)
     if (closeAfter.current) {
       closeAfter.current = false
-      router.back()
+      closeWithFade(router)
     }
   }, [pathname, router])
 

@@ -7,6 +7,7 @@ import ProductGrid from './ProductGrid'
 import { supabase } from '../lib/supabaseClient'
 import Image from 'next/image'
 import { cldOpt } from '../lib/cloudinary'
+import { closeWithFade } from '../lib/closeWithFade'
 
 const LABELS = { waist: 'Waist', length: 'Length', hip: 'Hip', leg_opening: 'Leg Opening', chest: 'Chest', shoulder: 'Shoulder', sleeve: 'Sleeve' }
 
@@ -68,7 +69,7 @@ export default function ProductDetail({ product, related }) {
     // position) instead of being redirected to Home. If there's truly no
     // history to go back to (e.g. the product was opened via a shared
     // link in a fresh tab), this is a harmless no-op.
-    router.back()
+    closeWithFade(router)
   }
 
   function slide(dir) {
