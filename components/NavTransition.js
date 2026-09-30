@@ -1,11 +1,30 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
+
+const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 export default function NavTransition() {
   const pathname = usePathname()
   const pending = useRef(null)
   const pathRef = useRef(pathname)
+
+  // Step-by-step pages (home > men > shirt ...): same fade-in as the product panel
+  useIsoLayoutEffect(() => {
+    const t = window.__dzPage
+    window.__dzPage = 0
+    if (!t || performance.now() - t > 12000) return
+    if (pathname === '/' || pathname.startsWith('/product/') || pathname.startsWith('/admin')) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const main = document.getElementById('main-content')
+    if (!main) return
+    try {
+      Array.from(main.children).forEach(el => el.animate(
+        [{ opacity: 0 }, { opacity: 1 }],
+        { duration: 320, easing: 'cubic-bezier(.22,.61,.36,1)' }
+      ))
+    } catch (err) {}
+  }, [pathname])
 
   useEffect(() => {
     pathRef.current = pathname
@@ -27,11 +46,14 @@ export default function NavTransition() {
 
     function onPop(e) {
       window.__dzEnter = null
+      window.__dzPage = 0
       if (replaying) return
       const st = e.state
       if (!st || !(st.__NA || st.__PRIVATE_NEXTJS_INTERNALS_TREE)) return
       if (location.pathname === pathRef.current) return
       if (location.pathname.startsWith('/admin') || pathRef.current.startsWith('/admin')) return
+      // Only product open/close gets the whole-screen cross-fade; other back moves stay plain
+      if (!location.pathname.startsWith('/product/') && !pathRef.current.startsWith('/product/')) return
 
       e.stopImmediatePropagation()
       let replayed = false
@@ -73,6 +95,7 @@ export default function NavTransition() {
       if (url.pathname === location.pathname) return
       if (a.dataset.preview) return
       if (url.pathname.startsWith('/product/')) window.__dzEnter = { t: performance.now(), mode: 'link' }
+      else window.__dzPage = performance.now()
 
       root.setAttribute('data-nav', '1')
       setTimeout(() => root.removeAttribute('data-nav'), 10000)
