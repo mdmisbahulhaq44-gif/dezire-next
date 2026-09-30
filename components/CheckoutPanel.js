@@ -5,7 +5,7 @@ import { supabase } from '../lib/supabaseClient'
 import { useShop } from './ShopContext'
 import {
   DHAKA_CITY, DEFAULT_SETTINGS, fetchDeliverySettings,
-  deliveryFor, couponDiscount, getProfile, setProfile
+  deliveryFor, couponDiscount, getProfile, setProfile, saveOrder
 } from '../lib/checkout'
 
 const homeIcon = (
@@ -226,10 +226,8 @@ export default function CheckoutPanel() {
         setBusy(false); return
       }
 
-      await Promise.all(cart.map(item =>
-        supabase.rpc('decrement_product_stock', { p_product_id: item.id, p_qty: item.qty })
-          .then(({ error: sErr }) => { if (sErr) console.error('Stock update failed for', item.id, sErr) })
-      ))
+      // Stock is reduced inside the database when the order row is inserted.
+      saveOrder(orderRef, ph)
 
       const purchaseTotal = cartSubtotal - discount + charge
 

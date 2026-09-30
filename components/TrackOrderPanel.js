@@ -6,21 +6,9 @@ import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
 import Image from 'next/image'
+import { getSavedOrders, saveOrder, clearSavedOrders } from '../lib/checkout'
 
 const ACTIVE_ORDER_STATUSES = new Set(['pending', 'processing', 'shipped'])
-
-function getCustomerProfile() {
-  try {
-    const raw = localStorage.getItem('lf_customer')
-    return raw ? JSON.parse(raw) : null
-  } catch { return null }
-}
-function getSavedTrackPhone() {
-  try { return localStorage.getItem('lf_track_phone') || null } catch { return null }
-}
-function setSavedTrackPhone(phone) {
-  try { localStorage.setItem('lf_track_phone', phone) } catch {}
-}
 
 function groupRows(data) {
   const groups = {}
@@ -89,67 +77,41 @@ export default function TrackOrderPanel() {
 
   async function runOpen() {
     setReceiptRows(null)
-    const profile = getCustomerProfile()
-
-    if (profile) {
+    const saved = getSavedOrders()
+    if (saved.length) {
       setManualOpen(false)
       setListState('loading')
-      await loadMyOrders(profile)
+      await loadSavedOrders(saved)
       return
     }
-
-    const savedPhone = getSavedTrackPhone()
-    if (savedPhone) {
-      // Seen this phone before on this device — skip straight to their orders.
-      setPhone(savedPhone)
-      setManualOpen(false)
-      await searchOrdersByPhone(savedPhone)
-      return
-    }
-
-    // Brand new visitor — no profile, no remembered phone yet.
     setListState('none')
     setManualOpen(true)
   }
 
-  async function loadMyOrders(profile) {
-    const { data, error } = await supabase.rpc('get_customer_orders', { p_customer_id: profile.id })
-
-    if (error) {
-      console.error(error)
-      setListState('error')
-      return
-    }
-    if (!data || !data.length) {
-      setListState('emptyProfile')
-      return
-    }
-    setGroups(groupRows(data))
-    setListSource('profile')
-    setListState('groups')
-  }
-
-  // Loads every order for an ALREADY-VERIFIED phone number.
-  async function searchOrdersByPhone(p) {
-    setReceiptRows(null)
-    setListState('loading')
-
-    const { data, error } = await supabase.rpc('get_orders_by_phone', { p_phone: p })
-
-    if (error || !data || !data.length) {
-      setListState('error')
+  // Each order is read with its own order number + phone (track_order),
+  // so nobody can list orders by guessing a phone number or customer id.
+  async function loadSavedOrders(saved) {
+    const results = await Promise.all(
+      saved.slice(0, 20).map(s => supabase.rpc('track_order', { p_ref: s.ref, p_phone: s.phone }))
+    )
+    const rows = []
+    let failed = false
+    results.forEach(r => {
+      if (r.error) failed = true
+      else if (r.data) rows.push(...r.data)
+    })
+    if (!rows.length) {
+      setListState(failed ? 'error' : 'emptyProfile')
       return false
     }
-
-    setSavedTrackPhone(p)
-    setGroups(groupRows(data))
+    setGroups(groupRows(rows))
     setListSource('phone')
     setListState('groups')
     return true
   }
 
   function clearSavedTrackPhone() {
-    try { localStorage.removeItem('lf_track_phone') } catch {}
+    clearSavedOrders()
     setListState('none')
     setReceiptRows(null)
     setManualOpen(true)
@@ -158,8 +120,9 @@ export default function TrackOrderPanel() {
   }
 
   function switchAccount() {
-    localStorage.removeItem('lf_customer')
-    showToast('Switched — enter a different name/phone to continue.')
+    clearSavedOrders()
+    try { localStorage.removeItem('lf_customer') } catch (e) {}
+    showToast('Switched — enter an Order ID and phone to look up an order.')
     runOpen()
   }
 
@@ -178,8 +141,9 @@ export default function TrackOrderPanel() {
       return
     }
 
-    const found = await searchOrdersByPhone(ph)
-    if (found) setManualOpen(false)
+    saveOrder(ref, ph)
+    await loadSavedOrders(getSavedOrders())
+    setManualOpen(false)
   }
 
   function viewOrderGroup(rows) {

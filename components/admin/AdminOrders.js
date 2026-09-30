@@ -89,27 +89,51 @@ export default function AdminOrders({ initialSearch }) {
   const [search, setSearch] = useState(initialSearch || '')
   const [allProducts, setAllProducts] = useState([])
 
-  async function load() {
-    const { data, error } = await supabase
-      .from('orders')
-      .select('id,customer,phone,total_amount,status,created_at,order_ref,rider_name,rider_phone,payment,delivery_note,payment_status,payment_wallet,payment_sender_number,payment_transaction_id,items,product_id,quantity,delivery_address,delivery_method,upazila,district')
-      .order('created_at', { ascending: false })
-      .limit(100)
+  const PAGE = 100
+  const [hasMore, setHasMore] = useState(false)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const COLS = 'id,customer,phone,total_amount,status,created_at,order_ref,rider_name,rider_phone,payment,delivery_note,payment_status,payment_wallet,payment_sender_number,payment_transaction_id,items,product_id,quantity,delivery_address,delivery_method,upazila,district'
 
-    if (error) { setCache([]); return }
-    setCache(data || [])
-
-    const { data: prods } = await supabase.from('products').select('id,name,imgs')
-    setAllProducts(prods || [])
+  function pageQuery(from) {
+    let q = supabase.from('orders').select(COLS).order('created_at', { ascending: false }).range(from, from + PAGE - 1)
+    // search runs on the server, so it covers every order, not just the loaded ones
+    const term = search.trim().replace(/[,()%*\\]/g, ' ').trim()
+    if (term) q = q.or(`customer.ilike.%${term}%,phone.ilike.%${term}%,order_ref.ilike.%${term}%`)
+    return q
   }
 
-  useEffect(() => { load() }, [])
+  async function load() {
+    const { data, error } = await pageQuery(0)
+    if (error) { setCache([]); setHasMore(false); return }
+    setCache(data || [])
+    setHasMore((data || []).length === PAGE)
+  }
+
+  async function loadMore() {
+    if (loadingMore || !cache) return
+    setLoadingMore(true)
+    const { data, error } = await pageQuery(cache.length)
+    if (!error) {
+      setCache(prev => [...prev, ...(data || [])])
+      setHasMore((data || []).length === PAGE)
+    }
+    setLoadingMore(false)
+  }
+
+  useEffect(() => {
+    supabase.from('products').select('id,name,imgs').then(({ data }) => setAllProducts(data || []))
+  }, [])
+
+  useEffect(() => {
+    const t = setTimeout(load, search ? 300 : 0)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search])
   useEffect(() => { if (initialSearch) setSearch(initialSearch) }, [initialSearch])
 
   const list = useMemo(() => {
     if (!cache) return []
-    const q = search.trim().toLowerCase()
-    const filtered = q ? cache.filter(o => (o.customer || '').toLowerCase().includes(q) || (o.phone || '').includes(q)) : cache
+    const filtered = cache
 
     const groups = new Map()
     filtered.forEach(o => {
@@ -151,7 +175,7 @@ export default function AdminOrders({ initialSearch }) {
       <div className="adminTable">
         <h2 style={{ marginBottom: 20 }}>All Orders</h2>
         <div className="adminSearchRow">
-          <input placeholder="Search orders by customer or phone..." value={search} onChange={e => setSearch(e.target.value)} />
+          <input placeholder="Search by customer, phone or order ID..." value={search} onChange={e => setSearch(e.target.value)} />
         </div>
         <table>
           <thead>
@@ -188,6 +212,13 @@ export default function AdminOrders({ initialSearch }) {
             ))}
           </tbody>
         </table>
+        {hasMore && (
+          <div style={{ textAlign: 'center', padding: '16px 0' }}>
+            <button type="button" className="btn light" onClick={loadMore} disabled={loadingMore}>
+              {loadingMore ? 'Loading...' : 'LOAD MORE ORDERS'}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
