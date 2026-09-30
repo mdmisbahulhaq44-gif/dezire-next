@@ -1,11 +1,10 @@
 import { notFound, redirect } from "next/navigation"
 import { supabaseServer as supabase } from "../../../../lib/supabaseServer"
-import { capitalize, getSubcategories, getProductsAtPath, buildShopPath } from "../../../../lib/categories"
+import { parseCatPath, capitalize, getSubcategories, getProductsAtPath, buildShopPath } from "../../../../lib/categories"
 import Breadcrumb from "../../../../components/Breadcrumb"
 import CategoryHub from "../../../../components/CategoryHub"
 import ShopBrowser from "../../../../components/ShopBrowser"
 export const revalidate = 60
-export function generateStaticParams() { return [{ gender: "men", path: [] }, { gender: "women", path: [] }] }
 
 function dec(s) {
   try { return decodeURIComponent(s) } catch (e) { return s }
@@ -67,4 +66,24 @@ export default async function CategoryPage({ params }) {
       breadcrumb={<Breadcrumb gender={gender} path={segs} />}
     />
   )
+}
+
+export async function generateStaticParams() {
+  const { data } = await supabase.from("products").select("gender,cat").limit(1000)
+  const out = [{ gender: "men", path: [] }, { gender: "women", path: [] }]
+  const seen = new Set()
+  ;(data || []).forEach(p => {
+    const segs = parseCatPath(p)
+    const genders = p.gender === "unisex" ? ["men", "women"] : [p.gender]
+    genders.forEach(g => {
+      if (g !== "men" && g !== "women") return
+      for (let i = 1; i <= segs.length; i++) {
+        const key = g + "/" + segs.slice(0, i).join("/")
+        if (seen.has(key)) continue
+        seen.add(key)
+        out.push({ gender: g, path: segs.slice(0, i) })
+      }
+    })
+  })
+  return out
 }
