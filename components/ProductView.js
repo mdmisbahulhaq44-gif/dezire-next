@@ -1,4 +1,4 @@
-import { supabase } from "../lib/supabaseClient"
+import { supabaseServer as supabase } from "../lib/supabaseServer"
 import { getProduct } from "../lib/getProduct"
 import ProductDetail from "./ProductDetail"
 import { cldOpt } from "../lib/cloudinary"

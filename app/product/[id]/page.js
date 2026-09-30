@@ -1,3 +1,4 @@
+import { supabaseServer } from "../../../lib/supabaseServer"
 import ProductView from "../../../components/ProductView"
 import { getProduct } from "../../../lib/getProduct"
 import { cldOpt } from "../../../lib/cloudinary"
@@ -31,4 +32,9 @@ export async function generateMetadata({ params }) {
 export default async function ProductPage({ params }) {
   const { id } = await params
   return <ProductView id={id} />
+}
+
+export async function generateStaticParams() {
+  const { data } = await supabaseServer.from("products").select("id").limit(200)
+  return (data || []).map(p => ({ id: String(p.id) }))
 }

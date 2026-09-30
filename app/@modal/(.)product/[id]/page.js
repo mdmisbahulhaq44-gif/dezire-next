@@ -1,3 +1,4 @@
+import { supabaseServer } from "../../../../lib/supabaseServer"
 import ProductView from "../../../../components/ProductView"
 
 // Same edge-caching as the full product page (see app/product/[id]/page.js)
@@ -9,4 +10,9 @@ export const revalidate = 60
 export default async function InterceptedProduct({ params }) {
   const { id } = await params
   return <ProductView id={id} />
+}
+
+export async function generateStaticParams() {
+  const { data } = await supabaseServer.from("products").select("id").limit(200)
+  return (data || []).map(p => ({ id: String(p.id) }))
 }
