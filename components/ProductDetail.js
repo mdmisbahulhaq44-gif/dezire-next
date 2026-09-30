@@ -174,7 +174,7 @@ export default function ProductDetail({ product, related }) {
           <div className="brand">{product.brand || ''}</div>
           <h2 style={{ margin: '6px 0 10px', fontSize: 22 }}>{product.name}</h2>
 
-          <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6 }}>
+          <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6, minHeight: 18 }}>
             {list && list.length > 0 ? (
               <>
                 <span style={{ color: 'var(--gold)' }}>{starString(avg)}</span> {avg.toFixed(1)} ({list.length} review{list.length > 1 ? 's' : ''})

@@ -66,7 +66,6 @@ export default function ProductPreview() {
     marginTop: mt,
     borderRadius: 8,
     background: 'rgba(128,128,128,.15)',
-    animation: 'skeletonPulse 1.1s ease-in-out infinite alternate'
   })
 
   return (
@@ -107,7 +106,7 @@ export default function ProductPreview() {
 
       <div style={{ paddingTop: 18 }}>
         <h2 style={{ margin: '6px 0 10px', fontSize: 22 }}>{p.name}</h2>
-        <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6 }}></div>
+        <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6, minHeight: 18 }}></div>
         <div className="price" style={{ fontSize: 20 }}>
           ৳{Number(p.price).toLocaleString()}
           {p.old ? <> <span className="old">৳{Number(p.old).toLocaleString()}</span></> : null}

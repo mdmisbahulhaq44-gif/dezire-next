@@ -1293,3 +1293,6 @@ html[data-nav]::after{content:"";position:fixed;top:0;left:0;height:3px;width:10
 /* Top progress bar while navigating */
 html[data-nav]::after{content:"";position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:left;background:var(--accent,#d4af37);z-index:99999;pointer-events:none;animation:navBar 8s cubic-bezier(.1,.7,.2,1) forwards}
 @keyframes navBar{from{transform:scaleX(.05)}to{transform:scaleX(.92)}}
+
+/* Touch screens: no sticky hover zoom on tapped product cards */
+@media (hover:none){.product:hover .productImage img{transform:none}}

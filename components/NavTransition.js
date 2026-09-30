@@ -28,6 +28,7 @@ export default function NavTransition() {
       if (url.origin !== location.origin || url.pathname.startsWith('/admin')) return
       if (url.pathname === location.pathname) return
 
+      if (a.dataset.preview) return
       const hero = a.querySelector('.productImage')
 
       // Category and other links: no frozen screen, normal Next navigation + progress bar
