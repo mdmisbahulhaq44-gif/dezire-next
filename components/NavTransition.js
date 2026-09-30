@@ -1,30 +1,12 @@
 'use client'
-import { useEffect, useLayoutEffect, useRef } from 'react'
-import { usePathname } from 'next/navigation'
-
-const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+import { useEffect, useRef } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function NavTransition() {
   const pathname = usePathname()
   const pending = useRef(null)
+  const router = useRouter()
   const pathRef = useRef(pathname)
-
-  // Step-by-step pages (home > men > shirt ...): same fade-in as the product panel
-  useIsoLayoutEffect(() => {
-    const t = window.__dzPage
-    window.__dzPage = 0
-    if (!t || performance.now() - t > 12000) return
-    if (pathname === '/' || pathname.startsWith('/product/') || pathname.startsWith('/admin')) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const main = document.getElementById('main-content')
-    if (!main) return
-    try {
-      Array.from(main.children).forEach(el => el.animate(
-        [{ opacity: 0 }, { opacity: 1 }],
-        { duration: 320, easing: 'cubic-bezier(.22,.61,.36,1)' }
-      ))
-    } catch (err) {}
-  }, [pathname])
 
   useEffect(() => {
     pathRef.current = pathname
@@ -46,7 +28,6 @@ export default function NavTransition() {
 
     function onPop(e) {
       window.__dzEnter = null
-      window.__dzPage = 0
       if (replaying) return
       const st = e.state
       if (!st || !(st.__NA || st.__PRIVATE_NEXTJS_INTERNALS_TREE)) return
@@ -95,7 +76,23 @@ export default function NavTransition() {
       if (url.pathname === location.pathname) return
       if (a.dataset.preview) return
       if (url.pathname.startsWith('/product/')) window.__dzEnter = { t: performance.now(), mode: 'link' }
-      else window.__dzPage = performance.now()
+      else if (document.startViewTransition && url.pathname !== '/' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Forward step (home > men > shirt ...): cross-fade old page into new, like product close.
+        // The wait is capped (250ms) so a slow network can never freeze the tap.
+        e.preventDefault()
+        const target = url.pathname + url.search + url.hash
+        const from = location.pathname
+        document.startViewTransition(() => new Promise(resolve => {
+          router.push(target)
+          const t0 = performance.now()
+          const tick = () => {
+            if ((location.pathname !== from && pathRef.current === location.pathname) || performance.now() - t0 > 250) return resolve()
+            setTimeout(tick, 16)
+          }
+          setTimeout(tick, 16)
+        }))
+        return
+      }
 
       root.setAttribute('data-nav', '1')
       setTimeout(() => root.removeAttribute('data-nav'), 10000)
