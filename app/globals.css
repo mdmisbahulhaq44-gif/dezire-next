@@ -1299,3 +1299,8 @@ html[data-nav]::after{content:"";position:fixed;top:0;left:0;height:3px;width:10
 
 /* No pinch zoom or double-tap zoom (scrolling and swipes still work) */
 html,body{touch-action:pan-x pan-y}
+
+@keyframes pdFadeIn{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){
+  #productPanel,#productPreview{animation:none !important}
+}

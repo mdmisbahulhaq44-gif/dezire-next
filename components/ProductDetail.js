@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useShop } from './ShopContext'
 import ProductGrid from './ProductGrid'
@@ -15,6 +15,8 @@ function starString(rating) {
   const r = Math.round(rating)
   return '★★★★★'.slice(0, r) + '☆☆☆☆☆'.slice(0, 5 - r)
 }
+
+const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 export default function ProductDetail({ product, related }) {
   const router = useRouter()
@@ -36,6 +38,22 @@ export default function ProductDetail({ product, related }) {
   const [rating, setRating] = useState('')
   const [comment, setComment] = useState('')
   const touchStartX = useRef(0)
+  const panelRef = useRef(null)
+  useIsoLayoutEffect(() => {
+    const info = window.__dzEnter
+    window.__dzEnter = null
+    const el = panelRef.current
+    if (!info || !el) return
+    if (performance.now() - info.t > 12000) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let delay = 0
+    if (info.mode === 'preview') {
+      delay = performance.now() - info.t
+      if (delay >= 320) return
+    }
+    el.style.animation = 'pdFadeIn 320ms cubic-bezier(.22,.61,.36,1) ' + (-delay) + 'ms backwards'
+    el.addEventListener('animationend', () => { el.style.animation = '' }, { once: true })
+  }, [])
 
   const inStock = Number(product.stock) > 0
   const lowStock = inStock && Number(product.stock) <= 5
@@ -134,7 +152,7 @@ export default function ProductDetail({ product, related }) {
 
   return (
     <>
-      <div className={`panel${shown ? ' show' : ''}`} id="productPanel" style={{ overscrollBehavior: 'contain' }}>
+      <div className={`panel${shown ? ' show' : ''}`} id="productPanel" ref={panelRef} style={{ overscrollBehavior: 'contain' }}>
         <div className="panelHead">
           <h2>Product Details</h2>
           <button className="close" onClick={closeProduct}>×</button>

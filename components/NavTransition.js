@@ -26,6 +26,7 @@ export default function NavTransition() {
     let replaying = false
 
     function onPop(e) {
+      window.__dzEnter = null
       if (replaying) return
       const st = e.state
       if (!st || !(st.__NA || st.__PRIVATE_NEXTJS_INTERNALS_TREE)) return
@@ -71,6 +72,7 @@ export default function NavTransition() {
       if (url.origin !== location.origin || url.pathname.startsWith('/admin')) return
       if (url.pathname === location.pathname) return
       if (a.dataset.preview) return
+      if (url.pathname.startsWith('/product/')) window.__dzEnter = { t: performance.now(), mode: 'link' }
 
       root.setAttribute('data-nav', '1')
       setTimeout(() => root.removeAttribute('data-nav'), 10000)

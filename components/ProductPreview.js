@@ -39,9 +39,8 @@ export default function ProductPreview() {
         if (location.pathname === target) return
         flushSync(() => setP(data))
       }
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      if (document.startViewTransition && !reduced) document.startViewTransition(show)
-      else show()
+      window.__dzEnter = { t: performance.now(), mode: 'preview' }
+      show()
       clearTimeout(timer.current)
       // Safety net: never leave the preview stuck if navigation fails
       timer.current = setTimeout(() => setP(null), 12000)
@@ -81,7 +80,7 @@ export default function ProductPreview() {
     <div
       className="panel show"
       id="productPreview"
-      style={{ transform: 'none', opacity: 1, transition: 'none', pointerEvents: 'auto', overscrollBehavior: 'contain' }}
+      style={{ transform: 'none', opacity: 1, transition: 'none', animation: 'pdFadeIn 320ms cubic-bezier(.22,.61,.36,1) backwards', pointerEvents: 'auto', overscrollBehavior: 'contain' }}
     >
       <div className="panelHead">
         <h2>Product Details</h2>
