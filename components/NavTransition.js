@@ -8,6 +8,7 @@ export default function NavTransition() {
   const pending = useRef(null)
 
   useEffect(() => {
+    document.documentElement.removeAttribute('data-nav')
     const done = pending.current
     if (!done) return
     pending.current = null
@@ -15,8 +16,9 @@ export default function NavTransition() {
   }, [pathname])
 
   useEffect(() => {
-    if (!document.startViewTransition) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const root = document.documentElement
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const canVT = !!document.startViewTransition && !reduced
 
     function onClick(e) {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
@@ -26,26 +28,32 @@ export default function NavTransition() {
       if (url.origin !== location.origin || url.pathname.startsWith('/admin')) return
       if (url.pathname === location.pathname) return
 
+      const hero = a.querySelector('.productImage')
+
+      // Category and other links: no frozen screen, normal Next navigation + progress bar
+      if (!hero || !canVT) {
+        root.setAttribute('data-nav', '1')
+        setTimeout(() => root.removeAttribute('data-nav'), 10000)
+        return
+      }
+
       e.preventDefault()
       e.stopPropagation()
       const href = url.pathname + url.search + url.hash
       const replace = a.dataset.replace === '1'
-      const hero = a.querySelector('.productImage')
       const old = document.querySelector('.pdGallery')
-      if (hero) {
-        if (old) old.style.viewTransitionName = 'none'
-        hero.style.viewTransitionName = 'product-hero'
-      }
+      if (old) old.style.viewTransitionName = 'none'
+      hero.style.viewTransitionName = 'product-hero'
 
       const t = document.startViewTransition(() => new Promise(resolve => {
         pending.current = resolve
         if (replace) router.replace(href); else router.push(href)
         setTimeout(() => {
           if (pending.current === resolve) { pending.current = null; resolve() }
-        }, 1500)
+        }, 600)
       }))
       t.finished.finally(() => {
-        if (hero) hero.style.viewTransitionName = ''
+        hero.style.viewTransitionName = ''
         if (old) old.style.viewTransitionName = ''
       })
     }
