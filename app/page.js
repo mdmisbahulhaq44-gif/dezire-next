@@ -1,8 +1,12 @@
-import { supabase } from "../lib/supabaseClient"
+import { supabaseServer as supabase } from "../lib/supabaseServer"
 import HeroCarousel from "../components/HeroCarousel"
 import CategoryTiles from "../components/CategoryTiles"
 import ProductGrid from "../components/ProductGrid"
 import PaymentReturnCheck from "../components/PaymentReturnCheck"
+
+// Cache the homepage for a minute (like product pages) instead of
+// re-rendering it on every visit.
+export const revalidate = 60
 
 const DEFAULT_HERO_SLIDES = [
   { image: "https://res.cloudinary.com/dtdztxbfg/image/upload/v1789381873/IMG_20260914_161653_hbvxqq.png" }
@@ -22,11 +26,25 @@ export default async function HomePage() {
   let reviews = []
 
   try {
-    const { data: settings } = await supabase
-      .from("settings")
-      .select("key,value")
-      .in("key", ["hero_slides", "homepage_categories"])
+    // All three queries run at the same time instead of one after another
+    const [settingsRes, productsRes, reviewsRes] = await Promise.all([
+      supabase.from("settings").select("key,value").in("key", ["hero_slides", "homepage_categories"]),
+      supabase
+        .from("products")
+        .select("id,name,price,old,badge,imgs,stock,created_at")
+        .order("created_at", { ascending: false })
+        .limit(8),
+      supabase
+        .from("reviews")
+        .select("name,rating,comment")
+        .gte("rating", 4)
+        .not("comment", "is", null)
+        .neq("comment", "")
+        .order("created_at", { ascending: false })
+        .limit(3)
+    ])
 
+    const settings = settingsRes.data
     const heroRow = settings?.find(s => s.key === "hero_slides")
     const catRow = settings?.find(s => s.key === "homepage_categories")
 
@@ -43,24 +61,8 @@ export default async function HomePage() {
       } catch (e) {}
     }
 
-    const { data: productRows } = await supabase
-      .from("products")
-      .select("id,name,price,old,badge,imgs,stock,created_at")
-      .order("created_at", { ascending: false })
-      .limit(8)
-
-    products = productRows || []
-
-    const { data: reviewRows } = await supabase
-      .from("reviews")
-      .select("name,rating,comment")
-      .gte("rating", 4)
-      .not("comment", "is", null)
-      .neq("comment", "")
-      .order("created_at", { ascending: false })
-      .limit(3)
-
-    reviews = reviewRows || []
+    products = productsRes.data || []
+    reviews = reviewsRes.data || []
   } catch (e) {
     console.error("Homepage data fetch failed:", e)
   }
