@@ -33,8 +33,6 @@ export default function NavTransition() {
       if (!st || !(st.__NA || st.__PRIVATE_NEXTJS_INTERNALS_TREE)) return
       if (location.pathname === pathRef.current) return
       if (location.pathname.startsWith('/admin') || pathRef.current.startsWith('/admin')) return
-      // Only product open/close gets the whole-screen cross-fade; other back moves stay plain
-      if (!location.pathname.startsWith('/product/') && !pathRef.current.startsWith('/product/')) return
 
       e.stopImmediatePropagation()
       let replayed = false
