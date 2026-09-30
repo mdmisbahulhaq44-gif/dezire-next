@@ -142,7 +142,7 @@ export default async function HomePage() {
               })}
             </div>
           </section>
-          <style>{"@media(max-width:900px){#testimonialsWrap{grid-template-columns:1fr}}"}</style>
+          <style>{"@media(max-width:900px){#testimonialsWrap{grid-template-columns:1fr !important}}"}</style>
         </>
       )}
     </div>
