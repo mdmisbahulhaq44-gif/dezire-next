@@ -31,7 +31,8 @@ export default function NavTransition() {
       const hero = a.querySelector('.productImage')
 
       // Category and other links: no frozen screen, normal Next navigation + progress bar
-      if (!hero || !canVT) {
+      // Product cards also skip the freeze: an instant preview panel is shown instead
+      if (!hero || !canVT || a.dataset.preview) {
         root.setAttribute('data-nav', '1')
         setTimeout(() => root.removeAttribute('data-nav'), 10000)
         return
