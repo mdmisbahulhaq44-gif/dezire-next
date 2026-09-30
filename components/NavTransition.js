@@ -57,51 +57,23 @@ export default function NavTransition() {
     return () => window.removeEventListener('popstate', onPop, true)
   }, [])
 
-  // Every internal link tap (category, sub-category, menu, breadcrumb...) gets
-  // the same single native cross-fade the original site had. The tap is held
-  // back until the browser has photographed the old screen, then replayed
-  // inside the transition (so the link's own handlers still run). If the new
-  // page hasn't arrived within 350ms the screen is released (never frozen) and
-  // a thin progress bar shows until it arrives.
+  // Category / menu / breadcrumb links: normal instant Next navigation (no held
+  // tap, no frozen screen). A thin progress bar shows only if the page is slow.
+  // Product cards are handled by ProductPreview (instant panel + cross-fade).
   useEffect(() => {
     const root = document.documentElement
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const canVT = !!document.startViewTransition && !reduced
-    let replayingClick = false
 
     function onClick(e) {
-      if (replayingClick) return
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
       const a = e.target.closest && e.target.closest('a[href]')
       if (!a || (a.target && a.target !== '_self') || a.hasAttribute('download') || a.hasAttribute('data-no-vt')) return
       const url = new URL(a.href, location.href)
       if (url.origin !== location.origin || url.pathname.startsWith('/admin')) return
       if (url.pathname === location.pathname) return
-
-      // Product cards have their own instant preview panel (ProductPreview)
       if (a.dataset.preview) return
 
-      if (!canVT) {
-        root.setAttribute('data-nav', '1')
-        setTimeout(() => root.removeAttribute('data-nav'), 10000)
-        return
-      }
-
-      e.preventDefault()
-      e.stopImmediatePropagation()
-      document.startViewTransition(() => new Promise(resolve => {
-        pending.current = resolve
-        replayingClick = true
-        try { a.click() } finally { replayingClick = false }
-        setTimeout(() => {
-          if (pending.current === resolve) {
-            pending.current = null
-            root.setAttribute('data-nav', '1')
-            setTimeout(() => root.removeAttribute('data-nav'), 10000)
-            resolve()
-          }
-        }, 350)
-      }))
+      root.setAttribute('data-nav', '1')
+      setTimeout(() => root.removeAttribute('data-nav'), 10000)
     }
 
     document.addEventListener('click', onClick, true)
