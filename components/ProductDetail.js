@@ -27,7 +27,6 @@ export default function ProductDetail({ product, related }) {
 
   const shown = true
   const [index, setIndex] = useState(0)
-  const [closing, setClosing] = useState(false)
   const [size, setSize] = useState('')
   const [qty, setQty] = useState(1)
   const [chartOpen, setChartOpen] = useState(false)
@@ -69,9 +68,7 @@ export default function ProductDetail({ product, related }) {
     // position) instead of being redirected to Home. If there's truly no
     // history to go back to (e.g. the product was opened via a shared
     // link in a fresh tab), this is a harmless no-op.
-    if (closing) return
-    setClosing(true)
-    setTimeout(() => router.back(), 220)
+    router.back()
   }
 
   function slide(dir) {
@@ -136,7 +133,7 @@ export default function ProductDetail({ product, related }) {
 
   return (
     <>
-      <div className={`panel${shown ? ' show' : ''}`} id="productPanel" data-closing={closing ? '1' : undefined} style={{ overscrollBehavior: 'contain' }}>
+      <div className={`panel${shown ? ' show' : ''}`} id="productPanel" style={{ overscrollBehavior: 'contain' }}>
         <div className="panelHead">
           <h2>Product Details</h2>
           <button className="close" onClick={closeProduct}>×</button>
