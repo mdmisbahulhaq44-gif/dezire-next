@@ -30,7 +30,6 @@ export default function NavTransition() {
 
       const hero = a.querySelector('.productImage')
 
-      // Category and other links: no frozen screen, normal Next navigation + progress bar
       if (!hero || !canVT) {
         root.setAttribute('data-nav', '1')
         setTimeout(() => root.removeAttribute('data-nav'), 10000)
@@ -44,6 +43,7 @@ export default function NavTransition() {
       const old = document.querySelector('.pdGallery')
       if (old) old.style.viewTransitionName = 'none'
       hero.style.viewTransitionName = 'product-hero'
+      root.setAttribute('data-vt', '1')
 
       const t = document.startViewTransition(() => new Promise(resolve => {
         pending.current = resolve
@@ -55,6 +55,7 @@ export default function NavTransition() {
       t.finished.finally(() => {
         hero.style.viewTransitionName = ''
         if (old) old.style.viewTransitionName = ''
+        root.removeAttribute('data-vt')
       })
     }
 

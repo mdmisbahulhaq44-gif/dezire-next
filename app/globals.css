@@ -1298,5 +1298,11 @@ a.category{text-decoration:none;color:#fff}
 }
 
 /* Top progress bar while navigating */
-html[data-nav]::after{content:"";position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:left;background:var(--accent,#d4af37);z-index:99999;pointer-events:none;animation:navBar 8s cubic-bezier(.1,.7,.2,1) forwards}
+html[data-nav]::after{content:"";position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:left;background:var(--gold);z-index:99999;pointer-events:none;animation:navBar 8s cubic-bezier(.1,.7,.2,1) forwards}
 @keyframes navBar{from{transform:scaleX(.05)}to{transform:scaleX(.92)}}
+
+/* Product panel close + no double animation during hero transition */
+@keyframes pdOut{to{opacity:0;transform:translateY(18px)}}
+#productPanel[data-closing]{animation:pdOut .22s ease-in forwards}
+html[data-vt] #productPanel.show{animation:none}
+@media (prefers-reduced-motion:reduce){#productPanel.show,#productPanel[data-closing]{animation:none}}
