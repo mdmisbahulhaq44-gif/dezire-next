@@ -31,6 +31,14 @@ export const metadata = {
   manifest: "/manifest.json"
 }
 
+// Pinch / double-tap zoom is turned off so accidental touches can't zoom the store
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false
+}
+
 export default function RootLayout({ children, modal }) {
   return (
     <html lang="en">

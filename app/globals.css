@@ -1296,3 +1296,6 @@ html[data-nav]::after{content:"";position:fixed;top:0;left:0;height:3px;width:10
 
 /* Touch screens: no sticky hover zoom on tapped product cards */
 @media (hover:none){.product:hover .productImage img{transform:none}}
+
+/* No pinch zoom or double-tap zoom (scrolling and swipes still work) */
+html,body{touch-action:pan-x pan-y}
