@@ -138,6 +138,9 @@ export default function SearchPanel() {
                     {lowStock && (
                       <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 3 }}>Only {p.stock} left</div>
                     )}
+                    {p.stock !== null && p.stock !== undefined && Number(p.stock) <= 0 && (
+                      <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 3 }}>Sold out</div>
+                    )}
                   </Link>
                 )
               })}

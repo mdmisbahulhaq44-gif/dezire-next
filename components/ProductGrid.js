@@ -12,6 +12,7 @@ export default function ProductGrid({ products, replaceLinks }) {
       {products.map(p => {
         const firstImg = p.imgs ? p.imgs.split(",")[0].trim() : ""
         const lowStock = p.stock !== null && p.stock !== undefined && p.stock > 0 && p.stock <= 5
+        const soldOut = p.stock !== null && p.stock !== undefined && Number(p.stock) <= 0
 
         return (
           <Link
@@ -22,8 +23,10 @@ export default function ProductGrid({ products, replaceLinks }) {
             data-replace={replaceLinks ? "1" : undefined}
             data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg })}
           >
-            <div className="productImage" style={{ position: "relative" }}>
-              {p.badge && (
+            <div className="productImage" style={{ position: "relative", opacity: soldOut ? 0.55 : 1 }}>
+              {soldOut ? (
+                <span className="badge" style={{ background: "#111", color: "#fff" }}>SOLD OUT</span>
+              ) : p.badge && (
                 <span className={`badge ${p.badge.toLowerCase() === "sale" ? "sale" : ""}`}>{p.badge}</span>
               )}
               {firstImg ? (

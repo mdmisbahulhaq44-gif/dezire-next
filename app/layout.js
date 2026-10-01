@@ -26,10 +26,37 @@ const quicksand = Quicksand({
   display: "swap"
 })
 
+const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://dezire-next.vercel.app").replace(/\/$/, "")
+
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "DEZIRE - Premium Fashion in Bangladesh",
   description: "DEZIRE - Premium men's and women's clothing in Bangladesh.",
-  manifest: "/manifest.json"
+  manifest: "/manifest.json",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "DEZIRE",
+    locale: "en_BD",
+    title: "DEZIRE - Premium Fashion in Bangladesh",
+    description: "Premium men's and women's clothing with nationwide cash-on-delivery in Bangladesh."
+  },
+  twitter: { card: "summary_large_image" }
+}
+
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": SITE_URL + "/#org",
+      name: "DEZIRE",
+      url: SITE_URL,
+      logo: SITE_URL + "/icon-512.png",
+      contactPoint: { "@type": "ContactPoint", telephone: "+8801877270165", contactType: "customer service", areaServed: "BD", availableLanguage: ["en", "bn"] }
+    },
+    { "@type": "WebSite", "@id": SITE_URL + "/#site", url: SITE_URL, name: "DEZIRE", publisher: { "@id": SITE_URL + "/#org" } }
+  ]
 }
 
 // Pinch / double-tap zoom is turned off so accidental touches can't zoom the store
@@ -44,6 +71,10 @@ export default function RootLayout({ children, modal }) {
   return (
     <html lang="en">
       <body className={quicksand.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c") }}
+        />
         <ShopProvider>
           <Header />
           <main id="main-content">
