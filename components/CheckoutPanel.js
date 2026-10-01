@@ -177,59 +177,43 @@ export default function CheckoutPanel() {
         profile = { id: newId, name: nm, phone: ph, email: null }
       }
 
-      const { data: sessionData } = await supabase.auth.getSession()
-      const userId = sessionData && sessionData.session ? sessionData.session.user.id : null
-
       const cityLabel = city === DHAKA_CITY ? 'Dhaka City' : city
       const isHome = method === 'home_delivery'
       const addr = isHome ? address.trim() : settings.pickup_address
       const fullAddress = [addr, isHome ? area : '', isHome ? subArea : '', isHome ? cityLabel : '', isHome ? region : '']
         .filter(Boolean).join(', ')
-      const couponCode = coupon ? coupon.code : ''
-      const charge = delivery.charge
-      const orderRef = 'VN' + Date.now().toString().slice(-8)
-      const itemsText = cart.map(i => `${i.name}${i.size ? ` (${i.size})` : ''} x${i.qty}`).join(', ')
+      const noteBase = [
+        isHome && subArea ? `${city === DHAKA_CITY ? 'Sub Area' : 'Union'}: ${subArea}` : '',
+        isHome && addrType ? `Address Type: ${addrType}` : '',
+        note.trim()
+      ].filter(Boolean).join(' | ')
 
-      const rows = cart.map((item, idx) => ({
-        customer: nm,
-        phone: ph,
-        user_id: userId,
-        customer_id: profile.id,
-        address: addr,
-        items: itemsText,
-        payment: payment,
-        status: 'Pending',
-        date: new Date().toISOString(),
-        order_ref: orderRef,
-        district: isHome ? cityLabel : '',
-        upazila: isHome ? area : '',
-        delivery_method: method,
-        delivery_address: fullAddress,
-        delivery_phone: ph,
-        delivery_note: [
-          isHome && subArea ? `${city === DHAKA_CITY ? 'Sub Area' : 'Union'}: ${subArea}` : '',
-          isHome && addrType ? `Address Type: ${addrType}` : '',
-          couponCode ? `Coupon: ${couponCode} (−৳${discount.toLocaleString()})` : '',
-          note.trim()
-        ].filter(Boolean).join(' | '),
-        delivery_charge: idx === 0 ? charge : 0,
-        unit_price: item.price,
-        total_amount: idx === 0 ? (item.price * item.qty) + charge - discount : (item.price * item.qty),
-        product_id: item.id,
-        quantity: item.qty
-      }))
-
-      const { error } = await supabase.from('orders').insert(rows)
-      if (error) {
+      // The server prices the order itself (products, coupon, delivery charge, stock).
+      const { data: result, error } = await supabase.rpc('place_order', {
+        p_name: nm,
+        p_phone: ph,
+        p_customer_id: profile.id,
+        p_items: cart.map(i => ({ id: i.id, qty: i.qty, size: i.size || null })),
+        p_method: method,
+        p_city: isHome ? cityLabel : '',
+        p_address: addr,
+        p_area: isHome ? area : '',
+        p_delivery_address: fullAddress,
+        p_note: noteBase,
+        p_coupon: coupon ? coupon.code : '',
+        p_payment: payment
+      })
+      if (error || !result) {
         console.error(error)
-        showToast('Order failed: ' + (error.message || 'Unknown error'))
+        showToast('Order failed: ' + ((error && error.message) || 'Unknown error'))
         setBusy(false); return
       }
 
-      // Stock is reduced inside the database when the order row is inserted.
+      const orderRef = result.order_ref
+      const itemsText = result.items_text
+      const charge = Number(result.delivery_charge)
+      const purchaseTotal = Number(result.total)
       saveOrder(orderRef, ph)
-
-      const purchaseTotal = cartSubtotal - discount + charge
 
       if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: purchaseTotal, currency: 'BDT', content_ids: cart.map(i => String(i.id)), content_type: 'product', num_items: cart.reduce((s, i) => s + i.qty, 0) })
       if (typeof window.gtag === 'function') window.gtag('event', 'purchase', { transaction_id: orderRef, value: purchaseTotal, currency: 'BDT', items: cart.map(i => ({ item_id: String(i.id), item_name: i.name, price: i.price, quantity: i.qty })) })

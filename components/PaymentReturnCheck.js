@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../lib/supabaseClient'
 import { useShop } from './ShopContext'
+import { getSavedOrders } from '../lib/checkout'
 
 export default function PaymentReturnCheck() {
   const router = useRouter()
@@ -20,10 +21,11 @@ export default function PaymentReturnCheck() {
 
     ;(async () => {
       try {
-        const { data, error } = await supabase
-          .from('orders')
-          .select('total_amount,delivery_method,payment_status')
-          .eq('order_ref', orderRef)
+        // Guests cannot read the orders table directly; the order number plus the
+        // phone saved on this device (at checkout) is what unlocks the order.
+        const saved = getSavedOrders().find(o => o.ref === orderRef)
+        if (!saved) return
+        const { data, error } = await supabase.rpc('track_order', { p_ref: orderRef, p_phone: saved.phone })
 
         if (error || !data || !data.length) return
 
