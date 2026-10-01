@@ -30,7 +30,8 @@ export default function AdminDashboard({ onNav }) {
     }
 
     const orders = allOrders || []
-    const total = orders.reduce((s, o) => s + Number(o.total_amount || 0), 0)
+    const isLive = o => !['cancelled', 'returned'].includes((o.status || '').toLowerCase())
+    const total = orders.filter(isLive).reduce((s, o) => s + Number(o.total_amount || 0), 0)
 
     const groups = new Map()
     orders.forEach(o => {
@@ -57,7 +58,7 @@ export default function AdminDashboard({ onNav }) {
 
     setStats({
       sales: total,
-      orderCount: groupedOrders.length,
+      orderCount: groupedOrders.filter(isLive).length,
       customerCount: uniqueCustomers.size,
       productCount: productCount || 0
     })

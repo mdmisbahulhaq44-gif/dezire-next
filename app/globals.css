@@ -1060,6 +1060,9 @@ font-weight:700;letter-spacing:0.4px
 }
 .statusBadge.pending{background:#fff3d6;color:#966600}
 .statusBadge.processing{background:#dceaff;color:#1a5bb8}
+.statusBadge.confirmed{background:#dceaff;color:#1a5bb8}
+.statusBadge.packed{background:#e0f2f1;color:#00695c}
+.statusBadge.returned{background:#eceff1;color:#455a64}
 .statusBadge.shipped{background:#e9ddff;color:#6934c9}
 .statusBadge.delivered{background:#dcf5e3;color:#1c8a45}
 .statusBadge.cancelled{background:#fde0e0;color:#c0392b}

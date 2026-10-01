@@ -5,7 +5,7 @@ import { supabase } from '../../lib/supabaseClient'
 import { cldOpt } from '../../lib/cloudinary'
 import { useShop } from '../ShopContext'
 
-const STATUS_OPTIONS = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled']
+const STATUS_OPTIONS = ['Pending', 'Confirmed', 'Packed', 'Shipped', 'Delivered', 'Cancelled', 'Returned']
 
 function WalletBadge({ name }) {
   return <span style={{ background: 'transparent', border: '1.5px solid #111', color: '#111', fontWeight: 700, fontSize: 12, padding: '3px 12px', borderRadius: 20, letterSpacing: '.3px', display: 'inline-block' }}>{name}</span>

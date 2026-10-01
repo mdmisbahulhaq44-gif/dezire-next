@@ -54,6 +54,7 @@ export default function TrackOrderPanel() {
   const [phone, setPhone] = useState('')
   const [receiptRows, setReceiptRows] = useState(null)
   const [imgById, setImgById] = useState({})
+  const [history, setHistory] = useState({})
   const [copiedPhone, setCopiedPhone] = useState(false)
   const resultRef = useRef(null)
 
@@ -62,6 +63,21 @@ export default function TrackOrderPanel() {
     if (show) runOpen()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show])
+
+  // when each status happened (customers can read this only with order number + phone)
+  useEffect(() => {
+    setHistory({})
+    if (!receiptRows || !receiptRows[0].order_ref) return
+    const o = receiptRows[0]
+    supabase.rpc('track_order_history', { p_ref: o.order_ref, p_phone: o.phone }).then(({ data }) => {
+      const map = {}
+      ;(data || []).forEach(h => {
+        const k = (h.status || '').toLowerCase()
+        if (!map[k]) map[k] = h.changed_at
+      })
+      setHistory(map)
+    })
+  }, [receiptRows])
 
   // product images for the receipt
   useEffect(() => {
@@ -224,20 +240,24 @@ export default function TrackOrderPanel() {
     const rows = receiptRows
     const o = rows[0]
 
-    if ((o.status || '').toLowerCase() === 'cancelled') {
+    const st = (o.status || '').toLowerCase()
+    if (st === 'cancelled' || st === 'returned') {
+      const cancelled = st === 'cancelled'
       return (
-        <div style={{ background: '#fde0e0', borderRadius: 12, padding: 18, color: '#c0392b', fontWeight: 700, textAlign: 'center' }}>
-          Order {o.order_ref || '#' + o.id} was cancelled
+        <div style={{ background: cancelled ? '#fde0e0' : '#eceff1', borderRadius: 12, padding: 18, color: cancelled ? '#c0392b' : '#455a64', fontWeight: 700, textAlign: 'center' }}>
+          Order {o.order_ref || '#' + o.id} was {cancelled ? 'cancelled' : 'returned'}
+          {history[st] ? <div style={{ fontWeight: 400, fontSize: 11, marginTop: 4 }}>{fmtTime(history[st])}</div> : null}
         </div>
       )
     }
 
-    const order = ['pending', 'processing', 'shipped', 'delivered']
-    const currentIdx = order.indexOf((o.status || 'pending').toLowerCase())
+    const order = ['pending', 'confirmed', 'packed', 'shipped', 'delivered']
+    const currentIdx = Math.max(0, order.indexOf(st === 'processing' ? 'confirmed' : st))
 
     const steps = [
       { key: 'pending', title: 'Order Placed (COD)', desc: `Your order ${o.order_ref || '#' + o.id} was successfully placed.`, time: o.created_at },
-      { key: 'processing', title: 'Processing', desc: 'We have received your order and our team is confirming it.' },
+      { key: 'confirmed', title: 'Confirmed', desc: 'Our team has confirmed your order.' },
+      { key: 'packed', title: 'Packed', desc: 'Your order is packed and ready for the rider.' },
       {
         key: 'shipped', title: 'Shipped',
         desc: o.rider_name ? (
@@ -277,7 +297,7 @@ export default function TrackOrderPanel() {
         {steps.map((s, i) => {
           const state = i < currentIdx ? 'done' : i === currentIdx ? 'current' : 'pending'
           const isLast = i === steps.length - 1
-          const time = i === currentIdx ? o.status_updated_at : s.time
+          const time = history[s.key] || (i === currentIdx ? o.status_updated_at : s.time)
           return (
             <div className={`trackStep ${state}`} key={s.key}>
               <div className="trackStepCol">
