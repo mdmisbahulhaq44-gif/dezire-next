@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
 import { cldOpt } from '../../lib/cloudinary'
 import { useShop } from '../ShopContext'
+import { printOrderSlip } from '../../lib/printSlip'
 
 const STATUS_OPTIONS = ['Pending', 'Confirmed', 'Packed', 'Shipped', 'Delivered', 'Cancelled', 'Returned']
 
@@ -92,7 +93,7 @@ export default function AdminOrders({ initialSearch }) {
   const PAGE = 100
   const [hasMore, setHasMore] = useState(false)
   const [loadingMore, setLoadingMore] = useState(false)
-  const COLS = 'id,customer,phone,total_amount,status,created_at,order_ref,rider_name,rider_phone,payment,delivery_note,payment_status,payment_wallet,payment_sender_number,payment_transaction_id,items,product_id,quantity,delivery_address,delivery_method,upazila,district'
+  const COLS = 'id,customer,phone,total_amount,status,created_at,order_ref,rider_name,rider_phone,payment,delivery_note,payment_status,payment_wallet,payment_sender_number,payment_transaction_id,items,product_id,quantity,delivery_address,delivery_method,upazila,district,unit_price,discount,delivery_charge,coupon_code'
 
   function pageQuery(from) {
     let q = supabase.from('orders').select(COLS).order('created_at', { ascending: false }).range(from, from + PAGE - 1)
@@ -139,10 +140,11 @@ export default function AdminOrders({ initialSearch }) {
     filtered.forEach(o => {
       const key = o.order_ref || ('id_' + o.id)
       if (!groups.has(key)) {
-        groups.set(key, { ...o, total_amount: Number(o.total_amount || 0), _items: [{ product_id: o.product_id, qty: o.quantity || 1 }] })
+        groups.set(key, { ...o, total_amount: Number(o.total_amount || 0), _rows: [o], _items: [{ product_id: o.product_id, qty: o.quantity || 1 }] })
       } else {
         const g = groups.get(key)
         g.total_amount += Number(o.total_amount || 0)
+        g._rows.push(o)
         g._items.push({ product_id: o.product_id, qty: o.quantity || 1 })
       }
     })
@@ -186,7 +188,17 @@ export default function AdminOrders({ initialSearch }) {
             {cache !== null && list.length === 0 && <tr><td colSpan={10}>{search ? 'No orders match your search.' : 'No orders yet'}</td></tr>}
             {list.map(o => (
               <tr key={o.order_ref || o.id}>
-                <td>{o.order_ref || '#' + o.id}</td>
+                <td>
+                  {o.order_ref || '#' + o.id}
+                  <br />
+                  <button
+                    type="button"
+                    onClick={() => { if (!printOrderSlip(o, allProducts)) showToast('Please allow pop-ups to print the slip.') }}
+                    style={{ fontSize: 11, padding: '3px 8px', marginTop: 4, borderRadius: 8, border: '1px solid var(--line)', background: '#fff', cursor: 'pointer', whiteSpace: 'nowrap' }}
+                  >
+                    🖨 Print slip
+                  </button>
+                </td>
                 <td>{o.customer || '—'}</td>
                 <td>{o.phone || '—'}</td>
                 <td><ProductChips items={o._items} allProducts={allProducts} /></td>
