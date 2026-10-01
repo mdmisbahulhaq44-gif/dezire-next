@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
 import { cldOpt } from '../../lib/cloudinary'
 import StatusBadge from './StatusBadge'
+import DashboardInsights from './DashboardInsights'
 
 export default function AdminDashboard({ onNav }) {
   const [state, setState] = useState('loading') // loading | error | ready
   const [stats, setStats] = useState({ sales: 0, orderCount: 0, customerCount: 0, productCount: 0 })
   const [recent, setRecent] = useState([])
+  const [summary, setSummary] = useState(null)
   const [imgById, setImgById] = useState({})
 
   useEffect(() => { load() }, [])
@@ -19,10 +21,16 @@ export default function AdminDashboard({ onNav }) {
     const { count: productCount } = await supabase
       .from('products').select('id', { count: 'exact', head: true })
 
-    const { data: allOrders, error } = await supabase
-      .from('orders')
-      .select('id,customer,phone,total_amount,status,created_at,order_ref,product_id,quantity')
-      .order('created_at', { ascending: false })
+    // totals, charts and lists are computed by the database (exact, any number of orders)
+    const [{ data: sum }, { data: allOrders, error }] = await Promise.all([
+      supabase.rpc('admin_dashboard_summary'),
+      supabase
+        .from('orders')
+        .select('id,customer,phone,total_amount,status,created_at,order_ref,product_id,quantity')
+        .order('created_at', { ascending: false })
+        .limit(80)
+    ])
+    setSummary(sum || null)
 
     if (error) {
       setState('error')
@@ -57,9 +65,9 @@ export default function AdminDashboard({ onNav }) {
     setImgById(map)
 
     setStats({
-      sales: total,
-      orderCount: groupedOrders.filter(isLive).length,
-      customerCount: uniqueCustomers.size,
+      sales: sum ? Number(sum.all.sales) : total,
+      orderCount: sum ? Number(sum.all.orders) : groupedOrders.filter(isLive).length,
+      customerCount: sum ? Number(sum.all.customers) : uniqueCustomers.size,
       productCount: productCount || 0
     })
     setRecent(recentOrders)
@@ -86,6 +94,8 @@ export default function AdminDashboard({ onNav }) {
           <div><small>PRODUCTS</small><h2>{stats.productCount}</h2></div>
         </div>
       </div>
+
+      <DashboardInsights summary={summary} onNav={onNav} />
 
       <div className="adminTable dashRecentOrders">
         <h2 style={{ marginBottom: 20 }}>Recent Orders</h2>
