@@ -7,6 +7,7 @@ import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
 import Image from 'next/image'
 import { getSavedOrders, saveOrder, clearSavedOrders } from '../lib/checkout'
+import ReturnRequest from './ReturnRequest'
 
 const ACTIVE_ORDER_STATUSES = new Set(['pending', 'processing', 'shipped'])
 
@@ -341,6 +342,8 @@ export default function TrackOrderPanel() {
         <h3 style={{ fontSize: 13, letterSpacing: '0.5px', marginTop: 20, marginBottom: 8 }}>DELIVERY ADDRESS</h3>
         <p style={{ fontSize: 13, color: '#333', lineHeight: 1.6 }}>{addressLine || '—'}</p>
         <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>{o.customer || ''} · {o.phone || ''}</p>
+
+        <ReturnRequest order={o} deliveredAt={history.delivered || o.status_updated_at} />
 
         <p style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', marginTop: 20 }}>
           Any query? Message us on <a href="https://wa.me/8801877270165" target="_blank" rel="noreferrer" style={{ color: 'var(--gold)' }}>WhatsApp</a>.
