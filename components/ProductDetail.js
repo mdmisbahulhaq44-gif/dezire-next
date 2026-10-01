@@ -132,13 +132,13 @@ export default function ProductDetail({ product, related }) {
     const { data } = await supabase.auth.getSession()
     const s = data && data.session
     if (!s) { showToast('Please login to submit a review.'); return }
-    const name = (s.user.user_metadata && s.user.user_metadata.full_name) || (s.user.email || '').split('@')[0]
+    const name = ((s.user.user_metadata && s.user.user_metadata.full_name) || 'DEZIRE Customer').slice(0, 100)
     const { error } = await supabase.from('reviews').insert({
       product_id: product.id,
       user_id: s.user.id,
       name,
       rating: Number(rating),
-      comment: comment.trim()
+      comment: comment.trim().slice(0, 1000)
     })
     if (error) { showToast('Could not submit review: ' + (error.message || 'Unknown error')); return }
     showToast('Thank you for your review!')
