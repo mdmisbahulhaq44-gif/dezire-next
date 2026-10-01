@@ -11,6 +11,7 @@ export default function AdminDashboard({ onNav }) {
   const [stats, setStats] = useState({ sales: 0, orderCount: 0, customerCount: 0, productCount: 0 })
   const [recent, setRecent] = useState([])
   const [summary, setSummary] = useState(null)
+  const [profit, setProfit] = useState(null)
   const [imgById, setImgById] = useState({})
 
   useEffect(() => { load() }, [])
@@ -22,8 +23,9 @@ export default function AdminDashboard({ onNav }) {
       .from('products').select('id', { count: 'exact', head: true })
 
     // totals, charts and lists are computed by the database (exact, any number of orders)
-    const [{ data: sum }, { data: allOrders, error }] = await Promise.all([
+    const [{ data: sum }, { data: prof }, { data: allOrders, error }] = await Promise.all([
       supabase.rpc('admin_dashboard_summary'),
+      supabase.rpc('admin_profit_summary'),
       supabase
         .from('orders')
         .select('id,customer,phone,total_amount,status,created_at,order_ref,product_id,quantity')
@@ -31,6 +33,7 @@ export default function AdminDashboard({ onNav }) {
         .limit(80)
     ])
     setSummary(sum || null)
+    setProfit(prof || null)
 
     if (error) {
       setState('error')
@@ -95,7 +98,7 @@ export default function AdminDashboard({ onNav }) {
         </div>
       </div>
 
-      <DashboardInsights summary={summary} onNav={onNav} />
+      <DashboardInsights summary={summary} profit={profit} onNav={onNav} />
 
       <div className="adminTable dashRecentOrders">
         <h2 style={{ marginBottom: 20 }}>Recent Orders</h2>

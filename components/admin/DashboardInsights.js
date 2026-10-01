@@ -135,7 +135,50 @@ function SalesChart({ days }) {
   )
 }
 
-export default function DashboardInsights({ summary, onNav }) {
+function ProfitSection({ profit, onNav }) {
+  const per = profit.periods || {}
+  const empty = { revenue: 0, cost: 0, profit: 0, missing: 0 }
+  const cells = [['Today', per.today], ['Last 7 days', per.week], ['Last 30 days', per.month]]
+  const margin = d => (d.revenue > 0 ? Math.round((d.profit / d.revenue) * 100) + '% margin' : '—')
+  const missingProducts = Number(profit.products_without_cost || 0)
+
+  return (
+    <div style={card}>
+      <div style={{ fontWeight: 700, fontSize: 14 }}>Profit</div>
+      <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 10 }}>Sales minus what the products cost you (delivery charge not counted)</div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(104px,1fr))', gap: 10 }}>
+        {cells.map(([label, d]) => {
+          const v = d || empty
+          return (
+            <div key={label} style={{ border: '1px solid var(--line)', borderRadius: 12, padding: 12 }}>
+              <div style={cap}>{label}</div>
+              <div style={{ fontSize: 20, fontWeight: 700, marginTop: 4, color: v.profit < 0 ? 'var(--red)' : 'inherit' }}>{fmt(v.profit)}</div>
+              <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>{margin(v)}</div>
+            </div>
+          )
+        })}
+      </div>
+      {(profit.top || []).length > 0 && (
+        <div style={{ marginTop: 12 }}>
+          <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>Most profitable, last 30 days</div>
+          {profit.top.map((p, i) => (
+            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', gap: 10, padding: '7px 0', borderTop: i ? '1px solid #f0eee9' : 'none', fontSize: 12 }}>
+              <span style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.name}</span>
+              <b style={{ whiteSpace: 'nowrap' }}>{fmt(p.profit)}</b>
+            </div>
+          ))}
+        </div>
+      )}
+      {missingProducts > 0 && (
+        <div onClick={() => onNav('products')} style={{ marginTop: 12, fontSize: 12, color: '#966600', background: '#fff8e5', borderRadius: 10, padding: '8px 10px', cursor: 'pointer' }}>
+          {missingProducts} product{missingProducts === 1 ? ' has' : 's have'} no cost price yet, so their sales are not in the profit numbers. Open a product and fill in "Cost price" →
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default function DashboardInsights({ summary, profit, onNav }) {
   if (!summary) return null
   const { today, week, month, pending, to_ship, daily, top, low_stock } = summary
   const lowCount = (low_stock || []).length
@@ -155,6 +198,8 @@ export default function DashboardInsights({ summary, onNav }) {
       </div>
 
       {daily && daily.length > 0 && <SalesChart days={daily} />}
+
+      {profit && <ProfitSection profit={profit} onNav={onNav} />}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))', gap: 10 }}>
         <div style={card}>

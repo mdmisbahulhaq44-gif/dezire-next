@@ -90,7 +90,7 @@ function CatBuilder({ allProducts, gender, levels, custom, onChange }) {
 
 const BLANK = {
   id: '', name: '', brand: 'DEZIRE', gender: 'men',
-  price: '', old: '', badge: '', stock: '', imgs: '',
+  price: '', old: '', badge: '', stock: '', imgs: '', cost: '',
   fabric: '', sizes: '', color_name: '', color_group: '', size_chart: ''
 }
 
@@ -127,6 +127,13 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
       setCatLevels([''])
       setCatCustom([false])
     }
+  }, [open, product])
+
+  // private cost price lives in its own admin-only table
+  useEffect(() => {
+    if (!open || !product || !product.id) return
+    supabase.from('product_costs').select('cost_price').eq('product_id', product.id).maybeSingle()
+      .then(({ data }) => { if (data) setF(prev => ({ ...prev, cost: data.cost_price })) })
   }, [open, product])
 
   function set(k, v) { setF(prev => ({ ...prev, [k]: v })) }
@@ -169,9 +176,24 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
     if (f.color_group.trim()) payload.color_group = f.color_group.trim()
 
     setBusy(true)
-    const { error } = f.id
-      ? await supabase.from('products').update(payload).eq('id', f.id)
-      : await supabase.from('products').insert(payload)
+    let pid = f.id
+    let error
+    if (f.id) {
+      ;({ error } = await supabase.from('products').update(payload).eq('id', f.id))
+    } else {
+      const res = await supabase.from('products').insert(payload).select('id').single()
+      error = res.error
+      pid = res.data && res.data.id
+    }
+    if (!error && pid) {
+      const costNum = f.cost === '' || f.cost === null ? null : Number(f.cost)
+      if (costNum !== null && costNum >= 0) {
+        const r2 = await supabase.from('product_costs').upsert({ product_id: pid, cost_price: costNum, updated_at: new Date().toISOString() })
+        if (r2.error) showToast('Product saved, but cost price failed: ' + r2.error.message)
+      } else if (f.id) {
+        await supabase.from('product_costs').delete().eq('product_id', pid)
+      }
+    }
     setBusy(false)
 
     if (error) {
@@ -225,6 +247,9 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
 
         <label>PRICE (৳)</label>
         <input type="number" required value={f.price} onChange={e => set('price', e.target.value)} />
+
+        <label>COST PRICE (৳) — PRIVATE, ONLY FOR YOUR PROFIT REPORT</label>
+        <input type="number" min="0" placeholder="What the product costs you" value={f.cost} onChange={e => set('cost', e.target.value)} />
 
         <label>OLD PRICE (OPTIONAL, FOR SALE STRIKETHROUGH)</label>
         <input type="number" value={f.old} onChange={e => set('old', e.target.value)} />
