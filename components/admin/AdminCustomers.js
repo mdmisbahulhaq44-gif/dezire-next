@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
+import { downloadCsv, stamp } from '../../lib/exportCsv'
 
 export default function AdminCustomers({ onViewOrders }) {
   const [orders, setOrders] = useState(null)
@@ -41,8 +42,15 @@ export default function AdminCustomers({ onViewOrders }) {
     <div id="adminCustomersView">
       <div className="adminTable">
         <h2 style={{ marginBottom: 20 }}>Customers</h2>
-        <div className="adminSearchRow">
+        <div className="adminSearchRow" style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <input placeholder="Search customers by name or phone..." value={search} onChange={e => setSearch(e.target.value)} />
+          <button
+            type="button"
+            onClick={() => downloadCsv(`dezire-customers-${stamp()}.csv`, ['Customer', 'Phone', 'Orders', 'Total spent', 'Last order'], list.map(c => [c.customer, c.phone, c.refs.size, c.totalSpent, c.lastOrder]))}
+            style={{ fontSize: 12, padding: '9px 14px', borderRadius: 10, border: '1px solid var(--line)', background: '#fff', cursor: 'pointer', whiteSpace: 'nowrap' }}
+          >
+            ⬇ Export CSV
+          </button>
         </div>
         <table>
           <thead><tr><th>Customer</th><th>Phone</th><th>Orders</th><th>Total Spent</th><th>Last Order</th></tr></thead>

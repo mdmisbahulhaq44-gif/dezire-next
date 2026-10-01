@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabaseClient'
 import { cldOpt } from '../../lib/cloudinary'
 import { useShop } from '../ShopContext'
 import { printOrderSlip } from '../../lib/printSlip'
+import { downloadCsv, stamp } from '../../lib/exportCsv'
 
 const STATUS_OPTIONS = ['Pending', 'Confirmed', 'Packed', 'Shipped', 'Delivered', 'Cancelled', 'Returned']
 
@@ -172,12 +173,34 @@ export default function AdminOrders({ initialSearch }) {
     showToast('Rider info saved.')
   }
 
+  async function exportAll() {
+    const all = []
+    for (let from = 0; ; from += 1000) {
+      const { data, error } = await supabase.from('orders').select(COLS).order('created_at', { ascending: false }).range(from, from + 999)
+      if (error) { showToast('Export failed. Try again.'); return }
+      all.push(...(data || []))
+      if (!data || data.length < 1000) break
+    }
+    downloadCsv(
+      `dezire-orders-${stamp()}.csv`,
+      ['Order', 'Date', 'Customer', 'Phone', 'Status', 'Payment', 'Payment status', 'Transaction', 'Item', 'Qty', 'Unit price', 'Discount', 'Delivery charge', 'Line total', 'Coupon', 'District', 'Address'],
+      all.map(o => [o.order_ref || o.id, o.created_at, o.customer, o.phone, o.status, o.payment, o.payment_status, o.payment_transaction_id, o.items, o.quantity, o.unit_price, o.discount, o.delivery_charge, o.total_amount, o.coupon_code, o.district, o.delivery_address])
+    )
+  }
+
   return (
     <div id="adminOrdersView">
       <div className="adminTable">
         <h2 style={{ marginBottom: 20 }}>All Orders</h2>
-        <div className="adminSearchRow">
+        <div className="adminSearchRow" style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
           <input placeholder="Search by customer, phone or order ID..." value={search} onChange={e => setSearch(e.target.value)} />
+          <button
+            type="button"
+            onClick={exportAll}
+            style={{ fontSize: 12, padding: '9px 14px', borderRadius: 10, border: '1px solid var(--line)', background: '#fff', cursor: 'pointer', whiteSpace: 'nowrap' }}
+          >
+            ⬇ Export CSV
+          </button>
         </div>
         <table>
           <thead>

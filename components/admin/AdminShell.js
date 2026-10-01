@@ -7,13 +7,15 @@ import AdminProducts from './AdminProducts'
 import AdminOrders from './AdminOrders'
 import AdminCustomers from './AdminCustomers'
 import AdminSettings from './AdminSettings'
+import AdminAuditLog from './AdminAuditLog'
 
 const SECTIONS = [
   { key: 'dashboard', label: '📊 Dashboard' },
   { key: 'products', label: '🛍️ Products' },
   { key: 'orders', label: '📦 Orders' },
   { key: 'customers', label: '👥 Customers' },
-  { key: 'settings', label: '⚙️ Settings' }
+  { key: 'settings', label: '⚙️ Settings' },
+  { key: 'activity', label: '🕘 Activity log' }
 ]
 
 const TITLES = {
@@ -21,7 +23,8 @@ const TITLES = {
   products: 'Products',
   orders: 'Orders',
   customers: 'Customers',
-  settings: 'Settings'
+  settings: 'Settings',
+  activity: 'Activity log'
 }
 
 export default function AdminShell() {
@@ -58,6 +61,7 @@ export default function AdminShell() {
         {section === 'orders' && <AdminOrders initialSearch={ordersSearch} />}
         {section === 'customers' && <AdminCustomers onViewOrders={phone => { setOrdersSearch(phone); setSection('orders') }} />}
         {section === 'settings' && <AdminSettings />}
+        {section === 'activity' && <AdminAuditLog />}
       </main>
     </div>
   )
