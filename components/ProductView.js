@@ -1,6 +1,7 @@
 import { supabaseServer as supabase } from "../lib/supabaseServer"
 import { getProduct } from "../lib/getProduct"
 import ProductDetail from "./ProductDetail"
+import TrackView from "./TrackView"
 import { cldOpt } from "../lib/cloudinary"
 import { parseCatPath, buildShopPath, capitalize } from "../lib/categories"
 
@@ -64,6 +65,7 @@ export default async function ProductView({ id }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd).replace(/</g, "\\u003c") }}
       />
+<TrackView id={product.id} />
       <ProductDetail key={product.id} product={product} related={related} />
     </>
   )

@@ -3,6 +3,7 @@ import HeroCarousel from "../components/HeroCarousel"
 import CategoryTiles from "../components/CategoryTiles"
 import ProductGrid from "../components/ProductGrid"
 import PaymentReturnCheck from "../components/PaymentReturnCheck"
+import RecentlyViewed from "../components/RecentlyViewed"
 
 // Cache the homepage for a minute (like product pages) instead of
 // re-rendering it on every visit.
@@ -85,6 +86,7 @@ export default async function HomePage() {
         <ProductGrid products={products} />
       </div>
 
+<RecentlyViewed />
       <section className="features">
         <div className="feature">
           <div style={{ fontSize: 25 }}>🚚</div>
