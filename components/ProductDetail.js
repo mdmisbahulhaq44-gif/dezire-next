@@ -36,6 +36,7 @@ export default function ProductDetail({ product, related, saleEndsAt }) {
   const [chartOpen, setChartOpen] = useState(false)
   const [reviews, setReviews] = useState(null) // null = loading, 'error' = failed
   const [session, setSession] = useState(undefined) // undefined = not checked yet
+  const [reviewed, setReviewed] = useState(false) // this customer already reviewed this product
   const [rating, setRating] = useState('')
   const [comment, setComment] = useState('')
   const touchStartX = useRef(0)
@@ -68,7 +69,18 @@ export default function ProductDetail({ product, related, saleEndsAt }) {
       .order('created_at', { ascending: false })
     setReviews(error ? 'error' : (data || []))
     const { data: s } = await supabase.auth.getSession()
-    setSession(s && s.session ? s.session : null)
+    const sess = s && s.session ? s.session : null
+    setSession(sess)
+    if (sess) {
+      const { count } = await supabase
+        .from('reviews')
+        .select('id', { count: 'exact', head: true })
+        .eq('product_id', product.id)
+        .eq('user_id', sess.user.id)
+      setReviewed((count || 0) > 0)
+    } else {
+      setReviewed(false)
+    }
   }, [product.id])
 
   useEffect(() => { loadReviews() }, [loadReviews])
@@ -141,7 +153,10 @@ export default function ProductDetail({ product, related, saleEndsAt }) {
       rating: Number(rating),
       comment: comment.trim().slice(0, 1000)
     })
-    if (error) { showToast('Could not submit review: ' + (error.message || 'Unknown error')); return }
+    if (error) {
+      if (error.code === '23505') { setReviewed(true); showToast('You have already reviewed this product.'); return }
+      showToast('Could not submit review: ' + (error.message || 'Unknown error')); return
+    }
     showToast('Thank you for your review!')
     setRating('')
     setComment('')
@@ -287,7 +302,9 @@ export default function ProductDetail({ product, related, saleEndsAt }) {
             ))}
 
             <div style={{ marginTop: 16 }}>
-              {session === undefined ? null : session ? (
+              {session === undefined ? null : session ? (reviewed ? (
+                <p style={{ fontSize: 12, color: 'var(--muted)' }}>✓ You have already reviewed this product. Thank you!</p>
+              ) : (
                 <form className="form" onSubmit={submitReview}>
                   <label>YOUR RATING</label>
                   <select value={rating} onChange={e => setRating(e.target.value)} required>
@@ -301,7 +318,7 @@ export default function ProductDetail({ product, related, saleEndsAt }) {
                   <textarea value={comment} onChange={e => setComment(e.target.value)} placeholder="Share your experience with this product (optional)" />
                   <button className="btn light" style={{ width: '100%' }}>SUBMIT REVIEW</button>
                 </form>
-              ) : (
+              )) : (
                 <p style={{ fontSize: 12, color: 'var(--muted)' }}>
                   <a href="#" onClick={e => { e.preventDefault(); openAccount() }} style={{ textDecoration: 'underline' }}>Login</a> to write a review.
                 </p>
