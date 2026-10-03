@@ -5,7 +5,7 @@ import { supabase } from '../lib/supabaseClient'
 import { useShop } from './ShopContext'
 import {
   DHAKA_CITY, DEFAULT_SETTINGS, fetchDeliverySettings,
-  deliveryFor, couponDiscount, getProfile, setProfile, saveOrder
+  deliveryFor, getProfile, setProfile, saveOrder
 } from '../lib/checkout'
 
 const homeIcon = (
@@ -123,32 +123,45 @@ export default function CheckoutPanel() {
     setSubAreas(data.map(u => u.name_en || u.name))
   }
 
+  // The server decides whether the coupon works and how much it takes off
+  async function runCoupon(code) {
+    const { data, error } = await supabase.rpc('check_coupon', {
+      p_code: code,
+      p_items: cart.map(i => ({ id: i.id, qty: i.qty })),
+      p_phone: phone.trim()
+    })
+    if (error || !data) return { ok: false, error: 'Could not check the coupon. Please try again.' }
+    return data
+  }
+
   async function applyCoupon() {
     const code = couponInput.trim()
     if (!code) { showToast('Please enter a coupon code.'); return }
-    // escape LIKE wildcards so "%" or "_" can't match other codes
-    const safe = code.replace(/[\\%_]/g, m => '\\' + m)
-    const { data, error } = await supabase
-      .from('coupons').select('code,type,value,minorder,active,expires')
-      .ilike('code', safe).maybeSingle()
-
-    if (error || !data || !data.active) {
-      setCoupon(null); setCouponMsg({ text: 'Invalid or inactive coupon code.', bad: true }); return
+    const r = await runCoupon(code)
+    if (!r.ok) {
+      setCoupon(null); setCouponMsg({ text: r.error, bad: true }); return
     }
-    if (data.expires && new Date(data.expires) < new Date()) {
-      setCoupon(null); setCouponMsg({ text: 'This coupon has expired.', bad: true }); return
-    }
-    if (data.minorder && cartSubtotal < Number(data.minorder)) {
-      setCoupon(null)
-      setCouponMsg({ text: `Minimum order ৳${Number(data.minorder).toLocaleString()} required for this coupon.`, bad: true })
-      return
-    }
-    setCoupon(data)
-    setCouponMsg({ text: `Coupon "${data.code}" applied!`, bad: false })
+    setCoupon({ code: r.code, discount: Number(r.discount) })
+    setCouponMsg({ text: `Coupon "${r.code}" applied!`, bad: false })
   }
 
+  // Re-check an applied coupon when the cart or phone number changes
+  const cartKey = cart.map(i => i.id + 'x' + i.qty).join(',')
+  useEffect(() => {
+    if (!coupon) return
+    let alive = true
+    const t = setTimeout(async () => {
+      const r = await runCoupon(coupon.code)
+      if (!alive) return
+      if (!r.ok) { setCoupon(null); setCouponMsg({ text: r.error, bad: true }) }
+      else if (Number(r.discount) !== coupon.discount) setCoupon({ code: r.code, discount: Number(r.discount) })
+    }, 500)
+    return () => { alive = false; clearTimeout(t) }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartKey, phone, coupon?.code])
+
   const delivery = deliveryFor(settings, cartSubtotal, method, city)
-  const discount = couponDiscount(coupon, cartSubtotal)
+  const discount = coupon ? Math.min(Number(coupon.discount) || 0, cartSubtotal) : 0
   const total = cartSubtotal - discount + delivery.charge
 
   async function placeOrder(e) {
