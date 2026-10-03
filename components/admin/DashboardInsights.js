@@ -15,28 +15,32 @@ function dayLabel(iso) {
   return new Date(iso + 'T00:00:00').toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })
 }
 
-const card = { border: '1px solid var(--line)', borderRadius: 14, padding: 14, background: '#fff' }
+const card = { border: '1px solid #eee', borderRadius: 14, padding: 18, background: '#fff' }
 const cap = { fontSize: 10, letterSpacing: '.5px', color: '#888', textTransform: 'uppercase' }
 
-function Period({ label, data }) {
+// Same look as the four top cards (icon + small caption + big number)
+function Period({ label, icon, bg, color, data }) {
   return (
-    <div style={card}>
-      <div style={cap}>{label}</div>
-      <div style={{ fontSize: 20, fontWeight: 700, marginTop: 4 }}>{fmt(data.sales)}</div>
-      <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>{data.orders} order{data.orders === 1 ? '' : 's'}</div>
+    <div className="stat">
+      <div className="statIcon" style={{ background: bg, color }}>{icon}</div>
+      <div>
+        <small>{label.toUpperCase()}</small>
+        <h2>{fmt(data.sales)}</h2>
+        <span className="statSub">{data.orders} order{data.orders === 1 ? '' : 's'}</span>
+      </div>
     </div>
   )
 }
 
-function Attention({ label, value, tone, onClick }) {
+function Attention({ label, icon, bg, color, value, tone, onClick }) {
   const alert = value > 0 && tone === 'alert'
   return (
-    <div
-      onClick={onClick}
-      style={{ ...card, cursor: onClick ? 'pointer' : 'default', borderColor: alert ? '#e8b4b4' : 'var(--line)' }}
-    >
-      <div style={cap}>{label}</div>
-      <div style={{ fontSize: 20, fontWeight: 700, marginTop: 4, color: alert ? 'var(--red)' : 'inherit' }}>{value}</div>
+    <div className={`stat${alert ? ' alert' : ''}`} onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
+      <div className="statIcon" style={{ background: alert ? '#fdecea' : bg, color: alert ? 'var(--red)' : color }}>{icon}</div>
+      <div>
+        <small>{label.toUpperCase()}</small>
+        <h2 style={{ color: alert ? 'var(--red)' : 'inherit' }}>{value}</h2>
+      </div>
     </div>
   )
 }
@@ -150,7 +154,7 @@ function ProfitSection({ profit, onNav }) {
         {cells.map(([label, d]) => {
           const v = d || empty
           return (
-            <div key={label} style={{ border: '1px solid var(--line)', borderRadius: 12, padding: 12 }}>
+            <div key={label} style={{ border: '1px solid #eee', borderRadius: 12, padding: 12 }}>
               <div style={cap}>{label}</div>
               <div style={{ fontSize: 20, fontWeight: 700, marginTop: 4, color: v.profit < 0 ? 'var(--red)' : 'inherit' }}>{fmt(v.profit)}</div>
               <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}>{margin(v)}</div>
@@ -184,17 +188,14 @@ export default function DashboardInsights({ summary, profit, onNav }) {
   const lowCount = (low_stock || []).length
 
   return (
-    <div style={{ display: 'grid', gap: 12, marginBottom: 22 }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(104px,1fr))', gap: 10 }}>
-        <Period label="Today" data={today} />
-        <Period label="Last 7 days" data={week} />
-        <Period label="Last 30 days" data={month} />
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(104px,1fr))', gap: 10 }}>
-        <Attention label="New orders to confirm" value={pending} tone="alert" onClick={() => onNav('orders')} />
-        <Attention label="Ready to ship" value={to_ship} onClick={() => onNav('orders')} />
-        <Attention label="Low stock items" value={lowCount} tone="alert" onClick={() => onNav('products')} />
+    <div className="dashInsights">
+      <div className="dashboard6">
+        <Period label="Today" icon="📅" bg="#e6f4f1" color="#16806b" data={today} />
+        <Period label="Last 7 days" icon="📆" bg="#e6eefd" color="#1a5bb8" data={week} />
+        <Period label="Last 30 days" icon="🗓️" bg="#f1e9fb" color="#6934c9" data={month} />
+        <Attention label="New orders to confirm" icon="🔔" bg="#fff4dc" color="#966600" value={pending} tone="alert" onClick={() => onNav('orders')} />
+        <Attention label="Ready to ship" icon="🚚" bg="#e8f5ea" color="#1c8a45" value={to_ship} onClick={() => onNav('orders')} />
+        <Attention label="Low stock items" icon="⚠️" bg="#fbeadd" color="#c9701f" value={lowCount} tone="alert" onClick={() => onNav('products')} />
       </div>
 
       {daily && daily.length > 0 && <SalesChart days={daily} />}

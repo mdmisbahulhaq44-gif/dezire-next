@@ -1307,3 +1307,11 @@ html,body{touch-action:pan-x pan-y}
 @media (prefers-reduced-motion: reduce){
   #productPanel,#productPreview{animation:none !important}
 }
+
+/* admin dashboard: second block of cards uses the same look as the top four */
+.dashboard6{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.dashInsights{display:grid;gap:18px;margin:18px 0 22px}
+.stat .statSub{display:block;color:#888;font-size:11px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stat.alert{border-color:#e8b4b4}
+@media(max-width:900px){.dashboard6{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.dashboard6{gap:10px}.dashInsights{gap:10px;margin:10px 0 18px}}
