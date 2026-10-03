@@ -11,6 +11,7 @@ import AdminAuditLog from './AdminAuditLog'
 import AdminReturns from './AdminReturns'
 import AdminStockHistory from './AdminStockHistory'
 import AdminBackup from './AdminBackup'
+import AdminSales from './AdminSales'
 
 const SECTIONS = [
   { key: 'dashboard', label: '📊 Dashboard' },
@@ -21,6 +22,7 @@ const SECTIONS = [
   { key: 'settings', label: '⚙️ Settings' },
   { key: 'stock', label: '📉 Stock history' },
   { key: 'backup', label: '💾 Backup' },
+  { key: 'sales', label: '🏷️ Sales' },
   { key: 'activity', label: '🕘 Activity log' }
 ]
 
@@ -33,6 +35,7 @@ const TITLES = {
   settings: 'Settings',
   stock: 'Stock history',
   backup: 'Backup',
+  sales: 'Sales',
   activity: 'Activity log'
 }
 
@@ -72,6 +75,7 @@ export default function AdminShell() {
         {section === 'returns' && <AdminReturns onViewOrder={ref => { setOrdersSearch(ref); setSection('orders') }} />}
         {section === 'settings' && <AdminSettings />}
         {section === 'activity' && <AdminAuditLog />}
+{section === 'sales' && <AdminSales />}
 {section === 'backup' && <AdminBackup />}
 {section === 'stock' && <AdminStockHistory />}
       </main>

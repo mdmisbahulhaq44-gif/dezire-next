@@ -8,6 +8,7 @@ import { supabase } from '../lib/supabaseClient'
 import Image from 'next/image'
 import { cldOpt } from '../lib/cloudinary'
 import { closeWithFade } from '../lib/closeWithFade'
+import SaleCountdown from "./SaleCountdown"
 
 const LABELS = { waist: 'Waist', length: 'Length', hip: 'Hip', leg_opening: 'Leg Opening', chest: 'Chest', shoulder: 'Shoulder', sleeve: 'Sleeve' }
 
@@ -205,6 +206,7 @@ export default function ProductDetail({ product, related }) {
             ৳{Number(product.price).toLocaleString()}
             {product.old && <> <span className="old">৳{Number(product.old).toLocaleString()}</span></>}
           </div>
+<SaleCountdown productId={product.id} />
           <div style={{ fontSize: 12, marginTop: 6, color: !inStock ? 'var(--red)' : lowStock ? 'var(--red)' : '#2a8f4f' }}>
             {!inStock ? 'Out of Stock' : lowStock ? `Only ${product.stock} left in stock!` : '✓ In Stock'}
           </div>
