@@ -2,11 +2,13 @@
 
 import { createContext, useContext, useEffect, useState, useRef } from 'react'
 import { getCart, saveCart, cartCount, cartSubtotal } from '../lib/cart'
+import { getWishlist, saveWishlist } from '../lib/wishlist'
 
 const ShopContext = createContext(null)
 
 export function ShopProvider({ children }) {
   const [cart, setCart] = useState([])
+  const [wishlist, setWishlist] = useState([])
   const [activePanel, setActivePanel] = useState(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [toastMsg, setToastMsg] = useState('')
@@ -15,7 +17,7 @@ export function ShopProvider({ children }) {
   const [paymentReturn, setPaymentReturn] = useState(null)
   const toastTimer = useRef(null)
 
-  useEffect(() => { setCart(getCart()) }, [])
+  useEffect(() => { setCart(getCart()); setWishlist(getWishlist()) }, [])
 
   useEffect(() => {
     document.body.style.overflow = (activePanel || drawerOpen) ? 'hidden' : ''
@@ -75,8 +77,28 @@ export function ShopProvider({ children }) {
     persist([])
   }
 
+  function toggleWishlist(product) {
+    const has = wishlist.some(w => w.id === product.id)
+    const next = has
+      ? wishlist.filter(w => w.id !== product.id)
+      : [{ id: product.id, price: Number(product.price) }, ...wishlist]
+    setWishlist(next)
+    saveWishlist(next)
+    showToast(has ? 'Removed from wishlist' : 'Added to wishlist')
+  }
+
+  function removeFromWishlist(id) {
+    const next = wishlist.filter(w => w.id !== id)
+    setWishlist(next)
+    saveWishlist(next)
+  }
+
   const value = {
     cart,
+    wishlist,
+    wishlistCount: wishlist.length,
+    toggleWishlist,
+    removeFromWishlist,
     cartCount: cartCount(cart),
     cartSubtotal: cartSubtotal(cart),
     activePanel,

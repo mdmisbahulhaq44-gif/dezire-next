@@ -21,7 +21,7 @@ const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : use
 
 export default function ProductDetail({ product, related, saleEndsAt }) {
   const router = useRouter()
-  const { addToCart, openCheckout, openAccount, showToast } = useShop()
+  const { addToCart, openCheckout, openAccount, showToast, wishlist, toggleWishlist } = useShop()
 
   const images = product.imgs ? product.imgs.split(',').map(s => s.trim()).filter(Boolean) : []
   const sizes = Array.isArray(product.sizes) ? product.sizes : []
@@ -268,6 +268,9 @@ export default function ProductDetail({ product, related, saleEndsAt }) {
           </button>
           <button className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={handleBuyNow}>
             BUY NOW
+          </button>
+          <button type="button" className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={() => toggleWishlist(product)}>
+            {wishlist.some(w => w.id === product.id) ? '♥ SAVED IN WISHLIST' : '♡ ADD TO WISHLIST'}
           </button>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 6, marginTop: 18, textAlign: 'center' }}>
