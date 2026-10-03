@@ -2,7 +2,24 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { cldOpt } from "../lib/cloudinary"
+import { buildShopPath } from "../lib/categories"
+
+// Where a slide leads when tapped (empty = not clickable)
+function slideHref(s) {
+  const gender = s.gender || ""
+  const category = s.category || ""
+  if (!gender) return ""
+  if (gender === "flash") return "/flash-sale"
+  if (gender === "men" || gender === "women") {
+    return buildShopPath(gender, category.split("/").map(x => x.trim()).filter(Boolean))
+  }
+  const params = new URLSearchParams()
+  params.set("gender", gender)
+  if (category) params.set("cat", category)
+  return "/shop?" + params.toString()
+}
 
 export default function HeroCarousel({ slides }) {
   const [index, setIndex] = useState(0)
@@ -39,6 +56,14 @@ export default function HeroCarousel({ slides }) {
               loading={i === 0 ? "eager" : "lazy"}
               quality={75}
             />
+            {slideHref(s) && (
+              <Link
+                href={slideHref(s)}
+                aria-label={s.gender === "flash" ? "Flash Sale" : "Open collection"}
+                tabIndex={i === index ? 0 : -1}
+                style={{ position: "absolute", inset: 0, zIndex: 1 }}
+              />
+            )}
           </div>
         ))}
       </div>

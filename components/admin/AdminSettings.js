@@ -31,6 +31,7 @@ function CategoryLinkPicker({ allProducts, gender, category, onGender, onCategor
     <div style={{ display: 'flex', gap: 8 }}>
       <select value={gender || ''} onChange={e => onGender(e.target.value)} style={{ flex: 1, border: '1px solid var(--line)', borderRadius: 8, padding: 8 }}>
         <option value="">No link</option>
+        <option value="flash">⚡ Flash Sale page</option>
         <option value="ALL">All</option>
         <option value="men">Men</option>
         <option value="women">Women</option>
