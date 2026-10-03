@@ -3,6 +3,7 @@ import HeroCarousel from "../components/HeroCarousel"
 import CategoryTiles from "../components/CategoryTiles"
 import ProductGrid from "../components/ProductGrid"
 import PaymentReturnCheck from "../components/PaymentReturnCheck"
+import FlashSection from "../components/FlashSection"
 import RecentlyViewed from "../components/RecentlyViewed"
 
 // Cache the homepage for a minute (like product pages) instead of
@@ -25,6 +26,8 @@ export default async function HomePage() {
   let categories = DEFAULT_HOME_CATEGORIES
   let products = []
   let reviews = []
+  let flashProducts = []
+  let flashEndsAt = null
 
   try {
     // All three queries run at the same time instead of one after another
@@ -64,6 +67,23 @@ export default async function HomePage() {
 
     products = productsRes.data || []
     reviews = reviewsRes.data || []
+
+    // Running flash sales (public rows only exist while a sale is active)
+    const { data: sales } = await supabase
+      .from("product_sales")
+      .select("product_id,ends_at")
+      .eq("status", "active")
+      .gt("ends_at", new Date().toISOString())
+      .order("ends_at", { ascending: true })
+    if (sales && sales.length) {
+      flashEndsAt = sales[0].ends_at
+      const { data: fp } = await supabase
+        .from("products")
+        .select("id,name,price,old,badge,imgs,stock")
+        .in("id", sales.map(s => s.product_id))
+        .limit(4)
+      flashProducts = fp || []
+    }
   } catch (e) {
     console.error("Homepage data fetch failed:", e)
   }
@@ -75,6 +95,12 @@ export default async function HomePage() {
       <div id="women" style={{ paddingTop: 14, scrollMarginTop: 46 }}>
         <CategoryTiles categories={categories} />
       </div>
+
+      {flashProducts.length > 0 && (
+        <FlashSection endsAt={flashEndsAt}>
+          <ProductGrid products={flashProducts} />
+        </FlashSection>
+      )}
 
       <div id="new" style={{ padding: "30px 5% 10px", scrollMarginTop: 46 }}>
         <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>

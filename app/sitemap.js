@@ -12,7 +12,7 @@ export default async function sitemap() {
     .limit(5000)
 
   const now = new Date()
-  const fixed = ["", "/shop/men", "/shop/women", "/contact", "/privacy", "/terms", "/refund-policy"].map(p => ({
+  const fixed = ["", "/flash-sale", "/shop/men", "/shop/women", "/contact", "/privacy", "/terms", "/refund-policy"].map(p => ({
     url: SITE + p,
     lastModified: now
   }))

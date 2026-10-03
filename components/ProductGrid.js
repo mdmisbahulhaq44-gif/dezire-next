@@ -27,7 +27,7 @@ export default function ProductGrid({ products, replaceLinks }) {
               {soldOut ? (
                 <span className="badge" style={{ background: "#111", color: "#fff" }}>SOLD OUT</span>
               ) : p.badge && (
-                <span className={`badge ${p.badge.toLowerCase() === "sale" ? "sale" : ""}`}>{p.badge}</span>
+                <span className={`badge ${/sale/i.test(p.badge) ? "sale" : ""}`}>{p.badge}</span>
               )}
               {firstImg ? (
                 <Image

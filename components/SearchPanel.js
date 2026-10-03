@@ -121,7 +121,7 @@ export default function SearchPanel() {
                   <Link href={`/product/${p.id}`} className="product" key={p.id} onClick={handleClose}>
                     <div className="productImage">
                       {p.badge && (
-                        <span className={`badge ${p.badge.toLowerCase() === 'sale' ? 'sale' : ''}`}>{p.badge}</span>
+                        <span className={`badge ${/sale/i.test(p.badge) ? 'sale' : ''}`}>{p.badge}</span>
                       )}
                       {firstImg ? (
                         <img src={cldOpt(firstImg, 400)} alt={p.name} loading="lazy" decoding="async" />

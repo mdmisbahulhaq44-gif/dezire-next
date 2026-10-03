@@ -14,11 +14,14 @@ function fmt(ms) {
   return `${p(h)}:${p(m)}:${p(sec)}`
 }
 
-export default function SaleCountdown({ productId }) {
-  const [end, setEnd] = useState(null)
+// endsAt comes from the server (so the line is already in the page and nothing
+// jumps when it appears). undefined = not provided, ask the database instead.
+export default function SaleCountdown({ productId, endsAt }) {
+  const [end, setEnd] = useState(endsAt ? new Date(endsAt).getTime() : null)
   const [left, setLeft] = useState(0)
 
   useEffect(() => {
+    if (endsAt !== undefined) return
     let alive = true
     supabase
       .from('product_sales')
@@ -31,7 +34,7 @@ export default function SaleCountdown({ productId }) {
         setEnd(new Date(data[0].ends_at).getTime())
       })
     return () => { alive = false }
-  }, [productId])
+  }, [productId, endsAt])
 
   useEffect(() => {
     if (!end) return
@@ -45,10 +48,10 @@ export default function SaleCountdown({ productId }) {
     return () => clearInterval(t)
   }, [end])
 
-  if (!end || left <= 0) return null
+  if (!end) return null
   return (
-    <div style={{ marginTop: 6, fontSize: 12, fontWeight: 700, color: 'var(--red)' }}>
-      ⚡ FLASH SALE · ends in {fmt(left)}
+    <div style={{ marginTop: 6, fontSize: 12, fontWeight: 700, color: 'var(--red)', minHeight: 18 }}>
+      {left > 0 ? `⚡ FLASH SALE · ends in ${fmt(left)}` : '\u00A0'}
     </div>
   )
 }

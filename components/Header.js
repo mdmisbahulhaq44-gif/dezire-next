@@ -39,6 +39,7 @@ export default function Header() {
           <div className="logo" style={{ fontSize: 18 }}>DEZIRE</div>
           <button className="close" onClick={closeDrawer}>×</button>
         </div>
+        <Link href="/flash-sale" onClick={closeDrawer}>⚡ Flash Sale</Link>
         <Link href="/#new" onClick={closeDrawer}>New Arrivals</Link>
         <Link href="/shop/women" onClick={closeDrawer}>Women</Link>
         <Link href="/shop/men" onClick={closeDrawer}>Men</Link>

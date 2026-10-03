@@ -19,7 +19,7 @@ function starString(rating) {
 
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
-export default function ProductDetail({ product, related }) {
+export default function ProductDetail({ product, related, saleEndsAt }) {
   const router = useRouter()
   const { addToCart, openCheckout, openAccount, showToast } = useShop()
 
@@ -206,7 +206,7 @@ export default function ProductDetail({ product, related }) {
             ৳{Number(product.price).toLocaleString()}
             {product.old && <> <span className="old">৳{Number(product.old).toLocaleString()}</span></>}
           </div>
-<SaleCountdown productId={product.id} />
+<SaleCountdown productId={product.id} endsAt={saleEndsAt || null} />
           <div style={{ fontSize: 12, marginTop: 6, color: !inStock ? 'var(--red)' : lowStock ? 'var(--red)' : '#2a8f4f' }}>
             {!inStock ? 'Out of Stock' : lowStock ? `Only ${product.stock} left in stock!` : '✓ In Stock'}
           </div>
