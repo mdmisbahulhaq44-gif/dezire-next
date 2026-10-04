@@ -1486,3 +1486,9 @@ footer:has(.footergrid) .copy{background:#f9f9f9;padding:28px 11% 34px}
 
 /* footer: extra space under the copyright row on every page (clears the bag button and bottom nav) */
 footer:has(.footergrid) .copy{padding-bottom:90px}
+
+/* "Pay With" strip above the footer (logos come from Admin → Settings → Payment method logos) */
+.payStrip{display:flex;align-items:center;gap:10px;padding:34px 5% 6px;background:#f9f9f9}
+.payStripLabel{flex:none;font-size:10px;color:#888;letter-spacing:.3px}
+.payStripLogos{flex:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 8px;border-left:1px solid #ddd;border-right:1px solid #ddd;padding:6px 10px}
+.payStripLogos img{height:26px;max-width:72px;object-fit:contain;display:block}

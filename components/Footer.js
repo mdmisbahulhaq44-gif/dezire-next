@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useShop } from "./ShopContext"
 import { usePathname } from "next/navigation"
+import PaymentStrip from "./PaymentStrip"
 
 // Static pages (contact / terms / refund / privacy) still live on the old
 // GitHub Pages site until they are migrated, so link there for now.
@@ -13,6 +14,8 @@ export default function Footer() {
   const pathname = usePathname()
   if (["/contact", "/terms", "/refund-policy", "/privacy"].includes(pathname)) return null
   return (
+    <>
+    <PaymentStrip />
     <footer>
       <div className="footergrid">
         <div>
@@ -55,5 +58,6 @@ export default function Footer() {
         <a href="/terms" style={{ color: "#999" }}>Terms &amp; Conditions</a>
       </div>
     </footer>
+    </>
   )
 }
