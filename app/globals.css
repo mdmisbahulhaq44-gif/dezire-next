@@ -1453,3 +1453,10 @@ body.pdBarOn .pdCartFab{bottom:calc(env(safe-area-inset-bottom) + 9px)}
 .pdCartFab{border:0;box-shadow:0 4px 14px rgba(0,0,0,.34)}
 body:has(#productPanel) .pdCartFab,body:has(#productPreview) .pdCartFab{bottom:calc(env(safe-area-inset-bottom) + 20px)}
 body.pdBarOn:has(#productPanel) .pdCartFab{bottom:calc(env(safe-area-inset-bottom) + 9px)}
+
+/* buy bar v2 + bag look: thin bar, bag stays and overlaps bar top, tight dark shadow like the reference */
+.pdBuyBar{height:calc(60px + env(safe-area-inset-bottom));padding-right:20px}
+.pdBuyBar .btn{padding:9px 20px;font-size:13px;font-weight:600;letter-spacing:.3px}
+.pdCartFab{width:60px;height:60px;box-shadow:2px 3px 4px rgba(0,0,0,.6)}
+.pdCartFab .fabCount{width:27px;height:27px;top:-9px;left:-9px;background:#000;font-weight:400;font-size:13px}
+body:has(#productPanel) .pdCartFab,body:has(#productPreview) .pdCartFab,body.pdBarOn:has(#productPanel) .pdCartFab{bottom:calc(env(safe-area-inset-bottom) + 22px)}
