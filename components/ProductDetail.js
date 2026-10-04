@@ -24,7 +24,7 @@ const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : use
 
 export default function ProductDetail({ product, related, saleEndsAt, colors = [] }) {
   const router = useRouter()
-  const { addToCart, openMini, openCheckout, openAccount, showToast, wishlist, toggleWishlist } = useShop()
+  const { addToCart, openMini, openCheckout, openAccount, showToast, wishlist, toggleWishlist, activePanel, drawerOpen } = useShop()
 
   const images = product.imgs ? product.imgs.split(',').map(s => s.trim()).filter(Boolean) : []
   const sizes = Array.isArray(product.sizes) ? product.sizes : []
@@ -36,6 +36,9 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const [index, setIndex] = useState(0)
   const [size, setSize] = useState('')
   const [tab, setTab] = useState('desc')
+  const [barOn, setBarOn] = useState(false)
+  const addRef = useRef(null)
+  const sizeRef = useRef(null)
   const [qty, setQty] = useState(1)
   const [chartOpen, setChartOpen] = useState(false)
   const [reviews, setReviews] = useState(null) // null = loading, 'error' = failed
@@ -88,6 +91,19 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   }, [product.id])
 
   useEffect(() => { loadReviews() }, [loadReviews])
+
+  // bottom buy bar: shows once the Add to cart button has scrolled up out of view
+  useEffect(() => {
+    const el = addRef.current
+    const root = panelRef.current
+    if (!el || !root || typeof IntersectionObserver === 'undefined') return
+    const io = new IntersectionObserver(([e]) => {
+      const top = e.rootBounds ? e.rootBounds.top : 0
+      setBarOn(!e.isIntersecting && e.boundingClientRect.top < top)
+    }, { root, threshold: 0 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
 
   useEffect(() => {
     if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_ids: [String(product.id)], content_type: 'product', content_name: product.name, value: Number(product.price), currency: 'BDT' })
@@ -169,6 +185,18 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   }
 
   const measures = hasChart ? Object.keys(chart[chartSizes[0]] || {}) : []
+  const showBar = barOn && !chartOpen && !activePanel && !drawerOpen
+  useEffect(() => {
+    document.body.classList.toggle('pdBarOn', showBar)
+    return () => document.body.classList.remove('pdBarOn')
+  }, [showBar])
+  function barAction() {
+    if (sizes.length && !size) {
+      if (sizeRef.current) sizeRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      return
+    }
+    handleAddToCart()
+  }
   const selectable = sizes.length > 0
 
   return (
@@ -296,7 +324,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           )}
 
           {sizes.length > 0 && (
-            <div style={{ marginTop: 14 }}>
+            <div ref={sizeRef} style={{ marginTop: 14 }}>
               <span className="pdOptLabel">Size</span>
               <select className="pdSizeSelect" value={size} onChange={e => setSize(e.target.value)}>
                 <option value="">Choose an option</option>
@@ -318,7 +346,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             <button className="qtyBtn" onClick={() => setQty(q => q + 1)}>+</button>
           </div>
 
-          <button className="btn" style={{ width: '100%', marginTop: 20 }} disabled={!inStock} onClick={handleAddToCart}>
+          <button ref={addRef} className="btn" style={{ width: '100%', marginTop: 20 }} disabled={!inStock} onClick={handleAddToCart}>
             {inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
           </button>
           <button className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={handleBuyNow}>
@@ -403,6 +431,12 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           </div>
         </div>
         <div className="pdFooter"><Footer /></div>
+      </div>
+
+      <div className={`pdBuyBar${showBar ? ' show' : ''}`} aria-hidden={!showBar}>
+        <button type="button" className="btn" tabIndex={showBar ? 0 : -1} disabled={!inStock} onClick={barAction}>
+          {!inStock ? 'Out of stock' : (sizes.length && !size) ? 'Select options' : 'Add to cart'}
+        </button>
       </div>
 
       <div className={`panel${chartOpen ? ' show' : ''}`}>
