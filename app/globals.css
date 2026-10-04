@@ -1447,3 +1447,9 @@ html,body{touch-action:pan-x pan-y}
 .pdBuyBar .btn:disabled{opacity:.5}
 .pdCartFab{transition:bottom .3s ease,transform .15s ease}
 body.pdBarOn .pdCartFab{bottom:calc(env(safe-area-inset-bottom) + 9px)}
+
+/* product page: no slide arrows/dots (swipe still works), cart bag lower + softer shadow like the reference */
+#productPanel .pdArrow,#productPanel .pdDots,#productPreview .pdDots{display:none}
+.pdCartFab{border:0;box-shadow:0 4px 14px rgba(0,0,0,.34)}
+body:has(#productPanel) .pdCartFab,body:has(#productPreview) .pdCartFab{bottom:calc(env(safe-area-inset-bottom) + 20px)}
+body.pdBarOn:has(#productPanel) .pdCartFab{bottom:calc(env(safe-area-inset-bottom) + 9px)}
