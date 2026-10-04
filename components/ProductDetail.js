@@ -325,11 +325,6 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             {wishlist.some(w => w.id === product.id) ? '♥ SAVED IN WISHLIST' : '♡ ADD TO WISHLIST'}
           </button>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: 6, marginTop: 18, textAlign: 'center' }}>
-            <div style={{ flex: 1, fontSize: 9, color: 'var(--muted)' }}><div style={{ fontSize: 18 }}>🔒</div>Secure Checkout</div>
-            <div style={{ flex: 1, fontSize: 9, color: 'var(--muted)' }}><div style={{ fontSize: 18 }}>💵</div>Cash on Delivery</div>
-            <div style={{ flex: 1, fontSize: 9, color: 'var(--muted)' }}><div style={{ fontSize: 18 }}>↩️</div>Easy Return</div>
-          </div>
 
           {(product.description || product.fabric || product.color_name || sizes.length > 0) && (
             <div className="pdTabs">
