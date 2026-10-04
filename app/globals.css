@@ -1483,3 +1483,6 @@ footer:has(.footergrid){padding:0}
 footer:has(.footergrid) .footergrid{padding:55px 11% 0;margin-bottom:45px}
 footer:has(.footergrid) .copy{background:#f9f9f9;padding:28px 11% 34px}
 .pdFooter footer .copy{padding-bottom:90px}
+
+/* footer: extra space under the copyright row on every page (clears the bag button and bottom nav) */
+footer:has(.footergrid) .copy{padding-bottom:90px}
