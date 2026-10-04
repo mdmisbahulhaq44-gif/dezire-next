@@ -1477,3 +1477,9 @@ footer:has(.footergrid) .copy a{color:#555!important;font-size:12.5px}
 footer .footergrid{grid-template-columns:1fr 1fr;gap:38px 22px}
 footer .footergrid>div:first-child{grid-column:1/-1}
 }
+
+/* footer v2: off-white copyright band across the full width, more space at the very end, wider side margins */
+footer:has(.footergrid){padding:0}
+footer:has(.footergrid) .footergrid{padding:55px 11% 0;margin-bottom:45px}
+footer:has(.footergrid) .copy{background:#f9f9f9;padding:28px 11% 34px}
+.pdFooter footer .copy{padding-bottom:90px}

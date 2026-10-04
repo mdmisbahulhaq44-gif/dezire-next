@@ -37,6 +37,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const [size, setSize] = useState('')
   const [tab, setTab] = useState('desc')
   const [barOn, setBarOn] = useState(false)
+  const [atEnd, setAtEnd] = useState(false)
   const addRef = useRef(null)
   const sizeRef = useRef(null)
   const [qty, setQty] = useState(1)
@@ -101,6 +102,16 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
       const top = e.rootBounds ? e.rootBounds.top : 0
       setBarOn(!e.isIntersecting && e.boundingClientRect.top < top)
     }, { root, threshold: 0 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  // hide the buy bar once the footer's copyright row is reached (nothing floats over the footer's end)
+  useEffect(() => {
+    const root = panelRef.current
+    const el = root ? root.querySelector('.pdFooter .copy') : null
+    if (!el || typeof IntersectionObserver === 'undefined') return
+    const io = new IntersectionObserver(([e]) => setAtEnd(e.isIntersecting), { root, threshold: 0 })
     io.observe(el)
     return () => io.disconnect()
   }, [])
@@ -185,7 +196,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   }
 
   const measures = hasChart ? Object.keys(chart[chartSizes[0]] || {}) : []
-  const showBar = barOn && !chartOpen && !activePanel && !drawerOpen
+  const showBar = barOn && !atEnd && !chartOpen && !activePanel && !drawerOpen
   useEffect(() => {
     document.body.classList.toggle('pdBarOn', showBar)
     return () => document.body.classList.remove('pdBarOn')
