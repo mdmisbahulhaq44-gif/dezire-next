@@ -1355,3 +1355,10 @@ html,body{touch-action:pan-x pan-y}
 .miniSub{display:flex;justify-content:space-between;font-size:16px;font-weight:700;margin-bottom:12px}
 
 .pdCartFab.withMini{left:auto;right:22px;z-index:522}
+
+/* mini cart + bag button: match the reference look */
+.miniHead{position:relative;justify-content:center;padding:20px 18px 16px}
+.miniHead h2{flex:none;font-weight:300;font-size:24px}
+.miniHead .close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;width:32px;height:32px;font-size:26px;font-weight:700;line-height:1}
+.pdCartFab{width:58px;height:58px}
+.pdCartFab .fabCount{top:-8px;left:-8px;width:24px;height:24px;font-size:12px;font-weight:500}

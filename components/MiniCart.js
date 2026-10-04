@@ -5,12 +5,12 @@ import { useShop } from './ShopContext'
 import { cldOpt } from '../lib/cloudinary'
 import BagCount from './BagCount'
 
-// Slide-in cart that opens from the left right after "Add to cart"
+// Slide-in cart that opens from the left (after "Add to cart" and when a bag button is tapped)
 export default function MiniCart() {
-  const { cart, cartCount, cartSubtotal, miniOpen, closeMini, removeFromCart, openCart, openCheckout } = useShop()
+  const { cart, cartCount, cartSubtotal, miniOpen, closeMini, removeFromCart, openCartFull, openCheckout } = useShop()
   const items = [...cart].reverse()
 
-  function goCart() { closeMini(); openCart() }
+  function goCart() { closeMini(); openCartFull() }
   function goCheckout() { closeMini(); openCheckout() }
 
   return (
@@ -39,8 +39,10 @@ export default function MiniCart() {
                 <div className="miniPrice">{i.qty} × ৳{Number(i.price).toLocaleString()}</div>
               </div>
               <button className="miniDel" onClick={() => removeFromCart(i.id, i.size)} aria-label="Remove item">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4h6v3" />
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3.8 7.2h16.4" />
+                  <path d="M9.5 7.2V5.4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1.8" />
+                  <path d="M6.2 7.2v11.2a2.2 2.2 0 0 0 2.2 2.2h7.2a2.2 2.2 0 0 0 2.2-2.2V7.2" />
                 </svg>
               </button>
             </div>
