@@ -1406,3 +1406,6 @@ html,body{touch-action:pan-x pan-y}
 .pdInfoTable td{padding:10px 0;color:#444}
 .pdFooter{margin:36px -25px -25px}
 .panel{overscroll-behavior:contain}
+
+/* product page header scrolls away with the page (not sticky) */
+.pdTopBar{position:relative;top:auto;background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}
