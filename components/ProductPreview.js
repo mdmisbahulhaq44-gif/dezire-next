@@ -5,6 +5,7 @@ import { flushSync } from 'react-dom'
 import { usePathname, useRouter } from 'next/navigation'
 import { cldOpt } from '../lib/cloudinary'
 import { closeWithFade } from '../lib/closeWithFade'
+import PdTopBar from './PdTopBar'
 
 // Shows the product panel INSTANTLY when a product card is tapped, using the
 // data the card already has (name, price, photo). The real panel (fetched
@@ -82,10 +83,7 @@ export default function ProductPreview() {
       id="productPreview"
       style={{ transform: 'none', opacity: 1, transition: 'none', animation: 'pdFadeIn 320ms cubic-bezier(.22,.61,.36,1) backwards', pointerEvents: 'auto', overscrollBehavior: 'contain' }}
     >
-      <div className="panelHead">
-        <h2>Product Details</h2>
-        <button className="close" onClick={() => { closeAfter.current = true }}>×</button>
-      </div>
+      <PdTopBar onBack={() => { closeAfter.current = true }} />
 
       <div className="pdGallery">
         <div className="pdGalleryTrack">

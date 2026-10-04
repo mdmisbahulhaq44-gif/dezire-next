@@ -1383,3 +1383,26 @@ html,body{touch-action:pan-x pan-y}
 
 /* mini cart v8: back to the site font (Quicksand) */
 .miniCart,.miniCart button,.miniCart h2,.miniCart h4,.miniCart small{font-family:inherit}
+
+/* PRODUCT PAGE: site header on top, photo grid, tabs, footer at the bottom */
+.pdTopBar{position:sticky;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;height:46px;margin:-25px -25px 16px;padding:0 4%;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.06)}
+.pdTopBar .logo{flex:none}
+.pdTopRight{display:flex;align-items:center;gap:4px;flex:1;justify-content:flex-end}
+.pdTopBar>.pdTopBtn:first-child{flex:1;justify-content:flex-start}
+.pdTopBtn{background:none;border:0;width:34px;height:34px;cursor:pointer;font-size:19px;color:#111;display:inline-flex;align-items:center;justify-content:center}
+.pdThumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.pdThumb{position:relative;aspect-ratio:3/4;border:2px solid transparent;border-radius:6px;overflow:hidden;background:#f4f4f4;padding:0;cursor:pointer}
+.pdThumb.active{border-color:#111}
+.pdMeasure{margin-top:14px;font-size:12.5px;line-height:1.75;color:#333}
+.pdMeasure b{display:block;margin-bottom:4px;color:#111}
+.pdMeasure span{display:inline-block;min-width:28px;font-weight:700;color:#111}
+.pdTabs{margin-top:28px}
+.pdTabBar{display:flex;border-bottom:1px solid #e5e5e5}
+.pdTabBar button{background:none;border:0;padding:12px 0;margin-right:22px;font-size:13px;color:#777;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.pdTabBar button.active{color:#111;font-weight:700;border-bottom-color:#111}
+.pdDesc{padding:16px 0 4px;font-size:13.5px;line-height:1.75;color:#333;white-space:pre-line}
+.pdInfoTable{margin-top:10px;font-size:13px}
+.pdInfoTable th{text-transform:none;letter-spacing:0;font-size:13px;color:#111;width:32%;padding:10px 6px 10px 0}
+.pdInfoTable td{padding:10px 0;color:#444}
+.pdFooter{margin:36px -25px -25px}
+.panel{overscroll-behavior:contain}

@@ -10,6 +10,8 @@ import Link from 'next/link'
 import { cldOpt } from '../lib/cloudinary'
 import { closeWithFade } from '../lib/closeWithFade'
 import SaleCountdown from "./SaleCountdown"
+import Footer from "./Footer"
+import PdTopBar from "./PdTopBar"
 
 const LABELS = { waist: 'Waist', length: 'Length', hip: 'Hip', leg_opening: 'Leg Opening', chest: 'Chest', shoulder: 'Shoulder', sleeve: 'Sleeve' }
 
@@ -33,6 +35,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const shown = true
   const [index, setIndex] = useState(0)
   const [size, setSize] = useState('')
+  const [tab, setTab] = useState('desc')
   const [qty, setQty] = useState(1)
   const [chartOpen, setChartOpen] = useState(false)
   const [reviews, setReviews] = useState(null) // null = loading, 'error' = failed
@@ -171,10 +174,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   return (
     <>
       <div className={`panel${shown ? ' show' : ''}`} id="productPanel" ref={panelRef} style={{ overscrollBehavior: 'contain' }}>
-        <div className="panelHead">
-          <h2>Product Details</h2>
-          <button className="close" onClick={closeProduct}>×</button>
-        </div>
+        <PdTopBar onBack={closeProduct} />
 
         <div className="pdGallery" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
           <div className="pdGalleryTrack" style={{ transform: `translateX(-${index * 100}%)` }}>
@@ -207,6 +207,16 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           </div>
         </div>
 
+        {images.length > 1 && (
+          <div className="pdThumbs">
+            {images.map((url, i) => (
+              <button type="button" key={i} className={`pdThumb${i === index ? ' active' : ''}`} onClick={() => setIndex(i)} aria-label={`Photo ${i + 1}`}>
+                <Image src={cldOpt(url, 240)} alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} loading="lazy" quality={60} />
+              </button>
+            ))}
+          </div>
+        )}
+
         <div style={{ paddingTop: 18 }}>
           <div className="brand">{product.brand || ''}</div>
           <h2 style={{ margin: '6px 0 10px', fontSize: 22 }}>{product.name}</h2>
@@ -231,6 +241,15 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           <div style={{ fontSize: 12, color: 'var(--muted)' }}>
             {product.fabric && <div style={{ marginTop: 4 }}><b>Fabric:</b> {product.fabric}</div>}
           </div>
+
+          {hasChart && (
+            <div className="pdMeasure">
+              <b>Measurements (in inches):</b>
+              {chartSizes.map(s => (
+                <div key={s}><span>{s}</span>: {Object.entries(chart[s]).map(([k, v]) => `${LABELS[k] || k}- ${v}`).join(' | ')}</div>
+              ))}
+            </div>
+          )}
 
           {hasChart && (
             <button
@@ -312,9 +331,28 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             <div style={{ flex: 1, fontSize: 9, color: 'var(--muted)' }}><div style={{ fontSize: 18 }}>↩️</div>Easy Return</div>
           </div>
 
+          {(product.description || product.fabric || product.color_name || sizes.length > 0) && (
+            <div className="pdTabs">
+              <div className="pdTabBar">
+                <button type="button" className={tab === 'desc' ? 'active' : ''} onClick={() => setTab('desc')}>Description</button>
+                <button type="button" className={tab === 'info' ? 'active' : ''} onClick={() => setTab('info')}>Additional Information</button>
+              </div>
+              {tab === 'desc' ? (
+                <div className="pdDesc">{product.description || 'No description added yet.'}</div>
+              ) : (
+                <table className="pdInfoTable"><tbody>
+                  {product.fabric && <tr><th>Fabric</th><td>{product.fabric}</td></tr>}
+                  {product.color_name && <tr><th>Color</th><td>{product.color_name}</td></tr>}
+                  {sizes.length > 0 && <tr><th>Sizes</th><td>{sizes.join(', ')}</td></tr>}
+                  {product.cat && <tr><th>Category</th><td>{product.cat.split('/').map(s => s.trim()).filter(Boolean).join(' › ')}</td></tr>}
+                </tbody></table>
+              )}
+            </div>
+          )}
+
           {related.length > 0 && (
             <div style={{ borderTop: '1px solid rgba(0,0,0,.08)', marginTop: 30, paddingTop: 20 }}>
-              <div style={{ fontSize: 11, letterSpacing: 2, color: 'var(--muted)', marginBottom: 14 }}>YOU MAY ALSO LIKE</div>
+              <div style={{ fontSize: 11, letterSpacing: 2, color: 'var(--muted)', marginBottom: 14 }}>RELATED PRODUCTS</div>
               <ProductGrid products={related} replaceLinks />
             </div>
           )}
@@ -362,6 +400,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             </div>
           </div>
         </div>
+        <div className="pdFooter"><Footer /></div>
       </div>
 
       <div className={`panel${chartOpen ? ' show' : ''}`}>

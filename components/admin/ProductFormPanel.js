@@ -91,7 +91,7 @@ function CatBuilder({ allProducts, gender, levels, custom, onChange }) {
 const BLANK = {
   id: '', name: '', brand: 'DEZIRE', gender: 'men',
   price: '', old: '', badge: '', stock: '', imgs: '', cost: '',
-  fabric: '', sizes: '', color_name: '', color_group: '', size_chart: ''
+  fabric: '', description: '', sizes: '', color_name: '', color_group: '', size_chart: ''
 }
 
 export default function ProductFormPanel({ open, product, allProducts, onClose, onSaved, showToast }) {
@@ -114,6 +114,7 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
         stock: product.stock ?? 0,
         imgs: product.imgs || '',
         fabric: product.fabric || '',
+        description: product.description || '',
         sizes: Array.isArray(product.sizes) ? product.sizes.join(', ') : '',
         color_name: product.color_name || '',
         color_group: product.color_group || '',
@@ -169,6 +170,7 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
       stock: Number(f.stock),
       imgs: f.imgs.trim(),
       fabric: f.fabric.trim() || null,
+      description: f.description.trim() || null,
       sizes: sizesArr,
       color_name: f.color_name.trim() || null,
       size_chart: sizeChartObj
@@ -262,6 +264,9 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
 
         <label>IMAGE URLS (comma-separated, first = main image)</label>
         <textarea placeholder="https://res.cloudinary.com/.../img1.png, https://.../img2.png" value={f.imgs} onChange={e => set('imgs', e.target.value)} />
+
+        <label>DESCRIPTION (OPTIONAL — shown in the product page tab; use new lines and "• " for bullet points)</label>
+        <textarea style={{ minHeight: 150 }} placeholder="Write about the product: fit, fabric, care instructions..." value={f.description} onChange={e => set('description', e.target.value)} />
 
         <label>FABRIC (OPTIONAL)</label>
         <input type="text" placeholder="e.g. 100% Cotton" value={f.fabric} onChange={e => set('fabric', e.target.value)} />
