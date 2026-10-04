@@ -7,6 +7,7 @@ export default function CartFab() {
   const { cartCount, openCart, activePanel, drawerOpen } = useShop()
   const pathname = usePathname()
   if (['/contact', '/terms', '/refund-policy', '/privacy'].includes(pathname)) return null
+  if (pathname && pathname.startsWith('/admin')) return null
   if (activePanel || drawerOpen) return null
   return (
     <button type="button" className="pdCartFab" onClick={openCart} title="View cart" aria-label="View cart">
