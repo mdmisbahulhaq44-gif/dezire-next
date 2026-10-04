@@ -1436,3 +1436,6 @@ html,body{touch-action:pan-x pan-y}
 .panel#productPanel .pdGallery,.panel#productPreview .pdGallery{border-radius:0;aspect-ratio:780/1005}
 .pdThumbs{gap:14px;margin-top:14px}
 .pdThumb{border-radius:0}
+
+/* product page: delivery line */
+.pdDelivery{margin-top:10px;font-size:13px;line-height:1.6;color:#444}

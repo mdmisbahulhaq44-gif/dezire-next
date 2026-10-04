@@ -236,6 +236,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             {product.old && <> <span className="old">৳{Number(product.old).toLocaleString()}</span></>}
           </div>
 <SaleCountdown productId={product.id} endsAt={saleEndsAt || null} />
+          <div className="pdDelivery">Order now and get it in 2–3 days inside Dhaka and 3–5 days outside Dhaka.</div>
           <div style={{ fontSize: 12, marginTop: 6, color: !inStock ? 'var(--red)' : lowStock ? 'var(--red)' : '#2a8f4f' }}>
             {!inStock ? 'Out of Stock' : lowStock ? `Only ${product.stock} left in stock!` : '✓ In Stock'}
           </div>
@@ -323,13 +324,13 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           <button className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={handleBuyNow}>
             BUY NOW
           </button>
+          <button type="button" className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={() => toggleWishlist(product)}>
+            {wishlist.some(w => w.id === product.id) ? '♥ SAVED IN WISHLIST' : '♡ ADD TO WISHLIST'}
+          </button>
 
           {product.cat && (
             <div className="pdMeta"><b>Categories:</b> {product.cat.split('/').map(x => x.trim()).filter(Boolean).join(', ')}</div>
           )}
-          <button type="button" className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={() => toggleWishlist(product)}>
-            {wishlist.some(w => w.id === product.id) ? '♥ SAVED IN WISHLIST' : '♡ ADD TO WISHLIST'}
-          </button>
 
 
           {(product.description || product.fabric || product.color_name || sizes.length > 0) && (
