@@ -1460,3 +1460,6 @@ body.pdBarOn:has(#productPanel) .pdCartFab{bottom:calc(env(safe-area-inset-botto
 .pdCartFab{width:60px;height:60px;box-shadow:2px 3px 4px rgba(0,0,0,.6)}
 .pdCartFab .fabCount{width:27px;height:27px;top:-9px;left:-9px;background:#000;font-weight:400;font-size:13px}
 body:has(#productPanel) .pdCartFab,body:has(#productPreview) .pdCartFab,body.pdBarOn:has(#productPanel) .pdCartFab{bottom:calc(env(safe-area-inset-bottom) + 22px)}
+
+/* bag shadow: even dark edge on all four sides, a bit more at the bottom (like the reference) */
+.pdCartFab{box-shadow:0 0 5px 1px rgba(0,0,0,.45),0 3px 5px rgba(0,0,0,.35)}
