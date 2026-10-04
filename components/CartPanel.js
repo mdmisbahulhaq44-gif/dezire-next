@@ -3,15 +3,16 @@
 import { useShop } from './ShopContext'
 import { cldOpt } from '../lib/cloudinary'
 import Image from 'next/image'
+import BagCount from './BagCount'
 
 export default function CartPanel() {
-  const { cart, cartSubtotal, activePanel, closePanel, changeQty, removeFromCart, openCheckout } = useShop()
+  const { cart, cartCount, cartSubtotal, activePanel, closePanel, changeQty, removeFromCart, openCheckout } = useShop()
   const show = activePanel === 'cart'
 
   return (
     <div className={`panel${show ? ' show' : ''}`}>
       <div className="panelHead">
-        <h2>Your Cart</h2>
+        <h2 style={{ display: 'flex', alignItems: 'center', gap: 10 }}><BagCount count={cartCount} />Your Cart</h2>
         <button className="close" onClick={closePanel}>×</button>
       </div>
 

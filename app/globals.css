@@ -1319,3 +1319,37 @@ html,body{touch-action:pan-x pan-y}
 /* dashboard cards: keep every card one slim row (orders count only on wide screens) */
 .stat h2 .statSub{display:inline;font-size:11px;font-weight:400;color:#888;margin-left:8px}
 @media(max-width:900px){.stat h2 .statSub{display:none}}
+
+/* MINI CART: slides in slowly from the left after "Add to cart" */
+.miniOverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:520;opacity:0;pointer-events:none;transition:opacity .85s ease}
+.miniOverlay.show{opacity:1;pointer-events:auto}
+.miniCart{position:fixed;top:0;bottom:0;left:0;width:min(84%,380px);background:#fff;z-index:521;display:flex;flex-direction:column;transform:translateX(-102%);visibility:hidden;transition:transform .85s cubic-bezier(.22,.61,.36,1),visibility 0s linear .85s;will-change:transform}
+.miniCart.show{transform:translateX(0);visibility:visible;transition:transform .85s cubic-bezier(.22,.61,.36,1),visibility 0s;box-shadow:2px 0 30px rgba(0,0,0,.12)}
+.miniHead{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid rgba(0,0,0,.08)}
+.miniHead h2{flex:1;margin:0;font-size:20px}
+.miniBody{flex:1;overflow:auto;padding:0 18px}
+.miniItem{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.08)}
+.miniInfo{flex:1;min-width:0}
+.miniInfo h4{margin:0 0 4px;font-size:14px;line-height:1.35}
+.miniInfo small{display:block;color:#777}
+.miniPrice{margin-top:6px;font-size:13px}
+.miniDel{background:none;border:0;cursor:pointer;color:#111;padding:4px}
+.miniFoot{padding:14px 18px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(0,0,0,.08);box-shadow:0 -6px 16px rgba(0,0,0,.05)}
+.miniSub{display:flex;justify-content:space-between;font-size:16px;font-weight:700;margin-bottom:12px}
+
+/* MINI CART: slides in slowly from the left after "Add to cart" */
+.miniOverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:520;opacity:0;pointer-events:none;transition:opacity .85s ease}
+.miniOverlay.show{opacity:1;pointer-events:auto}
+.miniCart{position:fixed;top:0;bottom:0;left:0;width:min(84%,380px);background:#fff;z-index:521;display:flex;flex-direction:column;transform:translateX(-102%);visibility:hidden;transition:transform .85s cubic-bezier(.22,.61,.36,1),visibility 0s linear .85s;will-change:transform}
+.miniCart.show{transform:translateX(0);visibility:visible;transition:transform .85s cubic-bezier(.22,.61,.36,1),visibility 0s;box-shadow:2px 0 30px rgba(0,0,0,.12)}
+.miniHead{display:flex;align-items:center;gap:10px;padding:18px 18px 14px;border-bottom:1px solid rgba(0,0,0,.08)}
+.miniHead h2{flex:1;margin:0;font-size:20px}
+.miniBody{flex:1;overflow:auto;padding:0 18px}
+.miniItem{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.08)}
+.miniInfo{flex:1;min-width:0}
+.miniInfo h4{margin:0 0 4px;font-size:14px;line-height:1.35}
+.miniInfo small{display:block;color:#777}
+.miniPrice{margin-top:6px;font-size:13px}
+.miniDel{background:none;border:0;cursor:pointer;color:#111;padding:4px}
+.miniFoot{padding:14px 18px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(0,0,0,.08);box-shadow:0 -6px 16px rgba(0,0,0,.05)}
+.miniSub{display:flex;justify-content:space-between;font-size:16px;font-weight:700;margin-bottom:12px}

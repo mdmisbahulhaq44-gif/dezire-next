@@ -22,7 +22,7 @@ const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : use
 
 export default function ProductDetail({ product, related, saleEndsAt, colors = [] }) {
   const router = useRouter()
-  const { addToCart, openCheckout, openAccount, showToast, wishlist, toggleWishlist } = useShop()
+  const { addToCart, openMini, openCheckout, openAccount, showToast, wishlist, toggleWishlist } = useShop()
 
   const images = product.imgs ? product.imgs.split(',').map(s => s.trim()).filter(Boolean) : []
   const sizes = Array.isArray(product.sizes) ? product.sizes : []
@@ -126,6 +126,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   function handleAddToCart() {
     if (sizeMissing()) return
     addToCart(product, size || null, qty)
+    openMini()
   }
 
   function handleBuyNow() {

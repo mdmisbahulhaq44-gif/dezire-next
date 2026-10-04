@@ -4,11 +4,11 @@ import { useShop } from './ShopContext'
 import { usePathname } from 'next/navigation'
 
 export default function CartFab() {
-  const { cartCount, openCart, activePanel, drawerOpen } = useShop()
+  const { cartCount, openCart, activePanel, drawerOpen, miniOpen } = useShop()
   const pathname = usePathname()
   if (['/contact', '/terms', '/refund-policy', '/privacy'].includes(pathname)) return null
   if (pathname && pathname.startsWith('/admin')) return null
-  if (activePanel || drawerOpen) return null
+  if (activePanel || drawerOpen || miniOpen) return null
   return (
     <button type="button" className="pdCartFab" onClick={openCart} title="View cart" aria-label="View cart">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none">

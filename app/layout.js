@@ -6,6 +6,7 @@ import Footer from "../components/Footer"
 import { ShopProvider } from "../components/ShopContext"
 import CartFab from "../components/CartFab"
 import CartPanel from "../components/CartPanel"
+import MiniCart from "../components/MiniCart"
 import CheckoutPanel from "../components/CheckoutPanel"
 import WishlistPanel from "../components/WishlistPanel"
 import SearchPanel from "../components/SearchPanel"
@@ -86,6 +87,7 @@ export default function RootLayout({ children, modal }) {
           <CartFab />
           <ShopOverlay />
           <CartPanel />
+          <MiniCart />
           <CheckoutPanel />
           <WishlistPanel />
           <SearchPanel />

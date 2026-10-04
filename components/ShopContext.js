@@ -11,6 +11,7 @@ export function ShopProvider({ children }) {
   const [wishlist, setWishlist] = useState([])
   const [activePanel, setActivePanel] = useState(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [miniOpen, setMiniOpen] = useState(false)
   const [toastMsg, setToastMsg] = useState('')
   const [toastShow, setToastShow] = useState(false)
   const [lastOrder, setLastOrder] = useState(null)
@@ -20,9 +21,9 @@ export function ShopProvider({ children }) {
   useEffect(() => { setCart(getCart()); setWishlist(getWishlist()) }, [])
 
   useEffect(() => {
-    document.body.style.overflow = (activePanel || drawerOpen) ? 'hidden' : ''
+    document.body.style.overflow = (activePanel || drawerOpen || miniOpen) ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
-  }, [activePanel, drawerOpen])
+  }, [activePanel, drawerOpen, miniOpen])
 
   function persist(next) {
     setCart(next)
@@ -103,6 +104,9 @@ export function ShopProvider({ children }) {
     cartSubtotal: cartSubtotal(cart),
     activePanel,
     drawerOpen,
+    miniOpen,
+    openMini: () => setMiniOpen(true),
+    closeMini: () => setMiniOpen(false),
     openDrawer: () => setDrawerOpen(true),
     closeDrawer: () => setDrawerOpen(false),
     openCart: () => setActivePanel('cart'),
