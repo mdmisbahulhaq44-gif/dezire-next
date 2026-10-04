@@ -217,9 +217,11 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           </div>
         )}
 
-        <div style={{ paddingTop: 18 }}>
-          <div className="brand">{product.brand || ''}</div>
-          <h2 style={{ margin: '6px 0 10px', fontSize: 22 }}>{product.name}</h2>
+        <div style={{ paddingTop: 14 }}>
+          <div className="pdCrumb">
+            <span>Home</span>{(product.cat || '').split('/').map(x => x.trim()).filter(Boolean).map((c, i) => <span key={i}> / {c}</span>)}<span> / {product.name}</span>
+          </div>
+          <h2 className="pdTitle">{product.name}</h2>
 
           <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6, minHeight: 18 }}>
             {list && list.length > 0 ? (
@@ -294,7 +296,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           {sizes.length > 0 && (
             <div style={{ marginTop: 14 }}>
-              <span style={{ fontSize: 12, letterSpacing: 1, color: 'var(--muted)' }}>SELECT SIZE</span>
+              <span className="pdOptLabel">Size</span>
               <select className="pdSizeSelect" value={size} onChange={e => setSize(e.target.value)}>
                 <option value="">Choose an option</option>
                 {sizes.map(s => <option value={s} key={s}>{s}</option>)}
@@ -321,6 +323,10 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           <button className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={handleBuyNow}>
             BUY NOW
           </button>
+
+          {product.cat && (
+            <div className="pdMeta"><b>Categories:</b> {product.cat.split('/').map(x => x.trim()).filter(Boolean).join(', ')}</div>
+          )}
           <button type="button" className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={() => toggleWishlist(product)}>
             {wishlist.some(w => w.id === product.id) ? '♥ SAVED IN WISHLIST' : '♡ ADD TO WISHLIST'}
           </button>
