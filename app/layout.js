@@ -1,4 +1,4 @@
-import { Quicksand, Poppins } from "next/font/google"
+import { Quicksand } from "next/font/google"
 import "./globals.css"
 import Header from "../components/Header"
 import BottomNav from "../components/BottomNav"
@@ -25,13 +25,6 @@ const quicksand = Quicksand({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap"
-})
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  display: "swap",
-  variable: "--font-poppins"
 })
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://dezire-next.vercel.app").replace(/\/$/, "")
@@ -78,7 +71,7 @@ export const viewport = {
 export default function RootLayout({ children, modal }) {
   return (
     <html lang="en">
-      <body className={`${quicksand.className} ${poppins.variable}`}>
+      <body className={quicksand.className}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c") }}
