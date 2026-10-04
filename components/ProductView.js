@@ -16,11 +16,15 @@ export default async function ProductView({ id }) {
     return <div className="empty" style={{ padding: "80px 20px" }}>Product not found.</div>
   }
 
-  const [{ data: sameCategory }, { data: twinRows }, { data: saleRows }] = await Promise.all([
+  const [{ data: sameCategory }, { data: twinRows }, { data: saleRows }, { data: colorRows }] = await Promise.all([
     supabase.from("products").select(CARD_FIELDS).eq("cat", product.cat).neq("id", product.id).order("created_at", { ascending: false }).limit(12),
     supabase.from("products").select(CARD_FIELDS).eq("name", product.name).neq("id", product.id).neq("gender", product.gender).limit(1),
-    supabase.from("product_sales").select("ends_at").eq("product_id", product.id).eq("status", "active").gt("ends_at", new Date().toISOString()).limit(1)
+    supabase.from("product_sales").select("ends_at").eq("product_id", product.id).eq("status", "active").gt("ends_at", new Date().toISOString()).limit(1),
+    product.color_group
+      ? supabase.from("products").select("id,name,imgs,stock,color_name,price,old").eq("color_group", product.color_group).order("id")
+      : Promise.resolve({ data: [] })
   ])
+  const colors = (colorRows || []).length > 1 ? colorRows : []
 
   const saleEndsAt = saleRows?.[0]?.ends_at || null
   const twin = twinRows?.[0] || null
@@ -68,7 +72,7 @@ export default async function ProductView({ id }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd).replace(/</g, "\\u003c") }}
       />
 <TrackView id={product.id} />
-      <ProductDetail key={product.id} product={product} related={related} saleEndsAt={saleEndsAt} />
+      <ProductDetail key={product.id} product={product} related={related} saleEndsAt={saleEndsAt} colors={colors} />
     </>
   )
 }

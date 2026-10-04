@@ -6,6 +6,7 @@ import { useShop } from './ShopContext'
 import ProductGrid from './ProductGrid'
 import { supabase } from '../lib/supabaseClient'
 import Image from 'next/image'
+import Link from 'next/link'
 import { cldOpt } from '../lib/cloudinary'
 import { closeWithFade } from '../lib/closeWithFade'
 import SaleCountdown from "./SaleCountdown"
@@ -19,7 +20,7 @@ function starString(rating) {
 
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
-export default function ProductDetail({ product, related, saleEndsAt }) {
+export default function ProductDetail({ product, related, saleEndsAt, colors = [] }) {
   const router = useRouter()
   const { addToCart, openCheckout, openAccount, showToast, wishlist, toggleWishlist } = useShop()
 
@@ -238,6 +239,37 @@ export default function ProductDetail({ product, related, saleEndsAt }) {
             >
               SIZE GUIDE
             </button>
+          )}
+
+          {colors.length > 1 && (
+            <div style={{ marginTop: 14 }}>
+              <span style={{ fontSize: 12, letterSpacing: 1, color: 'var(--muted)' }}>COLOR</span>
+              <span style={{ fontSize: 12, marginLeft: 8 }}>{product.color_name || product.name}</span>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
+                {colors.map(c => {
+                  const img = c.imgs ? c.imgs.split(',')[0].trim() : ''
+                  const active = c.id === product.id
+                  const out = Number(c.stock) <= 0
+                  const box = (
+                    <span style={{ display: 'block', position: 'relative', width: 46, height: 58, borderRadius: 6, overflow: 'hidden', border: active ? '2px solid #111' : '1px solid #ddd', opacity: out ? 0.45 : 1 }}>
+                      {img ? <Image src={cldOpt(img, 160)} alt={c.color_name || c.name} fill sizes="46px" style={{ objectFit: 'cover' }} quality={60} /> : null}
+                    </span>
+                  )
+                  return active ? (
+                    <span key={c.id} title={c.color_name || c.name}>{box}</span>
+                  ) : (
+                    <Link
+                      key={c.id}
+                      href={`/product/${c.id}`}
+                      replace
+                      data-replace="1"
+                      title={(c.color_name || c.name) + (out ? ' (sold out)' : '')}
+                      data-preview={JSON.stringify({ id: c.id, name: c.name, price: c.price, old: c.old || null, img })}
+                    >{box}</Link>
+                  )
+                })}
+              </div>
+            </div>
           )}
 
           {sizes.length > 0 && (
