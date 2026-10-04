@@ -1362,3 +1362,13 @@ html,body{touch-action:pan-x pan-y}
 .miniHead .close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;width:32px;height:32px;font-size:26px;font-weight:700;line-height:1}
 .pdCartFab{width:58px;height:58px}
 .pdCartFab .fabCount{top:-8px;left:-8px;width:24px;height:24px;font-size:12px;font-weight:500}
+
+/* mini cart v4: lighter text, centered subtotal, slimmer buttons like the reference */
+.miniOverlay{background:rgba(0,0,0,.72)}
+.miniInfo h4{font-size:15px;font-weight:500}
+.miniInfo small{font-weight:400}
+.miniPrice{font-weight:400;color:#333}
+.miniDel svg{width:20px;height:20px;stroke-width:1.8}
+.miniSub{justify-content:center;gap:6px;font-size:18px;font-weight:500;margin-bottom:14px}
+.miniSub span:first-child::after{content:':'}
+.miniFoot .btn{text-transform:none;letter-spacing:0;font-weight:500;font-size:16px;padding:11px 16px}

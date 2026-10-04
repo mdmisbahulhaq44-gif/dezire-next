@@ -51,9 +51,9 @@ export default function MiniCart() {
 
         <div className="miniFoot">
           <div className="miniSub"><span>Subtotal</span><span>৳{cartSubtotal.toLocaleString()}</span></div>
-          <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={closeMini}>CONTINUE SHOPPING</button>
-          <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={goCart}>VIEW CART</button>
-          <button className="btn" type="button" style={{ width: '100%' }} disabled={cart.length === 0} onClick={goCheckout}>CHECKOUT</button>
+          <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={closeMini}>Continue Shopping</button>
+          <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={goCart}>View Cart</button>
+          <button className="btn" type="button" style={{ width: '100%' }} disabled={cart.length === 0} onClick={goCheckout}>Checkout</button>
         </div>
       </aside>
     </>
