@@ -25,8 +25,7 @@ function Period({ label, icon, bg, color, data }) {
       <div className="statIcon" style={{ background: bg, color }}>{icon}</div>
       <div>
         <small>{label.toUpperCase()}</small>
-        <h2>{fmt(data.sales)}</h2>
-        <span className="statSub">{data.orders} order{data.orders === 1 ? '' : 's'}</span>
+        <h2>{fmt(data.sales)}<span className="statSub">{data.orders} order{data.orders === 1 ? '' : 's'}</span></h2>
       </div>
     </div>
   )
