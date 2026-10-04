@@ -1428,3 +1428,11 @@ html,body{touch-action:pan-x pan-y}
 .pdMeta{margin-top:18px;padding-top:14px;border-top:1px solid #eee;font-size:12.5px;color:#555}
 .pdMeta b{font-weight:600;color:#222}
 .pdMeasure{font-size:13px}
+
+/* product page v4: exact reference spacing */
+.panel#productPanel,.panel#productPreview{padding-left:18px;padding-right:18px}
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{margin-left:-18px;margin-right:-18px;margin-bottom:42px}
+.panel#productPanel .pdFooter{margin-left:-18px;margin-right:-18px}
+.panel#productPanel .pdGallery,.panel#productPreview .pdGallery{border-radius:0;aspect-ratio:780/1005}
+.pdThumbs{gap:14px;margin-top:14px}
+.pdThumb{border-radius:0}
