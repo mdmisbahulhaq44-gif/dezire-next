@@ -1463,3 +1463,17 @@ body:has(#productPanel) .pdCartFab,body:has(#productPreview) .pdCartFab,body.pdB
 
 /* bag shadow: even dark edge on all four sides, a bit more at the bottom (like the reference) */
 .pdCartFab{box-shadow:0 0 5px 1px rgba(0,0,0,.45),0 3px 5px rgba(0,0,0,.35)}
+
+/* footer: white, light headings, two columns on phones (like the reference) */
+footer:has(.footergrid){background:#fff;color:#222;padding:55px 8% 30px;border-top:1px solid #eee}
+footer:has(.footergrid) h3{font-size:22px;font-weight:300;letter-spacing:0;color:#555;margin-bottom:22px;text-transform:lowercase}
+footer:has(.footergrid) h3::first-letter{text-transform:uppercase}
+footer:has(.footergrid) .footergrid>div:first-child h3{font-size:20px;font-weight:700;letter-spacing:3px;color:#111;text-transform:none}
+footer:has(.footergrid) p,footer:has(.footergrid) a{color:#666;font-size:14.5px;line-height:1.7}
+footer:has(.footergrid) p{margin-bottom:12px}
+footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5;color:#555;font-size:12.5px;line-height:1.8;text-align:center;padding-top:26px}
+footer:has(.footergrid) .copy a{color:#555!important;font-size:12.5px}
+@media(max-width:900px){
+footer .footergrid{grid-template-columns:1fr 1fr;gap:38px 22px}
+footer .footergrid>div:first-child{grid-column:1/-1}
+}
