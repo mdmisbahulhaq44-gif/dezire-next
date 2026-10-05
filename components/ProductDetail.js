@@ -65,6 +65,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const addRef = useRef(null)
   const sizeRef = useRef(null)
   const [qty, setQty] = useState(1)
+  const [adding, setAdding] = useState(false)
   const [chartOpen, setChartOpen] = useState(false)
   const [reviews, setReviews] = useState(null) // null = loading, 'error' = failed
   const [session, setSession] = useState(undefined) // undefined = not checked yet
@@ -177,9 +178,13 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   }
 
   function handleAddToCart() {
-    if (sizeMissing()) return
-    addToCart(product, size || null, qty)
-    openMini()
+    if (adding || sizeMissing()) return
+    setAdding(true)
+    setTimeout(() => {
+      addToCart(product, size || null, qty)
+      setAdding(false)
+      openMini()
+    }, 800)
   }
 
   function handleBuyNow() {
@@ -367,8 +372,8 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           <div className="pdBuyRow">
             <input className="pdQty" type="number" inputMode="numeric" min="1" value={qty} onChange={e => setQty(Math.max(1, parseInt(e.target.value, 10) || 1))} aria-label="Quantity" />
-            <button ref={addRef} className="btn pdAddBtn" disabled={!inStock} onClick={handleAddToCart}>
-              {inStock ? 'Add to cart' : 'Out of stock'}
+            <button ref={addRef} className={`btn pdAddBtn${adding ? ' pdAdding' : ''}`} disabled={!inStock || adding} onClick={handleAddToCart}>
+              {inStock ? 'Add to cart' : 'Out of stock'}{adding && <span className="pdSpin" />}
             </button>
             <button type="button" className={`pdHeart${wishlist.some(w => w.id === product.id) ? ' on' : ''}`} onClick={() => toggleWishlist(product)} aria-label={wishlist.some(w => w.id === product.id) ? 'Remove from wishlist' : 'Add to wishlist'}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.some(w => w.id === product.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
@@ -411,7 +416,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
       </div>
 
       <div className={`pdBuyBar${showBar ? ' show' : ''}`} aria-hidden={!showBar}>
-        <button type="button" className="btn" tabIndex={showBar ? 0 : -1} disabled={!inStock} onClick={barAction}>
+        <button type="button" className="btn" tabIndex={showBar ? 0 : -1} disabled={!inStock || adding} onClick={barAction}>
           {!inStock ? 'Out of stock' : (sizes.length && !size) ? 'Select options' : 'Add to cart'}
         </button>
       </div>

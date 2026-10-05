@@ -1548,3 +1548,24 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 
 /* home page: no Fast Delivery / Easy Returns / Secure Checkout strip (cleaner, more professional) */
 .features{display:none}
+
+/* add to cart: button shows a small loading state, then the cart slides in smoothly */
+.pdAddBtn.pdAdding{opacity:.6;cursor:default}
+.pdSpin{display:inline-block;width:12px;height:12px;margin-left:8px;border:2px solid rgba(0,0,0,.22);border-top-color:#111;border-radius:50%;vertical-align:-2px;animation:pdSpin .7s linear infinite}
+@keyframes pdSpin{to{transform:rotate(360deg)}}
+.miniCart{transition:transform .5s cubic-bezier(.22,.61,.36,1),visibility 0s linear .5s}
+.miniCart.show{transition:transform .5s cubic-bezier(.22,.61,.36,1),visibility 0s}
+.miniOverlay{transition:opacity .5s ease}
+
+/* mini cart: thin bag icon, square photo centered beside a narrow name, full-width divider, slimmer footer (like the reference) */
+.miniHead svg{stroke-width:1.25}
+.miniBody{padding:0}
+.miniItem{align-items:center;gap:14px;padding:14px 15px}
+.miniItem .cartImg{width:68px;height:68px;flex:none;border-radius:0}
+.miniItem .miniInfo{flex:0 1 118px;min-width:0}
+.miniInfo h4{overflow-wrap:break-word}
+.miniItem .miniDel{margin-left:auto;align-self:flex-start;margin-top:2px}
+.miniFoot{padding:12px 14px calc(12px + env(safe-area-inset-bottom))}
+.miniSub{font-size:16px;margin-bottom:10px}
+.miniFoot .btn{padding:8px 16px;font-size:15px;border:0 !important;margin-bottom:5px !important}
+.miniFoot .btn:last-child{margin-bottom:0 !important}
