@@ -312,15 +312,6 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             </div>
           )}
 
-          {hasChart && (
-            <button
-              type="button"
-              onClick={() => setChartOpen(true)}
-              style={{ background: 'none', border: 0, textDecoration: 'underline', fontSize: 11, color: 'var(--gold)', padding: 0, marginTop: 6, cursor: 'pointer' }}
-            >
-              SIZE GUIDE
-            </button>
-          )}
 
           {colors.length > 1 && (
             <div style={{ marginTop: 14 }}>
@@ -363,12 +354,13 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
               {size && <button type="button" className="pdSizeClear" onClick={() => setSize('')}>Clear</button>}
               {measurements.length > 0 && (
                 <div style={{ marginTop: 10, fontSize: 12, color: '#333', lineHeight: 1.6 }}>
-                  <b>{size}</b>: {measurements.map(([k, v]) => `${LABELS[k] || k}- ${v}"`).join(' | ')}
+                  <b>{size}</b>: {measurements.map(([k, v]) => `${LABELS[k] || k}- ${v}`).join(' | ')}
                 </div>
               )}
             </div>
           )}
 
+          <div className="pdAvail">Availability:</div>
           <div className="pdBuyRow">
             <input className="pdQty" type="number" inputMode="numeric" min="1" value={qty} onChange={e => setQty(Math.max(1, parseInt(e.target.value, 10) || 1))} aria-label="Quantity" />
             <button ref={addRef} className="btn pdAddBtn" disabled={!inStock} onClick={handleAddToCart}>

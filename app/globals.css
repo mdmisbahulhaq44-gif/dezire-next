@@ -1581,3 +1581,8 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 /* mini cart: name column as narrow as its longest word (word-per-line stack like the reference) */
 .miniItem .miniInfo{flex:none;width:min-content;max-width:150px}
 .miniInfo small,.miniInfo .miniPrice{white-space:nowrap}
+
+/* product page: "Availability:" label above the quantity row; wishlist heart without the round glass background */
+.pdAvail{margin-top:18px;font-size:13px;font-weight:700;color:#111}
+.pdAvail + .pdBuyRow{margin-top:10px}
+.pdHeart{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;border-radius:0}
