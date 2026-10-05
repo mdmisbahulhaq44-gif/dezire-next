@@ -24,6 +24,8 @@ function slideHref(s) {
 export default function HeroCarousel({ slides }) {
   const [index, setIndex] = useState(0)
   const timerRef = useRef(null)
+  const [bump, setBump] = useState(0)
+  const touch = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
     if (slides.length < 2) return
@@ -31,17 +33,27 @@ export default function HeroCarousel({ slides }) {
       setIndex(i => (i + 1) % slides.length)
     }, 4500)
     return () => clearInterval(timerRef.current)
-  }, [slides.length])
+  }, [slides.length, bump])
 
   function goTo(i) {
     setIndex(((i % slides.length) + slides.length) % slides.length)
+    setBump(b => b + 1)
+  }
+
+  function onTouchStart(e) {
+    touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  }
+  function onTouchEnd(e) {
+    const dx = e.changedTouches[0].clientX - touch.current.x
+    const dy = e.changedTouches[0].clientY - touch.current.y
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) goTo(dx > 0 ? index - 1 : index + 1)
   }
 
   if (!slides.length) return null
   const multi = slides.length > 1
 
   return (
-    <div className="heroCarousel">
+    <div className="heroCarousel" onTouchStart={multi ? onTouchStart : undefined} onTouchEnd={multi ? onTouchEnd : undefined}>
       <div className="heroTrack" style={{ transform: `translateX(-${index * 100}%)` }}>
         {slides.map((s, i) => (
           <div className="heroSlide" key={i} style={{ position: "relative" }}>
