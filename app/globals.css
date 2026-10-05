@@ -1509,3 +1509,11 @@ footer:has(.footergrid) .copy{padding-bottom:90px}
 .pdDesc li{margin-bottom:6px;font-size:14px;color:#222}
 .pdDesc strong{font-weight:700;color:#111}
 .pdRelTitle{font-size:18px;font-weight:400;color:#444;margin-bottom:14px}
+
+/* liquid glass buttons (smoked glass: light top edge, soft gloss, blur) on every dark button */
+.btn:not(.light){background:linear-gradient(180deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.07) 46%,rgba(255,255,255,0) 52%),linear-gradient(180deg,rgba(66,66,72,.88),rgba(10,10,12,.93));-webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),inset 0 1px 1px rgba(255,255,255,.55),inset 0 -1px 2px rgba(255,255,255,.14),inset 0 0 14px rgba(255,255,255,.07),0 6px 16px rgba(0,0,0,.28),0 1px 3px rgba(0,0,0,.3);transition:transform .15s ease,box-shadow .15s ease}
+.btn:not(.light):active{transform:scale(.97)}
+/* round wishlist heart next to Add to cart (light glass) */
+.pdHeart{flex:none;width:42px;height:42px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;cursor:pointer;color:#111;background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(236,236,240,.8));-webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.12),inset 0 1px 1px #fff,inset 0 -2px 4px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.14);transition:transform .15s ease}
+.pdHeart:active{transform:scale(.92)}
+.pdHeart.on{color:#111}

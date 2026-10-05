@@ -115,7 +115,6 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
     }
   }, [product.id])
 
-  useEffect(() => { loadReviews() }, [loadReviews])
 
   // bottom buy bar: shows once the Add to cart button has scrolled up out of view
   useEffect(() => {
@@ -286,14 +285,6 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           </div>
           <h2 className="pdTitle">{product.name}</h2>
 
-          <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6, minHeight: 18 }}>
-            {list && list.length > 0 ? (
-              <>
-                <span style={{ color: 'var(--gold)' }}>{starString(avg)}</span> {avg.toFixed(1)} ({list.length} review{list.length > 1 ? 's' : ''})
-              </>
-            ) : list ? 'No ratings yet' : ''}
-          </div>
-
           <div className="price" style={{ fontSize: 20 }}>
             ৳{Number(product.price).toLocaleString()}
             {product.old && <> <span className="old">৳{Number(product.old).toLocaleString()}</span></>}
@@ -379,13 +370,10 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             <button ref={addRef} className="btn pdAddBtn" disabled={!inStock} onClick={handleAddToCart}>
               {inStock ? 'Add to cart' : 'Out of stock'}
             </button>
+            <button type="button" className={`pdHeart${wishlist.some(w => w.id === product.id) ? ' on' : ''}`} onClick={() => toggleWishlist(product)} aria-label={wishlist.some(w => w.id === product.id) ? 'Remove from wishlist' : 'Add to wishlist'}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.some(w => w.id === product.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+            </button>
           </div>
-          <button className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={handleBuyNow}>
-            BUY NOW
-          </button>
-          <button type="button" className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={() => toggleWishlist(product)}>
-            {wishlist.some(w => w.id === product.id) ? '♥ SAVED IN WISHLIST' : '♡ ADD TO WISHLIST'}
-          </button>
 
           {product.cat && (
             <div className="pdMeta"><b>Categories:</b> {product.cat.split('/').map(x => x.trim()).filter(Boolean).join(', ')}</div>
@@ -418,48 +406,6 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             </div>
           )}
 
-          <div style={{ borderTop: '1px solid rgba(0,0,0,.08)', marginTop: 30, paddingTop: 20 }}>
-            <div style={{ fontSize: 11, letterSpacing: 2, color: 'var(--muted)', marginBottom: 14 }}>REVIEWS</div>
-
-            {reviews === null && <div className="empty" style={{ padding: '20px 10px' }}>Loading reviews...</div>}
-            {reviews === 'error' && <div className="empty" style={{ padding: '20px 10px' }}>Could not load reviews.</div>}
-            {list && list.length === 0 && (
-              <div className="empty" style={{ padding: '20px 10px' }}>No reviews yet. Be the first to review!</div>
-            )}
-            {list && list.map(r => (
-              <div key={r.id} style={{ borderBottom: '1px solid rgba(0,0,0,.08)', padding: '12px 0' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <b style={{ fontSize: 13 }}>{r.name}</b>
-                  <span style={{ color: 'var(--gold)', fontSize: 12 }}>{starString(r.rating)}</span>
-                </div>
-                {r.comment && <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 6 }}>{r.comment}</p>}
-              </div>
-            ))}
-
-            <div style={{ marginTop: 16 }}>
-              {session === undefined ? null : session ? (reviewed ? (
-                <p style={{ fontSize: 12, color: 'var(--muted)' }}>✓ You have already reviewed this product. Thank you!</p>
-              ) : (
-                <form className="form" onSubmit={submitReview}>
-                  <label>YOUR RATING</label>
-                  <select value={rating} onChange={e => setRating(e.target.value)} required>
-                    <option value="">Select rating</option>
-                    <option value="5">★★★★★ (5)</option>
-                    <option value="4">★★★★ (4)</option>
-                    <option value="3">★★★ (3)</option>
-                    <option value="2">★★ (2)</option>
-                    <option value="1">★ (1)</option>
-                  </select>
-                  <textarea value={comment} onChange={e => setComment(e.target.value)} placeholder="Share your experience with this product (optional)" />
-                  <button className="btn light" style={{ width: '100%' }}>SUBMIT REVIEW</button>
-                </form>
-              )) : (
-                <p style={{ fontSize: 12, color: 'var(--muted)' }}>
-                  <a href="#" onClick={e => { e.preventDefault(); openAccount() }} style={{ textDecoration: 'underline' }}>Login</a> to write a review.
-                </p>
-              )}
-            </div>
-          </div>
         </div>
         <div className="pdFooter"><Footer /></div>
       </div>
