@@ -1574,3 +1574,6 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .miniCart{transition:transform .85s cubic-bezier(.22,.61,.36,1),visibility 0s linear .85s}
 .miniCart.show{transition:transform .85s cubic-bezier(.22,.61,.36,1),visibility 0s}
 .miniOverlay{transition:opacity .85s ease}
+
+/* mini cart: narrow name column so long names stack tall like the reference */
+.miniItem .miniInfo{flex:0 1 82px}
