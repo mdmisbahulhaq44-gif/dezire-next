@@ -1492,3 +1492,20 @@ footer:has(.footergrid) .copy{padding-bottom:90px}
 .payStripLabel{flex:none;font-size:10px;color:#888;letter-spacing:.3px}
 .payStripLogos{flex:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 8px;border-left:1px solid #ddd;border-right:1px solid #ddd;padding:6px 10px}
 .payStripLogos img{height:26px;max-width:72px;object-fit:contain;display:block}
+
+/* product page v5: quantity box + Add to cart in one row, stacked tabs, nicer description, related title (like the reference) */
+.pdBuyRow{display:flex;align-items:center;gap:12px;margin-top:18px}
+.pdQty{width:54px;height:42px;box-sizing:border-box;border:1px solid #ddd;border-radius:0;text-align:center;font:inherit;font-size:14px;color:#444;background:#fff;padding:0;-moz-appearance:textfield;appearance:textfield}
+.pdQty::-webkit-inner-spin-button,.pdQty::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.pdQty:focus{outline:none;border-color:#111}
+.pdAddBtn{padding:11px 24px;font-size:13px;font-weight:600;letter-spacing:.3px;text-transform:none}
+.pdTabs{margin-top:26px;border-top:2px solid #333}
+.pdTabBar{display:block;border-bottom:0}
+.pdTabBar button{display:block;width:100%;text-align:left;padding:12px 0;margin:0;font-size:14px;font-weight:400;color:#777;border-bottom:0}
+.pdTabBar button.active{color:#111;font-weight:400;border-bottom:0}
+.pdDesc{padding:14px 0 4px;font-size:14px;line-height:1.75;color:#222;white-space:normal}
+.pdDesc p{margin:0 0 16px}
+.pdDesc ul{margin:0 0 16px;padding-left:22px;list-style:disc}
+.pdDesc li{margin-bottom:6px;font-size:14px;color:#222}
+.pdDesc strong{font-weight:700;color:#111}
+.pdRelTitle{font-size:18px;font-weight:400;color:#444;margin-bottom:14px}

@@ -265,7 +265,7 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
         <label>IMAGE URLS (comma-separated, first = main image)</label>
         <textarea placeholder="https://res.cloudinary.com/.../img1.png, https://.../img2.png" value={f.imgs} onChange={e => set('imgs', e.target.value)} />
 
-        <label>DESCRIPTION (OPTIONAL — shown in the product page tab; use new lines and "• " for bullet points)</label>
+        <label>DESCRIPTION (OPTIONAL — blank line = new paragraph, "• " at line start = bullet point, **text** = bold)</label>
         <textarea style={{ minHeight: 150 }} placeholder="Write about the product: fit, fabric, care instructions..." value={f.description} onChange={e => set('description', e.target.value)} />
 
         <label>FABRIC (OPTIONAL)</label>

@@ -22,6 +22,30 @@ function starString(rating) {
 
 const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
+// Description text -> paragraphs and bullet lists. Blank line = new paragraph, "• " / "- " = bullet, **text** = bold.
+function inlineBold(t, k) {
+  return t.split(/\*\*(.+?)\*\*/g).map((p, i) => (i % 2 ? <strong key={k + '-' + i}>{p}</strong> : p))
+}
+function renderDesc(text) {
+  const t = (text || '').trim()
+  if (!t) return 'No description added yet.'
+  const isBullet = l => /^[•\-*·]\s+/.test(l)
+  return t.split(/\n\s*\n/).map((block, bi) => {
+    const lines = block.split('\n').map(l => l.trim()).filter(Boolean)
+    const out = []
+    let para = []
+    let items = []
+    const flushPara = () => { if (para.length) { out.push(<p key={bi + 'p' + out.length}>{para.map((l, i) => <span key={i}>{i > 0 && <br />}{inlineBold(l, bi + '-' + i)}</span>)}</p>); para = [] } }
+    const flushList = () => { if (items.length) { out.push(<ul key={bi + 'u' + out.length}>{items.map((l, i) => <li key={i}>{inlineBold(l, bi + '-' + i)}</li>)}</ul>); items = [] } }
+    lines.forEach(l => {
+      if (isBullet(l)) { flushPara(); items.push(l.replace(/^[•\-*·]\s+/, '')) }
+      else { flushList(); para.push(l) }
+    })
+    flushPara(); flushList()
+    return out
+  })
+}
+
 export default function ProductDetail({ product, related, saleEndsAt, colors = [] }) {
   const router = useRouter()
   const { addToCart, openMini, openCheckout, openAccount, showToast, wishlist, toggleWishlist, activePanel, drawerOpen } = useShop()
@@ -350,16 +374,12 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             </div>
           )}
 
-          <div className="qtyRow" style={{ marginTop: 18, gap: 14 }}>
-            <span style={{ fontSize: 12, letterSpacing: 1, color: 'var(--muted)' }}>QUANTITY</span>
-            <button className="qtyBtn" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button>
-            <span>{qty}</span>
-            <button className="qtyBtn" onClick={() => setQty(q => q + 1)}>+</button>
+          <div className="pdBuyRow">
+            <input className="pdQty" type="number" inputMode="numeric" min="1" value={qty} onChange={e => setQty(Math.max(1, parseInt(e.target.value, 10) || 1))} aria-label="Quantity" />
+            <button ref={addRef} className="btn pdAddBtn" disabled={!inStock} onClick={handleAddToCart}>
+              {inStock ? 'Add to cart' : 'Out of stock'}
+            </button>
           </div>
-
-          <button ref={addRef} className="btn" style={{ width: '100%', marginTop: 20 }} disabled={!inStock} onClick={handleAddToCart}>
-            {inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
-          </button>
           <button className="btn light" style={{ width: '100%', marginTop: 10 }} onClick={handleBuyNow}>
             BUY NOW
           </button>
@@ -379,7 +399,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                 <button type="button" className={tab === 'info' ? 'active' : ''} onClick={() => setTab('info')}>Additional Information</button>
               </div>
               {tab === 'desc' ? (
-                <div className="pdDesc">{product.description || 'No description added yet.'}</div>
+                <div className="pdDesc">{renderDesc(product.description)}</div>
               ) : (
                 <table className="pdInfoTable"><tbody>
                   {product.fabric && <tr><th>Fabric</th><td>{product.fabric}</td></tr>}
@@ -393,7 +413,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           {related.length > 0 && (
             <div style={{ borderTop: '1px solid rgba(0,0,0,.08)', marginTop: 30, paddingTop: 20 }}>
-              <div style={{ fontSize: 11, letterSpacing: 2, color: 'var(--muted)', marginBottom: 14 }}>RELATED PRODUCTS</div>
+              <div className="pdRelTitle">Related products</div>
               <ProductGrid products={related} replaceLinks />
             </div>
           )}
