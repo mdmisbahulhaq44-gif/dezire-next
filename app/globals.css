@@ -1545,3 +1545,6 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 /* hero banner: swipe only (no arrows, no dots) */
 .heroArrow,.heroDots{display:none}
 .heroCarousel{touch-action:pan-y}
+
+/* home page: no Fast Delivery / Easy Returns / Secure Checkout strip (cleaner, more professional) */
+.features{display:none}
