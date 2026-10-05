@@ -1524,3 +1524,7 @@ footer:has(.footergrid) .copy{padding-bottom:90px}
 
 /* liquid glass v3: flat frosted glass, bright rim, no dark shading (like iOS / the phone's control panel) */
 .btn:not(.light),.btn.light,.pdHeart{background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(242,244,248,.58));-webkit-backdrop-filter:blur(18px) saturate(190%);backdrop-filter:blur(18px) saturate(190%);color:#111;text-shadow:none;box-shadow:0 0 0 1px rgba(0,0,0,.09),inset 0 1.5px 1px rgba(255,255,255,.95),inset 0 -1px 1px rgba(255,255,255,.65),inset 0 0 12px rgba(255,255,255,.55),0 8px 20px -8px rgba(0,0,0,.2)}
+
+/* footer: grey band runs down behind the bottom nav (no white strip under it); product page footer unchanged */
+footer:has(.footergrid){margin-bottom:calc(-64px - env(safe-area-inset-bottom))}
+.pdFooter footer:has(.footergrid){margin-bottom:0}
