@@ -1532,3 +1532,8 @@ footer:has(.footergrid){margin-bottom:calc(-64px - env(safe-area-inset-bottom))}
 /* product page: square related-product photos and square color swatches (like the reference) */
 #productPanel .productImage{aspect-ratio:1/1}
 #productPanel span[style*="height: 58px"]{height:46px !important}
+
+/* product page: sharp square corners, no black frame on color swatches (selected = full color, others faded like the thumbnails) */
+#productPanel [title]>span[style*="width: 46px"]{border-radius:0 !important;border:0 !important}
+#productPanel a[data-preview]>span{opacity:.4 !important}
+#productPanel .productImage,#productPanel .productImage img{border-radius:0}
