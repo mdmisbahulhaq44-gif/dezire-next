@@ -1569,3 +1569,8 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .miniSub{font-size:16px;margin-bottom:10px}
 .miniFoot .btn{padding:8px 16px;font-size:15px;border:0 !important;margin-bottom:5px !important}
 .miniFoot .btn:last-child{margin-bottom:0 !important}
+
+/* mini cart: back to the slow, smooth slide-in (no loading step) */
+.miniCart{transition:transform .85s cubic-bezier(.22,.61,.36,1),visibility 0s linear .85s}
+.miniCart.show{transition:transform .85s cubic-bezier(.22,.61,.36,1),visibility 0s}
+.miniOverlay{transition:opacity .85s ease}
