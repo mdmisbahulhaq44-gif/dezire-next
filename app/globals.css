@@ -1528,3 +1528,7 @@ footer:has(.footergrid) .copy{padding-bottom:90px}
 /* footer: grey band runs down behind the bottom nav (no white strip under it); product page footer unchanged */
 footer:has(.footergrid){margin-bottom:calc(-64px - env(safe-area-inset-bottom))}
 .pdFooter footer:has(.footergrid){margin-bottom:0}
+
+/* product page: square related-product photos and square color swatches (like the reference) */
+#productPanel .productImage{aspect-ratio:1/1}
+#productPanel span[style*="height: 58px"]{height:46px !important}
