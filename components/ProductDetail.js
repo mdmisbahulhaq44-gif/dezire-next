@@ -116,17 +116,21 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   }, [product.id])
 
 
-  // bottom buy bar: shows once the Add to cart button has scrolled up out of view
+  // bottom buy bar: appears a little before the Add to cart button leaves the screen and hides again a bit later when scrolling back up (the gap stops flicker)
   useEffect(() => {
     const el = addRef.current
     const root = panelRef.current
-    if (!el || !root || typeof IntersectionObserver === 'undefined') return
-    const io = new IntersectionObserver(([e]) => {
-      const top = e.rootBounds ? e.rootBounds.top : 0
-      setBarOn(!e.isIntersecting && e.boundingClientRect.top < top)
-    }, { root, threshold: 0 })
-    io.observe(el)
-    return () => io.disconnect()
+    if (!el || !root) return
+    function check() {
+      const top = el.getBoundingClientRect().top - root.getBoundingClientRect().top
+      const h = root.clientHeight
+      if (top < h * 0.24) setBarOn(true)
+      else if (top > h * 0.30) setBarOn(false)
+    }
+    check()
+    root.addEventListener('scroll', check, { passive: true })
+    window.addEventListener('resize', check)
+    return () => { root.removeEventListener('scroll', check); window.removeEventListener('resize', check) }
   }, [])
 
   // hide the buy bar once the footer's copyright row is reached (nothing floats over the footer's end)
