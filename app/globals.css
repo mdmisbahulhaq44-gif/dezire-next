@@ -1537,3 +1537,7 @@ footer:has(.footergrid){margin-bottom:calc(-64px - env(safe-area-inset-bottom))}
 #productPanel [title]>span[style*="width: 46px"]{border-radius:0 !important;border:0 !important}
 #productPanel a[data-preview]>span{opacity:.4 !important}
 #productPanel .productImage,#productPanel .productImage img{border-radius:0}
+
+/* footer: on pages with the bottom nav, keep the copyright text above the nav and the bag (product page unchanged) */
+footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bottom))}
+.pdFooter footer:has(.footergrid) .copy{padding-bottom:90px}
