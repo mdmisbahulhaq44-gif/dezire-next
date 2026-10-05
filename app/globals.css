@@ -1521,3 +1521,6 @@ footer:has(.footergrid) .copy{padding-bottom:90px}
 /* liquid glass v2: light frosted glass with black text (replaces the dark smoked glass) */
 .btn:not(.light){background:linear-gradient(180deg,rgba(255,255,255,.95) 0%,rgba(255,255,255,.55) 48%,rgba(228,230,236,.7) 52%,rgba(214,217,225,.8) 100%);-webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);color:#111;text-shadow:0 1px 0 rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px rgba(0,0,0,.13),inset 0 1px 1px #fff,inset 0 -2px 4px rgba(0,0,0,.07),0 6px 16px rgba(0,0,0,.16),0 1px 3px rgba(0,0,0,.14)}
 .btn.light{box-shadow:inset 0 0 0 1px rgba(0,0,0,.13),inset 0 1px 1px #fff,0 4px 12px rgba(0,0,0,.12)}
+
+/* liquid glass v3: flat frosted glass, bright rim, no dark shading (like iOS / the phone's control panel) */
+.btn:not(.light),.btn.light,.pdHeart{background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(242,244,248,.58));-webkit-backdrop-filter:blur(18px) saturate(190%);backdrop-filter:blur(18px) saturate(190%);color:#111;text-shadow:none;box-shadow:0 0 0 1px rgba(0,0,0,.09),inset 0 1.5px 1px rgba(255,255,255,.95),inset 0 -1px 1px rgba(255,255,255,.65),inset 0 0 12px rgba(255,255,255,.55),0 8px 20px -8px rgba(0,0,0,.2)}
