@@ -1647,3 +1647,6 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{height:56px;margin-bottom:48px}
 .pdTopBar::after{height:48px}
 .panel#productPanel .pdGallery,.panel#productPreview .pdGallery{aspect-ratio:780/1005}
+
+/* product page breadcrumb: links look like plain text */
+.pdCrumb a{color:inherit;text-decoration:none}

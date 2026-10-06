@@ -33,7 +33,7 @@ export default async function ProductView({ id }) {
 
   const images = (product.imgs ? product.imgs.split(",").map(s => s.trim()).filter(Boolean) : []).map(u => cldOpt(u, 1200))
   const g = product.gender === "women" ? "women" : "men"
-  const catParts = parseCatPath(product)
+  const catParts = parseCatPath(product).filter((c, i, a) => !(i === a.length - 1 && c.toLowerCase() === (product.name || "").trim().toLowerCase()))
   const crumbs = [
     { name: "Home", url: SITE + "/" },
     { name: capitalize(g), url: SITE + buildShopPath(g, []) },

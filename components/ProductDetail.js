@@ -12,6 +12,7 @@ import { closeWithFade } from '../lib/closeWithFade'
 import SaleCountdown from "./SaleCountdown"
 import Footer from "./Footer"
 import PdTopBar from "./PdTopBar"
+import { buildShopPath, capitalize } from "../lib/categories"
 
 const LABELS = { waist: 'Waist', length: 'Length', hip: 'Hip', leg_opening: 'Leg Opening', chest: 'Chest', shoulder: 'Shoulder', sleeve: 'Sleeve' }
 
@@ -55,6 +56,11 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const chart = product.size_chart && typeof product.size_chart === 'object' ? product.size_chart : {}
   const chartSizes = Object.keys(chart)
   const hasChart = chartSizes.length > 0
+
+  // category path without the product's own name (some products have it as the last category, which showed the name twice)
+  const gender = product.gender === 'women' ? 'women' : 'men'
+  const rawCat = (product.cat || '').split('/').map(x => x.trim()).filter(Boolean)
+  const catSegs = rawCat.length && rawCat[rawCat.length - 1].toLowerCase() === (product.name || '').trim().toLowerCase() ? rawCat.slice(0, -1) : rawCat
 
   const shown = true
   const [index, setIndex] = useState(0)
@@ -285,7 +291,12 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
         <div style={{ paddingTop: 14 }}>
           <div className="pdCrumb">
-            <span>Home</span>{(product.cat || '').split('/').map(x => x.trim()).filter(Boolean).map((c, i) => <span key={i}> / {c}</span>)}<span> / {product.name}</span>
+            <Link href="/">Home</Link>
+            <span> / </span><Link href={buildShopPath(gender, [])}>{capitalize(gender)}</Link>
+            {catSegs.map((c, i) => (
+              <span key={i}> / <Link href={buildShopPath(gender, catSegs.slice(0, i + 1))}>{c}</Link></span>
+            ))}
+            <span> / {product.name}</span>
           </div>
           <h2 className="pdTitle">{product.name}</h2>
 
@@ -371,10 +382,10 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             </button>
           </div>
 
-          {(product.sku || product.cat) && (
+          {(product.sku || catSegs.length > 0) && (
             <div className="pdMeta">
-              {product.sku && <div style={{ marginBottom: product.cat ? 6 : 0 }}><b>SKU:</b> {product.sku}</div>}
-              {product.cat && <div><b>Categories:</b> {product.cat.split('/').map(x => x.trim()).filter(Boolean).join(', ')}</div>}
+              {product.sku && <div style={{ marginBottom: catSegs.length > 0 ? 6 : 0 }}><b>SKU:</b> {product.sku}</div>}
+              {catSegs.length > 0 && <div><b>Categories:</b> {catSegs.join(', ')}</div>}
             </div>
           )}
 
@@ -392,7 +403,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                   {product.fabric && <tr><th>Fabric</th><td>{product.fabric}</td></tr>}
                   {product.color_name && <tr><th>Color</th><td>{product.color_name}</td></tr>}
                   {sizes.length > 0 && <tr><th>Sizes</th><td>{sizes.join(', ')}</td></tr>}
-                  {product.cat && <tr><th>Category</th><td>{product.cat.split('/').map(s => s.trim()).filter(Boolean).join(' › ')}</td></tr>}
+                  {catSegs.length > 0 && <tr><th>Category</th><td>{catSegs.join(' › ')}</td></tr>}
                 </tbody></table>
               )}
             </div>
