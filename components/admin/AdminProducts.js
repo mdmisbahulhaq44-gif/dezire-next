@@ -24,7 +24,7 @@ export default function AdminProducts() {
     if (!products) return []
     const q = search.trim().toLowerCase()
     if (!q) return products
-    return products.filter(p => (p.name || '').toLowerCase().includes(q) || (p.cat || '').toLowerCase().includes(q))
+    return products.filter(p => (p.name || '').toLowerCase().includes(q) || (p.cat || '').toLowerCase().includes(q) || (p.sku || '').toLowerCase().includes(q))
   }, [products, search])
 
   function openAdd() { setEditing(null); setFormOpen(true) }
@@ -40,7 +40,7 @@ export default function AdminProducts() {
             <button className="btn" onClick={openAdd}>+ ADD PRODUCT</button>
           </div>
           <div className="adminSearchRow">
-            <input placeholder="Search products by name or category..." value={search} onChange={e => setSearch(e.target.value)} />
+            <input placeholder="Search products by name, category or SKU..." value={search} onChange={e => setSearch(e.target.value)} />
           </div>
           <table>
             <thead>

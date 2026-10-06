@@ -371,8 +371,11 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             </button>
           </div>
 
-          {product.cat && (
-            <div className="pdMeta"><b>Categories:</b> {product.cat.split('/').map(x => x.trim()).filter(Boolean).join(', ')}</div>
+          {(product.sku || product.cat) && (
+            <div className="pdMeta">
+              {product.sku && <div style={{ marginBottom: product.cat ? 6 : 0 }}><b>SKU:</b> {product.sku}</div>}
+              {product.cat && <div><b>Categories:</b> {product.cat.split('/').map(x => x.trim()).filter(Boolean).join(', ')}</div>}
+            </div>
           )}
 
 

@@ -91,7 +91,7 @@ function CatBuilder({ allProducts, gender, levels, custom, onChange }) {
 const BLANK = {
   id: '', name: '', brand: 'DEZIRE', gender: 'men',
   price: '', old: '', badge: '', stock: '', imgs: '', cost: '',
-  fabric: '', description: '', sizes: '', color_name: '', color_group: '', size_chart: ''
+  sku: '', fabric: '', description: '', sizes: '', color_name: '', color_group: '', size_chart: ''
 }
 
 export default function ProductFormPanel({ open, product, allProducts, onClose, onSaved, showToast }) {
@@ -115,6 +115,7 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
         imgs: product.imgs || '',
         fabric: product.fabric || '',
         description: product.description || '',
+        sku: product.sku || '',
         sizes: Array.isArray(product.sizes) ? product.sizes.join(', ') : '',
         color_name: product.color_name || '',
         color_group: product.color_group || '',
@@ -171,6 +172,7 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
       imgs: f.imgs.trim(),
       fabric: f.fabric.trim() || null,
       description: f.description.trim() || null,
+      sku: f.sku.trim() || null,
       sizes: sizesArr,
       color_name: f.color_name.trim() || null,
       size_chart: sizeChartObj
@@ -227,6 +229,9 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
       <form className="form" onSubmit={save}>
         <label>PRODUCT NAME</label>
         <input type="text" required value={f.name} onChange={e => set('name', e.target.value)} />
+
+        <label>SKU / PRODUCT CODE (OPTIONAL — e.g. SCBG-S, shown on the product page)</label>
+        <input type="text" placeholder="e.g. SCBG-S" value={f.sku} onChange={e => set('sku', e.target.value)} />
 
         <label>BRAND</label>
         <input type="text" value={f.brand} onChange={e => set('brand', e.target.value)} />
