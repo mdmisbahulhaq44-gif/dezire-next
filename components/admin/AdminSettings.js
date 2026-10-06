@@ -29,14 +29,14 @@ function CategoryLinkPicker({ allProducts, gender, category, onGender, onCategor
   const cats = (gender === 'men' || gender === 'women') ? getSubcategories(allProducts, gender, []) : []
   return (
     <div style={{ display: 'flex', gap: 8 }}>
-      <select value={gender || ''} onChange={e => onGender(e.target.value)} style={{ flex: 1, border: '1px solid var(--line)', borderRadius: 8, padding: 8 }}>
+      <select value={gender || ''} onChange={e => onGender(e.target.value)} style={{ flex: 1, minWidth: 0, border: '1px solid var(--line)', borderRadius: 8, padding: 8 }}>
         <option value="">No link</option>
         <option value="flash">⚡ Flash Sale page</option>
         <option value="ALL">All</option>
         <option value="men">Men</option>
         <option value="women">Women</option>
       </select>
-      <select value={category || ''} onChange={e => onCategory(e.target.value)} disabled={gender !== 'men' && gender !== 'women'} style={{ flex: 1, border: '1px solid var(--line)', borderRadius: 8, padding: 8 }}>
+      <select value={category || ''} onChange={e => onCategory(e.target.value)} disabled={gender !== 'men' && gender !== 'women'} style={{ flex: 1, minWidth: 0, border: '1px solid var(--line)', borderRadius: 8, padding: 8 }}>
         <option value="">Whole {capitalize(gender) || ''} section (hub page)</option>
         {cats.map(c => <option key={c.seg} value={c.seg}>{c.seg} ({c.count})</option>)}
       </select>
@@ -214,7 +214,8 @@ function CategoryImagesEditor({ allProducts, showToast }) {
 
   if (images === null || !allProducts.length) return <p style={{ fontSize: 12, color: 'var(--muted)' }}>{images === null ? 'Loading...' : 'No categories yet — add products with a Category first.'}</p>
 
-  const paths = getAllCategoryPaths(allProducts)
+  const productNames = new Set(allProducts.map(p => (p.name || '').trim().toLowerCase()))
+  const paths = getAllCategoryPaths(allProducts).filter(p => !productNames.has(p.path[p.path.length - 1].trim().toLowerCase()))
 
   return (
     <div style={{ maxWidth: 500 }}>
