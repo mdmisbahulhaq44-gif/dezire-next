@@ -1586,3 +1586,6 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .pdAvail{margin-top:18px;font-size:13px;font-weight:700;color:#111}
 .pdAvail + .pdBuyRow{margin-top:10px}
 .pdHeart{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;border-radius:0}
+
+/* admin: calm grey icon tiles (alert cards keep their red) */
+.stat:not(.alert) .statIcon{background:#f3f3f1 !important;color:#555 !important}

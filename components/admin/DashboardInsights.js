@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import AdminIcon from './AdminIcon'
 
 const INK = '#1a1a19'
 const fmt = n => '৳' + Number(n || 0).toLocaleString('en-US')
@@ -22,7 +23,7 @@ const cap = { fontSize: 10, letterSpacing: '.5px', color: '#888', textTransform:
 function Period({ label, icon, bg, color, data }) {
   return (
     <div className="stat">
-      <div className="statIcon" style={{ background: bg, color }}>{icon}</div>
+      <div className="statIcon" style={{ background: bg, color }}><AdminIcon name={icon} /></div>
       <div>
         <small>{label.toUpperCase()}</small>
         <h2>{fmt(data.sales)}<span className="statSub">{data.orders} order{data.orders === 1 ? '' : 's'}</span></h2>
@@ -35,7 +36,7 @@ function Attention({ label, icon, bg, color, value, tone, onClick }) {
   const alert = value > 0 && tone === 'alert'
   return (
     <div className={`stat${alert ? ' alert' : ''}`} onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
-      <div className="statIcon" style={{ background: alert ? '#fdecea' : bg, color: alert ? 'var(--red)' : color }}>{icon}</div>
+      <div className="statIcon" style={{ background: alert ? '#fdecea' : bg, color: alert ? 'var(--red)' : color }}><AdminIcon name={icon} /></div>
       <div>
         <small>{label.toUpperCase()}</small>
         <h2 style={{ color: alert ? 'var(--red)' : 'inherit' }}>{value}</h2>
@@ -189,12 +190,12 @@ export default function DashboardInsights({ summary, profit, onNav }) {
   return (
     <div className="dashInsights">
       <div className="dashboard6">
-        <Period label="Today" icon="📅" bg="#e6f4f1" color="#16806b" data={today} />
-        <Period label="Last 7 days" icon="📆" bg="#e6eefd" color="#1a5bb8" data={week} />
-        <Period label="Last 30 days" icon="🗓️" bg="#f1e9fb" color="#6934c9" data={month} />
-        <Attention label="New orders to confirm" icon="🔔" bg="#fff4dc" color="#966600" value={pending} tone="alert" onClick={() => onNav('orders')} />
-        <Attention label="Ready to ship" icon="🚚" bg="#e8f5ea" color="#1c8a45" value={to_ship} onClick={() => onNav('orders')} />
-        <Attention label="Low stock items" icon="⚠️" bg="#fbeadd" color="#c9701f" value={lowCount} tone="alert" onClick={() => onNav('products')} />
+        <Period label="Today" icon="today" bg="#e6f4f1" color="#16806b" data={today} />
+        <Period label="Last 7 days" icon="week" bg="#e6eefd" color="#1a5bb8" data={week} />
+        <Period label="Last 30 days" icon="month" bg="#f1e9fb" color="#6934c9" data={month} />
+        <Attention label="New orders to confirm" icon="bell" bg="#fff4dc" color="#966600" value={pending} tone="alert" onClick={() => onNav('orders')} />
+        <Attention label="Ready to ship" icon="truck" bg="#e8f5ea" color="#1c8a45" value={to_ship} onClick={() => onNav('orders')} />
+        <Attention label="Low stock items" icon="alert" bg="#fbeadd" color="#c9701f" value={lowCount} tone="alert" onClick={() => onNav('products')} />
       </div>
 
       {daily && daily.length > 0 && <SalesChart days={daily} />}

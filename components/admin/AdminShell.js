@@ -13,19 +13,20 @@ import AdminStockHistory from './AdminStockHistory'
 import AdminBackup from './AdminBackup'
 import AdminSales from './AdminSales'
 import AdminCoupons from './AdminCoupons'
+import AdminIcon from './AdminIcon'
 
 const SECTIONS = [
-  { key: 'dashboard', label: '📊 Dashboard' },
-  { key: 'products', label: '🛍️ Products' },
-  { key: 'orders', label: '📦 Orders' },
-  { key: 'returns', label: '↩️ Returns' },
-  { key: 'customers', label: '👥 Customers' },
-  { key: 'settings', label: '⚙️ Settings' },
-  { key: 'stock', label: '📉 Stock history' },
-  { key: 'backup', label: '💾 Backup' },
-  { key: 'sales', label: '🏷️ Sales' },
-  { key: 'coupons', label: '🎟️ Coupons' },
-  { key: 'activity', label: '🕘 Activity log' }
+  { key: 'dashboard', label: 'Dashboard' },
+  { key: 'products', label: 'Products' },
+  { key: 'orders', label: 'Orders' },
+  { key: 'returns', label: 'Returns' },
+  { key: 'customers', label: 'Customers' },
+  { key: 'settings', label: 'Settings' },
+  { key: 'stock', label: 'Stock history' },
+  { key: 'backup', label: 'Backup' },
+  { key: 'sales', label: 'Sales' },
+  { key: 'coupons', label: 'Coupons' },
+  { key: 'activity', label: 'Activity log' }
 ]
 
 const TITLES = {
@@ -57,7 +58,7 @@ export default function AdminShell() {
             className={section === s.key ? 'active' : ''}
             onClick={() => setSection(s.key)}
           >
-            {s.label}
+            <AdminIcon name={s.key} size={18} />{s.label}
           </button>
         ))}
       </aside>

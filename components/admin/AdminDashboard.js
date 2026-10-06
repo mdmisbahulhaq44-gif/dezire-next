@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabaseClient'
 import { cldOpt } from '../../lib/cloudinary'
 import StatusBadge from './StatusBadge'
 import DashboardInsights from './DashboardInsights'
+import AdminIcon from './AdminIcon'
 
 export default function AdminDashboard({ onNav }) {
   const [state, setState] = useState('loading') // loading | error | ready
@@ -81,19 +82,19 @@ export default function AdminDashboard({ onNav }) {
     <div id="adminDashboardView">
       <div className="dashboard">
         <div className="stat" onClick={() => onNav('orders')} style={{ cursor: 'pointer' }}>
-          <div className="statIcon" style={{ background: '#e8f5ea', color: '#1c8a45' }}>৳</div>
+          <div className="statIcon" style={{ background: '#e8f5ea', color: '#1c8a45' }}><AdminIcon name="taka" /></div>
           <div><small>TOTAL SALES</small><h2>৳{stats.sales.toLocaleString()}</h2></div>
         </div>
         <div className="stat" onClick={() => onNav('orders')} style={{ cursor: 'pointer' }}>
-          <div className="statIcon" style={{ background: '#e6eefd', color: '#1a5bb8' }}>📦</div>
+          <div className="statIcon" style={{ background: '#e6eefd', color: '#1a5bb8' }}><AdminIcon name="orders" /></div>
           <div><small>ORDERS</small><h2>{stats.orderCount}</h2></div>
         </div>
         <div className="stat" onClick={() => onNav('customers')} style={{ cursor: 'pointer' }}>
-          <div className="statIcon" style={{ background: '#fbeadd', color: '#c9701f' }}>👥</div>
+          <div className="statIcon" style={{ background: '#fbeadd', color: '#c9701f' }}><AdminIcon name="customers" /></div>
           <div><small>CUSTOMERS</small><h2>{stats.customerCount}</h2></div>
         </div>
         <div className="stat" onClick={() => onNav('products')} style={{ cursor: 'pointer' }}>
-          <div className="statIcon" style={{ background: '#f1e9fb', color: '#6934c9' }}>🛍️</div>
+          <div className="statIcon" style={{ background: '#f1e9fb', color: '#6934c9' }}><AdminIcon name="products" /></div>
           <div><small>PRODUCTS</small><h2>{stats.productCount}</h2></div>
         </div>
       </div>
