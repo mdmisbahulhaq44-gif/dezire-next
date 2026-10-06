@@ -1631,3 +1631,14 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 /* product page: no back arrow (phone back gesture closes it, like the reference) */
 .pdTopBar>.pdTopBtn:first-child{display:none}
 .pdTopBar .logo{margin-left:8px}
+
+/* product page: header and grey band sized like the reference (smaller than before), old button/logo sizes back, photo + first thumbnail row fit on screen */
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{height:71px;margin-bottom:59px;padding:0 8px}
+.pdTopBar::after{height:59px}
+.pdTopBar>.pdTopBtn:first-child{display:none}
+.pdTopBar .logo{font-size:20px;letter-spacing:4px;margin-left:0}
+.pdTopRight{gap:4px}
+.pdTopRight .pdTopBtn{width:34px;height:34px;font-size:19px}
+.pdTopRight .pdTopBtn:nth-child(2) svg{width:21px;height:21px}
+.pdTopRight .pdTopBtn:nth-child(3) svg{width:20px;height:20px}
+.panel#productPanel .pdGallery,.panel#productPreview .pdGallery{aspect-ratio:812/1000}
