@@ -1596,3 +1596,6 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .adminSide button{color:#888}
 .adminSide button:hover,.adminSide button.active{background:#f3f3f1;color:#111}
 .adminLogo{color:#111}
+
+/* product page: same empty space between related products and footer as the reference */
+.pdFooter{margin-top:210px}
