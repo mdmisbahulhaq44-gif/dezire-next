@@ -1642,3 +1642,8 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .pdTopRight .pdTopBtn:nth-child(2) svg{width:21px;height:21px}
 .pdTopRight .pdTopBtn:nth-child(3) svg{width:20px;height:20px}
 .panel#productPanel .pdGallery,.panel#productPreview .pdGallery{aspect-ratio:812/1000}
+
+/* product page: thinner header and grey band (a little thicker than the very first version) */
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{height:56px;margin-bottom:48px}
+.pdTopBar::after{height:48px}
+.panel#productPanel .pdGallery,.panel#productPreview .pdGallery{aspect-ratio:780/1005}
