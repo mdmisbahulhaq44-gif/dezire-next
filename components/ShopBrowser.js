@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import ProductGrid from './ProductGrid'
+import ShopAside from './ShopAside'
 
 function sizesOf(p) {
   if (Array.isArray(p.sizes)) return p.sizes
@@ -191,6 +192,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
         )}
 
         <ProductGrid products={visible} />
+        {breadcrumb && <ShopAside />}
       </div>
     </div>
   )

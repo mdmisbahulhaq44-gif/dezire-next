@@ -1599,3 +1599,18 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 
 /* product page: same empty space between related products and footer as the reference */
 .pdFooter{margin-top:210px}
+
+/* category page bottom: search box + recently viewed, then footer (spacing measured from the reference video) */
+.shopAside{margin:193px 0 10px}
+.shopSearch{display:flex;gap:11px;width:310px;max-width:100%;padding:5.5px;border:1px dotted #000}
+.shopSearch input{flex:1;min-width:0;height:51px;border:1px solid #ddd;border-radius:0;background:#fff;padding:0 13px;font-size:15px;color:#333;cursor:pointer}
+.shopSearch input::placeholder{color:#777}
+.shopSearch button{width:59px;height:51px;border:0;border-radius:8px;background:#30353b;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.shopAside h2{font-size:25px;font-weight:300;line-height:36px;letter-spacing:0;text-transform:none;color:#333;margin:47px 0 0}
+.shopRecent{margin-top:30px}
+.shopRecent a{display:flex;align-items:center;gap:16px;color:inherit;text-decoration:none}
+.shopRecent a+a{margin-top:18px}
+.shopRecent .rvImg{position:relative;display:block;width:65px;height:65px;flex:none;overflow:hidden;background:#f0f0f0}
+.shopRecent .rvText{display:block;min-width:0}
+.shopRecent .rvName{display:block;font-size:16px;line-height:24.7px;color:#333}
+.shopRecent .rvPrice{display:block;margin-top:6px;font-size:16px;line-height:22px;font-weight:500;color:#111}
