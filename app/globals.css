@@ -1614,3 +1614,7 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .shopRecent .rvText{display:block;min-width:0}
 .shopRecent .rvName{display:block;font-size:16px;line-height:24.7px;color:#333}
 .shopRecent .rvPrice{display:block;margin-top:6px;font-size:16px;line-height:22px;font-weight:500;color:#111}
+
+/* category hub pages: same search box + recently viewed block, footer 50px below */
+#categoryHub{padding-bottom:0}
+#categoryHub .shopAside{margin-bottom:50px}

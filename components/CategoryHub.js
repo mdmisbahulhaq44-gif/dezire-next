@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Breadcrumb from "./Breadcrumb"
+import ShopAside from "./ShopAside"
 import { cldOpt } from "../lib/cloudinary"
 import { buildShopPath } from "../lib/categories"
 
@@ -35,6 +36,7 @@ export default function CategoryHub({ gender, path, heading, subs }) {
           No products here yet — add some from the Admin Panel.
         </p>
       )}
+      {subs.length > 0 && <ShopAside />}
     </section>
   )
 }
