@@ -1627,3 +1627,7 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .pdTopRight{gap:5px}
 .pdTopRight .pdTopBtn{width:44px;height:44px;font-size:24px}
 .pdTopRight .pdTopBtn svg{width:22px;height:22px}
+
+/* product page: no back arrow (phone back gesture closes it, like the reference) */
+.pdTopBar>.pdTopBtn:first-child{display:none}
+.pdTopBar .logo{margin-left:8px}
