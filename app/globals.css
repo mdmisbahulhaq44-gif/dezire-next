@@ -1589,3 +1589,10 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 
 /* admin: calm grey icon tiles (alert cards keep their red) */
 .stat:not(.alert) .statIcon{background:#f3f3f1 !important;color:#555 !important}
+
+/* admin menu: white bar, grey icons, black when selected (like the bottom nav) */
+.adminSide{background:#fff;color:#111;border-bottom:1px solid #eee}
+@media(min-width:601px){.adminSide{border-bottom:0;border-right:1px solid #eee}}
+.adminSide button{color:#888}
+.adminSide button:hover,.adminSide button.active{background:#f3f3f1;color:#111}
+.adminLogo{color:#111}
