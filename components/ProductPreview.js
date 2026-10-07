@@ -111,12 +111,9 @@ export default function ProductPreview() {
       </div>
 
       <div style={{ paddingTop: 18 }}>
-        <h2 style={{ margin: '6px 0 10px', fontSize: 22 }}>{p.name}</h2>
+        <div style={bar('62%', 24, 6)}></div>
         <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6, minHeight: 18 }}></div>
-        <div className="price" style={{ fontSize: 20 }}>
-          ৳{Number(p.price).toLocaleString()}
-          {p.old ? <> <span className="old">৳{Number(p.old).toLocaleString()}</span></> : null}
-        </div>
+<div style={bar('28%', 20, 14)}></div>
         <div style={bar('40%', 14, 10)}></div>
         <div style={bar('100%', 42, 22)}></div>
         <div style={bar('100%', 48, 22)}></div>
