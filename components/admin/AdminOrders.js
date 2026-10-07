@@ -94,7 +94,7 @@ export default function AdminOrders({ initialSearch }) {
   const PAGE = 100
   const [hasMore, setHasMore] = useState(false)
   const [loadingMore, setLoadingMore] = useState(false)
-  const COLS = 'id,customer,phone,total_amount,status,created_at,order_ref,rider_name,rider_phone,payment,delivery_note,payment_status,payment_wallet,payment_sender_number,payment_transaction_id,items,product_id,quantity,delivery_address,delivery_method,upazila,district,unit_price,discount,delivery_charge,coupon_code'
+  const COLS = 'id,customer,phone,total_amount,status,created_at,order_ref,rider_name,rider_phone,client_ip,payment,delivery_note,payment_status,payment_wallet,payment_sender_number,payment_transaction_id,items,product_id,quantity,delivery_address,delivery_method,upazila,district,unit_price,discount,delivery_charge,coupon_code'
 
   function pageQuery(from) {
     let q = supabase.from('orders').select(COLS).order('created_at', { ascending: false }).range(from, from + PAGE - 1)
@@ -223,7 +223,7 @@ export default function AdminOrders({ initialSearch }) {
                   </button>
                 </td>
                 <td>{o.customer || '—'}</td>
-                <td>{o.phone || '—'}</td>
+                <td>{o.phone || '—'}{o.client_ip && <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 3 }}>IP: {o.client_ip}</div>}</td>
                 <td><ProductChips items={o._items} allProducts={allProducts} /></td>
                 <td>৳{Number(o.total_amount || 0).toLocaleString()}</td>
                 <td><PaymentCell o={o} /></td>
