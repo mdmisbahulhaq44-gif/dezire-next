@@ -31,9 +31,10 @@ const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://dezire-next.verce
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "DEZIRE - Premium Fashion in Bangladesh",
-  description: "DEZIRE - Premium men's and women's clothing in Bangladesh.",
+  title: "DEZIRE - Premium Men's & Women's Clothing in Bangladesh",
+  description: "DEZIRE - Premium men's and women's fashion in Bangladesh. Shop shirts, pants, crochet and more with nationwide cash on delivery and easy returns. Order online today.",
   manifest: "/manifest.json",
+  icons: { icon: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }], apple: "/icon-192.png" },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
