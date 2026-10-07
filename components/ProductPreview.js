@@ -38,9 +38,9 @@ export default function ProductPreview() {
       const target = url.pathname
       const show = () => {
         if (location.pathname === target) return
-        flushSync(() => setP(data))
+        flushSync(() => setP(Object.assign({}, data, { __still: location.pathname.startsWith('/product/') })))
       }
-      window.__dzEnter = { t: performance.now(), mode: 'preview' }
+      window.__dzEnter = { t: performance.now(), mode: 'preview', still: location.pathname.startsWith('/product/') }
       show()
       clearTimeout(timer.current)
       // Safety net: never leave the preview stuck if navigation fails
@@ -81,7 +81,7 @@ export default function ProductPreview() {
     <div
       className="panel show"
       id="productPreview"
-      style={{ transform: 'none', opacity: 1, transition: 'none', animation: 'pdFadeIn 320ms cubic-bezier(.22,.61,.36,1) backwards', pointerEvents: 'auto', overscrollBehavior: 'contain' }}
+      style={{ transform: 'none', opacity: 1, transition: 'none', animation: p.__still ? 'none' : 'pdFadeIn 320ms cubic-bezier(.22,.61,.36,1) backwards', pointerEvents: 'auto', overscrollBehavior: 'contain' }}
     >
       <PdTopBar onBack={() => { closeAfter.current = true }} />
 

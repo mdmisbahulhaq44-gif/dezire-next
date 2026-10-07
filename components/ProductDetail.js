@@ -85,6 +85,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
     const el = panelRef.current
     if (!info || !el) return
     if (performance.now() - info.t > 12000) return
+    if (info.still) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let delay = 0
     if (info.mode === 'preview') {
