@@ -1653,3 +1653,7 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 
 /* product page: buy bar stays at the very end; footer copyright keeps clear space above it */
 .pdFooter footer .copy,.pdFooter footer:has(.footergrid) .copy{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+
+/* product page: slower, smoother buy bar slide (bag moves in sync) */
+.pdBuyBar{transition:transform .7s cubic-bezier(.22,.61,.36,1)}
+.pdCartFab{transition:bottom .7s cubic-bezier(.22,.61,.36,1),transform .15s ease}
