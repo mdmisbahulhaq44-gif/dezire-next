@@ -1650,3 +1650,6 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 
 /* product page breadcrumb: links look like plain text */
 .pdCrumb a{color:inherit;text-decoration:none}
+
+/* product page: buy bar stays at the very end; footer copyright keeps clear space above it */
+.pdFooter footer .copy,.pdFooter footer:has(.footergrid) .copy{padding-bottom:calc(84px + env(safe-area-inset-bottom))}

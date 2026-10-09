@@ -231,7 +231,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   }
 
   const measures = hasChart ? Object.keys(chart[chartSizes[0]] || {}) : []
-  const showBar = barOn && !atEnd && !chartOpen && !activePanel && !drawerOpen
+  const showBar = barOn && !chartOpen && !activePanel && !drawerOpen
   useEffect(() => {
     document.body.classList.toggle('pdBarOn', showBar)
     return () => document.body.classList.remove('pdBarOn')
