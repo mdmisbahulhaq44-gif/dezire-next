@@ -375,7 +375,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           <div className="pdAvail">Availability:</div>
           <div className="pdBuyRow">
-            <input className="pdQty" type="text" inputMode="numeric" pattern="[0-9]*" value={qty} onChange={e => setQty(e.target.value.replace(/[^0-9]/g, '').slice(0, 3))} onBlur={() => setQty(qtyNum())} onFocus={e => e.target.select()} aria-label="Quantity" />
+            <input className="pdQty" type="text" inputMode="numeric" pattern="[0-9]*" value={qty} onChange={e => setQty(e.target.value.replace(/[^0-9]/g, '').slice(0, 3))} onBlur={() => setQty(qtyNum())} aria-label="Quantity" />
             <button ref={addRef} className="btn pdAddBtn" disabled={!inStock} onClick={handleAddToCart}>
               {inStock ? 'Add to cart' : 'Out of stock'}
             </button>
