@@ -71,6 +71,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const addRef = useRef(null)
   const sizeRef = useRef(null)
   const [qty, setQty] = useState(1)
+  const qtyNum = () => Math.max(1, parseInt(qty, 10) || 1)
   const [chartOpen, setChartOpen] = useState(false)
   const [reviews, setReviews] = useState(null) // null = loading, 'error' = failed
   const [session, setSession] = useState(undefined) // undefined = not checked yet
@@ -189,14 +190,14 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
   function handleAddToCart() {
     if (sizeMissing()) return
-    addToCart(product, size || null, qty)
+    addToCart(product, size || null, qtyNum())
     openMini()
   }
 
   function handleBuyNow() {
     if (sizeMissing()) return
-    if (!inStock) { addToCart(product, size || null, qty); return }
-    addToCart(product, size || null, qty)
+    if (!inStock) { addToCart(product, size || null, qtyNum()); return }
+    addToCart(product, size || null, qtyNum())
     openCheckout()
   }
 
@@ -374,7 +375,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           <div className="pdAvail">Availability:</div>
           <div className="pdBuyRow">
-            <input className="pdQty" type="number" inputMode="numeric" min="1" value={qty} onChange={e => setQty(Math.max(1, parseInt(e.target.value, 10) || 1))} aria-label="Quantity" />
+            <input className="pdQty" type="text" inputMode="numeric" pattern="[0-9]*" value={qty} onChange={e => setQty(e.target.value.replace(/[^0-9]/g, '').slice(0, 3))} onBlur={() => setQty(qtyNum())} onFocus={e => e.target.select()} aria-label="Quantity" />
             <button ref={addRef} className="btn pdAddBtn" disabled={!inStock} onClick={handleAddToCart}>
               {inStock ? 'Add to cart' : 'Out of stock'}
             </button>
