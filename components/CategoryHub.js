@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Breadcrumb from "./Breadcrumb"
 import ShopAside from "./ShopAside"
+import HubTiles from "./HubTiles"
 import { cldOpt } from "../lib/cloudinary"
 import { buildShopPath } from "../lib/categories"
 
@@ -9,7 +10,9 @@ export default function CategoryHub({ gender, path, heading, subs }) {
     <section className="section" id="categoryHub">
       <Breadcrumb gender={gender} path={path} />
       <div className="heading"><div><h2>{heading}</h2></div></div>
-      {subs.length ? (
+      {subs.length && subs.every(s => s.count === 1) ? (
+        <HubTiles gender={gender} path={path} subs={subs} />
+      ) : subs.length ? (
         <div className="hubTiles">
           {subs.map(s => (
             <Link
