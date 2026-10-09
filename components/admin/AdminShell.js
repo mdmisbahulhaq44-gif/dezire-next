@@ -51,7 +51,7 @@ export default function AdminShell() {
   return (
     <div className="admin">
       <aside className="adminSide">
-        <div className="adminLogo">DEZIRE ADMIN</div>
+        <div className="adminLogo">HEAVEN ADMIN</div>
         {SECTIONS.map(s => (
           <button
             key={s.key}

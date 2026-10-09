@@ -1,8 +1,8 @@
 import StaticPage from '../../components/StaticPage'
 
 export const metadata = {
-  title: 'Contact Us — DEZIRE',
-  description: 'Get in touch with DEZIRE — phone, WhatsApp, email, and social media.'
+  title: 'Contact Us — HEAVEN',
+  description: 'Get in touch with HEAVEN — phone, WhatsApp, email, and social media.'
 }
 
 export default function ContactPage() {
@@ -28,7 +28,7 @@ export default function ContactPage() {
         </a>
         <a className="card" href="https://www.facebook.com/profile.php?id=61583860210132" target="_blank" rel="noopener noreferrer">
           <div className="icon">f</div>
-          <div><div className="label">Facebook</div><div className="value">DEZIRE Page</div></div>
+          <div><div className="label">Facebook</div><div className="value">HEAVEN Page</div></div>
         </a>
         <a className="card" href="https://www.instagram.com/tanjumishu_2.0" target="_blank" rel="noopener noreferrer">
           <div className="icon">📷</div>

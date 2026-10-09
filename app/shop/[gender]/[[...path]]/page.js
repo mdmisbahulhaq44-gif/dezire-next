@@ -15,8 +15,8 @@ export async function generateMetadata({ params }) {
   const segs = (path || []).map(dec)
   const heading = segs.length ? segs[segs.length - 1] : capitalize(gender)
   return {
-    title: `${heading} — DEZIRE`,
-    description: `Shop ${heading} for ${gender === "women" ? "women's" : "men's"} fashion at DEZIRE — premium quality, nationwide cash-on-delivery in Bangladesh.`
+    title: `${heading} — HEAVEN`,
+    description: `Shop ${heading} for ${gender === "women" ? "women's" : "men's"} fashion at HEAVEN — premium quality, nationwide cash-on-delivery in Bangladesh.`
   }
 }
 

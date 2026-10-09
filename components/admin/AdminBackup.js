@@ -54,7 +54,7 @@ export default function AdminBackup() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `dezire-backup-${stamp()}.json`
+    a.download = `heaven-backup-${stamp()}.json`
     document.body.appendChild(a)
     a.click()
     a.remove()

@@ -31,16 +31,16 @@ const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://dezire-next.verce
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "DEZIRE - Premium Men's & Women's Clothing in Bangladesh",
-  description: "DEZIRE - Premium men's and women's fashion in Bangladesh. Shop shirts, pants, crochet and more with nationwide cash on delivery and easy returns. Order online today.",
+  title: "HEAVEN - Premium Men's & Women's Clothing in Bangladesh",
+  description: "HEAVEN - Premium men's and women's fashion in Bangladesh. Shop shirts, pants, crochet and more with nationwide cash on delivery and easy returns. Order online today.",
   manifest: "/manifest.json",
   icons: { icon: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }], apple: "/icon-192.png" },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    siteName: "DEZIRE",
+    siteName: "HEAVEN",
     locale: "en_BD",
-    title: "DEZIRE - Premium Fashion in Bangladesh",
+    title: "HEAVEN - Premium Fashion in Bangladesh",
     description: "Premium men's and women's clothing with nationwide cash-on-delivery in Bangladesh."
   },
   twitter: { card: "summary_large_image" }
@@ -52,12 +52,12 @@ const orgJsonLd = {
     {
       "@type": "Organization",
       "@id": SITE_URL + "/#org",
-      name: "DEZIRE",
+      name: "HEAVEN",
       url: SITE_URL,
       logo: SITE_URL + "/icon-512.png",
       contactPoint: { "@type": "ContactPoint", telephone: "+8801877270165", contactType: "customer service", areaServed: "BD", availableLanguage: ["en", "bn"] }
     },
-    { "@type": "WebSite", "@id": SITE_URL + "/#site", url: SITE_URL, name: "DEZIRE", publisher: { "@id": SITE_URL + "/#org" } }
+    { "@type": "WebSite", "@id": SITE_URL + "/#site", url: SITE_URL, name: "HEAVEN", publisher: { "@id": SITE_URL + "/#org" } }
   ]
 }
 

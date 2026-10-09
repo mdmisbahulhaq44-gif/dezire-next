@@ -18,7 +18,7 @@ export default function Header() {
           </button>
         </div>
 
-        <div className="logo">DEZIRE</div>
+        <div className="logo">HEAVEN</div>
 
         <div className="navRightIcons">
           <button className="iconbtn" aria-label="Search" onClick={openSearch}>⌕</button>
@@ -41,7 +41,7 @@ export default function Header() {
       <div className={`overlay${drawerOpen ? ' show' : ''}`} onClick={closeDrawer}></div>
       <div className={`drawer${drawerOpen ? ' show' : ''}`}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 25 }}>
-          <div className="logo" style={{ fontSize: 18 }}>DEZIRE</div>
+          <div className="logo" style={{ fontSize: 18 }}>HEAVEN</div>
           <button className="close" onClick={closeDrawer}>×</button>
         </div>
         <Link href="/flash-sale" onClick={closeDrawer}>⚡ Flash Sale</Link>

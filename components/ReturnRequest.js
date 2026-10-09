@@ -51,7 +51,7 @@ export default function ReturnRequest({ order, deliveredAt }) {
       {req && (
         <div style={{ fontSize: 13, lineHeight: 1.6, marginBottom: reqOpen || !inWindow ? 0 : 12 }}>
           <b style={{ textTransform: 'capitalize' }}>{req.type} request</b> · {STATUS_TEXT[req.status] || req.status}
-          {req.admin_note ? <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>Note from DEZIRE: {req.admin_note}</div> : null}
+          {req.admin_note ? <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>Note from HEAVEN: {req.admin_note}</div> : null}
         </div>
       )}
 

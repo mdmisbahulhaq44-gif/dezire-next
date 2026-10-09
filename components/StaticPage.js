@@ -2,7 +2,7 @@ export default function StaticPage({ title, updated, children, footerLinks }) {
   return (
     <div className="staticPage">
       <header>
-        <a href="/">DEZIRE</a>
+        <a href="/">HEAVEN</a>
         <a className="back" href="/">← Back to shop</a>
       </header>
 
@@ -12,7 +12,7 @@ export default function StaticPage({ title, updated, children, footerLinks }) {
         {children}
       </main>
 
-      <footer>© 2026 DEZIRE. All rights reserved. · {footerLinks}</footer>
+      <footer>© 2026 HEAVEN. All rights reserved. · {footerLinks}</footer>
 
       
     </div>

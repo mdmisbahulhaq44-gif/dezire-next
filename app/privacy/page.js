@@ -1,8 +1,8 @@
 import StaticPage from '../../components/StaticPage'
 
 export const metadata = {
-  title: 'Privacy Policy — DEZIRE',
-  description: "DEZIRE's privacy policy — how we collect, use, and protect your information."
+  title: 'Privacy Policy — HEAVEN',
+  description: "HEAVEN's privacy policy — how we collect, use, and protect your information."
 }
 
 export default function PrivacyPage() {
@@ -12,7 +12,7 @@ export default function PrivacyPage() {
       updated="Last updated: September 2026"
       footerLinks={<><a href="/terms">Terms</a> · <a href="/refund-policy">Returns</a> · <a href="/contact">Contact</a></>}
     >
-      <p>DEZIRE ("we", "us", "our") operates this website to sell clothing and fashion products in Bangladesh. This page explains what information we collect from you, how we use it, and the choices you have.</p>
+      <p>HEAVEN ("we", "us", "our") operates this website to sell clothing and fashion products in Bangladesh. This page explains what information we collect from you, how we use it, and the choices you have.</p>
 
       <h2>Information We Collect</h2>
       <p>When you browse, create an account, or place an order with us, we may collect:</p>
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
       <ul>
         <li>Phone / WhatsApp: <a href="https://wa.me/8801877270165">+880 1877-270165</a></li>
         <li>Email: <a href="mailto:mdmisbahulhaq44@gmail.com">mdmisbahulhaq44@gmail.com</a></li>
-        <li>Facebook: <a href="https://www.facebook.com/profile.php?id=61583860210132" target="_blank" rel="noopener noreferrer">DEZIRE on Facebook</a></li>
+        <li>Facebook: <a href="https://www.facebook.com/profile.php?id=61583860210132" target="_blank" rel="noopener noreferrer">HEAVEN on Facebook</a></li>
       </ul>
     </StaticPage>
   )

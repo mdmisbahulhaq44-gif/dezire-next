@@ -1,8 +1,8 @@
 import StaticPage from '../../components/StaticPage'
 
 export const metadata = {
-  title: 'Terms & Conditions — DEZIRE',
-  description: "DEZIRE's terms and conditions — orders, pricing, delivery, and site usage."
+  title: 'Terms & Conditions — HEAVEN',
+  description: "HEAVEN's terms and conditions — orders, pricing, delivery, and site usage."
 }
 
 export default function TermsPage() {
@@ -12,10 +12,10 @@ export default function TermsPage() {
       updated="Last updated: September 2026"
       footerLinks={<><a href="/privacy">Privacy</a> · <a href="/refund-policy">Returns</a> · <a href="/contact">Contact</a></>}
     >
-      <p>Welcome to DEZIRE. By browsing this website and placing an order, you agree to the terms below.</p>
+      <p>Welcome to HEAVEN. By browsing this website and placing an order, you agree to the terms below.</p>
 
       <h2>About Us</h2>
-      <p>DEZIRE sells men's and women's clothing online across Bangladesh, based in Mirpur, Dhaka.</p>
+      <p>HEAVEN sells men's and women's clothing online across Bangladesh, based in Mirpur, Dhaka.</p>
 
       <h2>Orders & Pricing</h2>
       <ul>

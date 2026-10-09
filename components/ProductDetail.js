@@ -212,7 +212,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
     const { data } = await supabase.auth.getSession()
     const s = data && data.session
     if (!s) { showToast('Please login to submit a review.'); return }
-    const name = ((s.user.user_metadata && s.user.user_metadata.full_name) || 'DEZIRE Customer').slice(0, 100)
+    const name = ((s.user.user_metadata && s.user.user_metadata.full_name) || 'HEAVEN Customer').slice(0, 100)
     const { error } = await supabase.from('reviews').insert({
       product_id: product.id,
       user_id: s.user.id,

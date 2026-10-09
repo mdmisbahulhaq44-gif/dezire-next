@@ -10,7 +10,7 @@ export default function PdTopBar({ onBack }) {
       <button type="button" className="pdTopBtn" onClick={onBack} aria-label="Back">
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
       </button>
-      <div className="logo">DEZIRE</div>
+      <div className="logo">HEAVEN</div>
       <div className="pdTopRight">
         <button type="button" className="pdTopBtn" onClick={openSearch} aria-label="Search">⌕</button>
         <button type="button" className="pdTopBtn" onClick={openWishlist} aria-label="Wishlist" style={{ position: 'relative' }}>

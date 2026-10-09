@@ -142,7 +142,7 @@ export default function AccountPanel() {
     // Make sure name/phone are saved even if the account already existed
     await supabase.auth.updateUser({ data: { full_name: pendingSignup.name, phone: pendingSignup.phone } })
 
-    showToast('Welcome to DEZIRE!')
+    showToast('Welcome to HEAVEN!')
     setPendingSignup(null)
     closePanel()
   }

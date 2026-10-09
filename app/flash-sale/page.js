@@ -6,8 +6,8 @@ import { FlashBanner } from "../../components/FlashSection"
 export const revalidate = 30
 
 export const metadata = {
-  title: "Flash Sale - DEZIRE",
-  description: "Limited-time flash sale offers from DEZIRE."
+  title: "Flash Sale - HEAVEN",
+  description: "Limited-time flash sale offers from HEAVEN."
 }
 
 export default async function FlashSalePage() {

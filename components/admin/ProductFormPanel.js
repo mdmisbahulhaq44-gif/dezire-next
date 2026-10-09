@@ -89,7 +89,7 @@ function CatBuilder({ allProducts, gender, levels, custom, onChange }) {
 }
 
 const BLANK = {
-  id: '', name: '', brand: 'DEZIRE', gender: 'men',
+  id: '', name: '', brand: 'HEAVEN', gender: 'men',
   price: '', old: '', badge: '', stock: '', imgs: '', cost: '',
   sku: '', fabric: '', description: '', sizes: '', color_name: '', color_group: '', size_chart: ''
 }

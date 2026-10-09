@@ -19,7 +19,7 @@ export default function Footer() {
     <footer>
       <div className="footergrid">
         <div>
-          <h3>DEZIRE</h3>
+          <h3>HEAVEN</h3>
           <p>
             Modern fashion with timeless elegance.
             Discover our latest collections and find
@@ -53,7 +53,7 @@ export default function Footer() {
       </div>
 
       <div className="copy">
-        © 2026 DEZIRE. All rights reserved. ·{" "}
+        © 2026 HEAVEN. All rights reserved. ·{" "}
         <a href="/privacy" style={{ color: "#999" }}>Privacy Policy</a> ·{" "}
         <a href="/terms" style={{ color: "#999" }}>Terms &amp; Conditions</a>
       </div>

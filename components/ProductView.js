@@ -51,7 +51,7 @@ export default async function ProductView({ id }) {
     sku: String(product.id),
     name: product.name,
     image: images,
-    brand: { "@type": "Brand", name: product.brand || "DEZIRE" },
+    brand: { "@type": "Brand", name: product.brand || "HEAVEN" },
     offers: {
       "@type": "Offer",
       priceCurrency: "BDT",

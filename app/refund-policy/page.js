@@ -1,8 +1,8 @@
 import StaticPage from '../../components/StaticPage'
 
 export const metadata = {
-  title: 'Return & Refund Policy — DEZIRE',
-  description: "DEZIRE's return and exchange policy — 14 days from delivery."
+  title: 'Return & Refund Policy — HEAVEN',
+  description: "HEAVEN's return and exchange policy — 14 days from delivery."
 }
 
 export default function RefundPolicyPage() {

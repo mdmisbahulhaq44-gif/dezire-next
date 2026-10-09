@@ -182,7 +182,7 @@ export default function AdminOrders({ initialSearch }) {
       if (!data || data.length < 1000) break
     }
     downloadCsv(
-      `dezire-orders-${stamp()}.csv`,
+      `heaven-orders-${stamp()}.csv`,
       ['Order', 'Date', 'Customer', 'Phone', 'Status', 'Payment', 'Payment status', 'Transaction', 'Item', 'Qty', 'Unit price', 'Discount', 'Delivery charge', 'Line total', 'Coupon', 'District', 'Address'],
       all.map(o => [o.order_ref || o.id, o.created_at, o.customer, o.phone, o.status, o.payment, o.payment_status, o.payment_transaction_id, o.items, o.quantity, o.unit_price, o.discount, o.delivery_charge, o.total_amount, o.coupon_code, o.district, o.delivery_address])
     )

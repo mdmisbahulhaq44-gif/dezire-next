@@ -91,7 +91,7 @@ export default async function HomePage() {
   return (
     <div>
       <PaymentReturnCheck />
-      <h1 style={{ position: "absolute", width: 1, height: 1, margin: -1, padding: 0, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap", border: 0 }}>DEZIRE - Premium Fashion for Men and Women in Bangladesh</h1>
+      <h1 style={{ position: "absolute", width: 1, height: 1, margin: -1, padding: 0, overflow: "hidden", clip: "rect(0 0 0 0)", whiteSpace: "nowrap", border: 0 }}>HEAVEN - Premium Fashion for Men and Women in Bangladesh</h1>
       <HeroCarousel slides={heroSlides} />
       <div id="women" style={{ paddingTop: 14, scrollMarginTop: 46 }}>
         <CategoryTiles categories={categories} />

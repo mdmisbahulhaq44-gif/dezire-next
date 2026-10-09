@@ -139,7 +139,7 @@ export default function AdminCustomers({ onViewOrders }) {
           <input placeholder="Search customers by name or phone..." value={search} onChange={e => setSearch(e.target.value)} />
           <button
             type="button"
-            onClick={() => downloadCsv(`dezire-customers-${stamp()}.csv`, ['Customer', 'Phone', 'Orders', 'Total spent', 'Last order', 'Note'], list.map(c => [c.customer, c.phone, c.refs.size, c.totalSpent, c.lastOrder, notes[c.phone] || '']))}
+            onClick={() => downloadCsv(`heaven-customers-${stamp()}.csv`, ['Customer', 'Phone', 'Orders', 'Total spent', 'Last order', 'Note'], list.map(c => [c.customer, c.phone, c.refs.size, c.totalSpent, c.lastOrder, notes[c.phone] || '']))}
             style={btn}
           >
             ⬇ Export CSV

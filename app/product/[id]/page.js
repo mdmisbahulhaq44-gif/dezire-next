@@ -13,11 +13,11 @@ export const revalidate = 60
 export async function generateMetadata({ params }) {
   const { id } = await params
   const p = await getProduct(id)
-  if (!p) return { title: "Product not found — DEZIRE" }
+  if (!p) return { title: "Product not found — HEAVEN" }
 
   const firstImg = p.imgs ? p.imgs.split(",")[0].trim() : ""
-  const title = `${p.name} — DEZIRE`
-  const description = `${p.name}${p.brand ? " by " + p.brand : ""} — ৳${Number(p.price).toLocaleString()} at DEZIRE. ${Number(p.stock) > 0 ? "In stock now" : "Currently out of stock"}, nationwide cash-on-delivery in Bangladesh.`
+  const title = `${p.name} — HEAVEN`
+  const description = `${p.name}${p.brand ? " by " + p.brand : ""} — ৳${Number(p.price).toLocaleString()} at HEAVEN. ${Number(p.stock) > 0 ? "In stock now" : "Currently out of stock"}, nationwide cash-on-delivery in Bangladesh.`
   return {
     title,
     description,
