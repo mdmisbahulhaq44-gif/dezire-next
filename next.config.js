@@ -7,6 +7,11 @@ const nextConfig = {
     ],
     formats: ["image/avif", "image/webp"]
   },
+  async redirects() {
+    return [
+      { source: "/:path*", has: [{ type: "host", value: "dezire-next.vercel.app" }], destination: "https://heaven-bd.vercel.app/:path*", permanent: false }
+    ]
+  },
   async headers() {
     return [
       {
