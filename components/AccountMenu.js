@@ -39,16 +39,17 @@ function Row({ icon, label, onClick }) {
   )
 }
 
-export default function AccountMenu({ session, isAdmin, onLogin, onOrders, onLogout, go, openPanel, showToast }) {
+export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onOrders, onLogout, go, openPanel, showToast }) {
   const name = session?.user?.user_metadata?.full_name || ''
   const email = session?.user?.email || ''
   const initial = (name || email || '').trim().charAt(0).toUpperCase()
+  const avatarUrl = session?.user?.user_metadata?.avatar_url || ''
 
   return (
     <div>
-      <div className="acProfile">
+      <div className="acProfile" role="button" style={{ cursor: 'pointer' }} onClick={session ? onProfile : onLogin}>
         <div className={`acAvatar${session ? ' on' : ''}`}>
-          {session && initial ? initial : <Icon name="user" className="acAvatarIcon" />}
+          {session && avatarUrl ? <img className="acAvatarImg" src={avatarUrl} alt="" /> : session && initial ? initial : <Icon name="user" className="acAvatarIcon" />}
         </div>
         <div className="acWho">
           {session ? (
@@ -63,6 +64,7 @@ export default function AccountMenu({ session, isAdmin, onLogin, onOrders, onLog
             </>
           )}
         </div>
+        {session && <Icon name="arrow" className="acArrow" />}
       </div>
 
       <Row icon="orders" label="My Orders" onClick={onOrders} />

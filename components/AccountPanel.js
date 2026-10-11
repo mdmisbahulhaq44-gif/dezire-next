@@ -6,6 +6,7 @@ import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import OtpBoxes from './OtpBoxes'
 import AccountMenu from './AccountMenu'
+import { ProfileView, EditProfile } from './ProfileView'
 
 const ADMIN_EMAIL = "mdmisbahulhaq44@gmail.com"
 
@@ -204,7 +205,7 @@ export default function AccountPanel() {
         </div>
 
         {view !== 'menu' && (
-          <button type="button" className="acBack" onClick={() => setView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu' }[view] || 'menu')}>‹ Back</button>
+          <button type="button" className="acBack" onClick={() => setView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile' }[view] || 'menu')}>‹ Back</button>
         )}
 
         {view === 'menu' && (
@@ -212,6 +213,7 @@ export default function AccountPanel() {
             session={session}
             isAdmin={isAdmin}
             onLogin={() => setView('login')}
+            onProfile={() => setView('profile')}
             onOrders={() => { if (session) setView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
             go={path => { closePanel(); router.push(path) }}
@@ -271,6 +273,9 @@ export default function AccountPanel() {
             </div>
           </form>
         )}
+
+        {view === 'profile' && session && <ProfileView session={session} showToast={showToast} onEdit={() => setView('editProfile')} />}
+        {view === 'editProfile' && session && <EditProfile session={session} showToast={showToast} onDone={() => setView('profile')} />}
 
         {view === 'orders' && session && (
           <div>

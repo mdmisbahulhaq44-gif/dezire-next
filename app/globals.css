@@ -1673,3 +1673,18 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .acIcon{width:22px;height:22px;flex:none;color:#222}
 .acArrow{margin-left:auto;width:16px;height:16px;flex:none;color:#aaa}
 .acFoot{text-align:center;font-size:11px;color:var(--muted);margin:22px 0 10px}
+
+/* My Account: profile + edit profile */
+.acAvatar{overflow:hidden}
+.acAvatarImg{width:100%;height:100%;object-fit:cover}
+.pfAvatarWrap{position:relative;width:128px;height:128px;margin:6px auto 26px}
+.pfAvatar{width:128px;height:128px;border-radius:50%;object-fit:cover;display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-size:48px;font-weight:700}
+.pfCam{position:absolute;right:-2px;bottom:2px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:#111;box-shadow:0 2px 8px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pfCard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.pfField{margin-bottom:16px}
+.pfLabel{font-size:12px;color:var(--muted);margin-bottom:3px}
+.pfValue{font-size:16px;font-weight:700;color:#111;word-break:break-all}
+.form .pfFormLabel{display:block;font-size:13px;letter-spacing:0;color:#111;margin:0 0 6px}
+.pfCard select{background:#fff}
+.pfLocked{background:#f6f6f6;color:#888;-webkit-text-fill-color:#888}
+.pfTick{position:absolute;right:12px;top:50%;transform:translateY(-50%)}
