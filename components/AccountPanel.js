@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
+import OtpBoxes from './OtpBoxes'
 
 const ADMIN_EMAIL = "mdmisbahulhaq44@gmail.com"
 
@@ -233,11 +234,11 @@ export default function AccountPanel() {
           <form className="form" onSubmit={verifySignupOtp}>
             <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 2 }}>Enter the code we sent to</p>
             <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>{pendingSignup?.email}</p>
-            <input type="text" placeholder="Enter code" inputMode="numeric" maxLength={10} required autoFocus value={suOtp} onChange={e => setSuOtp(e.target.value)} style={{ textAlign: 'center', letterSpacing: 8, fontSize: 20, fontWeight: 700 }} />
+            <OtpBoxes value={suOtp} onChange={setSuOtp} />
             <button className="btn" disabled={busy}>{busy ? 'VERIFYING...' : 'VERIFY & CREATE ACCOUNT'}</button>
             <div style={{ textAlign: 'center', marginTop: 14, display: 'flex', justifyContent: 'center', gap: 18 }}>
-              <a href="#" onClick={e => { e.preventDefault(); sendSignupOtp(e) }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Resend code</a>
-              <a href="#" onClick={e => { e.preventDefault(); setView('signup1') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Change email</a>
+              <a href="#" onClick={e => { e.preventDefault(); sendSignupOtp(e) }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'none' }}>Resend code</a>
+              <a href="#" onClick={e => { e.preventDefault(); setView('signup1') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'none' }}>Change email</a>
             </div>
           </form>
         )}
