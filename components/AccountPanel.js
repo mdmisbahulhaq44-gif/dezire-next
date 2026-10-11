@@ -121,8 +121,8 @@ export default function AccountPanel() {
       return
     }
     const token = suOtp.trim()
-    if (token.length !== 6) {
-      showToast('Please enter the 6-digit code.')
+    if (token.length < 6 || token.length > 10) {
+      showToast('Please enter the code from your email.')
       return
     }
 
@@ -221,7 +221,7 @@ export default function AccountPanel() {
             <input type="text" placeholder="Full name" required value={suName} onChange={e => setSuName(e.target.value)} />
             <input type="email" placeholder="Email address" required value={suEmail} onChange={e => setSuEmail(e.target.value)} />
             <input type="tel" placeholder="Phone number (optional)" value={suPhone} onChange={e => setSuPhone(e.target.value)} />
-            <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: -6 }}>We'll send a 6-digit code to your email to verify it's you — no password needed.</p>
+            <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: -6 }}>We'll send a verification code to your email to verify it's you — no password needed.</p>
             <button className="btn" disabled={busy}>{busy ? 'SENDING...' : 'SEND CODE'}</button>
             <div style={{ textAlign: 'center', marginTop: 14 }}>
               <a href="#" onClick={e => { e.preventDefault(); setView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Back to login</a>
@@ -231,9 +231,9 @@ export default function AccountPanel() {
 
         {view === 'signup2' && (
           <form className="form" onSubmit={verifySignupOtp}>
-            <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 2 }}>Enter the 6-digit code we sent to</p>
+            <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 2 }}>Enter the code we sent to</p>
             <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>{pendingSignup?.email}</p>
-            <input type="text" placeholder="000000" inputMode="numeric" maxLength={6} required autoFocus value={suOtp} onChange={e => setSuOtp(e.target.value)} style={{ textAlign: 'center', letterSpacing: 8, fontSize: 20, fontWeight: 700 }} />
+            <input type="text" placeholder="Enter code" inputMode="numeric" maxLength={10} required autoFocus value={suOtp} onChange={e => setSuOtp(e.target.value)} style={{ textAlign: 'center', letterSpacing: 8, fontSize: 20, fontWeight: 700 }} />
             <button className="btn" disabled={busy}>{busy ? 'VERIFYING...' : 'VERIFY & CREATE ACCOUNT'}</button>
             <div style={{ textAlign: 'center', marginTop: 14, display: 'flex', justifyContent: 'center', gap: 18 }}>
               <a href="#" onClick={e => { e.preventDefault(); sendSignupOtp(e) }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Resend code</a>
