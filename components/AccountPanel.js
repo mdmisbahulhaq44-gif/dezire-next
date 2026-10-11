@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import OtpBoxes from './OtpBoxes'
+import AccountMenu from './AccountMenu'
 
 const ADMIN_EMAIL = "mdmisbahulhaq44@gmail.com"
 
@@ -17,11 +18,11 @@ function readableError(err) {
 
 export default function AccountPanel() {
   const router = useRouter()
-  const { activePanel, closePanel, showToast, openReset, openTrack } = useShop()
+  const { activePanel, closePanel, showToast, openReset, openTrack, openWishlist, openAbout } = useShop()
   const showAccount = activePanel === 'account'
   const showReset = activePanel === 'reset'
 
-  const [view, setView] = useState('login')
+  const [view, setView] = useState('menu')
   const [session, setSession] = useState(null)
   const [orders, setOrders] = useState(null)
   const [busy, setBusy] = useState(false)
@@ -53,7 +54,7 @@ export default function AccountPanel() {
     if (!showAccount) return
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session || null)
-      setView(data.session ? 'loggedIn' : 'login')
+      setView('menu')
     })
   }, [showAccount])
 
@@ -202,6 +203,23 @@ export default function AccountPanel() {
           <button className="close" onClick={closePanel}>×</button>
         </div>
 
+        {view !== 'menu' && (
+          <button type="button" className="acBack" onClick={() => setView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu' }[view] || 'menu')}>‹ Back</button>
+        )}
+
+        {view === 'menu' && (
+          <AccountMenu
+            session={session}
+            isAdmin={isAdmin}
+            onLogin={() => setView('login')}
+            onOrders={() => { if (session) setView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
+            onLogout={logout}
+            go={path => { closePanel(); router.push(path) }}
+            openPanel={name => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
+            showToast={showToast}
+          />
+        )}
+
         {view === 'login' && (
           <form className="form" onSubmit={login}>
             <input type="email" placeholder="Email address" required value={loginEmail} onChange={e => setLoginEmail(e.target.value)} />
@@ -254,16 +272,8 @@ export default function AccountPanel() {
           </form>
         )}
 
-        {view === 'loggedIn' && session && (
+        {view === 'orders' && session && (
           <div>
-            <div style={{ background: 'var(--cream)', borderRadius: 12, padding: 18, marginBottom: 20 }}>
-              <div style={{ fontWeight: 700, fontSize: 16 }}>{session.user.user_metadata?.full_name || 'My Account'}</div>
-              <div style={{ fontSize: 12, color: 'var(--muted)', marginTop: 3 }}>{session.user.email}</div>
-            </div>
-            {isAdmin && (
-              <button className="btn" style={{ width: '100%', marginBottom: 16 }} onClick={() => { closePanel(); router.push('/admin') }}>ADMIN PANEL</button>
-            )}
-
             <div style={{ fontSize: 11, letterSpacing: 2, color: 'var(--muted)', marginBottom: 12 }}>MY ORDERS</div>
             <div>
               {orders === null ? (
@@ -282,8 +292,7 @@ export default function AccountPanel() {
                 ))
               )}
             </div>
-
-            <button className="btn light" style={{ width: '100%', marginTop: 20 }} onClick={logout}>LOGOUT</button>
+            <button className="btn light" style={{ width: '100%', marginTop: 12 }} onClick={() => { closePanel(); if (openTrack) openTrack() }}>TRACK AN ORDER</button>
           </div>
         )}
       </div>

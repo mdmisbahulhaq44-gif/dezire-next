@@ -1657,3 +1657,19 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 /* product page: slower, smoother buy bar slide (bag moves in sync) */
 .pdBuyBar{transition:transform .7s cubic-bezier(.22,.61,.36,1)}
 .pdCartFab{transition:bottom .7s cubic-bezier(.22,.61,.36,1),transform .15s ease}
+
+/* My Account menu */
+.acBack{background:none;border:0;padding:0;margin:0 0 14px;font:inherit;font-size:13px;color:var(--muted);cursor:pointer}
+.acProfile{display:flex;align-items:center;gap:16px;padding:18px;margin-bottom:14px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.acAvatar{width:62px;height:62px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#efefef;color:#888;font-size:24px;font-weight:700}
+.acAvatar.on{background:#111;color:#fff}
+.acAvatarIcon{width:30px;height:30px}
+.acWho{min-width:0}
+.acName{font-size:18px;font-weight:700;color:#111}
+.acSub{font-size:12px;color:var(--muted);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acLoginLink{background:none;border:0;padding:0;margin-top:4px;font:inherit;font-size:13px;color:#555;cursor:pointer}
+.acRow{display:flex;align-items:center;gap:14px;width:100%;padding:15px 16px;margin-bottom:8px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.04);font:inherit;font-size:14px;color:#111;text-align:left;cursor:pointer;transition:background .15s}
+.acRow:active{background:#f4f4f4}
+.acIcon{width:22px;height:22px;flex:none;color:#222}
+.acArrow{margin-left:auto;width:16px;height:16px;flex:none;color:#aaa}
+.acFoot{text-align:center;font-size:11px;color:var(--muted);margin:22px 0 10px}
