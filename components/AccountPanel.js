@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import OtpBoxes from './OtpBoxes'
@@ -19,7 +19,11 @@ function readableError(err) {
 
 export default function AccountPanel() {
   const router = useRouter()
-  const { activePanel, closePanel, showToast, openReset, openTrack, openWishlist, openAbout } = useShop()
+  const pathname = usePathname()
+  const { activePanel, closePanel, showToast, openReset, openTrack, openWishlist, openAbout, openAccount } = useShop()
+  const lastPath = useRef(pathname)
+  const lastPop = useRef(0)
+  const fromAccount = useRef(null)
   const showAccount = activePanel === 'account'
   const showReset = activePanel === 'reset'
 
@@ -38,6 +42,23 @@ export default function AccountPanel() {
   const [forgotEmail, setForgotEmail] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [newPassword2, setNewPassword2] = useState('')
+
+  // Back from a page opened via My Account returns to My Account
+  useEffect(() => {
+    const onPop = () => { lastPop.current = Date.now() }
+    window.addEventListener('popstate', onPop, true)
+    return () => window.removeEventListener('popstate', onPop, true)
+  }, [])
+
+  useEffect(() => {
+    const prev = lastPath.current
+    lastPath.current = pathname
+    const pending = fromAccount.current
+    if (!pending || prev === pathname || pathname === pending.to) return
+    fromAccount.current = null
+    if (prev === pending.to && pathname === pending.from && Date.now() - lastPop.current < 1500) openAccount()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
   // keep session in sync + open reset panel when coming from the email link
   useEffect(() => {
@@ -216,7 +237,7 @@ export default function AccountPanel() {
             onProfile={() => setView('profile')}
             onOrders={() => { if (session) setView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
-            go={path => { closePanel(); router.push(path) }}
+            go={path => { fromAccount.current = { from: pathname, to: path.split('?')[0] }; closePanel(); router.push(path) }}
             openPanel={name => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
             showToast={showToast}
           />
