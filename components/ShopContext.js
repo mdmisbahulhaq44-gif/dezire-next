@@ -34,7 +34,16 @@ export function ShopProvider({ children }) {
     }
     function onPop(e) {
       const next = (e.state && e.state.dzPanel) || null
-      if (next !== prevPanel.current) { fromPop.current = true; setActivePanel(next) }
+      if (next !== prevPanel.current) {
+        fromPop.current = true
+        if (next) {
+          const root = document.documentElement
+          root.setAttribute('data-instant', '1')
+          clearTimeout(window.__dzInstant)
+          window.__dzInstant = setTimeout(() => root.removeAttribute('data-instant'), 800)
+        }
+        setActivePanel(next)
+      }
     }
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
