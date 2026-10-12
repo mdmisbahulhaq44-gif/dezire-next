@@ -1734,3 +1734,13 @@ a.acRow{text-decoration:none}
 .panelHead.acHead:has(.acBrand){justify-content:center;padding-left:0}
 html[data-acmenu] .bottomNav{z-index:600;background:#fff}
 .panel.acMenuOn{bottom:calc(58px + env(safe-area-inset-bottom))}
+
+/* My Account home = a tab between the shop's own header and bottom bar (no dim strip, no slide) */
+.panel.acMenuOn{top:var(--acTop,0px);bottom:0;padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+html[data-achead] nav{z-index:600;background:#fff}
+html[data-acmenu] .drawer{z-index:700}
+.panelHead.acHead{position:sticky;top:-25px;z-index:3;background:#fff;margin:-25px -25px 18px;padding:25px 25px 14px}
+.panelHead.acHead .acBackBtn{left:21px;top:25px}
+.panelHead.acHead .acHeadIcons{right:19px;top:25px}
+.panelHead.acHead:has(.acBackBtn){padding-left:65px}
+.panelHead.acHead:has(.acBrand){padding-left:25px}

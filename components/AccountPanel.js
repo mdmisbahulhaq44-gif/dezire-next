@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
@@ -35,11 +35,23 @@ export default function AccountPanel() {
   const [view, setView] = useState('menu')
 
   // My Account home keeps the shop's bottom bar visible (like a native app tab); inner pages hide it
-  useEffect(() => {
+  const [realHeader, setRealHeader] = useState(false)
+  useLayoutEffect(() => {
     const root = document.documentElement
-    if (showAccount && view === 'menu') root.setAttribute('data-acmenu', '1')
-    else root.removeAttribute('data-acmenu')
-    return () => root.removeAttribute('data-acmenu')
+    if (showAccount && view === 'menu') {
+      // the shop's own top bar stays visible above My Account (same header as the home page)
+      const nav = document.querySelector('nav')
+      const r = nav ? nav.getBoundingClientRect() : null
+      const ok = !!r && r.height > 0 && r.top >= -1 && r.top < 8
+      root.style.setProperty('--acTop', ok ? Math.round(r.bottom) + 'px' : '0px')
+      if (ok) root.setAttribute('data-achead', '1')
+      setRealHeader(ok)
+      root.setAttribute('data-acmenu', '1')
+    } else {
+      root.removeAttribute('data-acmenu')
+      root.removeAttribute('data-achead')
+    }
+    return () => { root.removeAttribute('data-acmenu'); root.removeAttribute('data-achead') }
   }, [showAccount, view])
   const [session, setSession] = useState(null)
   const [orders, setOrders] = useState(null)
@@ -238,27 +250,29 @@ export default function AccountPanel() {
   return (
     <>
       <div className={`panel${showAccount ? ' show' : ''}${showAccount && view === 'menu' ? ' acMenuOn' : ''}`}>
-        <div className="panelHead acHead">
-          {view !== 'menu' && (
-            <button type="button" className="acBackBtn" aria-label="Back" onClick={() => backView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile', support: 'menu' }[view] || 'menu')}>
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
-            </button>
-          )}
-          {view === 'menu'
-            ? <div className="acBrand">HEAVEN</div>
-            : <h2 className="acTitle">{({ login: 'Login', signup1: 'Create Account', signup2: 'Verify Email', forgot: 'Reset Password', orders: 'My Orders', profile: 'Profile', editProfile: 'Update Profile', support: 'Support' })[view] || 'My Account'}</h2>}
-          <div className="acHeadIcons">
+        {(view !== 'menu' || !realHeader) && (
+          <div className="panelHead acHead">
             {view !== 'menu' && (
-              <button type="button" className="acHeadBtn" aria-label="Search" onClick={() => { closePanel(); openSearch() }}>
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+              <button type="button" className="acBackBtn" aria-label="Back" onClick={() => backView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile', support: 'menu' }[view] || 'menu')}>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
               </button>
             )}
-            <button type="button" className="acHeadBtn" aria-label="Cart" onClick={() => { closePanel(); openCart() }}>
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2" /><circle cx="9" cy="19.5" r="1.4" /><circle cx="17" cy="19.5" r="1.4" /></svg>
-              {cartCount > 0 && <span className="acBadge">{cartCount}</span>}
-            </button>
+            {view === 'menu'
+              ? <div className="acBrand">HEAVEN</div>
+              : <h2 className="acTitle">{({ login: 'Login', signup1: 'Create Account', signup2: 'Verify Email', forgot: 'Reset Password', orders: 'My Orders', profile: 'Profile', editProfile: 'Update Profile', support: 'Support' })[view] || 'My Account'}</h2>}
+            <div className="acHeadIcons">
+              {view !== 'menu' && (
+                <button type="button" className="acHeadBtn" aria-label="Search" onClick={() => { closePanel(); openSearch() }}>
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+                </button>
+              )}
+              <button type="button" className="acHeadBtn" aria-label="Cart" onClick={() => { closePanel(); openCart() }}>
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2" /><circle cx="9" cy="19.5" r="1.4" /><circle cx="17" cy="19.5" r="1.4" /></svg>
+                {cartCount > 0 && <span className="acBadge">{cartCount}</span>}
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         {view === 'menu' && (
           <AccountMenu

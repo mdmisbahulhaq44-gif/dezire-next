@@ -52,7 +52,7 @@ export default function BottomNav() {
         </span>
         Track
       </button>
-      <button className={onAccount ? 'active' : ''} onClick={openAccount}>
+      <button className={onAccount ? 'active' : ''} onClick={() => { if (!onAccount) { const r = document.documentElement; r.setAttribute('data-instant', '1'); clearTimeout(window.__dzInstant); window.__dzInstant = setTimeout(() => r.removeAttribute('data-instant'), 800) } openAccount() }}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <circle cx="12" cy="8" r="3.5"/>
