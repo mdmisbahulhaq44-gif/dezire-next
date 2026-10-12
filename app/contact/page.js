@@ -5,40 +5,60 @@ export const metadata = {
   description: 'Get in touch with HEAVEN — phone, WhatsApp, email, and social media.'
 }
 
+const P = {
+  call: 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z',
+  mail: 'M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z M3 7l9 6 9-6',
+  insta: 'M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M17.5 6.5h.01',
+  pin: 'M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',
+  arrow: 'M9 6l6 6-6 6'
+}
+const S = {
+  chat: 'M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.13.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.98-.87c.17-.07.36-.09.53-.04.91.25 1.87.38 2.91.38 5.64 0 10-4.13 10-9.7S17.64 2 12 2zM6.8 14.5l2.94-4.66a1.5 1.5 0 0 1 2.17-.4l2.34 1.75c.21.16.5.16.7 0l3.16-2.4c.42-.32.97.19.69.64l-2.94 4.66a1.5 1.5 0 0 1-2.17.4l-2.34-1.75a.6.6 0 0 0-.7 0l-3.16 2.4c-.42.32-.97-.19-.69-.64z',
+  whatsapp: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z'
+}
+
+function Line({ d, cls = 'i' }) {
+  return (
+    <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d} /></svg>
+  )
+}
+function Solid({ d }) {
+  return (
+    <svg className="i" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fillRule="evenodd" d={d} /></svg>
+  )
+}
+
+function Row({ icon, label, value, href, external }) {
+  return (
+    <a className="cRow" href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+      {icon}
+      <div className="t"><div className="l">{label}</div><div className="v">{value}</div></div>
+      <Line d={P.arrow} cls="ar" />
+    </a>
+  )
+}
+
 export default function ContactPage() {
   return (
     <StaticPage
-      title="Get in Touch"
+      title="Contact Us"
       footerLinks={<><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/refund-policy">Returns</a></>}
     >
-      <p className="sub">Questions about an order, a product, or anything else? Reach us any of these ways — we usually reply fastest on WhatsApp.</p>
+      <div className="cClean">
+        <p className="sub">Questions about an order, a product, or anything else? Reach us any of these ways — we usually reply fastest on WhatsApp.</p>
 
-      <div className="cards">
-        <a className="card" href="https://wa.me/8801877270165" target="_blank" rel="noopener noreferrer">
-          <div className="icon">💬</div>
-          <div><div className="label">WhatsApp</div><div className="value">+880 1877-270165</div></div>
-        </a>
-        <a className="card" href="tel:+8801877270165">
-          <div className="icon">📞</div>
-          <div><div className="label">Phone</div><div className="value">+880 1877-270165</div></div>
-        </a>
-        <a className="card" href="mailto:mdmisbahulhaq44@gmail.com">
-          <div className="icon">✉️</div>
-          <div><div className="label">Email</div><div className="value">mdmisbahulhaq44@gmail.com</div></div>
-        </a>
-        <a className="card" href="https://www.facebook.com/profile.php?id=61583860210132" target="_blank" rel="noopener noreferrer">
-          <div className="icon">f</div>
-          <div><div className="label">Facebook</div><div className="value">HEAVEN Page</div></div>
-        </a>
-        <a className="card" href="https://www.instagram.com/tanjumishu_2.0" target="_blank" rel="noopener noreferrer">
-          <div className="icon">📷</div>
-          <div><div className="label">Instagram</div><div className="value">@tanjumishu_2.0</div></div>
-        </a>
-      </div>
+        <div className="cList">
+          <Row icon={<Solid d={S.whatsapp} />} label="WhatsApp" value="+880 1877-270165" href="https://wa.me/8801877270165" external />
+          <Row icon={<Line d={P.call} />} label="Phone" value="+880 1877-270165" href="tel:+8801877270165" />
+          <Row icon={<Line d={P.mail} />} label="Email" value="mdmisbahulhaq44@gmail.com" href="mailto:mdmisbahulhaq44@gmail.com" />
+          <Row icon={<Solid d={S.chat} />} label="Facebook" value="HEAVEN Page" href="https://www.facebook.com/profile.php?id=61583860210132" external />
+          <Row icon={<Line d={P.insta} />} label="Instagram" value="@tanjumishu_2.0" href="https://www.instagram.com/tanjumishu_2.0" external />
+        </div>
 
-      <div className="addr">
-        <h2>Based In</h2>
-        <p>Mirpur, Dhaka, Bangladesh</p>
+        <div className="cBase">
+          <Line d={P.pin} />
+          <div><div className="l">Based in</div><div className="v">Mirpur, Dhaka, Bangladesh</div></div>
+        </div>
       </div>
     </StaticPage>
   )
