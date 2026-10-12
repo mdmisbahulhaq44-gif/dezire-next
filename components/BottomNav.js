@@ -9,13 +9,14 @@ const SHOP_PHONE = '8801877270165'
 
 export default function BottomNav() {
   const router = useRouter()
-  const { openAccount, openTrack } = useShop()
+  const { openAccount, openTrack, activePanel, hidePanel } = useShop()
+  const onAccount = activePanel === 'account'
   const pathname = usePathname()
   if (['/contact', '/terms', '/refund-policy', '/privacy'].includes(pathname)) return null
 
   return (
     <div className="bottomNav">
-      <button className="active" onClick={() => { router.push('/'); window.scrollTo(0, 0) }}>
+      <button className={onAccount ? '' : 'active'} onClick={() => { hidePanel(true); router.push('/'); window.scrollTo(0, 0) }}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <path d="M3 10.5 12 3l9 7.5"/>
@@ -51,14 +52,14 @@ export default function BottomNav() {
         </span>
         Track
       </button>
-      <button onClick={openAccount}>
+      <button className={onAccount ? 'active' : ''} onClick={openAccount}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <circle cx="12" cy="8" r="3.5"/>
             <path d="M5 20c1.2-3.8 4.2-6 7-6s5.8 2.2 7 6"/>
           </svg>
         </span>
-        Login
+        Account
       </button>
     </div>
   )

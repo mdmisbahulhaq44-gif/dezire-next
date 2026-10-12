@@ -1729,3 +1729,8 @@ a.acRow{text-decoration:none}
 .staticPage header a.spHome{color:#111;font-size:13px;letter-spacing:3px;font-weight:600}
 
 .panelHead.acHead:has(.acBrand){justify-content:center;padding-left:0}
+
+/* My Account home: header on top, shop bottom bar stays visible */
+.panelHead.acHead:has(.acBrand){justify-content:center;padding-left:0}
+html[data-acmenu] .bottomNav{z-index:600;background:#fff}
+.panel.acMenuOn{bottom:calc(58px + env(safe-area-inset-bottom))}
