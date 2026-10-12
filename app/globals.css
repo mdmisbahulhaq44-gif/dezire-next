@@ -1758,3 +1758,27 @@ html[data-acmenu] .drawer{z-index:700}
 .acSearch{display:flex;align-items:center;gap:10px;height:44px;padding:0 14px;margin-bottom:14px;border:1px solid var(--line);border-radius:14px;background:#fff;color:#555}
 .acSearch:focus-within{border-color:#111}
 .acSearch input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:14px;color:#111;padding:0;-webkit-appearance:none;appearance:none}
+
+/* sub-page header: back arrow, title and icons sit on one straight line */
+.panelHead.acHead{display:flex;align-items:center;justify-content:flex-start;gap:2px;min-height:0;padding:12px 14px 10px 14px;margin:-25px -25px 16px}
+.panelHead.acHead:has(.acBackBtn),.panelHead.acHead:has(.acBrand){padding-left:14px}
+.panelHead.acHead:has(.acBrand){justify-content:center}
+.panelHead.acHead .acBackBtn,.panelHead.acHead .acHeadIcons{position:static}
+.panelHead.acHead .acBackBtn{width:40px;height:44px;margin:0 2px 0 -6px;padding:0}
+.panelHead.acHead .acHeadIcons{margin-left:auto;margin-right:-6px;gap:0;align-items:center}
+.panelHead.acHead .acHeadBtn{width:42px;height:44px;padding:0}
+.panelHead.acHead .acBackBtn svg,.panelHead.acHead .acHeadBtn svg{display:block}
+.panelHead.acHead h2.acTitle{flex:1;margin:0;padding:0;font-size:18px;line-height:44px;letter-spacing:0;font-weight:700;color:#111}
+.panelHead.acHead .acBrand{line-height:44px}
+
+/* sub-page header: back arrow, title and icons sit on one straight line */
+.panelHead.acHead{display:flex;align-items:center;justify-content:flex-start;gap:2px;min-height:0;padding:12px 14px 10px 14px;margin:-25px -25px 16px}
+.panelHead.acHead:has(.acBackBtn),.panelHead.acHead:has(.acBrand){padding-left:14px}
+.panelHead.acHead:has(.acBrand){justify-content:center}
+.panelHead.acHead .acBackBtn,.panelHead.acHead .acHeadIcons{position:static}
+.panelHead.acHead .acBackBtn{width:40px;height:44px;margin:0 2px 0 -6px;padding:0}
+.panelHead.acHead .acHeadIcons{margin-left:auto;margin-right:-6px;gap:0;align-items:center}
+.panelHead.acHead .acHeadBtn{width:42px;height:44px;padding:0}
+.panelHead.acHead .acBackBtn svg,.panelHead.acHead .acHeadBtn svg{display:block}
+.panelHead.acHead h2.acTitle{flex:1;margin:0;padding:0;font-size:18px;line-height:44px;letter-spacing:0;font-weight:700;color:#111}
+.panelHead.acHead .acBrand{line-height:44px}
