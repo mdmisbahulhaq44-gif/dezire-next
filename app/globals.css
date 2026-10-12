@@ -1782,3 +1782,6 @@ html[data-acmenu] .drawer{z-index:700}
 .panelHead.acHead .acBackBtn svg,.panelHead.acHead .acHeadBtn svg{display:block}
 .panelHead.acHead h2.acTitle{flex:1;margin:0;padding:0;font-size:18px;line-height:44px;letter-spacing:0;font-weight:700;color:#111}
 .panelHead.acHead .acBrand{line-height:44px}
+
+/* policy pages have no bottom bar, so no spare white strip under the black footer */
+body:has(.staticPage){padding-bottom:0}
