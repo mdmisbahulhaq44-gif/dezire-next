@@ -165,6 +165,18 @@ export function ShopProvider({ children }) {
     saveWishlist(next)
   }
 
+  function flashInstant() {
+    const root = document.documentElement
+    root.setAttribute('data-instant', '1')
+    clearTimeout(window.__dzInstant)
+    window.__dzInstant = setTimeout(() => root.removeAttribute('data-instant'), 800)
+  }
+
+  function swapPanel(name) {
+    if (prevPanel.current && prevPanel.current !== name) flashInstant()
+    setActivePanel(name)
+  }
+
   const value = {
     cart,
     wishlist,
@@ -182,16 +194,16 @@ export function ShopProvider({ children }) {
     closeDrawer: () => setDrawerOpen(false),
     openCart: () => setMiniOpen(true),
     openCartFull: () => setActivePanel('cart'),
-    openWishlist: () => setActivePanel('wishlist'),
+    openWishlist: () => swapPanel('wishlist'),
     openSearch: () => setActivePanel('search'),
     openCheckout: () => setActivePanel('checkout'),
     openAccount: () => setActivePanel('account'),
     openReset: () => setActivePanel('reset'),
-    openTrack: () => setActivePanel('track'),
-    openAbout: () => setActivePanel('about'),
+    openTrack: () => swapPanel('track'),
+    openAbout: () => swapPanel('about'),
     openSuccess: () => setActivePanel('success'),
     closePanel: () => setActivePanel(null),
-    hidePanel: () => { if (prevPanel.current) { keepHistory.current = true; setActivePanel(null) } },
+    hidePanel: (instant) => { if (prevPanel.current) { keepHistory.current = true; if (instant) flashInstant(); setActivePanel(null) } },
     addToCart,
     changeQty,
     removeFromCart,

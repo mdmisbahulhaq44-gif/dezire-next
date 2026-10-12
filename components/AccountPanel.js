@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import OtpBoxes from './OtpBoxes'
@@ -19,9 +19,17 @@ function readableError(err) {
 
 export default function AccountPanel() {
   const router = useRouter()
+  const pathname = usePathname()
+  const navTo = useRef(null)
   const { activePanel, closePanel, hidePanel, showToast, openReset, openTrack, openWishlist, openAbout } = useShop()
   const showAccount = activePanel === 'account'
   const showReset = activePanel === 'reset'
+
+  // Page opened from a menu row: My Account keeps covering the screen until the new page is ready, then hides at once
+  useEffect(() => {
+    if (navTo.current && pathname === navTo.current) { navTo.current = null; hidePanel(true) }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
 
   const [view, setView] = useState('menu')
   const [session, setSession] = useState(null)
@@ -238,7 +246,7 @@ export default function AccountPanel() {
             onProfile={() => navView('profile')}
             onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
-            go={path => { hidePanel(); router.push(path) }}
+            go={path => { navTo.current = path.split('?')[0]; router.push(path); setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000) }}
             openPanel={name => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
             showToast={showToast}
           />

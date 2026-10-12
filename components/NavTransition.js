@@ -11,6 +11,7 @@ export default function NavTransition() {
   useEffect(() => {
     pathRef.current = pathname
     document.documentElement.removeAttribute('data-nav')
+    window.__dzNavs = (window.__dzNavs || 0) + 1
     const done = pending.current
     if (!done) return
     pending.current = null

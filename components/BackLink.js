@@ -8,7 +8,8 @@ export default function BackLink({ className, children }) {
     e.preventDefault()
     let sameSite = false
     try { sameSite = !!document.referrer && new URL(document.referrer).origin === window.location.origin } catch (err) {}
-    if (sameSite && window.history.length > 1) router.back()
+    const clientNav = (window.__dzNavs || 0) > 1
+    if ((sameSite || clientNav) && window.history.length > 1) router.back()
     else router.push('/')
   }
   return <a className={className} href="/" onClick={onClick}>{children}</a>
