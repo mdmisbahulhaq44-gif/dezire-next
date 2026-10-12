@@ -246,7 +246,7 @@ export default function AccountPanel() {
             onProfile={() => navView('profile')}
             onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
-            go={path => { navTo.current = path.split('?')[0]; router.push(path); setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000) }}
+            go={path => { navTo.current = path.split('?')[0]; window.__dzFromAccount = navTo.current; router.push(path); setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000) }}
             openPanel={name => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
             showToast={showToast}
           />

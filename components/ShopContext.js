@@ -36,7 +36,7 @@ export function ShopProvider({ children }) {
       const next = (e.state && e.state.dzPanel) || null
       if (next !== prevPanel.current) {
         fromPop.current = true
-        if (next) {
+        if (next === 'account') {
           const root = document.documentElement
           root.setAttribute('data-instant', '1')
           clearTimeout(window.__dzInstant)
@@ -173,7 +173,7 @@ export function ShopProvider({ children }) {
   }
 
   function swapPanel(name) {
-    if (prevPanel.current && prevPanel.current !== name) flashInstant()
+    if (prevPanel.current === 'account') flashInstant()
     setActivePanel(name)
   }
 
