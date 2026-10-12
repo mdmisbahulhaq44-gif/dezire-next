@@ -17,8 +17,44 @@ export function ShopProvider({ children }) {
   const [lastOrder, setLastOrder] = useState(null)
   const [paymentReturn, setPaymentReturn] = useState(null)
   const toastTimer = useRef(null)
+  const prevPanel = useRef(null)
+  const fromPop = useRef(false)
+  const keepHistory = useRef(false)
 
   useEffect(() => { setCart(getCart()); setWishlist(getWishlist()) }, [])
+
+  // Panels live in browser history: phone Back closes a panel or returns to the one under it
+  useEffect(() => {
+    const st0 = window.history.state
+    if (st0 && st0.dzPanel) {
+      const clean = { ...st0 }
+      delete clean.dzPanel
+      delete clean.dzDepth
+      window.history.replaceState(clean, '')
+    }
+    function onPop(e) {
+      const next = (e.state && e.state.dzPanel) || null
+      if (next !== prevPanel.current) { fromPop.current = true; setActivePanel(next) }
+    }
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [])
+
+  useEffect(() => {
+    const prev = prevPanel.current
+    prevPanel.current = activePanel
+    if (fromPop.current) { fromPop.current = false; return }
+    if (activePanel === prev) return
+    const st = window.history.state || {}
+    const depth = st.dzDepth || 0
+    if (activePanel) {
+      window.history.pushState({ ...st, dzPanel: activePanel, dzDepth: depth + 1 }, '')
+    } else if (keepHistory.current) {
+      keepHistory.current = false
+    } else if (depth > 0) {
+      window.history.go(-depth)
+    }
+  }, [activePanel])
 
   useEffect(() => {
     document.body.style.overflow = (activePanel || drawerOpen || miniOpen) ? 'hidden' : ''
@@ -120,6 +156,7 @@ export function ShopProvider({ children }) {
     openAbout: () => setActivePanel('about'),
     openSuccess: () => setActivePanel('success'),
     closePanel: () => setActivePanel(null),
+    hidePanel: () => { if (prevPanel.current) { keepHistory.current = true; setActivePanel(null) } },
     addToCart,
     changeQty,
     removeFromCart,
