@@ -67,20 +67,28 @@ export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onOr
         {session && <Icon name="arrow" className="acArrow" />}
       </div>
 
-      <Row icon="orders" label="My Orders" onClick={onOrders} />
-      <Row icon="heart" label="Wishlist" onClick={() => openPanel('wishlist')} />
-      <Row icon="offers" label="Flash Sale / Offers" onClick={() => go('/flash-sale')} />
-      <Row icon="gift" label="Refer & Earn" onClick={() => showToast('Refer & Earn is coming soon.')} />
-      <Row icon="support" label="Support" onClick={() => window.open('https://wa.me/' + SHOP_PHONE, '_blank', 'noopener')} />
-      <Row icon="mail" label="Contact Us" onClick={() => go('/contact')} />
-      <Row icon="info" label="About Us" onClick={() => openPanel('about')} />
-      <Row icon="refund" label="Return & Refund Policy" onClick={() => go('/refund-policy')} />
-      <Row icon="shield" label="Privacy Policy" onClick={() => go('/privacy')} />
-      <Row icon="doc" label="Terms & Conditions" onClick={() => go('/terms')} />
-      {isAdmin && <Row icon="lock" label="Admin Panel" onClick={() => go('/admin')} />}
-      {session
-        ? <Row icon="logout" label="Logout" onClick={onLogout} />
-        : <Row icon="login" label="Login" onClick={onLogin} />}
+      <div className="acGroup">
+        <Row icon="orders" label="My Orders" onClick={onOrders} />
+        <Row icon="heart" label="Wishlist" onClick={() => openPanel('wishlist')} />
+        <Row icon="offers" label="Flash Sale / Offers" onClick={() => go('/flash-sale')} />
+        <Row icon="gift" label="Refer & Earn" onClick={() => showToast('Refer & Earn is coming soon.')} />
+      </div>
+      <div className="acGroup">
+        <Row icon="support" label="Support" onClick={() => window.open('https://wa.me/' + SHOP_PHONE, '_blank', 'noopener')} />
+        <Row icon="mail" label="Contact Us" onClick={() => go('/contact')} />
+        <Row icon="info" label="About Us" onClick={() => openPanel('about')} />
+      </div>
+      <div className="acGroup">
+        <Row icon="refund" label="Return & Refund Policy" onClick={() => go('/refund-policy')} />
+        <Row icon="shield" label="Privacy Policy" onClick={() => go('/privacy')} />
+        <Row icon="doc" label="Terms & Conditions" onClick={() => go('/terms')} />
+      </div>
+      <div className="acGroup">
+        {isAdmin && <Row icon="lock" label="Admin Panel" onClick={() => go('/admin')} />}
+        {session
+          ? <Row icon="logout" label="Logout" onClick={onLogout} />
+          : <Row icon="login" label="Login" onClick={onLogin} />}
+      </div>
 
       <div className="acFoot">© 2026 HEAVEN</div>
     </div>

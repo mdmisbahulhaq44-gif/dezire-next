@@ -1691,3 +1691,16 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 
 /* Back/gesture/cross returning to a panel (e.g. Wishlist -> My Account): swap instantly, no slide */
 html[data-instant] .panel{transition:none !important}
+
+/* My Account: native-app header and grouped rows */
+.panelHead.acHead{position:relative;justify-content:center;min-height:34px;padding-bottom:14px;margin-bottom:18px}
+.panelHead.acHead .close{position:absolute;right:0;top:0}
+.acBrand{font-size:20px;font-weight:600;letter-spacing:4px}
+.acTitle{font-size:17px;font-weight:700;margin:0;color:#111}
+.acBackBtn{position:absolute;left:-4px;top:0;width:38px;height:34px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:#111;cursor:pointer;border-radius:50%}
+.acBackBtn:active{background:#f1f1f1}
+.acGroup{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 6px rgba(0,0,0,.05);margin-bottom:14px;overflow:hidden}
+.acGroup:empty{display:none}
+.acGroup .acRow{margin:0;border:0;border-radius:0;box-shadow:none;padding:16px 16px}
+.acGroup .acRow + .acRow{border-top:1px solid #f0f0f0}
+.acProfile{border-radius:16px}

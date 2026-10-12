@@ -229,14 +229,17 @@ export default function AccountPanel() {
   return (
     <>
       <div className={`panel${showAccount ? ' show' : ''}`}>
-        <div className="panelHead">
-          <h2>My Account</h2>
+        <div className="panelHead acHead">
+          {view !== 'menu' && (
+            <button type="button" className="acBackBtn" aria-label="Back" onClick={() => backView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile' }[view] || 'menu')}>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+            </button>
+          )}
+          {view === 'menu'
+            ? <div className="acBrand">HEAVEN</div>
+            : <h2 className="acTitle">{({ login: 'Login', signup1: 'Create Account', signup2: 'Verify Email', forgot: 'Reset Password', orders: 'My Orders', profile: 'Profile', editProfile: 'Update Profile' })[view] || 'My Account'}</h2>}
           <button className="close" onClick={closePanel}>×</button>
         </div>
-
-        {view !== 'menu' && (
-          <button type="button" className="acBack" onClick={() => backView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile' }[view] || 'menu')}>‹ Back</button>
-        )}
 
         {view === 'menu' && (
           <AccountMenu
