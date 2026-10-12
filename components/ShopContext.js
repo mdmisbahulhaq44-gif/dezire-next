@@ -48,13 +48,39 @@ export function ShopProvider({ children }) {
     const st = window.history.state || {}
     const depth = st.dzDepth || 0
     if (activePanel) {
-      window.history.pushState({ ...st, dzPanel: activePanel, dzDepth: depth + 1 }, '')
+      const base = { ...st }
+      delete base.dzView
+      if (activePanel === 'success' && depth > 0) window.history.replaceState({ ...base, dzPanel: 'success', dzDepth: depth }, '')
+      else window.history.pushState({ ...base, dzPanel: activePanel, dzDepth: depth + 1 }, '')
     } else if (keepHistory.current) {
       keepHistory.current = false
     } else if (depth > 0) {
       window.history.go(-depth)
     }
   }, [activePanel])
+
+  // Cross (x) buttons act like the phone Back gesture; links inside a panel keep the history entry
+  useEffect(() => {
+    let timer
+    function onClick(e) {
+      if (!prevPanel.current) return
+      const el = e.target
+      if (!el || !el.closest) return
+      if (el.closest('.panel .close, .panelHead .close')) {
+        const st = window.history.state || {}
+        if (st.dzDepth > 0) { e.preventDefault(); e.stopPropagation(); window.history.back() }
+        return
+      }
+      const a = el.closest('a[href]')
+      if (a && a.closest('.panel') && a.origin === window.location.origin && a.pathname !== window.location.pathname) {
+        keepHistory.current = true
+        clearTimeout(timer)
+        timer = setTimeout(() => { keepHistory.current = false }, 1500)
+      }
+    }
+    document.addEventListener('click', onClick, true)
+    return () => document.removeEventListener('click', onClick, true)
+  }, [])
 
   useEffect(() => {
     document.body.style.overflow = (activePanel || drawerOpen || miniOpen) ? 'hidden' : ''

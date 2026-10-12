@@ -55,7 +55,7 @@ export default function AccountPanel() {
     if (!showAccount) return
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session || null)
-      setView('menu')
+      setView((window.history.state && window.history.state.dzView) || 'menu')
     })
   }, [showAccount])
 
@@ -74,6 +74,29 @@ export default function AccountPanel() {
       })
   }, [showAccount, session])
 
+  // Views inside My Account (orders, profile, login ...) are history entries too
+  useEffect(() => {
+    function onPop(e) {
+      const st = e.state
+      if (st && st.dzPanel === 'account') setView(st.dzView || 'menu')
+    }
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [])
+
+  function navView(v) {
+    if (v === view) return
+    const st = window.history.state || {}
+    window.history.pushState({ ...st, dzPanel: 'account', dzView: v, dzDepth: (st.dzDepth || 0) + 1 }, '')
+    setView(v)
+  }
+
+  function backView(fallback) {
+    const st = window.history.state || {}
+    if ((st.dzDepth || 0) > 1 && st.dzView) window.history.back()
+    else setView(fallback)
+  }
+
   async function login(e) {
     e.preventDefault()
     const email = loginEmail.trim()
@@ -83,8 +106,7 @@ export default function AccountPanel() {
       return
     }
     showToast('Welcome back!')
-    closePanel()
-    if (email.toLowerCase() === ADMIN_EMAIL) router.push('/admin')
+    if (email.toLowerCase() === ADMIN_EMAIL) { hidePanel(); router.push('/admin') } else closePanel()
   }
 
   async function sendSignupOtp(e) {
@@ -113,7 +135,7 @@ export default function AccountPanel() {
     setPendingSignup({ name, email, phone })
     showToast('Code sent! Check your email.')
     setSuOtp('')
-    setView('signup2')
+    navView('signup2')
   }
 
   async function verifySignupOtp(e) {
@@ -205,16 +227,16 @@ export default function AccountPanel() {
         </div>
 
         {view !== 'menu' && (
-          <button type="button" className="acBack" onClick={() => setView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile' }[view] || 'menu')}>‹ Back</button>
+          <button type="button" className="acBack" onClick={() => backView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile' }[view] || 'menu')}>‹ Back</button>
         )}
 
         {view === 'menu' && (
           <AccountMenu
             session={session}
             isAdmin={isAdmin}
-            onLogin={() => setView('login')}
-            onProfile={() => setView('profile')}
-            onOrders={() => { if (session) setView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
+            onLogin={() => navView('login')}
+            onProfile={() => navView('profile')}
+            onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
             go={path => { hidePanel(); router.push(path) }}
             openPanel={name => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
@@ -228,11 +250,11 @@ export default function AccountPanel() {
             <input type="password" placeholder="Password" required value={loginPassword} onChange={e => setLoginPassword(e.target.value)} />
             <button className="btn">LOGIN</button>
             <div style={{ textAlign: 'center', marginTop: 4 }}>
-              <a href="#" onClick={e => { e.preventDefault(); setView('forgot') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Forgot password?</a>
+              <a href="#" onClick={e => { e.preventDefault(); navView('forgot') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Forgot password?</a>
             </div>
             <div style={{ textAlign: 'center', marginTop: 14, paddingTop: 14, borderTop: '1px solid rgba(0,0,0,.08)' }}>
               <span style={{ fontSize: 12, color: 'var(--muted)' }}>Don't have an account? </span>
-              <a href="#" onClick={e => { e.preventDefault(); setView('signup1') }} style={{ fontSize: 12, color: '#111', fontWeight: 700, textDecoration: 'underline' }}>Create one</a>
+              <a href="#" onClick={e => { e.preventDefault(); navView('signup1') }} style={{ fontSize: 12, color: '#111', fontWeight: 700, textDecoration: 'underline' }}>Create one</a>
             </div>
           </form>
         )}
@@ -245,7 +267,7 @@ export default function AccountPanel() {
             <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: -6 }}>We'll send a verification code to your email to verify it's you — no password needed.</p>
             <button className="btn" disabled={busy}>{busy ? 'SENDING...' : 'SEND CODE'}</button>
             <div style={{ textAlign: 'center', marginTop: 14 }}>
-              <a href="#" onClick={e => { e.preventDefault(); setView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Back to login</a>
+              <a href="#" onClick={e => { e.preventDefault(); backView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Back to login</a>
             </div>
           </form>
         )}
@@ -269,13 +291,13 @@ export default function AccountPanel() {
             <input type="email" placeholder="Email address" required value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} />
             <button className="btn" type="button" onClick={sendPasswordReset}>SEND RESET LINK</button>
             <div style={{ textAlign: 'center', marginTop: 4 }}>
-              <a href="#" onClick={e => { e.preventDefault(); setView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Back to login</a>
+              <a href="#" onClick={e => { e.preventDefault(); backView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Back to login</a>
             </div>
           </form>
         )}
 
-        {view === 'profile' && session && <ProfileView session={session} showToast={showToast} onEdit={() => setView('editProfile')} />}
-        {view === 'editProfile' && session && <EditProfile session={session} showToast={showToast} onDone={() => setView('profile')} />}
+        {view === 'profile' && session && <ProfileView session={session} showToast={showToast} onEdit={() => navView('editProfile')} />}
+        {view === 'editProfile' && session && <EditProfile session={session} showToast={showToast} onDone={() => backView('profile')} />}
 
         {view === 'orders' && session && (
           <div>
