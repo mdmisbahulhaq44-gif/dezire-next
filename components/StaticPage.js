@@ -1,9 +1,11 @@
+import BackLink from './BackLink'
+
 export default function StaticPage({ title, updated, children, footerLinks }) {
   return (
     <div className="staticPage">
       <header>
         <a href="/">HEAVEN</a>
-        <a className="back" href="/">← Back to shop</a>
+        <BackLink className="back">← Back</BackLink>
       </header>
 
       <main>
