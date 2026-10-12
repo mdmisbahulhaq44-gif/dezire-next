@@ -11,6 +11,8 @@ export default function BottomNav() {
   const router = useRouter()
   const { openAccount, openTrack, activePanel, hidePanel } = useShop()
   const onAccount = activePanel === 'account'
+  // tab switches swap at once (no slide), like a native app
+  function instant() { const r = document.documentElement; r.setAttribute('data-instant', '1'); clearTimeout(window.__dzInstant); window.__dzInstant = setTimeout(() => r.removeAttribute('data-instant'), 800) }
   const pathname = usePathname()
   if (['/contact', '/terms', '/refund-policy', '/privacy'].includes(pathname)) return null
 
@@ -42,7 +44,7 @@ export default function BottomNav() {
         </span>
         WhatsApp
       </button>
-      <button onClick={openTrack}>
+      <button onClick={() => { instant(); openTrack() }}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <path d="M21 8 12 3 3 8l9 5 9-5Z"/>
