@@ -55,6 +55,7 @@ export default function AccountPanel() {
   }, [showAccount, view])
   const [session, setSession] = useState(null)
   const [orders, setOrders] = useState(null)
+  const [orderQ, setOrderQ] = useState('')
   const [busy, setBusy] = useState(false)
 
   const [loginEmail, setLoginEmail] = useState('')
@@ -347,13 +348,19 @@ export default function AccountPanel() {
 
         {view === 'orders' && session && (
           <div>
+            <div className="acSearch">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+              <input type="search" placeholder="Search your orders" value={orderQ} onChange={e => setOrderQ(e.target.value)} />
+            </div>
             <div>
               {orders === null ? (
                 <div className="empty" style={{ padding: '30px 10px' }}>Loading...</div>
               ) : orders.length === 0 ? (
                 <div className="empty" style={{ padding: '30px 10px' }}>No orders yet.</div>
+              ) : orders.filter(o => !orderQ.trim() || ((o.items || '') + ' #' + o.id + ' ' + (o.status || '')).toLowerCase().includes(orderQ.trim().toLowerCase())).length === 0 ? (
+                <div className="empty" style={{ padding: '30px 10px' }}>No orders match "{orderQ.trim()}"</div>
               ) : (
-                orders.map(o => (
+                orders.filter(o => !orderQ.trim() || ((o.items || '') + ' #' + o.id + ' ' + (o.status || '')).toLowerCase().includes(orderQ.trim().toLowerCase())).map(o => (
                   <div key={o.id} className="acOrder" onClick={() => { closePanel(); if (openTrack) openTrack() }}>
                     <div className="acOrderTop">
                       <div className="acOrderInfo">

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
@@ -22,6 +22,11 @@ export default function SearchPanel() {
   const [results, setResults] = useState(null)
   const debounceRef = useRef(null)
   const reqRef = useRef(0)
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (show) { const t = setTimeout(() => inputRef.current && inputRef.current.focus(), 30); return () => clearTimeout(t) }
+  }, [show])
 
   function handleInput(e) {
     const q = e.target.value
@@ -72,16 +77,17 @@ export default function SearchPanel() {
   }
 
   return (
-    <div className={`panel${show ? ' show' : ''}`}>
-      <div className="panelHead">
-        <h2>Search</h2>
-        <button className="close" onClick={handleClose}>×</button>
-      </div>
-
-      <form className="form" onSubmit={handleSubmit}>
-        <input placeholder="Search products..." value={query} onChange={handleInput} />
-        <button className="btn">SEARCH</button>
+    <div className={`searchLayer${show ? ' show' : ''}`}>
+      <form className="slBar" onSubmit={handleSubmit}>
+        <button type="button" className="slBack" aria-label="Back" onClick={handleClose}>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+        </button>
+        <div className="slField">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+          <input ref={inputRef} type="search" enterKeyHint="search" placeholder="Search products" value={query} onChange={handleInput} />
+        </div>
       </form>
+      <div className="slBody">
 
       {suggestions !== null && (
         suggestions.length ? (
@@ -150,6 +156,7 @@ export default function SearchPanel() {
           )}
         </div>
       )}
+      </div>
     </div>
   )
 }

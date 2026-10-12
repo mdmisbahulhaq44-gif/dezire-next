@@ -1744,3 +1744,17 @@ html[data-acmenu] .drawer{z-index:700}
 .panelHead.acHead .acHeadIcons{right:19px;top:25px}
 .panelHead.acHead:has(.acBackBtn){padding-left:65px}
 .panelHead.acHead:has(.acBrand){padding-left:25px}
+
+/* search happens in place: a bar with back arrow at the top, results right under it (no sliding panel) */
+.searchLayer{position:fixed;inset:0;z-index:650;background:#fff;display:none;flex-direction:column}
+.searchLayer.show{display:flex}
+.slBar{display:flex;align-items:center;gap:6px;padding:10px 12px;border-bottom:1px solid #eee;flex:none}
+.slBack{width:38px;height:40px;flex:none;display:flex;align-items:center;justify-content:center;background:none;border:0;color:#111;cursor:pointer;border-radius:50%}
+.slBack:active{background:#f1f1f1}
+.slField{flex:1;display:flex;align-items:center;gap:10px;height:44px;padding:0 14px;border:1px solid #dcdcdc;border-radius:14px;background:#fff;color:#555}
+.slField:focus-within{border-color:#111}
+.slField input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:15px;color:#111;padding:0;-webkit-appearance:none;appearance:none}
+.slBody{flex:1;overflow:auto;padding:12px 16px calc(24px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+.acSearch{display:flex;align-items:center;gap:10px;height:44px;padding:0 14px;margin-bottom:14px;border:1px solid var(--line);border-radius:14px;background:#fff;color:#555}
+.acSearch:focus-within{border-color:#111}
+.acSearch input{flex:1;min-width:0;border:0;outline:0;background:none;font:inherit;font-size:14px;color:#111;padding:0;-webkit-appearance:none;appearance:none}
