@@ -4,8 +4,9 @@ export default function StaticPage({ title, updated, children, footerLinks }) {
   return (
     <div className="staticPage">
       <header>
-        <a href="/">HEAVEN</a>
-        <BackLink className="back">← Back</BackLink>
+        <BackLink className="back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg></BackLink>
+        <span className="spTitle">{title}</span>
+        <a className="spHome" href="/">HEAVEN</a>
       </header>
 
       <main>

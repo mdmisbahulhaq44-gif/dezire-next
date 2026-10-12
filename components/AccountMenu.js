@@ -39,7 +39,7 @@ function Row({ icon, label, onClick }) {
   )
 }
 
-export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onOrders, onLogout, go, openPanel, showToast }) {
+export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSupport, onOrders, onLogout, go, openPanel, showToast }) {
   const name = session?.user?.user_metadata?.full_name || ''
   const email = session?.user?.email || ''
   const initial = (name || email || '').trim().charAt(0).toUpperCase()
@@ -74,7 +74,7 @@ export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onOr
         <Row icon="gift" label="Refer & Earn" onClick={() => showToast('Refer & Earn is coming soon.')} />
       </div>
       <div className="acGroup">
-        <Row icon="support" label="Support" onClick={() => window.open('https://wa.me/' + SHOP_PHONE, '_blank', 'noopener')} />
+        <Row icon="support" label="Support" onClick={onSupport} />
         <Row icon="mail" label="Contact Us" onClick={() => go('/contact')} />
         <Row icon="info" label="About Us" onClick={() => openPanel('about')} />
       </div>

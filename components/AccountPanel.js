@@ -7,6 +7,7 @@ import { supabase } from '../lib/supabaseClient'
 import OtpBoxes from './OtpBoxes'
 import AccountMenu from './AccountMenu'
 import { ProfileView, EditProfile } from './ProfileView'
+import AccountSupport from './AccountSupport'
 
 const ADMIN_EMAIL = "mdmisbahulhaq44@gmail.com"
 
@@ -21,7 +22,7 @@ export default function AccountPanel() {
   const router = useRouter()
   const pathname = usePathname()
   const navTo = useRef(null)
-  const { activePanel, closePanel, hidePanel, showToast, openReset, openTrack, openWishlist, openAbout } = useShop()
+  const { activePanel, closePanel, hidePanel, showToast, openReset, openTrack, openWishlist, openAbout, openSearch, openCart, cartCount } = useShop()
   const showAccount = activePanel === 'account'
   const showReset = activePanel === 'reset'
 
@@ -231,14 +232,26 @@ export default function AccountPanel() {
       <div className={`panel${showAccount ? ' show' : ''}`}>
         <div className="panelHead acHead">
           {view !== 'menu' && (
-            <button type="button" className="acBackBtn" aria-label="Back" onClick={() => backView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile' }[view] || 'menu')}>
+            <button type="button" className="acBackBtn" aria-label="Back" onClick={() => backView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile', support: 'menu' }[view] || 'menu')}>
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
             </button>
           )}
           {view === 'menu'
             ? <div className="acBrand">HEAVEN</div>
-            : <h2 className="acTitle">{({ login: 'Login', signup1: 'Create Account', signup2: 'Verify Email', forgot: 'Reset Password', orders: 'My Orders', profile: 'Profile', editProfile: 'Update Profile' })[view] || 'My Account'}</h2>}
-          <button className="close" onClick={closePanel}>×</button>
+            : <h2 className="acTitle">{({ login: 'Login', signup1: 'Create Account', signup2: 'Verify Email', forgot: 'Reset Password', orders: 'My Orders', profile: 'Profile', editProfile: 'Update Profile', support: 'Support' })[view] || 'My Account'}</h2>}
+          {view === 'menu'
+            ? <button className="close" onClick={closePanel}>×</button>
+            : (
+              <div className="acHeadIcons">
+                <button type="button" className="acHeadBtn" aria-label="Search" onClick={() => { closePanel(); openSearch() }}>
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+                </button>
+                <button type="button" className="acHeadBtn" aria-label="Cart" onClick={() => { closePanel(); openCart() }}>
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11h10.2L20 8H6.2" /><circle cx="9" cy="19.5" r="1.4" /><circle cx="17" cy="19.5" r="1.4" /></svg>
+                  {cartCount > 0 && <span className="acBadge">{cartCount}</span>}
+                </button>
+              </div>
+            )}
         </div>
 
         {view === 'menu' && (
@@ -247,6 +260,7 @@ export default function AccountPanel() {
             isAdmin={isAdmin}
             onLogin={() => navView('login')}
             onProfile={() => navView('profile')}
+            onSupport={() => navView('support')}
             onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
             go={path => { navTo.current = path.split('?')[0]; window.__dzFromAccount = navTo.current; router.push(path); setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000) }}
@@ -307,12 +321,12 @@ export default function AccountPanel() {
           </form>
         )}
 
+        {view === 'support' && <AccountSupport />}
         {view === 'profile' && session && <ProfileView session={session} showToast={showToast} onEdit={() => navView('editProfile')} />}
         {view === 'editProfile' && session && <EditProfile session={session} showToast={showToast} onDone={() => backView('profile')} />}
 
         {view === 'orders' && session && (
           <div>
-            <div style={{ fontSize: 11, letterSpacing: 2, color: 'var(--muted)', marginBottom: 12 }}>MY ORDERS</div>
             <div>
               {orders === null ? (
                 <div className="empty" style={{ padding: '30px 10px' }}>Loading...</div>
@@ -320,12 +334,23 @@ export default function AccountPanel() {
                 <div className="empty" style={{ padding: '30px 10px' }}>No orders yet.</div>
               ) : (
                 orders.map(o => (
-                  <div key={o.id} onClick={() => { closePanel(); if (openTrack) openTrack() }} style={{ border: '1px solid var(--line)', borderRadius: 10, padding: 14, marginBottom: 10, cursor: 'pointer' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, color: 'var(--muted)' }}>
-                      <span>#{o.id}</span><span>{o.status}</span>
+                  <div key={o.id} className="acOrder" onClick={() => { closePanel(); if (openTrack) openTrack() }}>
+                    <div className="acOrderTop">
+                      <div className="acOrderInfo">
+                        <div className="acOrderId">Order #{o.id}</div>
+                        <div className="acOrderItems">{o.items || ''}</div>
+                      </div>
+                      <div className="acOrderSide">
+                        <span className="acStatus">{o.status}</span>
+                        <div className="acOrderTotal">৳{Number(o.total_amount || 0).toLocaleString()}</div>
+                      </div>
                     </div>
-                    <div style={{ fontSize: 13, margin: '6px 0' }}>{o.items || ''}</div>
-                    <div style={{ fontWeight: 700 }}>৳{Number(o.total_amount || 0).toLocaleString()}</div>
+                    {o.created_at && (
+                      <div className="acOrderDate">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18 M8 3v4 M16 3v4" /></svg>
+                        <span>Ordered on {new Date(o.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                      </div>
+                    )}
                   </div>
                 ))
               )}

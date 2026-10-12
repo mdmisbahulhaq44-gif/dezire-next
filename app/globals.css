@@ -1704,3 +1704,26 @@ html[data-instant] .panel{transition:none !important}
 .acGroup .acRow{margin:0;border:0;border-radius:0;box-shadow:none;padding:16px 16px}
 .acGroup .acRow + .acRow{border-top:1px solid #f0f0f0}
 .acProfile{border-radius:16px}
+
+/* My Account: Arogga-style subpage header, orders, support */
+.acHeadIcons{position:absolute;right:-6px;top:0;display:flex;gap:2px}
+.acHeadBtn{position:relative;width:40px;height:34px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:#111;cursor:pointer;border-radius:50%}
+.acHeadBtn:active{background:#f1f1f1}
+.acBadge{position:absolute;top:0;right:2px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#111;color:#fff;font-size:10px;line-height:16px;text-align:center;font-weight:700}
+.panelHead.acHead:has(.acBackBtn){justify-content:flex-start;padding-left:40px}
+.acSection{font-size:16px;font-weight:700;color:#111;margin:4px 2px 10px}
+a.acRow{text-decoration:none}
+.acOrder{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 6px rgba(0,0,0,.05);padding:16px;margin-bottom:14px;cursor:pointer}
+.acOrderTop{display:flex;justify-content:space-between;gap:12px}
+.acOrderInfo{min-width:0}
+.acOrderId{font-size:15px;font-weight:700;color:#111}
+.acOrderItems{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.acOrderSide{text-align:right;flex:none}
+.acStatus{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.3px;padding:4px 10px;border-radius:999px;background:#f1f1f1;color:#111;text-transform:capitalize}
+.acOrderTotal{font-size:16px;font-weight:700;color:#111;margin-top:10px}
+.acOrderDate{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid #eee;font-size:13px;color:var(--muted)}
+/* static pages: white app-style header with back arrow + title */
+.staticPage header{background:#fff;border-bottom:1px solid #eee;justify-content:flex-start;gap:6px;padding:12px 4%;position:sticky;top:0;z-index:5}
+.staticPage header .back{display:flex;align-items:center;justify-content:center;width:38px;height:38px;margin-left:-8px;border-radius:50%;color:#111;letter-spacing:0}
+.staticPage header .spTitle{font-size:17px;font-weight:700;color:#111;letter-spacing:0;flex:1}
+.staticPage header a.spHome{color:#111;font-size:13px;letter-spacing:3px;font-weight:600}
