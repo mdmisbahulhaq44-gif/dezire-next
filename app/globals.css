@@ -1688,3 +1688,6 @@ footer:has(.footergrid) .copy{padding-bottom:calc(150px + env(safe-area-inset-bo
 .pfCard select{background:#fff}
 .pfLocked{background:#f6f6f6;color:#888;-webkit-text-fill-color:#888}
 .pfTick{position:absolute;right:12px;top:50%;transform:translateY(-50%)}
+
+/* Back/gesture/cross returning to a panel (e.g. Wishlist -> My Account): swap instantly, no slide */
+html[data-instant] .panel{transition:none !important}
