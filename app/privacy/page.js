@@ -1,4 +1,5 @@
 import StaticPage from '../../components/StaticPage'
+import Link from 'next/link'
 
 export const metadata = {
   title: 'Privacy Policy — HEAVEN',
@@ -10,7 +11,7 @@ export default function PrivacyPage() {
     <StaticPage
       title="Privacy Policy"
       updated="Last updated: September 2026"
-      footerLinks={<><a href="/terms">Terms</a> · <a href="/refund-policy">Returns</a> · <a href="/contact">Contact</a></>}
+      footerLinks={<><Link href="/terms">Terms</Link> · <Link href="/refund-policy">Returns</Link> · <Link href="/contact">Contact</Link></>}
     >
       <p>HEAVEN ("we", "us", "our") operates this website to sell clothing and fashion products in Bangladesh. This page explains what information we collect from you, how we use it, and the choices you have.</p>
 

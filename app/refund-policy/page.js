@@ -1,4 +1,5 @@
 import StaticPage from '../../components/StaticPage'
+import Link from 'next/link'
 
 export const metadata = {
   title: 'Return & Refund Policy — HEAVEN',
@@ -10,7 +11,7 @@ export default function RefundPolicyPage() {
     <StaticPage
       title="Return & Refund Policy"
       updated="Last updated: September 2026"
-      footerLinks={<><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact</a></>}
+      footerLinks={<><Link href="/privacy">Privacy</Link> · <Link href="/terms">Terms</Link> · <Link href="/contact">Contact</Link></>}
     >
       <div className="highlight">
         <strong>You can request a return or exchange within 14 days</strong> of receiving your order.

@@ -1,4 +1,5 @@
 import StaticPage from '../../components/StaticPage'
+import Link from 'next/link'
 
 export const metadata = {
   title: 'Contact Us — HEAVEN',
@@ -42,7 +43,7 @@ export default function ContactPage() {
   return (
     <StaticPage
       title="Contact Us"
-      footerLinks={<><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/refund-policy">Returns</a></>}
+      footerLinks={<><Link href="/privacy">Privacy</Link> · <Link href="/terms">Terms</Link> · <Link href="/refund-policy">Returns</Link></>}
     >
       <div className="cClean">
         <p className="sub">Questions about an order, a product, or anything else? Reach us any of these ways — we usually reply fastest on WhatsApp.</p>

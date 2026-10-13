@@ -12,5 +12,5 @@ export default function BackLink({ className, children }) {
     if ((sameSite || fromAccount) && window.history.length > 1) router.back()
     else router.push('/')
   }
-  return <a className={className} href="/" onClick={onClick}>{children}</a>
+  return <a className={className} href="/" onClick={onClick} aria-label="Back">{children}</a>
 }

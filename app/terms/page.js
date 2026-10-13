@@ -1,16 +1,34 @@
 import StaticPage from '../../components/StaticPage'
+import Link from 'next/link'
+import { supabaseServer as supabase } from '../../lib/supabaseServer'
+
+// Delivery charges come from the same settings table the checkout uses, so this page can never disagree with it
+async function getDelivery() {
+  const fallback = { dhaka: 50, outside: 60, free: 1000 }
+  try {
+    const { data, error } = await supabase.from('settings').select('key,value').in('key', ['delivery_charge_dhaka', 'delivery_charge_outside', 'free_delivery_threshold'])
+    if (error || !data || !data.length) return fallback
+    const m = {}
+    data.forEach(r => { m[r.key] = r.value })
+    const n = (v, d) => (v === undefined || v === null || v === '' || Number.isNaN(Number(v))) ? d : Number(v)
+    return { dhaka: n(m.delivery_charge_dhaka, fallback.dhaka), outside: n(m.delivery_charge_outside, fallback.outside), free: n(m.free_delivery_threshold, fallback.free) }
+  } catch (e) {
+    return fallback
+  }
+}
 
 export const metadata = {
   title: 'Terms & Conditions — HEAVEN',
   description: "HEAVEN's terms and conditions — orders, pricing, delivery, and site usage."
 }
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const d = await getDelivery()
   return (
     <StaticPage
       title="Terms & Conditions"
       updated="Last updated: September 2026"
-      footerLinks={<><a href="/privacy">Privacy</a> · <a href="/refund-policy">Returns</a> · <a href="/contact">Contact</a></>}
+      footerLinks={<><Link href="/privacy">Privacy</Link> · <Link href="/refund-policy">Returns</Link> · <Link href="/contact">Contact</Link></>}
     >
       <p>Welcome to HEAVEN. By browsing this website and placing an order, you agree to the terms below.</p>
 
@@ -32,14 +50,15 @@ export default function TermsPage() {
       <table>
         <tbody>
           <tr><th>Area</th><th>Delivery Charge</th><th>Estimated Time</th></tr>
-          <tr><td>Inside Dhaka</td><td>৳50</td><td>2–3 business days</td></tr>
-          <tr><td>Outside Dhaka (nationwide)</td><td>৳80</td><td>3–5 business days</td></tr>
+          <tr><td>Inside Dhaka</td><td>৳{d.dhaka}</td><td>2–3 business days</td></tr>
+          <tr><td>Outside Dhaka (nationwide)</td><td>৳{d.outside}</td><td>3–5 business days</td></tr>
         </tbody>
       </table>
+      {d.free > 0 && <p>Delivery is free on orders of ৳{d.free.toLocaleString('en-US')} or more.</p>}
       <p>Delivery times are estimates and may vary due to courier delays, weather, or other circumstances outside our control.</p>
 
       <h2>Returns & Refunds</h2>
-      <p>See our full <a href="/refund-policy">Return & Refund Policy</a> for details on exchanges and returns.</p>
+      <p>See our full <Link href="/refund-policy">Return & Refund Policy</Link> for details on exchanges and returns.</p>
 
       <h2>Account Responsibility</h2>
       <p>If you create an account with us, you're responsible for keeping your login details secure and for all activity under your account.</p>
