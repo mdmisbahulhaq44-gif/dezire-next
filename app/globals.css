@@ -1804,3 +1804,7 @@ body:has(.staticPage){padding-bottom:0}
 /* Buy Now label under the price on product cards (tap opens the product, same as the card) */
 .product .buyNow{display:block;margin-top:8px;height:34px;line-height:34px;text-align:center;background:#111;color:#fff;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
 .product:active .buyNow{opacity:.85}
+
+/* Buy Now: light outline style, so it does not show as heavy dark blocks while a product opens (cross-fade) */
+.product .buyNow{box-sizing:border-box;height:32px;line-height:29px;background:#fff;color:#111;border:1.5px solid #111;border-radius:10px;font-size:11.5px;letter-spacing:.9px}
+.product:active .buyNow{background:#f2f2f2;opacity:1}
