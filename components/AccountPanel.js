@@ -63,6 +63,35 @@ export default function AccountPanel() {
 
   const [view, setView] = useState('menu')
 
+  // Back from a page opened out of My Account (Contact, Privacy, Flash Sale ...) must land on My Account again,
+  // even if the browser lost the saved panel state on the way
+  const lastPop = useRef(0)
+  const apRef = useRef(activePanel)
+  apRef.current = activePanel
+  useEffect(() => {
+    const f = () => { lastPop.current = Date.now() }
+    window.addEventListener('popstate', f, true)
+    return () => window.removeEventListener('popstate', f, true)
+  }, [])
+  useEffect(() => {
+    const r = window.__dzRet
+    if (!r) return
+    if (pathname === r.from && Date.now() - lastPop.current < 1500) {
+      window.__dzRet = null
+      setTimeout(() => {
+        if (apRef.current) return
+        const st = window.history.state || {}
+        const ns = { ...st, dzPanel: 'account', dzView: 'menu', dzDepth: 1 }
+        window.history.replaceState(ns, '')
+        const ev = new Event('dzrestore')
+        ev.state = ns
+        window.dispatchEvent(ev)
+      }, 150)
+    } else if (pathname !== r.to && pathname !== r.from) {
+      window.__dzRet = null
+    }
+  }, [pathname])
+
   // Warm up the pages behind the menu rows so they open at once, even on a slow connection
   useEffect(() => {
     if (!showAccount) return
@@ -361,7 +390,7 @@ export default function AccountPanel() {
             onSupport={() => navView('support')}
             onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
-            go={path => { const target = path.split('?')[0]; navTo.current = target; window.__dzFromAccount = target; document.documentElement.setAttribute('data-nav', '1'); router.push(path); setTimeout(() => { if (navTo.current === target) window.location.assign(path) }, 4000) }}
+            go={path => { const target = path.split('?')[0]; navTo.current = target; window.__dzFromAccount = target; window.__dzRet = { from: pathname, to: target }; document.documentElement.setAttribute('data-nav', '1'); router.push(path); setTimeout(() => { if (navTo.current === target) window.location.assign(path) }, 4000) }}
             openPanel={name => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
             showToast={showToast}
           />

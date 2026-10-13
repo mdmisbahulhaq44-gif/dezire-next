@@ -46,7 +46,9 @@ export function ShopProvider({ children }) {
       }
     }
     window.addEventListener('popstate', onPop)
+    window.addEventListener('dzrestore', onPop)
     return () => window.removeEventListener('popstate', onPop)
+      window.removeEventListener('dzrestore', onPop)
   }, [])
 
   useEffect(() => {
