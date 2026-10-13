@@ -50,7 +50,14 @@ export default function AccountPanel() {
 
   // Page opened from a menu row: My Account keeps covering the screen until the new page is ready, then hides at once
   useEffect(() => {
-    if (navTo.current && pathname === navTo.current) { navTo.current = null; hidePanel(true) }
+    if (navTo.current && pathname === navTo.current) {
+      navTo.current = null
+      // product opened from My Orders: stay under the product fade, then hide just before the preview goes
+      const wait = window.__dzAcHold ? Math.max(0, window.__dzAcHold - performance.now()) : 0
+      window.__dzAcHold = 0
+      if (wait > 0) setTimeout(() => hidePanel(true), wait)
+      else hidePanel(true)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
@@ -79,6 +86,7 @@ export default function AccountPanel() {
   const [orders, setOrders] = useState(null)
   const [orderQ, setOrderQ] = useState('')
   const [orderProds, setOrderProds] = useState(ORDER_PRODS)
+  const ordersUid = useRef(null)
   const [busy, setBusy] = useState(false)
 
   const [loginEmail, setLoginEmail] = useState('')
@@ -115,7 +123,7 @@ export default function AccountPanel() {
   // loadAccountOrders
   useEffect(() => {
     if (!showAccount || !session) return
-    setOrders(null)
+    if (ordersUid.current !== session.user.id) setOrders(null)
     supabase
       .from('orders')
       .select('id,items,total_amount,status,created_at,product_id')
@@ -125,6 +133,7 @@ export default function AccountPanel() {
       .then(({ data, error }) => {
         const list = error || !data ? [] : data
         setOrders(list)
+        ordersUid.current = session.user.id
         // photos of the ordered products (same public products table the shop uses)
         const ids = [...new Set(list.map(o => o.product_id).filter(Boolean))]
         if (!ids.length) return
@@ -293,9 +302,11 @@ export default function AccountPanel() {
         style={box}
         aria-label={p.name}
         data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old, img: p.img })}
+        data-hold="400"
         onClick={e => {
           e.stopPropagation()
           navTo.current = '/product/' + p.id
+          window.__dzAcHold = performance.now() + 340
           window.__dzFromAccount = navTo.current
           setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000)
         }}
