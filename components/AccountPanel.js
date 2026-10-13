@@ -63,6 +63,13 @@ export default function AccountPanel() {
 
   const [view, setView] = useState('menu')
 
+  // Warm up the pages behind the menu rows so they open at once, even on a slow connection
+  useEffect(() => {
+    if (!showAccount) return
+    ;['/refund-policy', '/privacy', '/terms', '/contact', '/flash-sale'].forEach(p => { try { router.prefetch(p) } catch (e) {} })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showAccount])
+
   // My Account home keeps the shop's bottom bar visible (like a native app tab); inner pages hide it
   const [realHeader, setRealHeader] = useState(false)
   useLayoutEffect(() => {
@@ -354,7 +361,7 @@ export default function AccountPanel() {
             onSupport={() => navView('support')}
             onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
-            go={path => { navTo.current = path.split('?')[0]; window.__dzFromAccount = navTo.current; router.push(path); setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000) }}
+            go={path => { const target = path.split('?')[0]; navTo.current = target; window.__dzFromAccount = target; router.push(path); setTimeout(() => { if (navTo.current === target) { navTo.current = null; hidePanel(true) } }, 8000) }}
             openPanel={name => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
             showToast={showToast}
           />
