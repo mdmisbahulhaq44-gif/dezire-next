@@ -101,7 +101,7 @@ export default function SearchPanel() {
               >
                 <div style={{ width: 40, height: 50, background: 'var(--cream)', borderRadius: 10, overflow: 'hidden', flexShrink: 0 }}>
                   {p.imgs && (
-                    <img src={cldOpt(p.imgs.split(',')[0].trim(), 100)} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={cldOpt(p.imgs.split(',')[0].trim(), 100)} alt={p.name} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   )}
                 </div>
                 <div style={{ flex: 1 }}>

@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /admin
-Allow: /
-
-Sitemap: https://heaven-bd.vercel.app/sitemap.xml
