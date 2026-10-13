@@ -48,6 +48,7 @@ export default function ProductGrid({ products, replaceLinks }) {
               ৳{Number(p.price).toLocaleString()}{" "}
               {p.old && <span className="old">৳{Number(p.old).toLocaleString()}</span>}
             </div>
+            {!soldOut && <span className="buyNow">Buy Now</span>}
             {lowStock && (
               <div style={{ fontSize: 11, color: "var(--red)", marginTop: 3 }}>Only {p.stock} left</div>
             )}

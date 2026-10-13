@@ -1800,3 +1800,7 @@ body:has(.staticPage){padding-bottom:0}
 .cRow .ar{width:16px;height:16px;flex:none;color:#aaa}
 .cBase{display:flex;align-items:center;gap:14px;padding:18px 4px 0}
 .cBase .i{width:22px;height:22px;flex:none;color:#111}
+
+/* Buy Now label under the price on product cards (tap opens the product, same as the card) */
+.product .buyNow{display:block;margin-top:8px;height:34px;line-height:34px;text-align:center;background:#111;color:#fff;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.product:active .buyNow{opacity:.85}
