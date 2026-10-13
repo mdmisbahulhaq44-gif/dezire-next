@@ -13,6 +13,26 @@ import AccountSupport from './AccountSupport'
 
 const ADMIN_EMAIL = "mdmisbahulhaq44@gmail.com"
 
+// Product info for the order photos is kept here so My Orders shows photos at once on reopen
+let ORDER_PRODS = {}
+
+// Photo that fades in softly once it has loaded (no grey box, no pop-in)
+function FadeImg({ src, alt }) {
+  const [on, setOn] = useState(false)
+  const ref = useRef(null)
+  useEffect(() => { if (ref.current && ref.current.complete && ref.current.naturalWidth) setOn(true) }, [])
+  return (
+    <img
+      ref={ref}
+      src={src}
+      alt={alt}
+      loading="lazy"
+      onLoad={() => setOn(true)}
+      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', opacity: on ? 1 : 0, transform: on ? 'scale(1)' : 'scale(1.06)', transition: 'opacity .4s ease, transform .5s cubic-bezier(.22,.61,.36,1)' }}
+    />
+  )
+}
+
 function readableError(err) {
   if (!err) return 'Unknown error'
   if (typeof err === 'string') return err
@@ -58,7 +78,7 @@ export default function AccountPanel() {
   const [session, setSession] = useState(null)
   const [orders, setOrders] = useState(null)
   const [orderQ, setOrderQ] = useState('')
-  const [orderProds, setOrderProds] = useState({})
+  const [orderProds, setOrderProds] = useState(ORDER_PRODS)
   const [busy, setBusy] = useState(false)
 
   const [loginEmail, setLoginEmail] = useState('')
@@ -113,7 +133,8 @@ export default function AccountPanel() {
           ;(ps || []).forEach(p => {
             map[p.id] = { id: p.id, name: p.name, price: p.price, old: p.old || null, img: (p.imgs || '').split(',')[0].trim() }
           })
-          setOrderProds(map)
+          ORDER_PRODS = { ...ORDER_PRODS, ...map }
+          setOrderProds(ORDER_PRODS)
         })
       })
   }, [showAccount, session])
@@ -263,7 +284,7 @@ export default function AccountPanel() {
   // Photo of the ordered product; tapping it opens the product instantly (ProductPreview picks up data-preview)
   function orderThumb(o) {
     const p = o.product_id ? orderProds[o.product_id] : null
-    const box = { width: 64, height: 78, borderRadius: 10, overflow: 'hidden', background: 'var(--cream)', flexShrink: 0, display: 'block', position: 'relative' }
+    const box = { width: 64, height: 78, borderRadius: 10, overflow: 'hidden', flexShrink: 0, display: 'block', position: 'relative' }
     if (!p || !p.img) return <div style={box} />
     return (
       <Link
@@ -279,7 +300,7 @@ export default function AccountPanel() {
           setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000)
         }}
       >
-        <img src={cldOpt(p.img, 500)} alt={p.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        <FadeImg src={cldOpt(p.img, 500)} alt={p.name} />
       </Link>
     )
   }
