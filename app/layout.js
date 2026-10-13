@@ -7,11 +7,10 @@ import { ShopProvider } from "../components/ShopContext"
 import CartFab from "../components/CartFab"
 import CartPanel from "../components/CartPanel"
 import MiniCart from "../components/MiniCart"
-import CheckoutPanel from "../components/CheckoutPanel"
+import { LazyCheckoutPanel, LazyTrackOrderPanel } from "../components/LazyPanels"
 import WishlistPanel from "../components/WishlistPanel"
 import SearchPanel from "../components/SearchPanel"
 import AccountPanel from "../components/AccountPanel"
-import TrackOrderPanel from "../components/TrackOrderPanel"
 import AboutUsPanel from "../components/AboutUsPanel"
 import ShopOverlay from "../components/ShopOverlay"
 import Toast from "../components/Toast"
@@ -89,11 +88,11 @@ export default function RootLayout({ children, modal }) {
           <ShopOverlay />
           <CartPanel />
           <MiniCart />
-          <CheckoutPanel />
+          <LazyCheckoutPanel />
           <WishlistPanel />
           <SearchPanel />
           <AccountPanel />
-          <TrackOrderPanel />
+          <LazyTrackOrderPanel />
           <AboutUsPanel />
           <Toast />
           <Analytics />
