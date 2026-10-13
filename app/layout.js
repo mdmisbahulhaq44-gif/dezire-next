@@ -35,6 +35,7 @@ export const metadata = {
   manifest: "/manifest.json",
   icons: { icon: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }], apple: "/icon-192.png" },
   alternates: { canonical: "/" },
+  verification: { google: "wsDPReVbDYbtz1c4jNoeNxnFsZuHWWi9bfSJITLZSN0" },
   openGraph: {
     type: "website",
     siteName: "HEAVEN",
