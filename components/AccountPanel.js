@@ -361,7 +361,7 @@ export default function AccountPanel() {
             onSupport={() => navView('support')}
             onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
-            go={path => { const target = path.split('?')[0]; navTo.current = target; window.__dzFromAccount = target; router.push(path); setTimeout(() => { if (navTo.current === target) { navTo.current = null; hidePanel(true) } }, 8000) }}
+            go={path => { const target = path.split('?')[0]; navTo.current = target; window.__dzFromAccount = target; document.documentElement.setAttribute('data-nav', '1'); router.push(path); setTimeout(() => { if (navTo.current === target) window.location.assign(path) }, 4000) }}
             openPanel={name => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
             showToast={showToast}
           />
