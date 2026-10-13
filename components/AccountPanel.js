@@ -2,6 +2,8 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+import Link from 'next/link'
+import { cldOpt } from '../lib/cloudinary'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import OtpBoxes from './OtpBoxes'
@@ -56,6 +58,7 @@ export default function AccountPanel() {
   const [session, setSession] = useState(null)
   const [orders, setOrders] = useState(null)
   const [orderQ, setOrderQ] = useState('')
+  const [orderProds, setOrderProds] = useState({})
   const [busy, setBusy] = useState(false)
 
   const [loginEmail, setLoginEmail] = useState('')
@@ -100,7 +103,18 @@ export default function AccountPanel() {
       .order('created_at', { ascending: false })
       .limit(20)
       .then(({ data, error }) => {
-        setOrders(error || !data ? [] : data)
+        const list = error || !data ? [] : data
+        setOrders(list)
+        // photos of the ordered products (same public products table the shop uses)
+        const ids = [...new Set(list.map(o => o.product_id).filter(Boolean))]
+        if (!ids.length) return
+        supabase.from('products').select('id,name,price,old,imgs').in('id', ids).then(({ data: ps }) => {
+          const map = {}
+          ;(ps || []).forEach(p => {
+            map[p.id] = { id: p.id, name: p.name, price: p.price, old: p.old || null, img: (p.imgs || '').split(',')[0].trim() }
+          })
+          setOrderProds(map)
+        })
       })
   }, [showAccount, session])
 
@@ -246,6 +260,30 @@ export default function AccountPanel() {
     closePanel()
   }
 
+  // Photo of the ordered product; tapping it opens the product instantly (ProductPreview picks up data-preview)
+  function orderThumb(o) {
+    const p = o.product_id ? orderProds[o.product_id] : null
+    const box = { width: 64, height: 78, borderRadius: 10, overflow: 'hidden', background: 'var(--cream)', flexShrink: 0, display: 'block', position: 'relative' }
+    if (!p || !p.img) return <div style={box} />
+    return (
+      <Link
+        href={'/product/' + p.id}
+        prefetch={false}
+        style={box}
+        aria-label={p.name}
+        data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old, img: p.img })}
+        onClick={e => {
+          e.stopPropagation()
+          navTo.current = '/product/' + p.id
+          window.__dzFromAccount = navTo.current
+          setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000)
+        }}
+      >
+        <img src={cldOpt(p.img, 500)} alt={p.name} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      </Link>
+    )
+  }
+
   const isAdmin = session?.user?.email?.toLowerCase() === ADMIN_EMAIL
 
   return (
@@ -362,12 +400,13 @@ export default function AccountPanel() {
               ) : (
                 orders.filter(o => !orderQ.trim() || ((o.items || '') + ' #' + o.id + ' ' + (o.status || '')).toLowerCase().includes(orderQ.trim().toLowerCase())).map(o => (
                   <div key={o.id} className="acOrder" onClick={() => { closePanel(); if (openTrack) openTrack() }}>
-                    <div className="acOrderTop">
-                      <div className="acOrderInfo">
+                    <div className="acOrderTop" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                      {orderThumb(o)}
+                      <div className="acOrderInfo" style={{ flex: 1, minWidth: 0 }}>
                         <div className="acOrderId">Order #{o.id}</div>
                         <div className="acOrderItems">{o.items || ''}</div>
                       </div>
-                      <div className="acOrderSide">
+                      <div className="acOrderSide" style={{ flexShrink: 0 }}>
                         <span className="acStatus">{o.status}</span>
                         <div className="acOrderTotal">৳{Number(o.total_amount || 0).toLocaleString()}</div>
                       </div>
