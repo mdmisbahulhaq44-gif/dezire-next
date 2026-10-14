@@ -43,7 +43,7 @@ export function ShopProvider({ children }) {
           clearTimeout(window.__dzInstant)
           window.__dzInstant = setTimeout(() => root.removeAttribute('data-instant'), 800)
         }
-        if (next === 'account') fadeSwap(() => setActivePanel(next)); else setActivePanel(next)
+        setPanel(next)
       }
     }
     window.addEventListener('popstate', onPop)
@@ -169,17 +169,35 @@ export function ShopProvider({ children }) {
   }
 
   // Smooth cross-fade between two screens (same native cross-fade the page transitions use)
+  // Several changes made by one tap are queued and applied together, so nothing flashes in between.
   const fadingRef = useRef(false)
+  const fadeQ = useRef(null)
+  function canFade() {
+    return !!document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  }
   function fadeSwap(update) {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (fadingRef.current || reduced || !document.startViewTransition) { update(); return }
-    fadingRef.current = true
-    setTimeout(() => { fadingRef.current = false }, 1000)
-    try {
-      document.startViewTransition(() => {
-        try { flushSync(update) } finally { fadingRef.current = false }
-      })
-    } catch (e) { fadingRef.current = false; update() }
+    if (fadingRef.current || !canFade()) { update(); return }
+    if (fadeQ.current) { fadeQ.current.push(update); return }
+    const q = [update]
+    fadeQ.current = q
+    const run = () => {
+      if (fadeQ.current !== q) return
+      fadeQ.current = null
+      fadingRef.current = true
+      try { flushSync(() => { q.forEach(u => u()) }) } finally { fadingRef.current = false }
+    }
+    try { document.startViewTransition(run) } catch (e) { run() }
+    setTimeout(run, 1000)
+  }
+
+  // Open / close a screen with the smooth cross-fade (no slide, no peek of the page behind)
+  const FADE_PANELS = ['account', 'track', 'wishlist', 'about', 'search']
+  function setPanel(next) {
+    const prev = prevPanel.current
+    if (canFade() && (FADE_PANELS.includes(prev) || FADE_PANELS.includes(next))) {
+      flashInstant()
+      fadeSwap(() => setActivePanel(next))
+    } else setActivePanel(next)
   }
 
   function flashInstant() {
@@ -190,8 +208,7 @@ export function ShopProvider({ children }) {
   }
 
   function swapPanel(name) {
-    if (prevPanel.current === 'account') { flashInstant(); fadeSwap(() => setActivePanel(name)); return }
-    setActivePanel(name)
+    setPanel(name)
   }
 
   const value = {
@@ -212,16 +229,16 @@ export function ShopProvider({ children }) {
     openCart: () => setMiniOpen(true),
     openCartFull: () => setActivePanel('cart'),
     openWishlist: () => swapPanel('wishlist'),
-    openSearch: () => setActivePanel('search'),
+    openSearch: () => setPanel('search'),
     openCheckout: () => setActivePanel('checkout'),
-    openAccount: () => setActivePanel('account'),
+    openAccount: () => setPanel('account'),
     openReset: () => setActivePanel('reset'),
     openTrack: () => swapPanel('track'),
     openAbout: () => swapPanel('about'),
     openSuccess: () => setActivePanel('success'),
-    closePanel: () => setActivePanel(null),
+    closePanel: () => setPanel(null),
     fadeSwap,
-    hidePanel: (instant) => { if (prevPanel.current) { keepHistory.current = true; if (instant) flashInstant(); setActivePanel(null) } },
+    hidePanel: (instant, plain) => { if (prevPanel.current) { keepHistory.current = true; if (instant && !plain && FADE_PANELS.includes(prevPanel.current)) setPanel(null); else { if (instant) flashInstant(); setActivePanel(null) } } },
     addToCart,
     changeQty,
     removeFromCart,
