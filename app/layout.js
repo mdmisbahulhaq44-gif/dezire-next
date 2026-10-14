@@ -71,7 +71,7 @@ export const viewport = {
 
 export default function RootLayout({ children, modal }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={quicksand.className}>
         <script
           type="application/ld+json"
