@@ -127,6 +127,14 @@ export default function AccountPanel() {
     }
     return () => { root.removeAttribute('data-acmenu'); root.removeAttribute('data-achead') }
   }, [showAccount, view, pathname])
+  // product opened from My Orders: if the visitor leaves the product by a forward link (not Back), My Orders steps aside
+  useEffect(() => {
+    const root = document.documentElement
+    if (!root.hasAttribute('data-acprod') || pathname.startsWith('/product/')) return
+    root.removeAttribute('data-acprod')
+    if (Date.now() - lastPop.current > 1500 && apRef.current) hidePanel(true, true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
   const [session, setSession] = useState(null)
   const [orders, setOrders] = useState(null)
   const [orderQ, setOrderQ] = useState('')
@@ -350,11 +358,9 @@ export default function AccountPanel() {
         data-hold="400"
         onClick={e => {
           e.stopPropagation()
-          navTo.current = '/product/' + p.id
-          window.__dzAcHold = performance.now() + 340
-          window.__dzAccRet = true
-          window.__dzFromAccount = navTo.current
-          setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000)
+          // My Orders stays in place under the product, so closing the product shows it again at once (Home is never seen)
+          window.__dzFromAccount = '/product/' + p.id
+          document.documentElement.setAttribute('data-acprod', '1')
         }}
       >
         <FadeImg src={cldOpt(p.img, 500)} alt={p.name} />

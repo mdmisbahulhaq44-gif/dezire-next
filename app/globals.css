@@ -1830,3 +1830,6 @@ html[data-acmenu] .miniCart{z-index:711}
 .fsEmpty{min-height:62vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 9%}
 .fsEmpty h2{font-size:22px;font-weight:700;color:#111;letter-spacing:.3px;margin:0 0 10px}
 .fsEmpty p{font-size:14px;line-height:1.7;color:var(--muted);margin:0 0 26px}
+
+/* product opened from My Orders: the product sits above My Orders, which stays underneath */
+html[data-acprod] #productPanel,html[data-acprod] #productPreview{z-index:502}
