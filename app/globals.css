@@ -1817,3 +1817,7 @@ html{background:#fff}
 
 /* My Account menu: a white strip always backs the header area, so the page behind (Home) can never show above the menu while going Back */
 html[data-acmenu]::before{content:'';position:fixed;left:0;right:0;top:0;height:var(--acTop,0px);background:#fff;z-index:590;pointer-events:none}
+
+/* My Account open: the mini cart (and its dim layer) sit above the header and bottom bar, so nothing covers its top */
+html[data-acmenu] .miniOverlay{z-index:710}
+html[data-acmenu] .miniCart{z-index:711}
