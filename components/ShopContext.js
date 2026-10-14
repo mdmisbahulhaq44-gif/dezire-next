@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, useRef } from 'react'
+import { flushSync } from 'react-dom'
 import { getCart, saveCart, cartCount, cartSubtotal } from '../lib/cart'
 import { getWishlist, saveWishlist } from '../lib/wishlist'
 
@@ -42,7 +43,7 @@ export function ShopProvider({ children }) {
           clearTimeout(window.__dzInstant)
           window.__dzInstant = setTimeout(() => root.removeAttribute('data-instant'), 800)
         }
-        setActivePanel(next)
+        if (next === 'account') fadeSwap(() => setActivePanel(next)); else setActivePanel(next)
       }
     }
     window.addEventListener('popstate', onPop)
@@ -167,6 +168,20 @@ export function ShopProvider({ children }) {
     saveWishlist(next)
   }
 
+  // Smooth cross-fade between two screens (same native cross-fade the page transitions use)
+  const fadingRef = useRef(false)
+  function fadeSwap(update) {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (fadingRef.current || reduced || !document.startViewTransition) { update(); return }
+    fadingRef.current = true
+    setTimeout(() => { fadingRef.current = false }, 1000)
+    try {
+      document.startViewTransition(() => {
+        try { flushSync(update) } finally { fadingRef.current = false }
+      })
+    } catch (e) { fadingRef.current = false; update() }
+  }
+
   function flashInstant() {
     const root = document.documentElement
     root.setAttribute('data-instant', '1')
@@ -175,7 +190,7 @@ export function ShopProvider({ children }) {
   }
 
   function swapPanel(name) {
-    if (prevPanel.current === 'account') flashInstant()
+    if (prevPanel.current === 'account') { flashInstant(); fadeSwap(() => setActivePanel(name)); return }
     setActivePanel(name)
   }
 
@@ -205,6 +220,7 @@ export function ShopProvider({ children }) {
     openAbout: () => swapPanel('about'),
     openSuccess: () => setActivePanel('success'),
     closePanel: () => setActivePanel(null),
+    fadeSwap,
     hidePanel: (instant) => { if (prevPanel.current) { keepHistory.current = true; if (instant) flashInstant(); setActivePanel(null) } },
     addToCart,
     changeQty,

@@ -9,7 +9,7 @@ const SHOP_PHONE = '8801877270165'
 
 export default function BottomNav() {
   const router = useRouter()
-  const { openAccount, openTrack, activePanel, hidePanel } = useShop()
+  const { openAccount, openTrack, activePanel, hidePanel, fadeSwap } = useShop()
   const onAccount = activePanel === 'account'
   // tab switches swap at once (no slide), like a native app
   function instant() { const r = document.documentElement; r.setAttribute('data-instant', '1'); clearTimeout(window.__dzInstant); window.__dzInstant = setTimeout(() => r.removeAttribute('data-instant'), 800) }
@@ -18,7 +18,7 @@ export default function BottomNav() {
 
   return (
     <div className="bottomNav">
-      <button className={onAccount ? '' : 'active'} onClick={() => { hidePanel(true); router.push('/'); window.scrollTo(0, 0) }}>
+      <button className={onAccount ? '' : 'active'} onClick={() => { if (activePanel) fadeSwap(() => hidePanel(true)); router.push('/'); window.scrollTo(0, 0) }}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <path d="M3 10.5 12 3l9 7.5"/>
@@ -44,7 +44,7 @@ export default function BottomNav() {
         </span>
         WhatsApp
       </button>
-      <button onClick={() => { instant(); openTrack() }}>
+      <button onClick={() => { instant(); fadeSwap(() => openTrack()) }}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <path d="M21 8 12 3 3 8l9 5 9-5Z"/>
@@ -54,7 +54,7 @@ export default function BottomNav() {
         </span>
         Track
       </button>
-      <button className={onAccount ? 'active' : ''} onClick={() => { if (!onAccount) { const r = document.documentElement; r.setAttribute('data-instant', '1'); clearTimeout(window.__dzInstant); window.__dzInstant = setTimeout(() => r.removeAttribute('data-instant'), 800) } openAccount() }}>
+      <button className={onAccount ? 'active' : ''} onClick={() => { if (!onAccount) { const r = document.documentElement; r.setAttribute('data-instant', '1'); clearTimeout(window.__dzInstant); window.__dzInstant = setTimeout(() => r.removeAttribute('data-instant'), 800) } if (onAccount) openAccount(); else fadeSwap(() => openAccount()) }}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
             <circle cx="12" cy="8" r="3.5"/>

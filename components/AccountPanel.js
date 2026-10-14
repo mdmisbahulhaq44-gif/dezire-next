@@ -44,7 +44,7 @@ export default function AccountPanel() {
   const router = useRouter()
   const pathname = usePathname()
   const navTo = useRef(null)
-  const { activePanel, closePanel, hidePanel, showToast, openReset, openTrack, openWishlist, openAbout, openSearch, openCart, cartCount } = useShop()
+  const { activePanel, closePanel, hidePanel, showToast, openReset, openTrack, openWishlist, openAbout, openSearch, openCart, cartCount, fadeSwap } = useShop()
   const showAccount = activePanel === 'account'
   const showReset = activePanel === 'reset'
 
@@ -188,7 +188,7 @@ export default function AccountPanel() {
   useEffect(() => {
     function onPop(e) {
       const st = e.state
-      if (st && st.dzPanel === 'account') setView(st.dzView || 'menu')
+      if (st && st.dzPanel === 'account') { if (apRef.current === 'account') fadeSwap(() => setView(st.dzView || 'menu')); else setView(st.dzView || 'menu') }
     }
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
@@ -198,13 +198,13 @@ export default function AccountPanel() {
     if (v === view) return
     const st = window.history.state || {}
     window.history.pushState({ ...st, dzPanel: 'account', dzView: v, dzDepth: (st.dzDepth || 0) + 1 }, '')
-    setView(v)
+    fadeSwap(() => setView(v))
   }
 
   function backView(fallback) {
     const st = window.history.state || {}
     if ((st.dzDepth || 0) > 1 && st.dzView) window.history.back()
-    else setView(fallback)
+    else fadeSwap(() => setView(fallback))
   }
 
   async function login(e) {
@@ -391,7 +391,7 @@ export default function AccountPanel() {
             onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
             go={path => { const target = path.split('?')[0]; navTo.current = target; window.__dzFromAccount = target; window.__dzRet = { from: pathname, to: target }; document.documentElement.setAttribute('data-nav', '1'); router.push(path); setTimeout(() => { if (navTo.current === target) window.location.assign(path) }, 4000) }}
-            openPanel={name => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
+            openPanel={name => { fadeSwap(() => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }) }}
             showToast={showToast}
           />
         )}
