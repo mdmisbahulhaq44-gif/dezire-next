@@ -352,6 +352,7 @@ export default function AccountPanel() {
           e.stopPropagation()
           navTo.current = '/product/' + p.id
           window.__dzAcHold = performance.now() + 340
+          window.__dzAccRet = true
           window.__dzFromAccount = navTo.current
           setTimeout(() => { if (navTo.current) { navTo.current = null; hidePanel(true) } }, 3000)
         }}
