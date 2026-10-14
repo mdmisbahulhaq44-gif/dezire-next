@@ -116,7 +116,7 @@ export default function AccountPanel() {
       const nav = document.querySelector('nav')
       const r = nav ? nav.getBoundingClientRect() : null
       const ok = !!r && r.height > 0 && r.top > -20 && r.top < 100
-      root.style.setProperty('--acTop', ok ? Math.round(r.bottom) + 'px' : '0px')
+      root.style.setProperty('--acTop', ok ? Math.round(r.bottom) + 'px' : (/^\/(contact|terms|refund-policy|privacy)$/.test(pathname) || window.__dzRet ? '46px' : '0px'))
       if (ok) root.setAttribute('data-achead', '1')
       setRealHeader(ok)
       root.setAttribute('data-acmenu', '1')

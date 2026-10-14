@@ -1814,3 +1814,6 @@ html{background:#fff}
 
 /* profile photo: light grey circle while the picture loads (no black flash) */
 .acAvatar.on:has(.acAvatarImg){background:#e9e9e9}
+
+/* My Account menu: a white strip always backs the header area, so the page behind (Home) can never show above the menu while going Back */
+html[data-acmenu]::before{content:'';position:fixed;left:0;right:0;top:0;height:var(--acTop,0px);background:#fff;z-index:590;pointer-events:none}
