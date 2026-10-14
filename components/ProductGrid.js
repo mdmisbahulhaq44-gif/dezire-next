@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { cldOpt } from "../lib/cloudinary"
 
-export default function ProductGrid({ products, replaceLinks }) {
+export default function ProductGrid({ products, replaceLinks, noPreview }) {
   if (!products.length) {
     return <div className="empty">No products available right now.</div>
   }
@@ -21,7 +21,7 @@ export default function ProductGrid({ products, replaceLinks }) {
             key={p.id}
             replace={replaceLinks}
             data-replace={replaceLinks ? "1" : undefined}
-            data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg })}
+            data-preview={noPreview ? undefined : JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg })}
           >
             <div className="productImage" style={{ position: "relative", opacity: soldOut ? 0.55 : 1 }}>
               {soldOut ? (

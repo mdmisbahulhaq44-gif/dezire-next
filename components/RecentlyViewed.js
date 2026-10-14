@@ -34,7 +34,7 @@ export default function RecentlyViewed() {
         </h2>
       </div>
       <div style={{ padding: '0 5% 40px' }}>
-        <ProductGrid products={products} />
+        <ProductGrid products={products} noPreview />
       </div>
     </>
   )

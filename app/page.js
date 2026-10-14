@@ -99,7 +99,7 @@ export default async function HomePage() {
 
       {flashProducts.length > 0 && (
         <FlashSection endsAt={flashEndsAt}>
-          <ProductGrid products={flashProducts} />
+          <ProductGrid products={flashProducts} noPreview />
         </FlashSection>
       )}
 
@@ -110,7 +110,7 @@ export default async function HomePage() {
       </div>
 
       <div style={{ padding: "0 5% 40px" }}>
-        <ProductGrid products={products} />
+        <ProductGrid products={products} noPreview />
       </div>
 
 <RecentlyViewed />
