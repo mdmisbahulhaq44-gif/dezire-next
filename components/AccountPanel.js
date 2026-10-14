@@ -115,7 +115,7 @@ export default function AccountPanel() {
       // the shop's own top bar stays visible above My Account (same header as the home page)
       const nav = document.querySelector('nav')
       const r = nav ? nav.getBoundingClientRect() : null
-      const ok = !!r && r.height > 0 && r.top >= -1 && r.top < 8
+      const ok = !!r && r.height > 0 && r.top > -20 && r.top < 100
       root.style.setProperty('--acTop', ok ? Math.round(r.bottom) + 'px' : '0px')
       if (ok) root.setAttribute('data-achead', '1')
       setRealHeader(ok)

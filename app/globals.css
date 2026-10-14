@@ -1808,3 +1808,9 @@ body:has(.staticPage){padding-bottom:0}
 /* Buy Now: light outline style, so it does not show as heavy dark blocks while a product opens (cross-fade) */
 .product .buyNow{box-sizing:border-box;height:32px;line-height:29px;background:#fff;color:#111;border:1.5px solid #111;border-radius:10px;font-size:11.5px;letter-spacing:.9px}
 .product:active .buyNow{background:#f2f2f2;opacity:1}
+
+/* opaque page background so cross-fades never show a dark gap */
+html{background:#fff}
+
+/* profile photo: light grey circle while the picture loads (no black flash) */
+.acAvatar.on:has(.acAvatarImg){background:#e9e9e9}
