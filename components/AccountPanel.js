@@ -205,23 +205,28 @@ export default function AccountPanel() {
   useEffect(() => {
     function onPop(e) {
       const st = e.state
-      if (st && st.dzPanel === 'account') { if (apRef.current === 'account') fadeSwap(() => setView(st.dzView || 'menu')); else setView(st.dzView || 'menu') }
+      if (st && st.dzPanel === 'account') { if (apRef.current === 'account') swapView(st.dzView || 'menu'); else setView(st.dzView || 'menu') }
     }
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
+  // inside My Account the screens change at once (no cross-fade of old over new); the new one fades in slowly and softly
+  const [fadeTick, setFadeTick] = useState(0)
+  function swapView(v) { setView(v); setFadeTick(t => t + 1) }
+  useEffect(() => { if (!showAccount) setFadeTick(0) }, [showAccount])
+
   function navView(v) {
     if (v === view) return
     const st = window.history.state || {}
     window.history.pushState({ ...st, dzPanel: 'account', dzView: v, dzDepth: (st.dzDepth || 0) + 1 }, '')
-    fadeSwap(() => setView(v))
+    swapView(v)
   }
 
   function backView(fallback) {
     const st = window.history.state || {}
     if ((st.dzDepth || 0) > 1 && st.dzView) window.history.back()
-    else fadeSwap(() => setView(fallback))
+    else swapView(fallback)
   }
 
   async function login(e) {
@@ -372,7 +377,7 @@ export default function AccountPanel() {
 
   return (
     <>
-      <div className={`panel${showAccount ? ' show' : ''}${showAccount && view === 'menu' ? ' acMenuOn' : ''}`}>
+      <div className={`panel${showAccount ? ' show' : ''}${showAccount && view === 'menu' ? ' acMenuOn' : ''}${fadeTick ? (fadeTick % 2 ? ' acFadeA' : ' acFadeB') : ''}`}>
         {(view !== 'menu' || !realHeader) && (
           <div className="panelHead acHead">
             {view !== 'menu' && (

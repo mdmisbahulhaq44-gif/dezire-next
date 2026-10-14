@@ -1833,3 +1833,9 @@ html[data-acmenu] .miniCart{z-index:711}
 
 /* product opened from My Orders: the product sits above My Orders, which stays underneath */
 html[data-acprod] #productPanel,html[data-acprod] #productPreview{z-index:502}
+
+/* My Account: screen changes happen at once, the new screen fades in slowly (no old text under new text) */
+@keyframes acInA{from{opacity:0}to{opacity:1}}
+@keyframes acInB{from{opacity:0}to{opacity:1}}
+.panel.acFadeA > *{animation:acInA .55s cubic-bezier(.22,.61,.36,1) both}
+.panel.acFadeB > *{animation:acInB .55s cubic-bezier(.22,.61,.36,1) both}
