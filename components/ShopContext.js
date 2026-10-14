@@ -176,7 +176,7 @@ export function ShopProvider({ children }) {
     return !!document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   }
   function fadeSwap(update) {
-    if (fadingRef.current || !canFade()) { update(); return }
+    if (fadingRef.current || window.__dzReplay || !canFade()) { update(); return }
     if (fadeQ.current) { fadeQ.current.push(update); return }
     const q = [update]
     fadeQ.current = q

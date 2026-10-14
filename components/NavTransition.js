@@ -31,7 +31,7 @@ export default function NavTransition() {
       if (replaying) return
       const st = e.state
       if (!st || !(st.__NA || st.__PRIVATE_NEXTJS_INTERNALS_TREE)) return
-      if (st.dzPanel) return
+      if (st.dzPanel && pathRef.current.startsWith('/product/')) return
       if (location.pathname === pathRef.current) return
       if (location.pathname.startsWith('/admin') || pathRef.current.startsWith('/admin')) return
 
@@ -41,7 +41,7 @@ export default function NavTransition() {
         if (replayed) return
         replayed = true
         replaying = true
-        try { window.dispatchEvent(new PopStateEvent('popstate', { state: st })) } finally { replaying = false }
+        try { window.__dzReplay = true; window.dispatchEvent(new PopStateEvent('popstate', { state: st })) } finally { window.__dzReplay = false; replaying = false }
       }
       const fallback = setTimeout(replay, 400)
       document.startViewTransition(() => new Promise(resolve => {
