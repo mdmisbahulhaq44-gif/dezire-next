@@ -92,6 +92,14 @@ export default function AccountPanel() {
     }
   }, [pathname])
 
+  // Load the pages behind the menu rows in the background as soon as the site has settled (not only when My Account opens)
+  useEffect(() => {
+    const run = () => ['/refund-policy', '/privacy', '/terms', '/contact', '/flash-sale'].forEach(p => { try { router.prefetch(p) } catch (e) {} })
+    const id = window.requestIdleCallback ? window.requestIdleCallback(run, { timeout: 4000 }) : setTimeout(run, 2500)
+    return () => { if (window.cancelIdleCallback && window.requestIdleCallback) window.cancelIdleCallback(id); else clearTimeout(id) }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   // Warm up the pages behind the menu rows so they open at once, even on a slow connection
   useEffect(() => {
     if (!showAccount) return
@@ -117,7 +125,7 @@ export default function AccountPanel() {
       root.removeAttribute('data-achead')
     }
     return () => { root.removeAttribute('data-acmenu'); root.removeAttribute('data-achead') }
-  }, [showAccount, view])
+  }, [showAccount, view, pathname])
   const [session, setSession] = useState(null)
   const [orders, setOrders] = useState(null)
   const [orderQ, setOrderQ] = useState('')
