@@ -1821,3 +1821,12 @@ html[data-acmenu]::before{content:'';position:fixed;left:0;right:0;top:0;height:
 /* My Account open: the mini cart (and its dim layer) sit above the header and bottom bar, so nothing covers its top */
 html[data-acmenu] .miniOverlay{z-index:710}
 html[data-acmenu] .miniCart{z-index:711}
+
+/* Flash Sale page: same white app-style header as the policy pages (back arrow + small title), no shop header */
+.fsHead{display:flex;align-items:center;gap:6px;padding:12px 4%;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:5}
+.fsHead .back{display:flex;align-items:center;justify-content:center;width:38px;height:38px;margin-left:-8px;border-radius:50%;color:#111;text-decoration:none}
+.fsHead .spTitle{font-size:17px;font-weight:700;color:#111;flex:1}
+.fsHead a.spHome{color:#111;font-size:13px;letter-spacing:3px;font-weight:600;text-decoration:none}
+.fsEmpty{min-height:62vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 9%}
+.fsEmpty h2{font-size:22px;font-weight:700;color:#111;letter-spacing:.3px;margin:0 0 10px}
+.fsEmpty p{font-size:14px;line-height:1.7;color:var(--muted);margin:0 0 26px}

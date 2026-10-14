@@ -2,12 +2,23 @@ import Link from "next/link"
 import { supabaseServer as supabase } from "../../lib/supabaseServer"
 import ShopBrowser from "../../components/ShopBrowser"
 import { FlashBanner } from "../../components/FlashSection"
+import BackLink from "../../components/BackLink"
 
 export const revalidate = 30
 
 export const metadata = {
   title: "Flash Sale - HEAVEN",
   description: "Limited-time flash sale offers from HEAVEN."
+}
+
+function FlashHead() {
+  return (
+    <div className="fsHead">
+      <BackLink className="back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg></BackLink>
+      <span className="spTitle">Flash Sale</span>
+      <Link className="spHome" href="/" prefetch={false}>HEAVEN</Link>
+    </div>
+  )
 }
 
 export default async function FlashSalePage() {
@@ -36,16 +47,20 @@ export default async function FlashSalePage() {
 
   if (!products.length) {
     return (
-      <div style={{ padding: "70px 5%", textAlign: "center" }}>
-        <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>⚡ Flash Sale</h2>
-        <p style={{ color: "var(--muted)", marginTop: 10, fontSize: 14 }}>No flash sale is running right now. Check back soon!</p>
-        <Link href="/" className="btn" style={{ display: "inline-block", marginTop: 22 }}>SHOP NEW ARRIVALS</Link>
+      <div>
+        <FlashHead />
+        <div className="fsEmpty">
+          <h2>No flash sale right now</h2>
+          <p>New offers will appear here. Please check back soon.</p>
+          <Link href="/" className="btn">SHOP NEW ARRIVALS</Link>
+        </div>
       </div>
     )
   }
 
   return (
     <div>
+      <FlashHead />
       <FlashBanner endsAt={endsAt} />
       <ShopBrowser products={products} heading="Flash Sale" initialGender="ALL" />
     </div>
