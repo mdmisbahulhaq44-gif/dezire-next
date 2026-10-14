@@ -3,11 +3,12 @@
 import Link from 'next/link'
 import { useShop } from './ShopContext'
 import { usePathname } from 'next/navigation'
+import { NO_NAV_ROUTES } from '../lib/noNavRoutes'
 
 export default function Header() {
   const { cartCount, wishlistCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer, openTrack, openAbout } = useShop()
   const pathname = usePathname()
-  if (['/contact', '/terms', '/refund-policy', '/privacy'].includes(pathname)) return null
+  if (NO_NAV_ROUTES.includes(pathname)) return null
 
   return (
     <>
