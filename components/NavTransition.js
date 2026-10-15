@@ -31,7 +31,7 @@ export default function NavTransition() {
       if (replaying) return
       const st = e.state
       if (!st || !(st.__NA || st.__PRIVATE_NEXTJS_INTERNALS_TREE)) return
-      if (st.dzPanel && pathRef.current.startsWith('/product/')) return
+      if (st.dzPanel === 'account' || (st.dzPanel && pathRef.current.startsWith('/product/'))) return
       if (location.pathname === pathRef.current) return
       if (location.pathname.startsWith('/admin') || pathRef.current.startsWith('/admin')) return
 
