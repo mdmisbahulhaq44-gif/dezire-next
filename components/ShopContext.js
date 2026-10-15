@@ -91,7 +91,7 @@ export function ShopProvider({ children }) {
         return
       }
       const a = el.closest('a[href]')
-      if (a && a.closest('.panel') && a.origin === window.location.origin && a.pathname !== window.location.pathname) {
+      if (a && a.closest('.panel, .searchLayer') && a.origin === window.location.origin && a.pathname !== window.location.pathname) {
         keepHistory.current = true
         clearTimeout(timer)
         timer = setTimeout(() => { keepHistory.current = false }, 1500)

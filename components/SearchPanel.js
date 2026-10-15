@@ -96,6 +96,7 @@ export default function SearchPanel() {
               <Link
                 href={`/product/${p.id}`}
                 key={p.id}
+                data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: null, img: p.imgs ? p.imgs.split(',')[0].trim() : '', all: p.imgs || '' })}
                 onClick={handleClose}
                 style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 4px', borderBottom: '1px solid rgba(0,0,0,.08)', textDecoration: 'none', color: 'inherit' }}
               >
@@ -124,7 +125,7 @@ export default function SearchPanel() {
                 const firstImg = p.imgs ? p.imgs.split(',')[0].trim() : ''
                 const lowStock = p.stock !== null && p.stock !== undefined && p.stock > 0 && p.stock <= 5
                 return (
-                  <Link href={`/product/${p.id}`} className="product" key={p.id} onClick={handleClose}>
+                  <Link href={`/product/${p.id}`} className="product" key={p.id} data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg, all: p.imgs || '' })} onClick={handleClose}>
                     <div className="productImage">
                       {p.badge && (
                         <span className={`badge ${/sale/i.test(p.badge) ? 'sale' : ''}`}>{p.badge}</span>
