@@ -57,7 +57,7 @@ export default function AccountPanel() {
       const wait = window.__dzAcHold ? Math.max(0, window.__dzAcHold - performance.now()) : 0
       window.__dzAcHold = 0
       if (wait > 0) setTimeout(() => hidePanel(true, true), wait)
-      else hidePanel(true, pathname.startsWith('/product/'))
+      else hidePanel(true, true)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
