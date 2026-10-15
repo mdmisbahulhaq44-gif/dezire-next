@@ -41,6 +41,14 @@ function readableError(err) {
   try { return JSON.stringify(err) } catch (e) { return String(err) }
 }
 
+// the page / menu that appears gets a slow soft fade-in (the old one is already gone, so no text overlaps)
+function softIn() {
+  const r = document.documentElement
+  r.setAttribute('data-acin', '1')
+  clearTimeout(window.__dzAcin)
+  window.__dzAcin = setTimeout(() => r.removeAttribute('data-acin'), 900)
+}
+
 export default function AccountPanel() {
   const router = useRouter()
   const pathname = usePathname()
@@ -57,7 +65,7 @@ export default function AccountPanel() {
       const wait = window.__dzAcHold ? Math.max(0, window.__dzAcHold - performance.now()) : 0
       window.__dzAcHold = 0
       if (wait > 0) setTimeout(() => hidePanel(true, true), wait)
-      else hidePanel(true, true)
+      { softIn(); hidePanel(true, true) }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])

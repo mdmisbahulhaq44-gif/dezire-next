@@ -44,7 +44,13 @@ export function ShopProvider({ children }) {
           window.__dzInstant = setTimeout(() => root.removeAttribute('data-instant'), 800)
         }
         // coming back to My Account: at once, no cross-fade of old page over the menu
-        if (next === 'account') setActivePanel(next); else setPanel(next)
+        if (next === 'account') {
+          const r = document.documentElement
+          r.setAttribute('data-acin', '1')
+          clearTimeout(window.__dzAcin)
+          window.__dzAcin = setTimeout(() => r.removeAttribute('data-acin'), 900)
+          setActivePanel(next)
+        } else setPanel(next)
       }
     }
     window.addEventListener('popstate', onPop)

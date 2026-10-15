@@ -1844,3 +1844,13 @@ html[data-acprod] #productPanel,html[data-acprod] #productPreview{z-index:502}
 @keyframes acInA{from{opacity:.35}to{opacity:1}}
 @keyframes acInB{from{opacity:.35}to{opacity:1}}
 .panel.acFadeA > .panelHead,.panel.acFadeB > .panelHead{animation:none}
+
+/* slow, soft arrival of the new screen (old one is already gone): light veil + a small rise */
+@keyframes acInA{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes acInB{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes acInP{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:none}}
+.panel.acFadeA > *{animation:acInA .5s cubic-bezier(.22,.61,.36,1) backwards}
+.panel.acFadeB > *{animation:acInB .5s cubic-bezier(.22,.61,.36,1) backwards}
+.panel.acFadeA > .panelHead,.panel.acFadeB > .panelHead{animation:none}
+html[data-acin] #main-content{animation:acInP .5s cubic-bezier(.22,.61,.36,1) backwards}
+html[data-acin] .panel.acMenuOn > *:not(.panelHead){animation:acInP .5s cubic-bezier(.22,.61,.36,1) backwards}
