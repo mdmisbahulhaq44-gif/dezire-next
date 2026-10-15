@@ -1879,3 +1879,8 @@ html[data-dnav] .drawer,html[data-dnav] .overlay:has(+ .drawer){transition:none 
 .drawer a.dtProd .dtProdName{min-width:0}
 .drawer a.dtProd .dtProdPrice{flex-shrink:0;color:#888;font-size:12px}
 .drawer .dtNote{display:block;width:100%;padding:14px 0;font-size:13px;color:#888;background:none;border:0;border-bottom:1px solid rgba(0,0,0,.08);text-align:left;font-family:inherit}
+
+/* product opened from the search screen: search stays underneath the product until it is ready */
+html[data-sprod] .searchLayer{z-index:502}
+html[data-sprod] .slBar{visibility:hidden}
+html[data-sprod] #productPanel,html[data-sprod] #productPreview{z-index:503}

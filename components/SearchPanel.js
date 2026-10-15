@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
@@ -14,7 +15,9 @@ function clean(q) {
 }
 
 export default function SearchPanel() {
-  const { activePanel, closePanel, showToast } = useShop()
+  const { activePanel, closePanel, hidePanel, showToast } = useShop()
+  const pathname = usePathname()
+  const pending = useRef(false)
   const show = activePanel === 'search'
 
   const [query, setQuery] = useState('')
@@ -69,6 +72,29 @@ export default function SearchPanel() {
     setResults(data || [])
   }
 
+  // A result was tapped: the search screen stays under the product while it fades in, then hides behind it (Home is never seen)
+  function openProduct() {
+    pending.current = true
+    document.documentElement.setAttribute('data-sprod', '1')
+    setTimeout(() => {
+      if (!pending.current) return
+      pending.current = false
+      document.documentElement.removeAttribute('data-sprod')
+      handleClose()
+    }, 8000)
+  }
+
+  useEffect(() => {
+    if (!pending.current || !pathname || !pathname.startsWith('/product/')) return
+    pending.current = false
+    hidePanel(true, true)
+    setQuery('')
+    setSuggestions(null)
+    setResults(null)
+    setTimeout(() => document.documentElement.removeAttribute('data-sprod'), 1200)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
+
   function handleClose() {
     closePanel()
     setQuery('')
@@ -97,7 +123,8 @@ export default function SearchPanel() {
                 href={`/product/${p.id}`}
                 key={p.id}
                 data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: null, img: p.imgs ? p.imgs.split(',')[0].trim() : '', all: p.imgs || '' })}
-                onClick={handleClose}
+                data-hold="400"
+                onClick={openProduct}
                 style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 4px', borderBottom: '1px solid rgba(0,0,0,.08)', textDecoration: 'none', color: 'inherit' }}
               >
                 <div style={{ width: 40, height: 50, background: 'var(--cream)', borderRadius: 10, overflow: 'hidden', flexShrink: 0 }}>
@@ -125,7 +152,7 @@ export default function SearchPanel() {
                 const firstImg = p.imgs ? p.imgs.split(',')[0].trim() : ''
                 const lowStock = p.stock !== null && p.stock !== undefined && p.stock > 0 && p.stock <= 5
                 return (
-                  <Link href={`/product/${p.id}`} className="product" key={p.id} data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg, all: p.imgs || '' })} onClick={handleClose}>
+                  <Link href={`/product/${p.id}`} className="product" key={p.id} data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg, all: p.imgs || '' })} data-hold="400" onClick={openProduct}>
                     <div className="productImage">
                       {p.badge && (
                         <span className={`badge ${/sale/i.test(p.badge) ? 'sale' : ''}`}>{p.badge}</span>
