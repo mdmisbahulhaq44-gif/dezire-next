@@ -44,7 +44,8 @@ function ProductRow({ p, onNavigate }) {
       className="dtProd"
       href={'/product/' + p.id}
       prefetch={false}
-      onClick={onNavigate}
+      // the menu stays under the product while it fades in, then closes behind it (so the page underneath is never seen)
+      onClick={() => setTimeout(onNavigate, 450)}
       data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img })}
     >
       <span className="dtProdName">{p.name}</span>
