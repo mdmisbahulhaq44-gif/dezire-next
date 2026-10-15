@@ -364,7 +364,6 @@ export default function AccountPanel() {
     return (
       <Link
         href={'/product/' + p.id}
-        prefetch={false}
         style={box}
         aria-label={p.name}
         data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old, img: p.img })}
