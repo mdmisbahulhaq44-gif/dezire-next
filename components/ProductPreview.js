@@ -115,7 +115,18 @@ export default function ProductPreview() {
         </div>
       </div>
 
-      <div style={{ paddingTop: 18 }}>
+      {p.img && (
+        // same thumbnail row as the real page, so when the real page arrives the photos only fill in (nothing below jumps)
+        <div className="pdThumbs">
+          {[0, 1, 2, 3].map(i => (
+            <div key={i} className={'pdThumb' + (i === 0 ? ' active' : '')}>
+              {i === 0 && <img src={cldOpt(p.img, 240)} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div style={{ paddingTop: 14 }}>
         <div style={bar('62%', 24, 6)}></div>
         <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6, minHeight: 18 }}></div>
 <div style={bar('28%', 20, 14)}></div>

@@ -286,7 +286,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           <div className="pdThumbs">
             {images.map((url, i) => (
               <button type="button" key={i} className={`pdThumb${i === index ? ' active' : ''}`} onClick={() => setIndex(i)} aria-label={`Photo ${i + 1}`}>
-                <Image src={cldOpt(url, 240)} alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} loading="lazy" quality={60} />
+                <Image src={cldOpt(url, 240)} alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} loading={i < 8 ? 'eager' : 'lazy'} quality={60} />
               </button>
             ))}
           </div>
