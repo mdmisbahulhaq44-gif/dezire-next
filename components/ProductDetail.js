@@ -350,7 +350,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                       replace
                       data-replace="1"
                       title={(c.color_name || c.name) + (out ? ' (sold out)' : '')}
-                      data-preview={JSON.stringify({ id: c.id, name: c.name, price: c.price, old: c.old || null, img })}
+                      data-preview={JSON.stringify({ id: c.id, name: c.name, price: c.price, old: c.old || null, img, all: c.imgs || '' })}
                     >{box}</Link>
                   )
                 })}

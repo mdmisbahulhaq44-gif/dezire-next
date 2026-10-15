@@ -50,7 +50,7 @@ export default function ShopAside() {
                 <Link
                   key={p.id}
                   href={'/product/' + p.id}
-                  data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img })}
+                  data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img, all: p.imgs || '' })}
                 >
                   <span className="rvImg">
                     {img ? <Image src={cldOpt(img, 160)} alt="" fill sizes="65px" style={{ objectFit: 'cover' }} quality={60} /> : null}

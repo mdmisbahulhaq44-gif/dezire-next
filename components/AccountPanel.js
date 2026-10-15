@@ -201,7 +201,7 @@ export default function AccountPanel() {
         supabase.from('products').select('id,name,price,old,imgs').in('id', ids).then(({ data: ps }) => {
           const map = {}
           ;(ps || []).forEach(p => {
-            map[p.id] = { id: p.id, name: p.name, price: p.price, old: p.old || null, img: (p.imgs || '').split(',')[0].trim() }
+            map[p.id] = { id: p.id, name: p.name, price: p.price, old: p.old || null, img: (p.imgs || '').split(',')[0].trim(), all: p.imgs || '' }
           })
           ORDER_PRODS = { ...ORDER_PRODS, ...map }
           setOrderProds(ORDER_PRODS)
@@ -366,7 +366,7 @@ export default function AccountPanel() {
         href={'/product/' + p.id}
         style={box}
         aria-label={p.name}
-        data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old, img: p.img })}
+        data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old, img: p.img, all: p.all || '' })}
         data-hold="400"
         onClick={e => {
           e.stopPropagation()

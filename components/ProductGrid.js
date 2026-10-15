@@ -21,7 +21,7 @@ export default function ProductGrid({ products, replaceLinks, noPreview }) {
             key={p.id}
             replace={replaceLinks}
             data-replace={replaceLinks ? "1" : undefined}
-            data-preview={noPreview ? undefined : JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg })}
+            data-preview={noPreview ? undefined : JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg, all: p.imgs || '' })}
           >
             <div className="productImage" style={{ position: "relative", opacity: soldOut ? 0.55 : 1 }}>
               {soldOut ? (

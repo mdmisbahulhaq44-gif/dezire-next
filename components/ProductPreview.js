@@ -73,6 +73,7 @@ export default function ProductPreview() {
   }, [pathname, router])
 
   if (!p) return null
+  const thumbs = p.all ? String(p.all).split(',').map(s => s.trim()).filter(Boolean) : []
 
   const bar = (w, h, mt) => ({
     width: w,
@@ -115,12 +116,12 @@ export default function ProductPreview() {
         </div>
       </div>
 
-      {p.img && (
-        // same thumbnail row as the real page, so when the real page arrives the photos only fill in (nothing below jumps)
+      {thumbs.length > 1 && (
+        // same thumbnails as the real page (same photos, same rows), so nothing shifts or pops in when the real page arrives
         <div className="pdThumbs">
-          {[0, 1, 2, 3].map(i => (
+          {thumbs.map((u, i) => (
             <div key={i} className={'pdThumb' + (i === 0 ? ' active' : '')}>
-              {i === 0 && <img src={cldOpt(p.img, 240)} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
+              <img src={cldOpt(u, 240)} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           ))}
         </div>
