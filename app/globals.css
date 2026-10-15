@@ -1854,3 +1854,5 @@ html[data-acprod] #productPanel,html[data-acprod] #productPreview{z-index:502}
 .panel.acFadeA > .panelHead,.panel.acFadeB > .panelHead{animation:none}
 html[data-acin] #main-content{animation:acInP .5s cubic-bezier(.22,.61,.36,1) backwards}
 html[data-acin] .panel.acMenuOn > *:not(.panelHead){animation:acInP .5s cubic-bezier(.22,.61,.36,1) backwards}
+
+html[data-acin] .panel.show > *:not(.panelHead){animation:acInP .5s cubic-bezier(.22,.61,.36,1) backwards}

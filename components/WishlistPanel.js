@@ -38,7 +38,7 @@ export default function WishlistPanel() {
   return (
     <div className={`panel left${show ? ' show' : ''}`}>
       <div className="panelHead acHead">
-        <button type="button" className="acBackBtn" aria-label="Back" onClick={closePanel}>
+        <button type="button" className="acBackBtn" aria-label="Back" onClick={() => { const st = window.history.state || {}; if (st.dzDepth > 0) window.history.back(); else closePanel() }}>
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
         </button>
         <h2 className="acTitle">Wishlist</h2>

@@ -201,6 +201,16 @@ export function ShopProvider({ children }) {
   const FADE_PANELS = ['account', 'track', 'wishlist', 'about', 'search']
   function setPanel(next) {
     const prev = prevPanel.current
+    // My Account menu -> Wishlist / About Us: at once (no cross-fade), the new screen fades in softly; Back returns to the menu
+    if (prev === 'account' && (next === 'wishlist' || next === 'about')) {
+      flashInstant()
+      const r = document.documentElement
+      r.setAttribute('data-acin', '1')
+      clearTimeout(window.__dzAcin)
+      window.__dzAcin = setTimeout(() => r.removeAttribute('data-acin'), 900)
+      setActivePanel(next)
+      return
+    }
     if (canFade() && (FADE_PANELS.includes(prev) || FADE_PANELS.includes(next))) {
       flashInstant()
       fadeSwap(() => setActivePanel(next))

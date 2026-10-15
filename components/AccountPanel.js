@@ -420,7 +420,7 @@ export default function AccountPanel() {
             onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
             go={path => { const target = path.split('?')[0]; navTo.current = target; window.__dzFromAccount = target; window.__dzRet = { from: pathname, to: target }; document.documentElement.setAttribute('data-nav', '1'); router.push(path); setTimeout(() => { if (navTo.current === target) window.location.assign(path) }, 4000) }}
-            openPanel={name => { fadeSwap(() => { closePanel(); if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }) }}
+            openPanel={name => { if (name === 'wishlist' && openWishlist) openWishlist(); if (name === 'about' && openAbout) openAbout() }}
             showToast={showToast}
           />
         )}
