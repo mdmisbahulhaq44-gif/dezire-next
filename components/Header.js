@@ -3,12 +3,22 @@
 import Link from 'next/link'
 import { useShop } from './ShopContext'
 import { usePathname } from 'next/navigation'
+import DrawerTree from './DrawerTree'
 import { NO_NAV_ROUTES } from '../lib/noNavRoutes'
 
 export default function Header() {
   const { cartCount, wishlistCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer, openTrack, openAbout } = useShop()
   const pathname = usePathname()
   if (NO_NAV_ROUTES.includes(pathname)) return null
+
+  // a menu link that leaves the menu closes it at once (no slow slide under the page change); the x / dim area keep the slow slide
+  function navClose() {
+    const r = document.documentElement
+    r.setAttribute('data-dnav', '1')
+    clearTimeout(window.__dzDnav)
+    window.__dzDnav = setTimeout(() => r.removeAttribute('data-dnav'), 700)
+    closeDrawer()
+  }
 
   return (
     <>
@@ -45,14 +55,14 @@ export default function Header() {
           <div className="logo" style={{ fontSize: 18 }}>HEAVEN</div>
           <button className="close" onClick={closeDrawer}>×</button>
         </div>
-        <Link href="/flash-sale" onClick={closeDrawer}>⚡ Flash Sale</Link>
-        <Link href="/#new" onClick={closeDrawer}>New Arrivals</Link>
-        <Link href="/shop/women" onClick={closeDrawer}>Women</Link>
-        <Link href="/shop/men" onClick={closeDrawer}>Men</Link>
-        <Link href="/#women" onClick={closeDrawer}>Accessories</Link>
-        <Link href="/#new" onClick={closeDrawer}>Sale</Link>
-        <a href="#" onClick={e => { e.preventDefault(); closeDrawer(); openAbout() }}>About Us</a>
-        <a href="#" onClick={e => { e.preventDefault(); closeDrawer(); openTrack() }}>Track Order</a>
+        <Link href="/flash-sale" onClick={navClose}>⚡ Flash Sale</Link>
+        <Link href="/#new" onClick={navClose}>New Arrivals</Link>
+        <DrawerTree gender="women" label="Women" onNavigate={navClose} />
+        <DrawerTree gender="men" label="Men" onNavigate={navClose} />
+        <Link href="/#women" onClick={navClose}>Accessories</Link>
+        <Link href="/#new" onClick={navClose}>Sale</Link>
+        <a href="#" onClick={e => { e.preventDefault(); navClose(); openAbout() }}>About Us</a>
+        <a href="#" onClick={e => { e.preventDefault(); navClose(); openTrack() }}>Track Order</a>
       </div>
     </>
   )

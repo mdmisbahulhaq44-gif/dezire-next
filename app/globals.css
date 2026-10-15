@@ -1862,3 +1862,20 @@ html[data-acin] .panel.show > *:not(.panelHead){animation:acInP .5s cubic-bezier
 .drawer.show{transform:translateX(0);visibility:visible;transition:transform .85s cubic-bezier(.22,.61,.36,1),visibility 0s}
 .overlay:has(+ .drawer){display:block;opacity:0;visibility:hidden;pointer-events:none;background:rgba(0,0,0,.45);-webkit-backdrop-filter:none;backdrop-filter:none;transition:opacity .85s ease,visibility 0s linear .85s}
 .overlay.show:has(+ .drawer){opacity:1;visibility:visible;pointer-events:auto;transition:opacity .85s ease,visibility 0s}
+
+/* menu tree (Men / Women): a + at the side of every row opens the rows inside it; all rows keep the same size and width */
+html[data-dnav] .drawer,html[data-dnav] .overlay:has(+ .drawer){transition:none !important}
+.drawer .dtRowWrap{display:flex;align-items:stretch;border-bottom:1px solid rgba(0,0,0,.08)}
+.drawer .dtRowWrap > a.dtLink{flex:1;min-width:0;border-bottom:0}
+.drawer button.dtPlus{flex-shrink:0;width:46px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:#111;cursor:pointer}
+.drawer button.dtPlus:active{background:rgba(0,0,0,.05)}
+.drawer .dtPlusIc .dtV{transform-origin:12px 12px;transition:transform .3s ease}
+.drawer .dtPlusIc.open .dtV{transform:scaleY(0)}
+.drawer .dtWrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.22,.61,.36,1)}
+.drawer .dtWrap.open{grid-template-rows:1fr}
+.drawer .dtWrap > div{overflow:hidden;min-height:0}
+.drawer .dtWrap:not(.open) > div{visibility:hidden;transition:visibility 0s linear .35s}
+.drawer a.dtProd{display:flex;justify-content:space-between;gap:10px}
+.drawer a.dtProd .dtProdName{min-width:0}
+.drawer a.dtProd .dtProdPrice{flex-shrink:0;color:#888;font-size:12px}
+.drawer .dtNote{display:block;width:100%;padding:14px 0;font-size:13px;color:#888;background:none;border:0;border-bottom:1px solid rgba(0,0,0,.08);text-align:left;font-family:inherit}
