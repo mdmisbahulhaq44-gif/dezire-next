@@ -18,6 +18,7 @@ export default function SearchPanel() {
   const { activePanel, closePanel, hidePanel, showToast } = useShop()
   const pathname = usePathname()
   const pending = useRef(false)
+  const clickT = useRef(0)
   const show = activePanel === 'search'
 
   const [query, setQuery] = useState('')
@@ -75,6 +76,7 @@ export default function SearchPanel() {
   // A result was tapped: the search screen stays under the product while it fades in, then hides behind it (Home is never seen)
   function openProduct() {
     pending.current = true
+    clickT.current = performance.now()
     document.documentElement.setAttribute('data-sprod', '1')
     setTimeout(() => {
       if (!pending.current) return
@@ -87,7 +89,7 @@ export default function SearchPanel() {
   useEffect(() => {
     if (!pending.current || !pathname || !pathname.startsWith('/product/')) return
     pending.current = false
-    hidePanel(true, true)
+    setTimeout(() => hidePanel(true, true), Math.max(0, 480 - (performance.now() - clickT.current)))
     setTimeout(() => document.documentElement.removeAttribute('data-sprod'), 1200)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
