@@ -88,12 +88,18 @@ export default function SearchPanel() {
     if (!pending.current || !pathname || !pathname.startsWith('/product/')) return
     pending.current = false
     hidePanel(true, true)
-    setQuery('')
-    setSuggestions(null)
-    setResults(null)
     setTimeout(() => document.documentElement.removeAttribute('data-sprod'), 1200)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
+
+  // search closed for real (not because a product opened): forget the old words and results
+  useEffect(() => {
+    if (show || pending.current) return
+    if (window.location.pathname.startsWith('/product/')) return
+    setQuery('')
+    setSuggestions(null)
+    setResults(null)
+  }, [show])
 
   function handleClose() {
     closePanel()

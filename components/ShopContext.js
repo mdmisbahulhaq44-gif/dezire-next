@@ -50,6 +50,10 @@ export function ShopProvider({ children }) {
           clearTimeout(window.__dzAcin)
           window.__dzAcin = setTimeout(() => r.removeAttribute('data-acin'), 900)
           setActivePanel(next)
+        } else if (next === 'search') {
+          // back from a product to the search screen: at once, Home is never seen
+          flashInstant()
+          setActivePanel(next)
         } else setPanel(next)
       }
     }
