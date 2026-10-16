@@ -1884,3 +1884,5 @@ html[data-dnav] .drawer,html[data-dnav] .overlay:has(+ .drawer){transition:none 
 html[data-sprod] .searchLayer{z-index:502}
 html[data-sprod] .slBar{visibility:hidden}
 html[data-sprod] #productPanel,html[data-sprod] #productPreview{z-index:503}
+/* product opened from search: the result list disappears at once, so the product fades in over plain white (nothing shows through) */
+html[data-sprod] .slBody{visibility:hidden}
