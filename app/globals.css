@@ -1886,3 +1886,6 @@ html[data-sprod] .slBar{visibility:hidden}
 html[data-sprod] #productPanel,html[data-sprod] #productPreview{z-index:503}
 /* product opened from search: the result list disappears at once, so the product fades in over plain white (nothing shows through) */
 html[data-sprod] .slBody{visibility:hidden}
+
+/* product opened from search: slow, soft fade-in (same feel as the other screens) */
+html[data-sprod] #productPreview{animation:pdFadeIn 700ms cubic-bezier(.22,.61,.36,1) backwards !important}

@@ -89,7 +89,7 @@ export default function SearchPanel() {
   useEffect(() => {
     if (!pending.current || !pathname || !pathname.startsWith('/product/')) return
     pending.current = false
-    setTimeout(() => hidePanel(true, true), Math.max(0, 480 - (performance.now() - clickT.current)))
+    setTimeout(() => hidePanel(true, true), Math.max(0, 780 - (performance.now() - clickT.current)))
     setTimeout(() => document.documentElement.removeAttribute('data-sprod'), 1200)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
@@ -131,7 +131,7 @@ export default function SearchPanel() {
                 href={`/product/${p.id}`}
                 key={p.id}
                 data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: null, img: p.imgs ? p.imgs.split(',')[0].trim() : '', all: p.imgs || '' })}
-                data-hold="400"
+                data-hold="800"
                 onClick={openProduct}
                 style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 4px', borderBottom: '1px solid rgba(0,0,0,.08)', textDecoration: 'none', color: 'inherit' }}
               >
@@ -160,7 +160,7 @@ export default function SearchPanel() {
                 const firstImg = p.imgs ? p.imgs.split(',')[0].trim() : ''
                 const lowStock = p.stock !== null && p.stock !== undefined && p.stock > 0 && p.stock <= 5
                 return (
-                  <Link href={`/product/${p.id}`} className="product" key={p.id} data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg, all: p.imgs || '' })} data-hold="400" onClick={openProduct}>
+                  <Link href={`/product/${p.id}`} className="product" key={p.id} data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg, all: p.imgs || '' })} data-hold="800" onClick={openProduct}>
                     <div className="productImage">
                       {p.badge && (
                         <span className={`badge ${/sale/i.test(p.badge) ? 'sale' : ''}`}>{p.badge}</span>
