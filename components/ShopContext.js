@@ -215,6 +215,15 @@ export function ShopProvider({ children }) {
       setActivePanel(next)
       return
     }
+    if (next === 'search' || prev === 'search') {
+      flashInstant()
+      const r = document.documentElement
+      r.setAttribute('data-acin', '1')
+      clearTimeout(window.__dzAcin)
+      window.__dzAcin = setTimeout(() => r.removeAttribute('data-acin'), 900)
+      setActivePanel(next)
+      return
+    }
     if (canFade() && (FADE_PANELS.includes(prev) || FADE_PANELS.includes(next))) {
       flashInstant()
       fadeSwap(() => setActivePanel(next))
