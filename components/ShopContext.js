@@ -106,6 +106,10 @@ export function ShopProvider({ children }) {
   }, [])
 
   useEffect(() => {
+    if (activePanel && activePanel !== 'account') document.documentElement.removeAttribute('data-acprod')
+  }, [activePanel])
+
+  useEffect(() => {
     document.body.style.overflow = (activePanel || drawerOpen || miniOpen) ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [activePanel, drawerOpen, miniOpen])
