@@ -221,8 +221,7 @@ export default function AccountPanel() {
 
   // inside My Account the screens change at once (no cross-fade of old over new); the new one fades in slowly and softly
   const [fadeTick, setFadeTick] = useState(0)
-  // tabs inside My Account change at once (no slow fade)
-  function swapView(v) { setView(v) }
+  function swapView(v) { setView(v); setFadeTick(t => t + 1) }
   useEffect(() => { if (!showAccount) setFadeTick(0) }, [showAccount])
 
   function navView(v) {

@@ -1890,3 +1890,13 @@ html[data-sprod] .slBody{visibility:hidden}
 /* product opened from search: slow, soft fade-in (same feel as the other screens) */
 html[data-sprod] #productPreview{animation:pdFadeIn 700ms cubic-bezier(.22,.61,.36,1) backwards !important}
 
+
+/* My Account tabs, and Wishlist / About Us from the menu: instant, with a short light fade-in (smooth, not slow) */
+@keyframes acSoftA{from{opacity:.5}to{opacity:1}}
+@keyframes acSoftB{from{opacity:.5}to{opacity:1}}
+@keyframes acSoftP{from{opacity:.5}to{opacity:1}}
+.panel.acFadeA > *{animation:acSoftA .26s cubic-bezier(.22,.61,.36,1) backwards}
+.panel.acFadeB > *{animation:acSoftB .26s cubic-bezier(.22,.61,.36,1) backwards}
+.panel.acFadeA > .panelHead,.panel.acFadeB > .panelHead{animation:none}
+html[data-acin] .panel.acMenuOn > *:not(.panelHead){animation:acSoftP .26s cubic-bezier(.22,.61,.36,1) backwards}
+html[data-acin] .panel.show > *:not(.panelHead){animation:acSoftP .26s cubic-bezier(.22,.61,.36,1) backwards}
