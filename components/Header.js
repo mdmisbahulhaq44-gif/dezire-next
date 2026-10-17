@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useShop } from './ShopContext'
 import { usePathname } from 'next/navigation'
@@ -9,10 +10,29 @@ import { NO_NAV_ROUTES } from '../lib/noNavRoutes'
 export default function Header() {
   const { cartCount, wishlistCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer, openTrack, openAbout } = useShop()
   const pathname = usePathname()
+  const pendingNav = useRef(null)
+
+  // a menu link to another page: the menu stays until the new page is there, then slides away over it (Home is never seen)
+  useEffect(() => {
+    if (pendingNav.current && pathname !== pendingNav.current.from) {
+      clearTimeout(pendingNav.current.t)
+      pendingNav.current = null
+      closeDrawer()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
+
   if (NO_NAV_ROUTES.includes(pathname)) return null
 
   // a menu link that leaves the menu closes it at once (no slow slide under the page change); the x / dim area keep the slow slide
-  function navClose() {
+  function navClose(e) {
+    const link = e && e.currentTarget
+    const target = link && link.pathname
+    if (target && target !== pathname) {
+      if (pendingNav.current) clearTimeout(pendingNav.current.t)
+      pendingNav.current = { from: pathname, t: setTimeout(() => { pendingNav.current = null; navClose() }, 4000) }
+      return
+    }
     const r = document.documentElement
     r.setAttribute('data-dnav', '1')
     clearTimeout(window.__dzDnav)
