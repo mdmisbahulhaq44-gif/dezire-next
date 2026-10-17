@@ -1900,3 +1900,6 @@ html[data-sprod] #productPreview{animation:pdFadeIn 700ms cubic-bezier(.22,.61,.
 .panel.acFadeA > .panelHead,.panel.acFadeB > .panelHead{animation:none}
 html[data-acin] .panel.acMenuOn > *:not(.panelHead){animation:acSoftP .26s cubic-bezier(.22,.61,.36,1) backwards}
 html[data-acin] .panel.show > *:not(.panelHead){animation:acSoftP .26s cubic-bezier(.22,.61,.36,1) backwards}
+
+/* pages opened from My Account rows (Flash Sale, Contact, Refund, Terms ...): same short light fade as the other screens */
+html[data-acin] #main-content{animation:acSoftP .26s cubic-bezier(.22,.61,.36,1) backwards}
