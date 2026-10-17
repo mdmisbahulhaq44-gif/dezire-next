@@ -216,11 +216,8 @@ export function ShopProvider({ children }) {
       return
     }
     if (next === 'search' || prev === 'search') {
+      // search opens and closes at once: no cross-fade, no slow fade
       flashInstant()
-      const r = document.documentElement
-      r.setAttribute('data-acin', '1')
-      clearTimeout(window.__dzAcin)
-      window.__dzAcin = setTimeout(() => r.removeAttribute('data-acin'), 900)
       setActivePanel(next)
       return
     }

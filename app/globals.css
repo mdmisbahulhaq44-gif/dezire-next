@@ -1890,5 +1890,3 @@ html[data-sprod] .slBody{visibility:hidden}
 /* product opened from search: slow, soft fade-in (same feel as the other screens) */
 html[data-sprod] #productPreview{animation:pdFadeIn 700ms cubic-bezier(.22,.61,.36,1) backwards !important}
 
-/* search screen arrives softly (old screen is already gone) */
-html[data-acin] .searchLayer.show{animation:acInP .5s cubic-bezier(.22,.61,.36,1) backwards}
