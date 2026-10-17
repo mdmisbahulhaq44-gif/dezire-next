@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useShop } from './ShopContext'
 import { cldOpt } from '../lib/cloudinary'
 import BagCount from './BagCount'
+import Money, { CurNote } from './Money'
 
 // Slide-in cart that opens from the left (after "Add to cart" and when a bag button is tapped)
 export default function MiniCart() {
@@ -36,7 +37,7 @@ export default function MiniCart() {
               <div className="miniInfo">
                 <h4>{i.name}</h4>
                 {i.size && <small>Size: {i.size}</small>}
-                <div className="miniPrice">{i.qty} × ৳{Number(i.price).toLocaleString()}</div>
+                <div className="miniPrice">{i.qty} × <Money n={i.price} /></div>
               </div>
               <button className="miniDel" onClick={() => removeFromCart(i.id, i.size)} aria-label="Remove item">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round">
@@ -50,7 +51,8 @@ export default function MiniCart() {
         </div>
 
         <div className="miniFoot">
-          <div className="miniSub"><span>Subtotal</span><span>৳{cartSubtotal.toLocaleString()}</span></div>
+          <div className="miniSub"><span>Subtotal</span><span><Money n={cartSubtotal} /></span></div>
+          <CurNote n={cartSubtotal} />
           <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={closeMini}>Continue Shopping</button>
           <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={goCart}>View Cart</button>
           <button className="btn" type="button" style={{ width: '100%' }} disabled={cart.length === 0} onClick={goCheckout}>Checkout</button>

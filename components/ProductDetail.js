@@ -13,6 +13,7 @@ import SaleCountdown from "./SaleCountdown"
 import Footer from "./Footer"
 import PdTopBar from "./PdTopBar"
 import { buildShopPath, capitalize } from "../lib/categories"
+import Money from './Money'
 
 const LABELS = { waist: 'Waist', length: 'Length', hip: 'Hip', leg_opening: 'Leg Opening', chest: 'Chest', shoulder: 'Shoulder', sleeve: 'Sleeve' }
 
@@ -304,8 +305,8 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           <h2 className="pdTitle">{product.name}</h2>
 
           <div className="price" style={{ fontSize: 20 }}>
-            ৳{Number(product.price).toLocaleString()}
-            {product.old && <> <span className="old">৳{Number(product.old).toLocaleString()}</span></>}
+            <Money n={product.price} />
+            {product.old && <> <span className="old"><Money n={product.old} /></span></>}
           </div>
 <SaleCountdown productId={product.id} endsAt={saleEndsAt || null} />
           <div className="pdDelivery">Order now and get it in 2–3 days inside Dhaka and 3–5 days outside Dhaka.</div>

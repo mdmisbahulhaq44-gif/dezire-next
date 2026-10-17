@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
+import Money from './Money'
 
 // Characters that break PostgREST's .or() filter syntax or act as LIKE
 // wildcards are turned into spaces. (The original site filtered in the
@@ -142,7 +143,7 @@ export default function SearchPanel() {
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontSize: 13 }}>{p.name}</div>
-                  <div style={{ fontSize: 11, color: 'var(--muted)' }}>৳{Number(p.price).toLocaleString()}</div>
+                  <div style={{ fontSize: 11, color: 'var(--muted)' }}><Money n={p.price} /></div>
                 </div>
               </Link>
             ))}
@@ -174,8 +175,8 @@ export default function SearchPanel() {
                     <div className="brand">{p.brand || ''}</div>
                     <h3>{p.name}</h3>
                     <div className="price">
-                      ৳{Number(p.price).toLocaleString()}{' '}
-                      {p.old && <span className="old">৳{Number(p.old).toLocaleString()}</span>}
+                      <Money n={p.price} />{' '}
+                      {p.old && <span className="old"><Money n={p.old} /></span>}
                     </div>
                     {lowStock && (
                       <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 3 }}>Only {p.stock} left</div>

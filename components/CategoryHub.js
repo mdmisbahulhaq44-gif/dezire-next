@@ -4,6 +4,7 @@ import ShopAside from "./ShopAside"
 import HubTiles from "./HubTiles"
 import { cldOpt } from "../lib/cloudinary"
 import { buildShopPath } from "../lib/categories"
+import Money from "./Money"
 
 export default function CategoryHub({ gender, path, heading, subs }) {
   return (
@@ -28,8 +29,8 @@ export default function CategoryHub({ gender, path, heading, subs }) {
               <div className="catText">
                 <h3>{s.seg}</h3>
                 {s.count === 1
-                  ? (s.minPrice !== null ? <span>৳{Number(s.minPrice).toLocaleString()}</span> : null)
-                  : <span>{s.count} PRODUCTS{s.minPrice !== null ? ` · FROM ৳${s.minPrice}` : ""}</span>}
+                  ? (s.minPrice !== null ? <span><Money n={s.minPrice} /></span> : null)
+                  : <span>{s.count} PRODUCTS{s.minPrice !== null ? <> · FROM <Money n={s.minPrice} /></> : ""}</span>}
               </div>
             </Link>
           ))}

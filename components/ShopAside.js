@@ -7,6 +7,7 @@ import { supabase } from '../lib/supabaseClient'
 import { getRecent } from '../lib/recent'
 import { cldOpt } from '../lib/cloudinary'
 import { useShop } from './ShopContext'
+import Money from './Money'
 
 export default function ShopAside() {
   const { openSearch } = useShop()
@@ -57,7 +58,7 @@ export default function ShopAside() {
                   </span>
                   <span className="rvText">
                     <span className="rvName">{p.name}</span>
-                    <span className="rvPrice">৳{Number(p.price).toLocaleString()}{p.old ? <span className="old">৳{Number(p.old).toLocaleString()}</span> : null}</span>
+                    <span className="rvPrice"><Money n={p.price} />{p.old ? <span className="old"><Money n={p.old} /></span> : null}</span>
                   </span>
                 </Link>
               )

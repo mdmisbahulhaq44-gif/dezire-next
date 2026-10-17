@@ -4,6 +4,7 @@ import { useShop } from './ShopContext'
 import { cldOpt } from '../lib/cloudinary'
 import Image from 'next/image'
 import BagCount from './BagCount'
+import Money, { CurNote } from './Money'
 
 export default function CartPanel() {
   const { cart, cartCount, cartSubtotal, activePanel, closePanel, changeQty, removeFromCart, openCheckout } = useShop()
@@ -29,7 +30,7 @@ export default function CartPanel() {
               </div>
               <div className="cartInfo">
                 <h4>{i.name}</h4>
-                <small>৳{i.price.toLocaleString()} each{i.size ? ` • Size: ${i.size}` : ''}</small>
+                <small><Money n={i.price} /> each{i.size ? ` • Size: ${i.size}` : ''}</small>
                 <div className="qtyRow">
                   <button className="qtyBtn" onClick={() => changeQty(i.id, i.size, -1)}>−</button>
                   <span>{i.qty}</span>
@@ -45,8 +46,9 @@ export default function CartPanel() {
       <div style={{ marginTop: 30, textAlign: 'center' }}>
         <div className="summaryRow total" style={{ textAlign: 'left' }}>
           <b>Total</b>
-          <b>৳{cartSubtotal.toLocaleString()}</b>
+          <b><Money n={cartSubtotal} /></b>
         </div>
+        <CurNote n={cartSubtotal} />
         <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 10 }} onClick={closePanel}>
           CONTINUE SHOPPING
         </button>

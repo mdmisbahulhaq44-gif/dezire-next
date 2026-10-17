@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
 import { useShop } from './ShopContext'
+import Money from './Money'
 
 export default function WishlistPanel() {
   const { activePanel, closePanel, wishlist, removeFromWishlist, cartCount, openCart, openSearch } = useShop()
@@ -72,13 +73,13 @@ export default function WishlistPanel() {
               <div className="cartInfo">
                 <Link href={`/product/${p.id}`} onClick={closePanel}><h4>{p.name}</h4></Link>
                 <small>
-                  ৳{Number(p.price).toLocaleString()}
-                  {p.old ? <> <s style={{ opacity: 0.6 }}>৳{Number(p.old).toLocaleString()}</s></> : null}
+                  <Money n={p.price} />
+                  {p.old ? <> <s style={{ opacity: 0.6 }}><Money n={p.old} /></s></> : null}
                   {soldOut ? ' • Out of stock' : ''}
                 </small>
                 {dropped && (
                   <div style={{ fontSize: 11, color: 'var(--red)', fontWeight: 700, marginTop: 3 }}>
-                    ↓ Price dropped from ৳{p.savedPrice.toLocaleString()}
+                    ↓ Price dropped from <Money n={p.savedPrice} />
                   </div>
                 )}
                 <div className="qtyRow">

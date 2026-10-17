@@ -6,6 +6,7 @@ import { useShop } from './ShopContext'
 import { usePathname } from 'next/navigation'
 import DrawerTree from './DrawerTree'
 import { NO_NAV_ROUTES } from '../lib/noNavRoutes'
+import { CurrencyToggle } from './Money'
 
 export default function Header() {
   const { cartCount, wishlistCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer, openTrack, openAbout } = useShop()
@@ -83,6 +84,7 @@ export default function Header() {
         <Link href="/#new" onClick={navClose}>Sale</Link>
         <a href="#" onClick={e => { e.preventDefault(); navClose(); openAbout() }}>About Us</a>
         <a href="#" onClick={e => { e.preventDefault(); navClose(); openTrack() }}>Track Order</a>
+        <CurrencyToggle />
       </div>
     </>
   )

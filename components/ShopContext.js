@@ -3,12 +3,14 @@
 import { createContext, useContext, useEffect, useState, useRef } from 'react'
 import { flushSync } from 'react-dom'
 import { getCart, saveCart, cartCount, cartSubtotal } from '../lib/cart'
+import { formatMoney } from '../lib/currency'
 import { getWishlist, saveWishlist } from '../lib/wishlist'
 
 const ShopContext = createContext(null)
 
 export function ShopProvider({ children }) {
   const [cart, setCart] = useState([])
+  const [currency, setCurrencyState] = useState('BDT')
   const [wishlist, setWishlist] = useState([])
   const [activePanel, setActivePanel] = useState(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -23,6 +25,13 @@ export function ShopProvider({ children }) {
   const keepHistory = useRef(false)
 
   useEffect(() => { setCart(getCart()); setWishlist(getWishlist()) }, [])
+  useEffect(() => {
+    try { if (localStorage.getItem('dz_cur') === 'USD') setCurrencyState('USD') } catch (e) {}
+  }, [])
+  function setCurrency(c) {
+    setCurrencyState(c)
+    try { localStorage.setItem('dz_cur', c) } catch (e) {}
+  }
 
   // Panels live in browser history: phone Back closes a panel or returns to the one under it
   useEffect(() => {
@@ -243,6 +252,9 @@ export function ShopProvider({ children }) {
   }
 
   const value = {
+    currency,
+    setCurrency,
+    money: n => formatMoney(n, currency),
     cart,
     wishlist,
     wishlistCount: wishlist.length,

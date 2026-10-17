@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { cldOpt } from "../lib/cloudinary"
+import Money from "./Money"
 
 export default function ProductGrid({ products, replaceLinks, noPreview }) {
   if (!products.length) {
@@ -45,8 +46,8 @@ export default function ProductGrid({ products, replaceLinks, noPreview }) {
             </div>
             <h3>{p.name}</h3>
             <div className="price">
-              ৳{Number(p.price).toLocaleString()}{" "}
-              {p.old && <span className="old">৳{Number(p.old).toLocaleString()}</span>}
+              <Money n={p.price} />{" "}
+              {p.old && <span className="old"><Money n={p.old} /></span>}
             </div>
             {!soldOut && <span className="buyNow">Buy Now</span>}
             {lowStock && (

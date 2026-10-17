@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { cldOpt } from '../lib/cloudinary'
 import { buildShopPath } from '../lib/categories'
+import Money from './Money'
 
 // Category page whose tiles are single products: same FILTER + sort as the
 // other product listings, tiles keep their look.
@@ -144,8 +145,8 @@ export default function HubTiles({ gender, path, subs }) {
               <div className="catText">
                 <h3>{s.seg}</h3>
                 {s.count === 1
-                  ? (s.minPrice !== null ? <span>৳{Number(s.minPrice).toLocaleString()}</span> : null)
-                  : <span>{s.count} PRODUCTS{s.minPrice !== null ? ` · FROM ৳${s.minPrice}` : ''}</span>}
+                  ? (s.minPrice !== null ? <span><Money n={s.minPrice} /></span> : null)
+                  : <span>{s.count} PRODUCTS{s.minPrice !== null ? <> · FROM <Money n={s.minPrice} /></> : ''}</span>}
               </div>
             </Link>
           ))}

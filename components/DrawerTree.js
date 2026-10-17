@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { supabase } from '../lib/supabaseClient'
 import { parseCatPath, buildShopPath } from '../lib/categories'
+import Money from './Money'
 
 // Menu tree for Men / Women: every category row has a + at its side; the + opens the rows inside it
 // (categories, then sub-categories, then products). The name itself opens that category's page.
@@ -49,7 +50,7 @@ function ProductRow({ p, onNavigate }) {
       data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img, all: p.imgs || '' })}
     >
       <span className="dtProdName">{p.name}</span>
-      <span className="dtProdPrice">৳{Number(p.price).toLocaleString()}</span>
+      <span className="dtProdPrice"><Money n={p.price} /></span>
     </Link>
   )
 }
