@@ -1,4 +1,4 @@
-import { Quicksand } from "next/font/google"
+import { Quicksand, Hind_Siliguri } from "next/font/google"
 import "./globals.css"
 import Header from "../components/Header"
 import BottomNav from "../components/BottomNav"
@@ -23,7 +23,17 @@ import ServiceWorkerRegister from "../components/ServiceWorkerRegister"
 const quicksand = Quicksand({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  display: "swap"
+  display: "swap",
+  variable: "--font-q"
+})
+
+// Bangla letters only (Quicksand has none). English and all digits stay in Quicksand.
+const hind = Hind_Siliguri({
+  subsets: ["bengali"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  preload: false,
+  variable: "--font-hind"
 })
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://heaven-bd.vercel.app").replace(/\/$/, "")
@@ -72,7 +82,7 @@ export const viewport = {
 export default function RootLayout({ children, modal }) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body className={quicksand.className}>
+      <body className={quicksand.variable + " " + hind.variable}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c") }}

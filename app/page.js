@@ -5,6 +5,7 @@ import ProductGrid from "../components/ProductGrid"
 import PaymentReturnCheck from "../components/PaymentReturnCheck"
 import FlashSection from "../components/FlashSection"
 import RecentlyViewed from "../components/RecentlyViewed"
+import T from "../components/T"
 
 // Cache the homepage for a minute (like product pages) instead of
 // re-rendering it on every visit.
@@ -105,7 +106,7 @@ export default async function HomePage() {
 
       <div id="new" style={{ padding: "30px 5% 10px", scrollMarginTop: 46 }}>
         <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
-          New Arrivals
+          <T>New Arrivals</T>
         </h2>
       </div>
 
@@ -118,32 +119,32 @@ export default async function HomePage() {
         <div className="feature">
           <div style={{ fontSize: 25 }}>🚚</div>
           <div>
-            <b>Fast Delivery</b>
-            <span>Nationwide delivery across Bangladesh.</span>
+            <b><T>Fast Delivery</T></b>
+            <span><T>Nationwide delivery across Bangladesh.</T></span>
           </div>
         </div>
 
         <div className="feature">
           <div style={{ fontSize: 25 }}>↩️</div>
           <div>
-            <b>Easy Returns</b>
-            <span>Simple return experience for eligible products.</span>
+            <b><T>Easy Returns</T></b>
+            <span><T>Simple return experience for eligible products.</T></span>
           </div>
         </div>
 
         <div className="feature">
           <div style={{ fontSize: 25 }}>🔒</div>
           <div>
-            <b>Secure Checkout</b>
-            <span>Your customer information stays protected.</span>
+            <b><T>Secure Checkout</T></b>
+            <span><T>Your customer information stays protected.</T></span>
           </div>
         </div>
 
         <div className="feature">
           <div style={{ fontSize: 25 }}>💬</div>
           <div>
-            <b>Customer Support</b>
-            <span>We're here to help with your orders.</span>
+            <b><T>Customer Support</T></b>
+            <span><T>{"We're here to help with your orders."}</T></span>
           </div>
         </div>
       </section>
@@ -153,7 +154,7 @@ export default async function HomePage() {
           <section className="section" id="testimonials" style={{ paddingBottom: 0 }}>
             <div className="heading">
               <div>
-                <h2>What Our Customers Say</h2>
+                <h2><T>What Our Customers Say</T></h2>
               </div>
             </div>
             <div id="testimonialsWrap" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>

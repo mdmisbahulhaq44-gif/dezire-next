@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState, useRef } from 'react'
 import { flushSync } from 'react-dom'
 import { getCart, saveCart, cartCount, cartSubtotal } from '../lib/cart'
 import { formatMoney, USD_RATE } from '../lib/currency'
+import { translate } from '../lib/i18n'
 import { supabase } from '../lib/supabaseClient'
 import { getWishlist, saveWishlist } from '../lib/wishlist'
 
@@ -13,6 +14,7 @@ export function ShopProvider({ children }) {
   const [cart, setCart] = useState([])
   const [currency, setCurrencyState] = useState('BDT')
   const [rate, setRate] = useState(USD_RATE)
+  const [lang, setLangState] = useState('en')
   const [wishlist, setWishlist] = useState([])
   const [activePanel, setActivePanel] = useState(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -31,6 +33,14 @@ export function ShopProvider({ children }) {
     try { const r = Number(localStorage.getItem('dz_rate')); if (r > 0) setRate(r) } catch (e) {}
     try { if (localStorage.getItem('dz_cur') === 'USD') { setCurrencyState('USD'); loadRate() } } catch (e) {}
   }, [])
+  useEffect(() => {
+    try { if (localStorage.getItem('dz_lang') === 'bn') { setLangState('bn'); document.documentElement.lang = 'bn' } } catch (e) {}
+  }, [])
+  function setLang(l) {
+    setLangState(l)
+    document.documentElement.lang = l === 'bn' ? 'bn' : 'en'
+    try { localStorage.setItem('dz_lang', l) } catch (e) {}
+  }
   function loadRate() {
     supabase.from('settings').select('value').eq('key', 'usd_rate').maybeSingle().then(({ data }) => {
       const r = Number(data && data.value)
@@ -265,6 +275,9 @@ export function ShopProvider({ children }) {
     currency,
     setCurrency,
     money: n => formatMoney(n, currency, rate),
+    lang,
+    setLang,
+    t: (s, vars) => translate(s, lang, vars),
     cart,
     wishlist,
     wishlistCount: wishlist.length,

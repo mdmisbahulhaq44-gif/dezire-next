@@ -2,10 +2,11 @@ import Link from "next/link"
 import Image from "next/image"
 import { cldOpt } from "../lib/cloudinary"
 import Money from "./Money"
+import T from "./T"
 
 export default function ProductGrid({ products, replaceLinks, noPreview }) {
   if (!products.length) {
-    return <div className="empty">No products available right now.</div>
+    return <div className="empty"><T>No products available right now.</T></div>
   }
 
   return (
@@ -26,9 +27,9 @@ export default function ProductGrid({ products, replaceLinks, noPreview }) {
           >
             <div className="productImage" style={{ position: "relative", opacity: soldOut ? 0.55 : 1 }}>
               {soldOut ? (
-                <span className="badge" style={{ background: "#111", color: "#fff" }}>SOLD OUT</span>
+                <span className="badge" style={{ background: "#111", color: "#fff" }}><T>SOLD OUT</T></span>
               ) : p.badge && (
-                <span className={`badge ${/sale/i.test(p.badge) ? "sale" : ""}`}>{p.badge}</span>
+                <span className={`badge ${/sale/i.test(p.badge) ? "sale" : ""}`}><T>{p.badge}</T></span>
               )}
               {firstImg ? (
                 <Image
@@ -49,9 +50,9 @@ export default function ProductGrid({ products, replaceLinks, noPreview }) {
               <Money n={p.price} />{" "}
               {p.old && <span className="old"><Money n={p.old} /></span>}
             </div>
-            {!soldOut && <span className="buyNow">Buy Now</span>}
+            {!soldOut && <span className="buyNow"><T>Buy Now</T></span>}
             {lowStock && (
-              <div style={{ fontSize: 11, color: "var(--red)", marginTop: 3 }}>Only {p.stock} left</div>
+              <div style={{ fontSize: 11, color: "var(--red)", marginTop: 3 }}><T vars={{ n: p.stock }}>{'Only {n} left'}</T></div>
             )}
           </Link>
         )

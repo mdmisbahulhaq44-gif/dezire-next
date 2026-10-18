@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { getRecent } from '../lib/recent'
 import ProductGrid from './ProductGrid'
+import T from './T'
 
 export default function RecentlyViewed() {
   const [products, setProducts] = useState([])
@@ -30,7 +31,7 @@ export default function RecentlyViewed() {
     <>
       <div style={{ padding: '10px 5% 10px' }}>
         <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1 }}>
-          Recently Viewed
+          <T>Recently Viewed</T>
         </h2>
       </div>
       <div style={{ padding: '0 5% 40px' }}>

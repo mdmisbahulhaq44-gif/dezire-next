@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { supabase } from '../lib/supabaseClient'
 import { parseCatPath, buildShopPath } from '../lib/categories'
 import Money from './Money'
+import { useShop } from './ShopContext'
 
 // Menu tree for Men / Women: every category row has a + at its side; the + opens the rows inside it
 // (categories, then sub-categories, then products). The name itself opens that category's page.
@@ -56,9 +57,10 @@ function ProductRow({ p, onNavigate }) {
 }
 
 function Row({ label, href, open, onToggle, onNavigate }) {
+  const { t } = useShop()
   return (
     <div className="dtRowWrap">
-      <Link className="dtLink" href={href} onClick={onNavigate}>{label}</Link>
+      <Link className="dtLink" href={href} onClick={onNavigate}>{t(label)}</Link>
       <button type="button" className="dtPlus" aria-expanded={open} aria-label={(open ? 'Close ' : 'Open ') + label} onClick={onToggle}>
         <Plus open={open} />
       </button>
@@ -85,6 +87,7 @@ function Node({ node, gender, path, onNavigate }) {
 export default function DrawerTree({ gender, label, onNavigate }) {
   const [open, setOpen] = useState(false)
   const [state, setState] = useState(cache[gender] ? 'ok' : 'idle')
+  const { t } = useShop()
 
   function load() {
     if (cache[gender]) { setState('ok'); return }
@@ -116,10 +119,10 @@ export default function DrawerTree({ gender, label, onNavigate }) {
       <Row label={label} href={buildShopPath(gender, [])} open={open} onToggle={toggle} onNavigate={onNavigate} />
       <Collapse open={open}>
         <div>
-          {state === 'loading' && <div className="dtNote">Loading...</div>}
-          {state === 'error' && <button type="button" className="dtNote dtRetry" onClick={load}>Could not load. Tap to try again</button>}
+          {state === 'loading' && <div className="dtNote">{t('Loading...')}</div>}
+          {state === 'error' && <button type="button" className="dtNote dtRetry" onClick={load}>{t('Could not load. Tap to try again')}</button>}
           {state === 'ok' && tree && (empty
-            ? <div className="dtNote">Nothing here yet</div>
+            ? <div className="dtNote">{t('Nothing here yet')}</div>
             : <>
                 {Array.from(tree.kids.values()).map(k => <Node key={k.name.toLowerCase()} node={k} gender={gender} path={[]} onNavigate={onNavigate} />)}
                 {tree.items.map(p => <ProductRow key={p.id} p={p} onNavigate={onNavigate} />)}

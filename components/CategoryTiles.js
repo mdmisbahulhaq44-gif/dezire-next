@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { cldOpt } from "../lib/cloudinary"
 import { buildShopPath } from "../lib/categories"
+import T from "./T"
 
 export default function CategoryTiles({ categories }) {
   return (
@@ -40,8 +41,8 @@ export default function CategoryTiles({ categories }) {
               />
             )}
             <div className="catText" style={{ position: "relative", zIndex: 1 }}>
-              <h3>{c.name || ""}</h3>
-              <span>{c.subtitle || ""}</span>
+              <h3><T>{c.name || ""}</T></h3>
+              <span><T>{c.subtitle || ""}</T></span>
             </div>
           </Link>
         )

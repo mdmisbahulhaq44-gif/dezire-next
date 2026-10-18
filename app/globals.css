@@ -11,7 +11,7 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
 html{scroll-behavior:smooth}
 body{
-font-family:Quicksand,sans-serif;
+font-family:var(--font-q),var(--font-hind),Quicksand,sans-serif;
 color:var(--black);
 background:#fff;
 overflow-x:hidden
@@ -1910,3 +1910,6 @@ html[data-acin] #main-content{animation:acSoftP .26s cubic-bezier(.22,.61,.36,1)
 .drawer .curToggle button{border:1.5px solid #111;background:#fff;color:#111;font:inherit;font-size:12px;letter-spacing:.5px;padding:7px 12px;border-radius:999px;cursor:pointer}
 .drawer .curToggle button.on{background:#111;color:#fff}
 .curNote{font-size:11px;color:#777;text-align:center;margin:-4px 0 12px}
+
+/* Bangla mode: letter spacing breaks joined Bangla letters */
+html[lang="bn"] *:not(.logo){letter-spacing:normal !important}

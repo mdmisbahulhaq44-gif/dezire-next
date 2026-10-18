@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import { useShop } from './ShopContext'
 
 let cached = null
 
@@ -9,6 +10,7 @@ let cached = null
 // Settings → Payment method logos (also shown at checkout). Shows nothing until logos are added.
 export default function PaymentStrip() {
   const [logos, setLogos] = useState(cached || [])
+  const { t } = useShop()
   useEffect(() => {
     if (cached) return
     supabase.from('settings').select('value').eq('key', 'payment_logos').maybeSingle().then(({ data }) => {
@@ -21,7 +23,7 @@ export default function PaymentStrip() {
   if (!logos.length) return null
   return (
     <div className="payStrip">
-      <span className="payStripLabel">Pay With</span>
+      <span className="payStripLabel">{t('Pay With')}</span>
       <div className="payStripLogos">
         {logos.map((url, i) => (
           <img key={i} src={url} alt="" loading="lazy" onError={e => { e.currentTarget.style.display = 'none' }} />

@@ -7,9 +7,10 @@ import { usePathname } from 'next/navigation'
 import DrawerTree from './DrawerTree'
 import { NO_NAV_ROUTES } from '../lib/noNavRoutes'
 import { CurrencyToggle } from './Money'
+import LangToggle from './LangToggle'
 
 export default function Header() {
-  const { cartCount, wishlistCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer, openTrack, openAbout } = useShop()
+  const { cartCount, wishlistCount, openCart, openWishlist, openSearch, drawerOpen, openDrawer, closeDrawer, openTrack, openAbout, t } = useShop()
   const pathname = usePathname()
   const pendingNav = useRef(null)
 
@@ -76,15 +77,16 @@ export default function Header() {
           <div className="logo" style={{ fontSize: 18 }}>HEAVEN</div>
           <button className="close" onClick={closeDrawer}>×</button>
         </div>
-        <Link href="/flash-sale" onClick={navClose}>⚡ Flash Sale</Link>
-        <Link href="/#new" onClick={navClose}>New Arrivals</Link>
+        <Link href="/flash-sale" onClick={navClose}>⚡ {t('Flash Sale')}</Link>
+        <Link href="/#new" onClick={navClose}>{t('New Arrivals')}</Link>
         <DrawerTree gender="women" label="Women" onNavigate={navClose} />
         <DrawerTree gender="men" label="Men" onNavigate={navClose} />
-        <Link href="/#women" onClick={navClose}>Accessories</Link>
-        <Link href="/#new" onClick={navClose}>Sale</Link>
-        <a href="#" onClick={e => { e.preventDefault(); navClose(); openAbout() }}>About Us</a>
-        <a href="#" onClick={e => { e.preventDefault(); navClose(); openTrack() }}>Track Order</a>
+        <Link href="/#women" onClick={navClose}>{t('Accessories')}</Link>
+        <Link href="/#new" onClick={navClose}>{t('Sale')}</Link>
+        <a href="#" onClick={e => { e.preventDefault(); navClose(); openAbout() }}>{t('About Us')}</a>
+        <a href="#" onClick={e => { e.preventDefault(); navClose(); openTrack() }}>{t('Track Order')}</a>
         <CurrencyToggle />
+        <LangToggle />
       </div>
     </>
   )

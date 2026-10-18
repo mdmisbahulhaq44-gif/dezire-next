@@ -16,10 +16,10 @@ export function CurNote({ n }) {
 }
 
 export function CurrencyToggle() {
-  const { currency, setCurrency } = useShop()
+  const { currency, setCurrency, t } = useShop()
   return (
     <div className="curToggle" role="group" aria-label="Currency">
-      <span>Currency</span>
+      <span>{t('Currency')}</span>
       <button type="button" className={currency === 'BDT' ? 'on' : ''} onClick={() => setCurrency('BDT')}>৳ BDT</button>
       <button type="button" className={currency === 'USD' ? 'on' : ''} onClick={() => setCurrency('USD')}>$ USD</button>
     </div>
