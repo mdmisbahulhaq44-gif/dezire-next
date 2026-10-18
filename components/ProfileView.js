@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import { useShop } from './ShopContext'
 
 const GENDERS = [['male', 'Male'], ['female', 'Female'], ['other', 'Other']]
 
@@ -49,6 +50,7 @@ function genderLabel(v) {
 }
 
 export function ProfileView({ session, showToast, onEdit }) {
+  const { t } = useShop()
   const meta = session.user.user_metadata || {}
   const fileRef = useRef(null)
   const [busy, setBusy] = useState(false)
@@ -88,18 +90,19 @@ export function ProfileView({ session, showToast, onEdit }) {
       </div>
 
       <div className="pfCard">
-        <div className="pfField"><div className="pfLabel">Name</div><div className="pfValue">{meta.full_name || '—'}</div></div>
-        <div className="pfField"><div className="pfLabel">Date of Birth</div><div className="pfValue">{meta.birth_date || '—'}</div></div>
-        <div className="pfField"><div className="pfLabel">Gender</div><div className="pfValue">{genderLabel(meta.gender) || '—'}</div></div>
-        <div className="pfField"><div className="pfLabel">Phone Number</div><div className="pfValue">{meta.phone || '—'}</div></div>
-        <div className="pfField"><div className="pfLabel">Email Address</div><div className="pfValue">{session.user.email}</div></div>
-        <button type="button" className="btn light" style={{ width: '100%', marginTop: 6 }} onClick={onEdit}>EDIT PROFILE</button>
+        <div className="pfField"><div className="pfLabel">{t("Name")}</div><div className="pfValue">{meta.full_name || '—'}</div></div>
+        <div className="pfField"><div className="pfLabel">{t("Date of Birth")}</div><div className="pfValue">{meta.birth_date || '—'}</div></div>
+        <div className="pfField"><div className="pfLabel">{t("Gender")}</div><div className="pfValue">{(genderLabel(meta.gender) && t(genderLabel(meta.gender))) || '—'}</div></div>
+        <div className="pfField"><div className="pfLabel">{t("Phone Number")}</div><div className="pfValue">{meta.phone || '—'}</div></div>
+        <div className="pfField"><div className="pfLabel">{t("Email Address")}</div><div className="pfValue">{session.user.email}</div></div>
+        <button type="button" className="btn light" style={{ width: '100%', marginTop: 6 }} onClick={onEdit}>{t("EDIT PROFILE")}</button>
       </div>
     </div>
   )
 }
 
 export function EditProfile({ session, showToast, onDone }) {
+  const { t } = useShop()
   const meta = session.user.user_metadata || {}
   const [name, setName] = useState(meta.full_name || '')
   const [gender, setGender] = useState(meta.gender || '')
@@ -123,32 +126,32 @@ export function EditProfile({ session, showToast, onDone }) {
   return (
     <form className="pfCard form" onSubmit={save}>
       <div>
-        <label className="pfFormLabel">Full Name <span style={{ color: '#d33' }}>*</span></label>
+        <label className="pfFormLabel">{t("Full Name")} <span style={{ color: '#d33' }}>*</span></label>
         <input type="text" value={name} onChange={e => setName(e.target.value)} required maxLength={100} />
       </div>
       <div>
-        <label className="pfFormLabel">Gender</label>
+        <label className="pfFormLabel">{t("Gender")}</label>
         <select value={gender} onChange={e => setGender(e.target.value)}>
-          <option value="">Select</option>
-          {GENDERS.map(g => <option key={g[0]} value={g[0]}>{g[1]}</option>)}
+          <option value="">{t("Select")}</option>
+          {GENDERS.map(g => <option key={g[0]} value={g[0]}>{t(g[1])}</option>)}
         </select>
       </div>
       <div>
-        <label className="pfFormLabel">Date of Birth</label>
+        <label className="pfFormLabel">{t("Date of Birth")}</label>
         <input type="date" value={dob} min="1900-01-01" max={today} onChange={e => setDob(e.target.value)} />
       </div>
       <div>
-        <label className="pfFormLabel">Email Address</label>
+        <label className="pfFormLabel">{t("Email Address")}</label>
         <div style={{ position: 'relative' }}>
           <input type="email" value={session.user.email} disabled className="pfLocked" />
           <Tick />
         </div>
       </div>
       <div>
-        <label className="pfFormLabel">Phone Number</label>
+        <label className="pfFormLabel">{t("Phone Number")}</label>
         <input type="text" value={meta.phone || ''} disabled className="pfLocked" />
       </div>
-      <button className="btn" disabled={busy}>{busy ? 'SAVING...' : 'SAVE CHANGES'}</button>
+      <button className="btn" disabled={busy}>{t(busy ? 'SAVING...' : 'SAVE CHANGES')}</button>
     </form>
   )
 }

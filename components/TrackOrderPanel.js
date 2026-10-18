@@ -33,17 +33,19 @@ function sortOrderRefEntries(groups) {
 }
 
 function StatusBadge({ status }) {
+  const { t } = useShop()
   const s = (status || 'pending').toLowerCase()
   const label = s.charAt(0).toUpperCase() + s.slice(1)
-  return <span className={`statusBadge ${s}`}>{label}</span>
+  return <span className={`statusBadge ${s}`}>{t(label)}</span>
 }
 
-const fmtDate = iso => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
-const fmtTime = iso => new Date(iso).toLocaleString('en-US', { month: 'short', day: '2-digit', hour: 'numeric', minute: '2-digit', hour12: true })
+const loc = lang => (lang === 'bn' ? 'bn-BD-u-nu-latn' : 'en-US')
+const fmtDate = (iso, lang) => new Date(iso).toLocaleDateString(loc(lang), { month: 'short', day: '2-digit', year: 'numeric' })
+const fmtTime = (iso, lang) => new Date(iso).toLocaleString(loc(lang), { month: 'short', day: '2-digit', hour: 'numeric', minute: '2-digit', hour12: true })
 
 export default function TrackOrderPanel() {
   const router = useRouter()
-  const { activePanel, closePanel, showToast, cartCount, openCart, openSearch } = useShop()
+  const { activePanel, closePanel, showToast, cartCount, openCart, openSearch, t, lang } = useShop()
   const show = activePanel === 'track'
 
   // listState: none | loading | error | emptyProfile | groups | verifying | nomatch
@@ -139,7 +141,7 @@ export default function TrackOrderPanel() {
   function switchAccount() {
     clearSavedOrders()
     try { localStorage.removeItem('lf_customer') } catch (e) {}
-    showToast('Switched — enter an Order ID and phone to look up an order.')
+    showToast(t('Switched — enter an Order ID and phone to look up an order.'))
     runOpen()
   }
 
@@ -181,21 +183,21 @@ export default function TrackOrderPanel() {
       try { document.execCommand('copy') } catch (e2) {}
       document.body.removeChild(temp)
     }
-    showToast('Phone number copied!')
+    showToast(t('Phone number copied!'))
     setCopiedPhone(true)
     setTimeout(() => setCopiedPhone(false), 1500)
   }
 
   function renderList() {
-    if (listState === 'loading') return <div className="empty" style={{ padding: '20px 10px' }}>Loading your orders...</div>
-    if (listState === 'verifying') return <div className="empty" style={{ padding: '20px 10px' }}>Verifying...</div>
-    if (listState === 'nomatch') return <div className="empty" style={{ padding: '20px 10px' }}>No matching order found. Please check the Order ID and phone number.</div>
-    if (listState === 'error') return <div className="empty" style={{ padding: '20px 10px' }}>Could not load your orders. Please try again.</div>
+    if (listState === 'loading') return <div className="empty" style={{ padding: '20px 10px' }}>{t('Loading your orders...')}</div>
+    if (listState === 'verifying') return <div className="empty" style={{ padding: '20px 10px' }}>{t('Verifying...')}</div>
+    if (listState === 'nomatch') return <div className="empty" style={{ padding: '20px 10px' }}>{t('No matching order found. Please check the Order ID and phone number.')}</div>
+    if (listState === 'error') return <div className="empty" style={{ padding: '20px 10px' }}>{t('Could not load your orders. Please try again.')}</div>
     if (listState === 'emptyProfile') {
       return (
         <div className="empty" style={{ padding: '30px 10px' }}>
-          You haven't placed any orders yet with this name/phone.<br /><br />
-          <a href="#" onClick={e => { e.preventDefault(); switchAccount() }} style={{ color: 'var(--gold)', textDecoration: 'underline', fontSize: 12 }}>Not you? Look up an order manually</a>
+          {t("You haven't placed any orders yet with this name/phone.")}<br /><br />
+          <a href="#" onClick={e => { e.preventDefault(); switchAccount() }} style={{ color: 'var(--gold)', textDecoration: 'underline', fontSize: 12 }}>{t('Not you? Look up an order manually')}</a>
         </div>
       )
     }
@@ -209,7 +211,7 @@ export default function TrackOrderPanel() {
       const isActive = ACTIVE_ORDER_STATUSES.has((o.status || '').toLowerCase())
       if (!isActive && !sawHistoryHeading) {
         out.push(
-          <div key={'h' + idx} style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.5px', color: 'var(--muted)', margin: `${out.length ? '18px' : '0'} 0 8px` }}>RECENT ORDERS</div>
+          <div key={'h' + idx} style={{ fontSize: 11, fontWeight: 700, letterSpacing: '.5px', color: 'var(--muted)', margin: `${out.length ? '18px' : '0'} 0 8px` }}>{t('RECENT ORDERS')}</div>
         )
         sawHistoryHeading = true
       }
@@ -219,7 +221,7 @@ export default function TrackOrderPanel() {
         <div key={ref} className="pickerRow" style={{ border: '1px solid var(--line)', marginBottom: 10, padding: 16 }} onClick={() => viewOrderGroup(rows)}>
           <div>
             <div style={{ fontWeight: 700, fontSize: 13 }}>{ref}</div>
-            <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 3 }}>{fmtDate(o.created_at)} · {itemCount} item{itemCount > 1 ? 's' : ''} · ৳{total.toLocaleString()}</div>
+            <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 3 }}>{fmtDate(o.created_at, lang)} · {t(itemCount > 1 ? '{n} items' : '{n} item', { n: itemCount })} · ৳{total.toLocaleString()}</div>
           </div>
           <StatusBadge status={o.status} />
         </div>
@@ -229,8 +231,8 @@ export default function TrackOrderPanel() {
     out.push(
       <div key="switch" style={{ textAlign: 'center', marginTop: 14 }}>
         {listSource === 'profile'
-          ? <a href="#" onClick={e => { e.preventDefault(); switchAccount() }} style={{ color: 'var(--muted)', textDecoration: 'underline', fontSize: 11 }}>Not you? Switch account</a>
-          : <a href="#" onClick={e => { e.preventDefault(); clearSavedTrackPhone() }} style={{ color: 'var(--muted)', textDecoration: 'underline', fontSize: 11 }}>Not your number? Search a different one</a>}
+          ? <a href="#" onClick={e => { e.preventDefault(); switchAccount() }} style={{ color: 'var(--muted)', textDecoration: 'underline', fontSize: 11 }}>{t('Not you? Switch account')}</a>
+          : <a href="#" onClick={e => { e.preventDefault(); clearSavedTrackPhone() }} style={{ color: 'var(--muted)', textDecoration: 'underline', fontSize: 11 }}>{t('Not your number? Search a different one')}</a>}
       </div>
     )
     return out
@@ -246,8 +248,8 @@ export default function TrackOrderPanel() {
       const cancelled = st === 'cancelled'
       return (
         <div style={{ background: cancelled ? '#fde0e0' : '#eceff1', borderRadius: 12, padding: 18, color: cancelled ? '#c0392b' : '#455a64', fontWeight: 700, textAlign: 'center' }}>
-          Order {o.order_ref || '#' + o.id} was {cancelled ? 'cancelled' : 'returned'}
-          {history[st] ? <div style={{ fontWeight: 400, fontSize: 11, marginTop: 4 }}>{fmtTime(history[st])}</div> : null}
+          {t(cancelled ? 'Order {ref} was cancelled' : 'Order {ref} was returned', { ref: o.order_ref || '#' + o.id })}
+          {history[st] ? <div style={{ fontWeight: 400, fontSize: 11, marginTop: 4 }}>{fmtTime(history[st], lang)}</div> : null}
         </div>
       )
     }
@@ -256,14 +258,14 @@ export default function TrackOrderPanel() {
     const currentIdx = Math.max(0, order.indexOf(st === 'processing' ? 'confirmed' : st))
 
     const steps = [
-      { key: 'pending', title: 'Order Placed (COD)', desc: `Your order ${o.order_ref || '#' + o.id} was successfully placed.`, time: o.created_at },
-      { key: 'confirmed', title: 'Confirmed', desc: 'Our team has confirmed your order.' },
-      { key: 'packed', title: 'Packed', desc: 'Your order is packed and ready for the rider.' },
+      { key: 'pending', title: t('Order Placed (COD)'), desc: t('Your order {ref} was successfully placed.', { ref: o.order_ref || '#' + o.id }), time: o.created_at },
+      { key: 'confirmed', title: t('Confirmed'), desc: t('Our team has confirmed your order.') },
+      { key: 'packed', title: t('Packed'), desc: t('Your order is packed and ready for the rider.') },
       {
-        key: 'shipped', title: 'Shipped',
+        key: 'shipped', title: t('Shipped'),
         desc: o.rider_name ? (
           <>
-            {`Rider (${o.rider_name}) has picked up your order for delivery.`}
+            {t('Rider ({name}) has picked up your order for delivery.', { name: o.rider_name })}
             {o.rider_phone && (
               <div className="riderPhoneRow">
                 <a href={`tel:${o.rider_phone}`} className="riderPhoneNum">{o.rider_phone}</a>
@@ -277,15 +279,15 @@ export default function TrackOrderPanel() {
               </div>
             )}
           </>
-        ) : 'Your order has been handed to our delivery rider.'
+        ) : t('Your order has been handed to our delivery rider.')
       },
-      { key: 'delivered', title: 'Delivered', desc: 'You have received your order. Thank you for shopping with us!' }
+      { key: 'delivered', title: t('Delivered'), desc: t('You have received your order. Thank you for shopping with us!') }
     ]
 
     const grandTotal = rows.reduce((s, r) => s + Number(r.total_amount || 0), 0)
 
     const addressLine = o.delivery_method === 'pickup'
-      ? 'Store Pickup (Mirpur 12)'
+      ? t('Store Pickup (Mirpur 12)')
       : [o.delivery_address, o.upazila, o.district]
           .filter(Boolean)
           .filter((v, i) => i === 0 || !o.delivery_address || !o.delivery_address.includes(v))
@@ -293,7 +295,7 @@ export default function TrackOrderPanel() {
 
     return (
       <>
-        <button type="button" onClick={() => setReceiptRows(null)} style={{ background: 'none', border: 0, color: 'var(--muted)', fontSize: 12, marginBottom: 14, cursor: 'pointer' }}>← Back to my orders</button>
+        <button type="button" onClick={() => setReceiptRows(null)} style={{ background: 'none', border: 0, color: 'var(--muted)', fontSize: 12, marginBottom: 14, cursor: 'pointer' }}>{t('← Back to my orders')}</button>
 
         {steps.map((s, i) => {
           const state = i < currentIdx ? 'done' : i === currentIdx ? 'current' : 'pending'
@@ -308,18 +310,18 @@ export default function TrackOrderPanel() {
               <div className="trackStepBody">
                 <div className="trackTitle" style={{ color: state === 'pending' ? '#aaa' : '#111' }}>{s.title}</div>
                 <div className="trackDesc">{s.desc}</div>
-                {time ? <div className="trackTime">{fmtTime(time)}</div> : null}
+                {time ? <div className="trackTime">{fmtTime(time, lang)}</div> : null}
               </div>
             </div>
           )
         })}
 
         <div style={{ background: 'var(--cream)', borderRadius: 12, padding: 18, marginTop: 6, marginBottom: 16 }}>
-          <div className="summaryRow"><span>Order ID</span><b>{o.order_ref || '#' + o.id}</b></div>
-          <div className="summaryRow" style={{ marginBottom: 0 }}><span>Delivery</span><b style={{ textAlign: 'right', maxWidth: '65%' }}>{o.delivery_method === 'pickup' ? 'Store Pickup' : 'Home Delivery'}</b></div>
+          <div className="summaryRow"><span>{t('Order ID')}</span><b>{o.order_ref || '#' + o.id}</b></div>
+          <div className="summaryRow" style={{ marginBottom: 0 }}><span>{t('Delivery')}</span><b style={{ textAlign: 'right', maxWidth: '65%' }}>{t(o.delivery_method === 'pickup' ? 'Store Pickup' : 'Home Delivery')}</b></div>
         </div>
 
-        <h3 style={{ fontSize: 13, letterSpacing: '0.5px', marginBottom: 4 }}>ITEMS</h3>
+        <h3 style={{ fontSize: 13, letterSpacing: '0.5px', marginBottom: 4 }}>{t('ITEMS')}</h3>
         {rows.map((r, idx) => {
           const label = (r.items || '').split(',')[0]?.trim() || 'Item'
           const img = imgById[r.product_id]
@@ -331,22 +333,22 @@ export default function TrackOrderPanel() {
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 13, fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{label}</div>
-                <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>Qty: {r.quantity || 1} × ৳{Number(r.unit_price || 0).toLocaleString()}</div>
+                <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>{t('Qty')}: {r.quantity || 1} × ৳{Number(r.unit_price || 0).toLocaleString()}</div>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13 }}>৳{Number((r.unit_price || 0) * (r.quantity || 1)).toLocaleString()}</div>
             </div>
           )
         })}
-        <div className="summaryRow total" style={{ marginTop: 14 }}><span>Total</span><span>৳{grandTotal.toLocaleString()}</span></div>
+        <div className="summaryRow total" style={{ marginTop: 14 }}><span>{t('Total')}</span><span>৳{grandTotal.toLocaleString()}</span></div>
 
-        <h3 style={{ fontSize: 13, letterSpacing: '0.5px', marginTop: 20, marginBottom: 8 }}>DELIVERY ADDRESS</h3>
+        <h3 style={{ fontSize: 13, letterSpacing: '0.5px', marginTop: 20, marginBottom: 8 }}>{t('DELIVERY ADDRESS')}</h3>
         <p style={{ fontSize: 13, color: '#333', lineHeight: 1.6 }}>{addressLine || '—'}</p>
         <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 4 }}>{o.customer || ''} · {o.phone || ''}</p>
 
         <ReturnRequest order={o} deliveredAt={history.delivered || o.status_updated_at} />
 
         <p style={{ fontSize: 11, color: 'var(--muted)', textAlign: 'center', marginTop: 20 }}>
-          Any query? Message us on <a href="https://wa.me/8801877270165" target="_blank" rel="noreferrer" style={{ color: 'var(--gold)' }}>WhatsApp</a>.
+          {t('Any query? Message us on')} <a href="https://wa.me/8801877270165" target="_blank" rel="noreferrer" style={{ color: 'var(--gold)' }}>WhatsApp</a>.
         </p>
       </>
     )
@@ -358,7 +360,7 @@ export default function TrackOrderPanel() {
         <button type="button" className="acBackBtn" aria-label="Back" onClick={() => { const st = window.history.state || {}; if (st.dzDepth > 0) window.history.back(); else closePanel() }}>
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
         </button>
-        <h2 className="acTitle">My Orders</h2>
+        <h2 className="acTitle">{t("My Orders")}</h2>
         <div className="acHeadIcons">
           <button type="button" className="acHeadBtn" aria-label="Search" onClick={() => { closePanel(); openSearch() }}>
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
@@ -375,14 +377,14 @@ export default function TrackOrderPanel() {
       {manualOpen && (
         <div>
           <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 14, lineHeight: 1.6 }}>
-            Enter your Order ID (from your order confirmation) and phone number once to verify it's really you — after that, this device will remember you and show all your orders automatically.
+            {t("Enter your Order ID (from your order confirmation) and phone number once to verify it's really you — after that, this device will remember you and show all your orders automatically.")}
           </p>
           <form className="form" onSubmit={submitTrackOrder}>
-            <label>ORDER ID</label>
-            <input type="text" placeholder="e.g. VN12345678" required value={orderId} onChange={e => setOrderId(e.target.value)} />
-            <label>PHONE NUMBER USED FOR THE ORDER</label>
+            <label>{t('ORDER ID')}</label>
+            <input type="text" placeholder={t("e.g. VN12345678")} required value={orderId} onChange={e => setOrderId(e.target.value)} />
+            <label>{t('PHONE NUMBER USED FOR THE ORDER')}</label>
             <input type="tel" placeholder="01XXXXXXXXX" required value={phone} onChange={e => setPhone(e.target.value)} />
-            <button className="btn" style={{ width: '100%' }}>VERIFY & TRACK ORDER</button>
+            <button className="btn" style={{ width: '100%' }}>{t('VERIFY & TRACK ORDER')}</button>
           </form>
         </div>
       )}

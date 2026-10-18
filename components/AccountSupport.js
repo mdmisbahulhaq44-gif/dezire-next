@@ -1,5 +1,7 @@
 'use client'
 
+import { useShop } from './ShopContext'
+
 // "Support" page inside My Account: grouped contact options.
 const PHONE = '8801877270165'
 const FB = 'https://www.facebook.com/profile.php?id=61583860210132'
@@ -31,24 +33,26 @@ function Ic({ name, cls = 'acIcon' }) {
 }
 
 function Item({ icon, label, href, external }) {
+  const { t } = useShop()
   return (
     <a className="acRow" href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
       <Ic name={icon} />
-      <span>{label}</span>
+      <span>{t(label)}</span>
       <Ic name="arrow" cls="acArrow" />
     </a>
   )
 }
 
 export default function AccountSupport() {
+  const { t } = useShop()
   return (
     <div>
-      <div className="acSection">Place Order</div>
+      <div className="acSection">{t("Place Order")}</div>
       <div className="acGroup">
         <Item icon="call" label="Call for Order" href={'tel:+' + PHONE} />
         <Item icon="whatsapp" label="Order on WhatsApp" href={'https://wa.me/' + PHONE} external />
       </div>
-      <div className="acSection">Support</div>
+      <div className="acSection">{t("Support")}</div>
       <div className="acGroup">
         <Item icon="call" label="Call" href={'tel:+' + PHONE} />
         <Item icon="chat" label="Messenger" href={FB} external />

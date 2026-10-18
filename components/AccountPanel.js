@@ -53,9 +53,17 @@ export default function AccountPanel() {
   const router = useRouter()
   const pathname = usePathname()
   const navTo = useRef(null)
-  const { activePanel, closePanel, hidePanel, showToast, openReset, openTrack, openWishlist, openAbout, openSearch, openCart, cartCount, fadeSwap } = useShop()
+  const { activePanel, closePanel, hidePanel, showToast: rawToast, openReset, openTrack, openWishlist, openAbout, openSearch, openCart, cartCount, fadeSwap, t, lang } = useShop()
   const showAccount = activePanel === 'account'
   const showReset = activePanel === 'reset'
+  // translate toast text (the part after a colon is the server's own message and stays as is)
+  const showToast = msg => {
+    const m = String(msg)
+    const full = t(m)
+    if (full !== m) return rawToast(full)
+    const i = m.indexOf(': ')
+    return rawToast(i > 0 ? t(m.slice(0, i + 1)) + ' ' + m.slice(i + 2) : m)
+  }
 
   // Page opened from a menu row: My Account keeps covering the screen until the new page is ready, then hides at once
   useEffect(() => {
@@ -394,7 +402,7 @@ export default function AccountPanel() {
             )}
             {view === 'menu'
               ? <div className="acBrand">HEAVEN</div>
-              : <h2 className="acTitle">{({ login: 'Login', signup1: 'Create Account', signup2: 'Verify Email', forgot: 'Reset Password', orders: 'My Orders', profile: 'Profile', editProfile: 'Update Profile', support: 'Support' })[view] || 'My Account'}</h2>}
+              : <h2 className="acTitle">{t(({ login: 'Login', signup1: 'Create Account', signup2: 'Verify Email', forgot: 'Reset Password', orders: 'My Orders', profile: 'Profile', editProfile: 'Update Profile', support: 'Support' })[view] || 'My Account')}</h2>}
             <div className="acHeadIcons">
               {view !== 'menu' && (
                 <button type="button" className="acHeadBtn" aria-label="Search" onClick={() => { closePanel(); openSearch() }}>
@@ -426,52 +434,52 @@ export default function AccountPanel() {
 
         {view === 'login' && (
           <form className="form" onSubmit={login}>
-            <input type="email" placeholder="Email address" required value={loginEmail} onChange={e => setLoginEmail(e.target.value)} />
-            <input type="password" placeholder="Password" required value={loginPassword} onChange={e => setLoginPassword(e.target.value)} />
-            <button className="btn">LOGIN</button>
+            <input type="email" placeholder={t("Email address")} required value={loginEmail} onChange={e => setLoginEmail(e.target.value)} />
+            <input type="password" placeholder={t("Password")} required value={loginPassword} onChange={e => setLoginPassword(e.target.value)} />
+            <button className="btn">{t("LOGIN")}</button>
             <div style={{ textAlign: 'center', marginTop: 4 }}>
-              <a href="#" onClick={e => { e.preventDefault(); navView('forgot') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Forgot password?</a>
+              <a href="#" onClick={e => { e.preventDefault(); navView('forgot') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>{t('Forgot password?')}</a>
             </div>
             <div style={{ textAlign: 'center', marginTop: 14, paddingTop: 14, borderTop: '1px solid rgba(0,0,0,.08)' }}>
-              <span style={{ fontSize: 12, color: 'var(--muted)' }}>Don't have an account? </span>
-              <a href="#" onClick={e => { e.preventDefault(); navView('signup1') }} style={{ fontSize: 12, color: '#111', fontWeight: 700, textDecoration: 'underline' }}>Create one</a>
+              <span style={{ fontSize: 12, color: 'var(--muted)' }}>{t("Don't have an account?")}{' '}</span>
+              <a href="#" onClick={e => { e.preventDefault(); navView('signup1') }} style={{ fontSize: 12, color: '#111', fontWeight: 700, textDecoration: 'underline' }}>{t('Create one')}</a>
             </div>
           </form>
         )}
 
         {view === 'signup1' && (
           <form className="form" onSubmit={sendSignupOtp}>
-            <input type="text" placeholder="Full name" required value={suName} onChange={e => setSuName(e.target.value)} />
-            <input type="email" placeholder="Email address" required value={suEmail} onChange={e => setSuEmail(e.target.value)} />
-            <input type="tel" placeholder="Phone number (optional)" value={suPhone} onChange={e => setSuPhone(e.target.value)} />
-            <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: -6 }}>We'll send a verification code to your email to verify it's you — no password needed.</p>
-            <button className="btn" disabled={busy}>{busy ? 'SENDING...' : 'SEND CODE'}</button>
+            <input type="text" placeholder={t("Full name")} required value={suName} onChange={e => setSuName(e.target.value)} />
+            <input type="email" placeholder={t("Email address")} required value={suEmail} onChange={e => setSuEmail(e.target.value)} />
+            <input type="tel" placeholder={t("Phone number (optional)")} value={suPhone} onChange={e => setSuPhone(e.target.value)} />
+            <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: -6 }}>{t("We'll send a verification code to your email to verify it's you — no password needed.")}</p>
+            <button className="btn" disabled={busy}>{t(busy ? 'SENDING...' : 'SEND CODE')}</button>
             <div style={{ textAlign: 'center', marginTop: 14 }}>
-              <a href="#" onClick={e => { e.preventDefault(); backView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Back to login</a>
+              <a href="#" onClick={e => { e.preventDefault(); backView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>{t('Back to login')}</a>
             </div>
           </form>
         )}
 
         {view === 'signup2' && (
           <form className="form" onSubmit={verifySignupOtp}>
-            <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 2 }}>Enter the code we sent to</p>
+            <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 2 }}>{t('Enter the code we sent to')}</p>
             <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>{pendingSignup?.email}</p>
             <OtpBoxes value={suOtp} onChange={setSuOtp} />
-            <button className="btn" disabled={busy}>{busy ? 'VERIFYING...' : 'VERIFY & CREATE ACCOUNT'}</button>
+            <button className="btn" disabled={busy}>{t(busy ? 'VERIFYING...' : 'VERIFY & CREATE ACCOUNT')}</button>
             <div style={{ textAlign: 'center', marginTop: 14, display: 'flex', justifyContent: 'center', gap: 18 }}>
-              <a href="#" onClick={e => { e.preventDefault(); sendSignupOtp(e) }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'none' }}>Resend code</a>
-              <a href="#" onClick={e => { e.preventDefault(); setView('signup1') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'none' }}>Change email</a>
+              <a href="#" onClick={e => { e.preventDefault(); sendSignupOtp(e) }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'none' }}>{t('Resend code')}</a>
+              <a href="#" onClick={e => { e.preventDefault(); setView('signup1') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'none' }}>{t('Change email')}</a>
             </div>
           </form>
         )}
 
         {view === 'forgot' && (
           <form className="form" onSubmit={e => e.preventDefault()}>
-            <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6 }}>Enter your account email and we'll send you a password reset link.</p>
-            <input type="email" placeholder="Email address" required value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} />
-            <button className="btn" type="button" onClick={sendPasswordReset}>SEND RESET LINK</button>
+            <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6 }}>{t("Enter your account email and we'll send you a password reset link.")}</p>
+            <input type="email" placeholder={t("Email address")} required value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} />
+            <button className="btn" type="button" onClick={sendPasswordReset}>{t('SEND RESET LINK')}</button>
             <div style={{ textAlign: 'center', marginTop: 4 }}>
-              <a href="#" onClick={e => { e.preventDefault(); backView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Back to login</a>
+              <a href="#" onClick={e => { e.preventDefault(); backView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>{t('Back to login')}</a>
             </div>
           </form>
         )}
@@ -484,40 +492,40 @@ export default function AccountPanel() {
           <div>
             <div className="acSearch">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
-              <input type="search" placeholder="Search your orders" value={orderQ} onChange={e => setOrderQ(e.target.value)} />
+              <input type="search" placeholder={t("Search your orders")} value={orderQ} onChange={e => setOrderQ(e.target.value)} />
             </div>
             <div>
               {orders === null ? (
-                <div className="empty" style={{ padding: '30px 10px' }}>Loading...</div>
+                <div className="empty" style={{ padding: '30px 10px' }}>{t('Loading...')}</div>
               ) : orders.length === 0 ? (
-                <div className="empty" style={{ padding: '30px 10px' }}>No orders yet.</div>
+                <div className="empty" style={{ padding: '30px 10px' }}>{t('No orders yet.')}</div>
               ) : orders.filter(o => !orderQ.trim() || ((o.items || '') + ' #' + o.id + ' ' + (o.status || '')).toLowerCase().includes(orderQ.trim().toLowerCase())).length === 0 ? (
-                <div className="empty" style={{ padding: '30px 10px' }}>No orders match "{orderQ.trim()}"</div>
+                <div className="empty" style={{ padding: '30px 10px' }}>{t('No orders match "{q}"', { q: orderQ.trim() })}</div>
               ) : (
                 orders.filter(o => !orderQ.trim() || ((o.items || '') + ' #' + o.id + ' ' + (o.status || '')).toLowerCase().includes(orderQ.trim().toLowerCase())).map(o => (
                   <div key={o.id} className="acOrder" onClick={() => { closePanel(); if (openTrack) openTrack() }}>
                     <div className="acOrderTop" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                       {orderThumb(o)}
                       <div className="acOrderInfo" style={{ flex: 1, minWidth: 0 }}>
-                        <div className="acOrderId">Order #{o.id}</div>
+                        <div className="acOrderId">{t("Order")} #{o.id}</div>
                         <div className="acOrderItems">{o.items || ''}</div>
                       </div>
                       <div className="acOrderSide" style={{ flexShrink: 0 }}>
-                        <span className="acStatus">{o.status}</span>
+                        <span className="acStatus">{t(o.status)}</span>
                         <div className="acOrderTotal">৳{Number(o.total_amount || 0).toLocaleString()}</div>
                       </div>
                     </div>
                     {o.created_at && (
                       <div className="acOrderDate">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18 M8 3v4 M16 3v4" /></svg>
-                        <span>Ordered on {new Date(o.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                        <span>{t('Ordered on {date}', { date: new Date(o.created_at).toLocaleDateString(lang === 'bn' ? 'bn-BD-u-nu-latn' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) })}</span>
                       </div>
                     )}
                   </div>
                 ))
               )}
             </div>
-            <button className="btn light" style={{ width: '100%', marginTop: 12 }} onClick={() => { closePanel(); if (openTrack) openTrack() }}>TRACK AN ORDER</button>
+            <button className="btn light" style={{ width: '100%', marginTop: 12 }} onClick={() => { closePanel(); if (openTrack) openTrack() }}>{t('TRACK AN ORDER')}</button>
           </div>
         )}
       </div>
@@ -525,14 +533,14 @@ export default function AccountPanel() {
       {/* RESET PASSWORD (opened automatically from email reset link) */}
       <div className={`panel${showReset ? ' show' : ''}`}>
         <div className="panelHead">
-          <h2>Set New Password</h2>
+          <h2>{t('Set New Password')}</h2>
           <button className="close" onClick={closePanel}>×</button>
         </div>
         <form className="form" onSubmit={submitNewPassword}>
-          <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6 }}>Choose a new password for your account.</p>
-          <input type="password" placeholder="New password" required value={newPassword} onChange={e => setNewPassword(e.target.value)} />
-          <input type="password" placeholder="Confirm new password" required value={newPassword2} onChange={e => setNewPassword2(e.target.value)} />
-          <button className="btn">UPDATE PASSWORD</button>
+          <p style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6 }}>{t('Choose a new password for your account.')}</p>
+          <input type="password" placeholder={t("New password")} required value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+          <input type="password" placeholder={t("Confirm new password")} required value={newPassword2} onChange={e => setNewPassword2(e.target.value)} />
+          <button className="btn">{t('UPDATE PASSWORD')}</button>
         </form>
       </div>
     </>

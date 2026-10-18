@@ -1,5 +1,7 @@
 'use client'
 
+import { useShop } from './ShopContext'
+
 // "My Account" home: profile card + list of rows (icon, label, arrow).
 const SHOP_PHONE = '8801877270165'
 
@@ -40,6 +42,7 @@ function Row({ icon, label, onClick }) {
 }
 
 export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSupport, onOrders, onLogout, go, openPanel, showToast }) {
+  const { t } = useShop()
   const name = session?.user?.user_metadata?.full_name || ''
   const email = session?.user?.email || ''
   const initial = (name || email || '').trim().charAt(0).toUpperCase()
@@ -54,13 +57,13 @@ export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSu
         <div className="acWho">
           {session ? (
             <>
-              <div className="acName">{name || 'My Account'}</div>
+              <div className="acName">{name || t('My Account')}</div>
               <div className="acSub">{email}</div>
             </>
           ) : (
             <>
-              <div className="acName">Account</div>
-              <button type="button" className="acLoginLink" onClick={onLogin}>Login / Sign up</button>
+              <div className="acName">{t("Account")}</div>
+              <button type="button" className="acLoginLink" onClick={onLogin}>{t("Login / Sign up")}</button>
             </>
           )}
         </div>
@@ -68,26 +71,26 @@ export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSu
       </div>
 
       <div className="acGroup">
-        <Row icon="orders" label="My Orders" onClick={onOrders} />
-        <Row icon="heart" label="Wishlist" onClick={() => openPanel('wishlist')} />
-        <Row icon="offers" label="Flash Sale / Offers" onClick={() => go('/flash-sale')} />
-        <Row icon="gift" label="Refer & Earn" onClick={() => showToast('Refer & Earn is coming soon.')} />
+        <Row icon="orders" label={t("My Orders")} onClick={onOrders} />
+        <Row icon="heart" label={t("Wishlist")} onClick={() => openPanel('wishlist')} />
+        <Row icon="offers" label={t("Flash Sale / Offers")} onClick={() => go('/flash-sale')} />
+        <Row icon="gift" label={t("Refer & Earn")} onClick={() => showToast('Refer & Earn is coming soon.')} />
       </div>
       <div className="acGroup">
-        <Row icon="support" label="Support" onClick={onSupport} />
-        <Row icon="mail" label="Contact Us" onClick={() => go('/contact')} />
-        <Row icon="info" label="About Us" onClick={() => openPanel('about')} />
+        <Row icon="support" label={t("Support")} onClick={onSupport} />
+        <Row icon="mail" label={t("Contact Us")} onClick={() => go('/contact')} />
+        <Row icon="info" label={t("About Us")} onClick={() => openPanel('about')} />
       </div>
       <div className="acGroup">
-        <Row icon="refund" label="Return & Refund Policy" onClick={() => go('/refund-policy')} />
-        <Row icon="shield" label="Privacy Policy" onClick={() => go('/privacy')} />
-        <Row icon="doc" label="Terms & Conditions" onClick={() => go('/terms')} />
+        <Row icon="refund" label={t("Return & Refund Policy")} onClick={() => go('/refund-policy')} />
+        <Row icon="shield" label={t("Privacy Policy")} onClick={() => go('/privacy')} />
+        <Row icon="doc" label={t("Terms & Conditions")} onClick={() => go('/terms')} />
       </div>
       <div className="acGroup">
-        {isAdmin && <Row icon="lock" label="Admin Panel" onClick={() => go('/admin')} />}
+        {isAdmin && <Row icon="lock" label={t("Admin Panel")} onClick={() => go('/admin')} />}
         {session
-          ? <Row icon="logout" label="Logout" onClick={onLogout} />
-          : <Row icon="login" label="Login" onClick={onLogin} />}
+          ? <Row icon="logout" label={t("Logout")} onClick={onLogout} />
+          : <Row icon="login" label={t("Login")} onClick={onLogin} />}
       </div>
 
       <div className="acFoot">© 2026 HEAVEN</div>
