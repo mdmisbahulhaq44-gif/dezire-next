@@ -3,7 +3,8 @@
 import { createContext, useContext, useEffect, useState, useRef } from 'react'
 import { flushSync } from 'react-dom'
 import { getCart, saveCart, cartCount, cartSubtotal } from '../lib/cart'
-import { formatMoney } from '../lib/currency'
+import { formatMoney, USD_RATE } from '../lib/currency'
+import { supabase } from '../lib/supabaseClient'
 import { getWishlist, saveWishlist } from '../lib/wishlist'
 
 const ShopContext = createContext(null)
@@ -11,6 +12,7 @@ const ShopContext = createContext(null)
 export function ShopProvider({ children }) {
   const [cart, setCart] = useState([])
   const [currency, setCurrencyState] = useState('BDT')
+  const [rate, setRate] = useState(USD_RATE)
   const [wishlist, setWishlist] = useState([])
   const [activePanel, setActivePanel] = useState(null)
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -26,10 +28,18 @@ export function ShopProvider({ children }) {
 
   useEffect(() => { setCart(getCart()); setWishlist(getWishlist()) }, [])
   useEffect(() => {
-    try { if (localStorage.getItem('dz_cur') === 'USD') setCurrencyState('USD') } catch (e) {}
+    try { const r = Number(localStorage.getItem('dz_rate')); if (r > 0) setRate(r) } catch (e) {}
+    try { if (localStorage.getItem('dz_cur') === 'USD') { setCurrencyState('USD'); loadRate() } } catch (e) {}
   }, [])
+  function loadRate() {
+    supabase.from('settings').select('value').eq('key', 'usd_rate').maybeSingle().then(({ data }) => {
+      const r = Number(data && data.value)
+      if (r > 0) { setRate(r); try { localStorage.setItem('dz_rate', String(r)) } catch (e) {} }
+    })
+  }
   function setCurrency(c) {
     setCurrencyState(c)
+    if (c === 'USD') loadRate()
     try { localStorage.setItem('dz_cur', c) } catch (e) {}
   }
 
@@ -254,7 +264,7 @@ export function ShopProvider({ children }) {
   const value = {
     currency,
     setCurrency,
-    money: n => formatMoney(n, currency),
+    money: n => formatMoney(n, currency, rate),
     cart,
     wishlist,
     wishlistCount: wishlist.length,

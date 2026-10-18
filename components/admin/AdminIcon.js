@@ -10,6 +10,7 @@ const P = {
   backup: <><path d="M12 4v11" /><path d="M7 11l5 5 5-5" /><path d="M4 20h16" /></>,
   sales: <><path d="M3 12V4h8l10 10-8 8L3 12Z" /><circle cx="7.5" cy="8.5" r="1.2" /></>,
   coupons: <><path d="M4 6h16v4a2 2 0 0 0 0 4v4H4v-4a2 2 0 0 0 0-4V6Z" /><path d="M14 7v2" /><path d="M14 11v2" /><path d="M14 15v2" /></>,
+  currency: <><circle cx="12" cy="12" r="9" /><path d="M14.6 9.3c-.5-.8-1.4-1.3-2.6-1.3-1.5 0-2.6.8-2.6 2s1 1.7 2.6 2 2.6.8 2.6 2-1.1 2-2.6 2c-1.2 0-2.1-.5-2.6-1.3" /><path d="M12 6.5V8" /><path d="M12 16v1.5" /></>,
   activity: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
   today: <><rect x="3.5" y="5" width="17" height="15.5" rx="2" /><path d="M3.5 10h17" /><path d="M8 3v4" /><path d="M16 3v4" /><circle cx="12" cy="15" r="1.3" /></>,
   week: <><rect x="3.5" y="5" width="17" height="15.5" rx="2" /><path d="M3.5 10h17" /><path d="M8 3v4" /><path d="M16 3v4" /><path d="M8 15h8" /></>,
