@@ -28,9 +28,9 @@ const useIsoLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : use
 function inlineBold(t, k) {
   return t.split(/\*\*(.+?)\*\*/g).map((p, i) => (i % 2 ? <strong key={k + '-' + i}>{p}</strong> : p))
 }
-function renderDesc(text) {
+function renderDesc(text, tr) {
   const t = (text || '').trim()
-  if (!t) return 'No description added yet.'
+  if (!t) return tr ? tr('No description added yet.') : 'No description added yet.'
   const isBullet = l => /^[•\-*·]\s+/.test(l)
   return t.split(/\n\s*\n/).map((block, bi) => {
     const lines = block.split('\n').map(l => l.trim()).filter(Boolean)
@@ -50,7 +50,7 @@ function renderDesc(text) {
 
 export default function ProductDetail({ product, related, saleEndsAt, colors = [] }) {
   const router = useRouter()
-  const { addToCart, openMini, openCheckout, openAccount, showToast, wishlist, toggleWishlist, activePanel, drawerOpen } = useShop()
+  const { addToCart, openMini, openCheckout, openAccount, showToast, wishlist, toggleWishlist, activePanel, drawerOpen, t, lang } = useShop()
 
   const images = product.imgs ? product.imgs.split(',').map(s => s.trim()).filter(Boolean) : []
   const sizes = Array.isArray(product.sizes) ? product.sizes : []
@@ -183,7 +183,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
   function sizeMissing() {
     if (sizes.length && !size) {
-      showToast('Please select a size first.')
+      showToast(t('Please select a size first.'))
       return true
     }
     return false
@@ -205,14 +205,14 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   function pickSizeFromChart(s) {
     setSize(s)
     setChartOpen(false)
-    showToast('Size ' + s + ' selected')
+    showToast(t('Size {s} selected', { s }))
   }
 
   async function submitReview(e) {
     e.preventDefault()
     const { data } = await supabase.auth.getSession()
     const s = data && data.session
-    if (!s) { showToast('Please login to submit a review.'); return }
+    if (!s) { showToast(t('Please login to submit a review.')); return }
     const name = ((s.user.user_metadata && s.user.user_metadata.full_name) || 'HEAVEN Customer').slice(0, 100)
     const { error } = await supabase.from('reviews').insert({
       product_id: product.id,
@@ -222,10 +222,10 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
       comment: comment.trim().slice(0, 1000)
     })
     if (error) {
-      if (error.code === '23505') { setReviewed(true); showToast('You have already reviewed this product.'); return }
-      showToast('Could not submit review: ' + (error.message || 'Unknown error')); return
+      if (error.code === '23505') { setReviewed(true); showToast(t('You have already reviewed this product.')); return }
+      showToast(t('Could not submit review: {m}', { m: error.message || 'Unknown error' })); return
     }
-    showToast('Thank you for your review!')
+    showToast(t('Thank you for your review!'))
     setRating('')
     setComment('')
     loadReviews()
@@ -295,10 +295,10 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
         <div style={{ paddingTop: 14 }}>
           <div className="pdCrumb">
-            <Link href="/">Home</Link>
-            <span> / </span><Link href={buildShopPath(gender, [])}>{capitalize(gender)}</Link>
+            <Link href="/">{t('Home')}</Link>
+            <span> / </span><Link href={buildShopPath(gender, [])}>{t(capitalize(gender))}</Link>
             {catSegs.map((c, i) => (
-              <span key={i}> / <Link href={buildShopPath(gender, catSegs.slice(0, i + 1))}>{c}</Link></span>
+              <span key={i}> / <Link href={buildShopPath(gender, catSegs.slice(0, i + 1))}>{t(c)}</Link></span>
             ))}
             <span> / {product.name}</span>
           </div>
@@ -309,20 +309,20 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             {product.old && <> <span className="old"><Money n={product.old} /></span></>}
           </div>
 <SaleCountdown productId={product.id} endsAt={saleEndsAt || null} />
-          <div className="pdDelivery">Order now and get it in 2–3 days inside Dhaka and 3–5 days outside Dhaka.</div>
+          <div className="pdDelivery">{t('Order now and get it in 2–3 days inside Dhaka and 3–5 days outside Dhaka.')}</div>
           <div style={{ fontSize: 12, marginTop: 6, color: !inStock ? 'var(--red)' : lowStock ? 'var(--red)' : '#2a8f4f' }}>
-            {!inStock ? 'Out of Stock' : lowStock ? `Only ${product.stock} left in stock!` : '✓ In Stock'}
+            {!inStock ? t('Out of Stock') : lowStock ? t('Only {n} left in stock!', { n: product.stock }) : '✓ ' + t('In Stock')}
           </div>
 
           <div style={{ fontSize: 12, color: 'var(--muted)' }}>
-            {product.fabric && <div style={{ marginTop: 4 }}><b>Fabric:</b> {product.fabric}</div>}
+            {product.fabric && <div style={{ marginTop: 4 }}><b>{t('Fabric')}:</b> {product.fabric}</div>}
           </div>
 
           {hasChart && (
             <div className="pdMeasure">
-              <b>Measurements (in inches):</b>
+              <b>{t('Measurements (in inches):')}</b>
               {chartSizes.map(s => (
-                <div key={s}><span>{s}</span>: {Object.entries(chart[s]).map(([k, v]) => `${LABELS[k] || k}- ${v}`).join(' | ')}</div>
+                <div key={s}><span>{s}</span>: {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</div>
               ))}
             </div>
           )}
@@ -330,7 +330,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           {colors.length > 1 && (
             <div style={{ marginTop: 14 }}>
-              <span style={{ fontSize: 12, letterSpacing: 1, color: 'var(--muted)' }}>COLOR</span>
+              <span style={{ fontSize: 12, letterSpacing: 1, color: 'var(--muted)' }}>{t('COLOR')}</span>
               <span style={{ fontSize: 12, marginLeft: 8 }}>{product.color_name || product.name}</span>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
                 {colors.map(c => {
@@ -350,7 +350,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                       href={`/product/${c.id}`}
                       replace
                       data-replace="1"
-                      title={(c.color_name || c.name) + (out ? ' (sold out)' : '')}
+                      title={(c.color_name || c.name) + (out ? ' (' + t('sold out') + ')' : '')}
                       data-preview={JSON.stringify({ id: c.id, name: c.name, price: c.price, old: c.old || null, img, all: c.imgs || '' })}
                     >{box}</Link>
                   )
@@ -361,25 +361,25 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           {sizes.length > 0 && (
             <div ref={sizeRef} style={{ marginTop: 14 }}>
-              <span className="pdOptLabel">Size</span>
+              <span className="pdOptLabel">{t('Size')}</span>
               <select className="pdSizeSelect" value={size} onChange={e => setSize(e.target.value)}>
-                <option value="">Choose an option</option>
+                <option value="">{t('Choose an option')}</option>
                 {sizes.map(s => <option value={s} key={s}>{s}</option>)}
               </select>
-              {size && <button type="button" className="pdSizeClear" onClick={() => setSize('')}>Clear</button>}
+              {size && <button type="button" className="pdSizeClear" onClick={() => setSize('')}>{t('Clear')}</button>}
               {measurements.length > 0 && (
                 <div style={{ marginTop: 10, fontSize: 12, color: '#333', lineHeight: 1.6 }}>
-                  <b>{size}</b>: {measurements.map(([k, v]) => `${LABELS[k] || k}- ${v}`).join(' | ')}
+                  <b>{size}</b>: {measurements.map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}
                 </div>
               )}
             </div>
           )}
 
-          <div className="pdAvail">Availability:</div>
+          <div className="pdAvail">{t('Availability:')}</div>
           <div className="pdBuyRow">
             <input className="pdQty" type="text" inputMode="numeric" pattern="[0-9]*" value={qty} onChange={e => setQty(e.target.value.replace(/[^0-9]/g, '').slice(0, 3))} onBlur={() => setQty(qtyNum())} aria-label="Quantity" />
             <button ref={addRef} className="btn pdAddBtn" disabled={!inStock} onClick={handleAddToCart}>
-              {inStock ? 'Add to cart' : 'Out of stock'}
+              {inStock ? t('Add to cart') : t('Out of stock')}
             </button>
             <button type="button" className={`pdHeart${wishlist.some(w => w.id === product.id) ? ' on' : ''}`} onClick={() => toggleWishlist(product)} aria-label={wishlist.some(w => w.id === product.id) ? 'Remove from wishlist' : 'Add to wishlist'}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill={wishlist.some(w => w.id === product.id) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
@@ -389,7 +389,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           {(product.sku || catSegs.length > 0) && (
             <div className="pdMeta">
               {product.sku && <div style={{ marginBottom: catSegs.length > 0 ? 6 : 0 }}><b>SKU:</b> {product.sku}</div>}
-              {catSegs.length > 0 && <div><b>Categories:</b> {catSegs.join(', ')}</div>}
+              {catSegs.length > 0 && <div><b>{t('Categories')}:</b> {catSegs.map(c => t(c)).join(', ')}</div>}
             </div>
           )}
 
@@ -397,17 +397,17 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           {(product.description || product.fabric || product.color_name || sizes.length > 0) && (
             <div className="pdTabs">
               <div className="pdTabBar">
-                <button type="button" className={tab === 'desc' ? 'active' : ''} onClick={() => setTab('desc')}>Description</button>
-                <button type="button" className={tab === 'info' ? 'active' : ''} onClick={() => setTab('info')}>Additional Information</button>
+                <button type="button" className={tab === 'desc' ? 'active' : ''} onClick={() => setTab('desc')}>{t('Description')}</button>
+                <button type="button" className={tab === 'info' ? 'active' : ''} onClick={() => setTab('info')}>{t('Additional Information')}</button>
               </div>
               {tab === 'desc' ? (
-                <div className="pdDesc">{renderDesc(product.description)}</div>
+                <div className="pdDesc">{renderDesc(product.description, t)}</div>
               ) : (
                 <table className="pdInfoTable"><tbody>
-                  {product.fabric && <tr><th>Fabric</th><td>{product.fabric}</td></tr>}
-                  {product.color_name && <tr><th>Color</th><td>{product.color_name}</td></tr>}
-                  {sizes.length > 0 && <tr><th>Sizes</th><td>{sizes.join(', ')}</td></tr>}
-                  {catSegs.length > 0 && <tr><th>Category</th><td>{catSegs.join(' › ')}</td></tr>}
+                  {product.fabric && <tr><th>{t('Fabric')}</th><td>{product.fabric}</td></tr>}
+                  {product.color_name && <tr><th>{t('Color')}</th><td>{product.color_name}</td></tr>}
+                  {sizes.length > 0 && <tr><th>{t('Sizes')}</th><td>{sizes.join(', ')}</td></tr>}
+                  {catSegs.length > 0 && <tr><th>{t('Category')}</th><td>{catSegs.map(c => t(c)).join(' › ')}</td></tr>}
                 </tbody></table>
               )}
             </div>
@@ -415,7 +415,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           {related.length > 0 && (
             <div style={{ borderTop: '1px solid rgba(0,0,0,.08)', marginTop: 30, paddingTop: 20 }}>
-              <div className="pdRelTitle">Related products</div>
+              <div className="pdRelTitle">{t('Related products')}</div>
               <ProductGrid products={related} replaceLinks />
             </div>
           )}
@@ -426,13 +426,13 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
       <div className={`pdBuyBar${showBar ? ' show' : ''}`} aria-hidden={!showBar}>
         <button type="button" className="btn" tabIndex={showBar ? 0 : -1} disabled={!inStock} onClick={barAction}>
-          {!inStock ? 'Out of stock' : (sizes.length && !size) ? 'Select options' : 'Add to cart'}
+          {!inStock ? t('Out of stock') : (sizes.length && !size) ? t('Select options') : t('Add to cart')}
         </button>
       </div>
 
       <div className={`panel${chartOpen ? ' show' : ''}`}>
         <div className="panelHead">
-          <h2>Size Guide</h2>
+          <h2>{t('Size Guide')}</h2>
           <button className="close" onClick={() => setChartOpen(false)}>×</button>
         </div>
         <div style={{ overflow: 'auto' }}>
@@ -441,9 +441,9 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
                 <tbody>
                   <tr style={{ borderBottom: '1px solid var(--line)' }}>
-                    <th style={{ textAlign: 'left', padding: '8px 4px' }}>Size</th>
+                    <th style={{ textAlign: 'left', padding: '8px 4px' }}>{t('Size')}</th>
                     {measures.map(m => (
-                      <th key={m} style={{ textAlign: 'left', padding: '8px 4px', textTransform: 'capitalize' }}>{m}</th>
+                      <th key={m} style={{ textAlign: 'left', padding: '8px 4px', textTransform: 'capitalize' }}>{lang === 'bn' ? t(LABELS[m] || m) : m}</th>
                     ))}
                   </tr>
                   {chartSizes.map(s => {
@@ -466,7 +466,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                 </tbody>
               </table>
               <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: 10 }}>
-                All measurements in inches.{selectable ? ' Tap a row to select that size.' : ''}
+                {t('All measurements in inches.')}{selectable ? ' ' + t('Tap a row to select that size.') : ''}
               </p>
             </>
           )}
