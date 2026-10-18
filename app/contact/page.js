@@ -1,4 +1,6 @@
 import StaticPage from '../../components/StaticPage'
+import T from '../../components/T'
+import TM from '../../components/TM'
 import Link from 'next/link'
 
 export const metadata = {
@@ -33,7 +35,7 @@ function Row({ icon, label, value, href, external }) {
   return (
     <a className="cRow" href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
       {icon}
-      <div className="t"><div className="l">{label}</div><div className="v">{value}</div></div>
+      <div className="t"><div className="l"><T>{label}</T></div><div className="v"><T>{value}</T></div></div>
       <Line d={P.arrow} cls="ar" />
     </a>
   )
@@ -43,10 +45,10 @@ export default function ContactPage() {
   return (
     <StaticPage
       title="Contact Us"
-      footerLinks={<><Link href="/privacy">Privacy</Link> · <Link href="/terms">Terms</Link> · <Link href="/refund-policy">Returns</Link></>}
+      footerLinks={<><Link href="/privacy"><T>Privacy</T></Link> · <Link href="/terms"><T>Terms</T></Link> · <Link href="/refund-policy"><T>Returns</T></Link></>}
     >
       <div className="cClean">
-        <p className="sub">Questions about an order, a product, or anything else? Reach us any of these ways — we usually reply fastest on WhatsApp.</p>
+        <p className="sub"><T>{"Questions about an order, a product, or anything else? Reach us any of these ways — we usually reply fastest on WhatsApp."}</T></p>
 
         <div className="cList">
           <Row icon={<Solid d={S.whatsapp} />} label="WhatsApp" value="+880 1877-270165" href="https://wa.me/8801877270165" external />
@@ -58,7 +60,7 @@ export default function ContactPage() {
 
         <div className="cBase">
           <Line d={P.pin} />
-          <div><div className="l">Based in</div><div className="v">Mirpur, Dhaka, Bangladesh</div></div>
+          <div><div className="l"><T>Based in</T></div><div className="v"><T>Mirpur, Dhaka, Bangladesh</T></div></div>
         </div>
       </div>
     </StaticPage>

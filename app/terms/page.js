@@ -1,4 +1,6 @@
 import StaticPage from '../../components/StaticPage'
+import T from '../../components/T'
+import TM from '../../components/TM'
 import Link from 'next/link'
 import { supabaseServer as supabase } from '../../lib/supabaseServer'
 
@@ -28,48 +30,48 @@ export default async function TermsPage() {
     <StaticPage
       title="Terms & Conditions"
       updated="Last updated: September 2026"
-      footerLinks={<><Link href="/privacy">Privacy</Link> · <Link href="/refund-policy">Returns</Link> · <Link href="/contact">Contact</Link></>}
+      footerLinks={<><Link href="/privacy"><T>Privacy</T></Link> · <Link href="/refund-policy"><T>Returns</T></Link> · <Link href="/contact"><T>Contact</T></Link></>}
     >
-      <p>Welcome to HEAVEN. By browsing this website and placing an order, you agree to the terms below.</p>
+      <p><TM>{"Welcome to HEAVEN. By browsing this website and placing an order, you agree to the terms below."}</TM></p>
 
-      <h2>About Us</h2>
-      <p>HEAVEN sells men's and women's clothing online across Bangladesh, based in Mirpur, Dhaka.</p>
+      <h2><TM>{"About Us"}</TM></h2>
+      <p><TM>{"HEAVEN sells men's and women's clothing online across Bangladesh, based in Mirpur, Dhaka."}</TM></p>
 
-      <h2>Orders & Pricing</h2>
+      <h2><TM>{"Orders & Pricing"}</TM></h2>
       <ul>
-        <li>All prices shown are in Bangladeshi Taka (৳) and include applicable taxes.</li>
-        <li>We reserve the right to correct pricing errors and to cancel an order placed at an incorrect price, in which case you will be notified and no charge will be made.</li>
-        <li>Product availability is not guaranteed until your order is confirmed — occasionally an item may sell out before your order is processed, in which case we will contact you.</li>
-        <li>Product images are for illustration; actual color may vary slightly due to lighting and screen settings.</li>
+        <li><TM>{"All prices shown are in Bangladeshi Taka (৳) and include applicable taxes."}</TM></li>
+        <li><TM>{"We reserve the right to correct pricing errors and to cancel an order placed at an incorrect price, in which case you will be notified and no charge will be made."}</TM></li>
+        <li><TM>{"Product availability is not guaranteed until your order is confirmed — occasionally an item may sell out before your order is processed, in which case we will contact you."}</TM></li>
+        <li><TM>{"Product images are for illustration; actual color may vary slightly due to lighting and screen settings."}</TM></li>
       </ul>
 
-      <h2>Payment</h2>
-      <p>We currently accept <strong>Cash on Delivery (COD)</strong> — you pay when your order arrives at your doorstep.</p>
+      <h2><TM>{"Payment"}</TM></h2>
+      <p><TM>{"We currently accept **Cash on Delivery (COD)** — you pay when your order arrives at your doorstep."}</TM></p>
 
-      <h2>Delivery</h2>
+      <h2><TM>{"Delivery"}</TM></h2>
       <table>
         <tbody>
-          <tr><th>Area</th><th>Delivery Charge</th><th>Estimated Time</th></tr>
-          <tr><td>Inside Dhaka</td><td>৳{d.dhaka}</td><td>2–3 business days</td></tr>
-          <tr><td>Outside Dhaka (nationwide)</td><td>৳{d.outside}</td><td>3–5 business days</td></tr>
+          <tr><th><T>Area</T></th><th><T>Delivery Charge</T></th><th><T>Estimated Time</T></th></tr>
+          <tr><td><T>Inside Dhaka</T></td><td>৳{d.dhaka}</td><td><T>2–3 business days</T></td></tr>
+          <tr><td><T>Outside Dhaka (nationwide)</T></td><td>৳{d.outside}</td><td><T>3–5 business days</T></td></tr>
         </tbody>
       </table>
-      {d.free > 0 && <p>Delivery is free on orders of ৳{d.free.toLocaleString('en-US')} or more.</p>}
-      <p>Delivery times are estimates and may vary due to courier delays, weather, or other circumstances outside our control.</p>
+      {d.free > 0 && <p><TM vars={{ n: d.free.toLocaleString('en-US') }}>{"Delivery is free on orders of ৳{n} or more."}</TM></p>}
+      <p><TM>{"Delivery times are estimates and may vary due to courier delays, weather, or other circumstances outside our control."}</TM></p>
 
-      <h2>Returns & Refunds</h2>
-      <p>See our full <Link href="/refund-policy">Return & Refund Policy</Link> for details on exchanges and returns.</p>
+      <h2><TM>{"Returns & Refunds"}</TM></h2>
+      <p><TM>{"See our full [Return & Refund Policy](/refund-policy) for details on exchanges and returns."}</TM></p>
 
-      <h2>Account Responsibility</h2>
-      <p>If you create an account with us, you're responsible for keeping your login details secure and for all activity under your account.</p>
+      <h2><TM>{"Account Responsibility"}</TM></h2>
+      <p><TM>{"If you create an account with us, you're responsible for keeping your login details secure and for all activity under your account."}</TM></p>
 
-      <h2>Changes to These Terms</h2>
-      <p>We may update these terms from time to time. Continued use of the site after changes means you accept the updated terms.</p>
+      <h2><TM>{"Changes to These Terms"}</TM></h2>
+      <p><TM>{"We may update these terms from time to time. Continued use of the site after changes means you accept the updated terms."}</TM></p>
 
-      <h2>Contact Us</h2>
+      <h2><TM>{"Contact Us"}</TM></h2>
       <ul>
-        <li>Phone / WhatsApp: <a href="https://wa.me/8801877270165">+880 1877-270165</a></li>
-        <li>Email: <a href="mailto:mdmisbahulhaq44@gmail.com">mdmisbahulhaq44@gmail.com</a></li>
+        <li><TM>{"Phone / WhatsApp: [+880 1877-270165](https://wa.me/8801877270165)"}</TM></li>
+        <li><TM>{"Email: [mdmisbahulhaq44@gmail.com](mailto:mdmisbahulhaq44@gmail.com)"}</TM></li>
       </ul>
     </StaticPage>
   )
