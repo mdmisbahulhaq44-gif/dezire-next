@@ -10,9 +10,9 @@ export default function Money({ n }) {
 
 // "Charged in ৳X at checkout" reminder, shown only while prices are displayed in USD
 export function CurNote({ n }) {
-  const { currency } = useShop()
+  const { currency, t } = useShop()
   if (currency !== 'USD') return null
-  return <div className="curNote">Charged in ৳{Number(n || 0).toLocaleString('en-US')} (BDT) at checkout</div>
+  return <div className="curNote">{t('Charged in ৳{n} (BDT) at checkout', { n: Number(n || 0).toLocaleString('en-US') })}</div>
 }
 
 export function CurrencyToggle() {

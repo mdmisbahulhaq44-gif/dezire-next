@@ -8,7 +8,7 @@ import Money, { CurNote } from './Money'
 
 // Slide-in cart that opens from the left (after "Add to cart" and when a bag button is tapped)
 export default function MiniCart() {
-  const { cart, cartCount, cartSubtotal, miniOpen, closeMini, removeFromCart, openCartFull, openCheckout } = useShop()
+  const { cart, cartCount, cartSubtotal, miniOpen, closeMini, removeFromCart, openCartFull, openCheckout, t } = useShop()
   const items = [...cart].reverse()
 
   function goCart() { closeMini(); openCartFull() }
@@ -20,13 +20,13 @@ export default function MiniCart() {
       <aside className={`miniCart${miniOpen ? ' show' : ''}`} aria-hidden={!miniOpen}>
         <div className="miniHead">
           <BagCount count={cartCount} />
-          <h2>Your Cart</h2>
+          <h2>{t('Your Cart')}</h2>
           <button className="close" onClick={closeMini} aria-label="Close">×</button>
         </div>
 
         <div className="miniBody">
           {items.length === 0 ? (
-            <div className="empty" style={{ padding: '40px 10px' }}>Your cart is empty.</div>
+            <div className="empty" style={{ padding: '40px 10px' }}>{t('Your cart is empty.')}</div>
           ) : items.map((i, idx) => (
             <div className="miniItem" key={i.id + '-' + (i.size || '') + '-' + idx}>
               <div className="cartImg" style={{ position: 'relative' }}>
@@ -36,7 +36,7 @@ export default function MiniCart() {
               </div>
               <div className="miniInfo">
                 <h4>{i.name}</h4>
-                {i.size && <small>Size: {i.size}</small>}
+                {i.size && <small>{t('Size')}: {i.size}</small>}
                 <div className="miniPrice">{i.qty} × <Money n={i.price} /></div>
               </div>
               <button className="miniDel" onClick={() => removeFromCart(i.id, i.size)} aria-label="Remove item">
@@ -51,11 +51,11 @@ export default function MiniCart() {
         </div>
 
         <div className="miniFoot">
-          <div className="miniSub"><span>Subtotal</span><span><Money n={cartSubtotal} /></span></div>
+          <div className="miniSub"><span>{t('Subtotal')}</span><span><Money n={cartSubtotal} /></span></div>
           <CurNote n={cartSubtotal} />
-          <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={closeMini}>Continue Shopping</button>
-          <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={goCart}>View Cart</button>
-          <button className="btn" type="button" style={{ width: '100%' }} disabled={cart.length === 0} onClick={goCheckout}>Checkout</button>
+          <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={closeMini}>{t('Continue Shopping')}</button>
+          <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginBottom: 8 }} onClick={goCart}>{t('View Cart')}</button>
+          <button className="btn" type="button" style={{ width: '100%' }} disabled={cart.length === 0} onClick={goCheckout}>{t('Checkout')}</button>
         </div>
       </aside>
     </>

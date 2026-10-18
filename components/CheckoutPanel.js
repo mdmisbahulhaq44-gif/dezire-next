@@ -25,7 +25,7 @@ const officeIcon = (
 )
 
 export default function CheckoutPanel() {
-  const { cart, cartSubtotal, activePanel, closePanel, clearCart, showToast, setLastOrder, openSuccess, lastOrder, paymentReturn } = useShop()
+  const { cart, cartSubtotal, activePanel, closePanel, clearCart, showToast, setLastOrder, openSuccess, lastOrder, paymentReturn, t } = useShop()
   const show = activePanel === 'checkout'
   const showSuccess = activePanel === 'success'
 
@@ -136,7 +136,7 @@ export default function CheckoutPanel() {
 
   async function applyCoupon() {
     const code = couponInput.trim()
-    if (!code) { showToast('Please enter a coupon code.'); return }
+    if (!code) { showToast(t('Please enter a coupon code.')); return }
     const r = await runCoupon(code)
     if (!r.ok) {
       setCoupon(null); setCouponMsg({ text: r.error, bad: true }); return
@@ -164,15 +164,25 @@ export default function CheckoutPanel() {
   const discount = coupon ? Math.min(Number(coupon.discount) || 0, cartSubtotal) : 0
   const total = cartSubtotal - discount + delivery.charge
 
+  // coupon messages come from the server in English; show them in the chosen language
+  function cErr(msg) {
+    if (!msg) return msg
+    let m = /^Minimum order ৳(.+)$/.exec(msg)
+    if (m) return t('Minimum order ৳{n}', { n: m[1] })
+    m = /^Coupon "(.+)" applied!$/.exec(msg)
+    if (m) return t('Coupon "{c}" applied!', { c: m[1] })
+    return t(msg)
+  }
+
   async function placeOrder(e) {
     e.preventDefault()
     if (busy) return
-    if (!cart.length) { showToast('Your cart is empty.'); return }
+    if (!cart.length) { showToast(t('Your cart is empty.')); return }
     const nm = name.trim()
     const ph = phone.trim()
-    if (!nm || !ph) { showToast('Please fill in your name and phone number.'); return }
+    if (!nm || !ph) { showToast(t('Please fill in your name and phone number.')); return }
     if (method === 'home_delivery' && (!region || !city || !area || !address.trim())) {
-      showToast('Please fill in region, city, area and address.'); return
+      showToast(t('Please fill in region, city, area and address.')); return
     }
 
     setBusy(true)
@@ -184,7 +194,7 @@ export default function CheckoutPanel() {
         })
         if (pErr || !newId) {
           console.error(pErr)
-          showToast('Could not save your details. Please try again.')
+          showToast(t('Could not save your details. Please try again.'))
           setBusy(false); return
         }
         profile = { id: newId, name: nm, phone: ph, email: null }
@@ -218,7 +228,7 @@ export default function CheckoutPanel() {
       })
       if (error || !result) {
         console.error(error)
-        showToast('Order failed: ' + ((error && error.message) || 'Unknown error'))
+        showToast(t('Order failed: {m}', { m: (error && error.message) || 'Unknown error' }))
         setBusy(false); return
       }
 
@@ -238,7 +248,7 @@ export default function CheckoutPanel() {
           })
           if (chargeError || !chargeData || !chargeData.payment_url) {
             console.error('create-charge failed:', chargeError, chargeData)
-            showToast('Could not start online payment. Please try Cash on Delivery, or contact us — your order is saved as #' + orderRef + '.')
+            showToast(t('Could not start online payment. Please try Cash on Delivery, or contact us — your order is saved as #{r}.', { r: orderRef }))
             setBusy(false); return
           }
           clearCart()
@@ -246,7 +256,7 @@ export default function CheckoutPanel() {
           return
         } catch (err) {
           console.error('create-charge error:', err)
-          showToast('Could not start online payment. Please try Cash on Delivery, or contact us — your order is saved as #' + orderRef + '.')
+          showToast(t('Could not start online payment. Please try Cash on Delivery, or contact us — your order is saved as #{r}.', { r: orderRef }))
           setBusy(false); return
         }
       }
@@ -277,7 +287,7 @@ export default function CheckoutPanel() {
       openSuccess()
     } catch (err) {
       console.error(err)
-      showToast('Something went wrong. Please try again.')
+      showToast(t('Something went wrong. Please try again.'))
     }
     setBusy(false)
   }
@@ -286,126 +296,126 @@ export default function CheckoutPanel() {
     <>
       <div className={`panel${show ? ' show' : ''}`}>
         <div className="panelHead">
-          <h2>Checkout</h2>
+          <h2>{t('Checkout')}</h2>
           <button className="close" onClick={closePanel}>×</button>
         </div>
 
         <form className="form" onSubmit={placeOrder}>
-          <label>FULL NAME</label>
-          <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Your full name" required />
+          <label>{t('FULL NAME')}</label>
+          <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder={t('Your full name')} required />
 
-          <label>PHONE NUMBER</label>
+          <label>{t('PHONE NUMBER')}</label>
           <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="01XXXXXXXXX" required />
 
-          <label>DELIVERY METHOD</label>
+          <label>{t('DELIVERY METHOD')}</label>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <label className="optionPick">
               <input type="radio" name="coMethod" checked={method === 'home_delivery'} onChange={() => setMethod('home_delivery')} />
               <span className="opIcon">{homeIcon}</span>
-              <span className="opTitle">Home Delivery</span>
+              <span className="opTitle">{t('Home Delivery')}</span>
             </label>
             <label className="optionPick">
               <input type="radio" name="coMethod" checked={method === 'pickup'} onChange={() => setMethod('pickup')} />
               <span className="opIcon">{storeIcon}</span>
-              <span className="opTitle">Store Pickup</span>
-              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: 'var(--muted)' }}>Free</span>
+              <span className="opTitle">{t('Store Pickup')}</span>
+              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: 'var(--muted)' }}>{t('Free')}</span>
             </label>
           </div>
 
           {method === 'home_delivery' ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <label htmlFor="coRegion">REGION</label>
+              <label htmlFor="coRegion">{t('REGION')}</label>
               <select id="coRegion" aria-label="Select Region" value={region} onChange={e => onRegion(e.target.value)}>
-                <option value="">Select Region</option>
+                <option value="">{t('Select Region')}</option>
                 {regions.map(r => <option key={r.id} value={r.label}>{r.label}</option>)}
               </select>
 
-              <label htmlFor="coCity">CITY</label>
+              <label htmlFor="coCity">{t('CITY')}</label>
               <select id="coCity" aria-label="Select City" value={city} onChange={e => onCity(e.target.value)} disabled={!cities.length}>
-                <option value="">Select City</option>
+                <option value="">{t('Select City')}</option>
                 {cities.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
               </select>
 
-              <label htmlFor="coArea">AREA</label>
+              <label htmlFor="coArea">{t('AREA')}</label>
               <select id="coArea" aria-label="Select Area" value={area} onChange={e => onArea(e.target.value)} disabled={!areas.length}>
-                <option value="">Select Area</option>
+                <option value="">{t('Select Area')}</option>
                 {areas.map(a => <option key={a.id} value={a.label}>{a.label}</option>)}
               </select>
 
               {areas.length > 0 && (
                 <>
-                  <label htmlFor="coSubArea">{city === DHAKA_CITY ? 'SUB AREA (OPTIONAL)' : 'UNION'}</label>
+                  <label htmlFor="coSubArea">{t(city === DHAKA_CITY ? 'SUB AREA (OPTIONAL)' : 'UNION')}</label>
                   <select id="coSubArea" aria-label={city === DHAKA_CITY ? 'Select Subarea' : 'Select Union'} value={subArea} onChange={e => setSubArea(e.target.value)} disabled={!subAreas.length}>
-                    <option value="">{city === DHAKA_CITY ? 'Select Subarea' : 'Select Union'}</option>
+                    <option value="">{t(city === DHAKA_CITY ? 'Select Subarea' : 'Select Union')}</option>
                     {subAreas.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </>
               )}
 
-              <label>ADDRESS</label>
-              <textarea value={address} onChange={e => setAddress(e.target.value)} placeholder="Type House, Flat No, Road" />
+              <label>{t('ADDRESS')}</label>
+              <textarea value={address} onChange={e => setAddress(e.target.value)} placeholder={t('Type House, Flat No, Road')} />
 
-              <label>ADDRESS TYPE</label>
+              <label>{t('ADDRESS TYPE')}</label>
               <div className="radioRow" style={{ gap: 10 }}>
                 <label className="optionPick" style={{ flex: 1 }}>
                   <input type="radio" name="coAddrType" checked={addrType === 'Home'} onChange={() => setAddrType('Home')} />
                   <span className="opIcon">{homeIcon}</span>
-                  <span className="opTitle">Home</span>
+                  <span className="opTitle">{t('Home')}</span>
                 </label>
                 <label className="optionPick" style={{ flex: 1 }}>
                   <input type="radio" name="coAddrType" checked={addrType === 'Office'} onChange={() => setAddrType('Office')} />
                   <span className="opIcon">{officeIcon}</span>
-                  <span className="opTitle">Office</span>
+                  <span className="opTitle">{t('Office')}</span>
                 </label>
               </div>
             </div>
           ) : (
             <div style={{ fontSize: 12, color: 'var(--muted)', background: '#f5f4f1', padding: 14, borderRadius: 8 }}>
-              Collect your order from our store:<br />
+              {t('Collect your order from our store:')}<br />
               <b>{settings.pickup_address}</b>
             </div>
           )}
 
-          <label>ORDER NOTE (OPTIONAL)</label>
-          <textarea value={note} onChange={e => setNote(e.target.value)} placeholder="Any special instruction..." />
+          <label>{t('ORDER NOTE (OPTIONAL)')}</label>
+          <textarea value={note} onChange={e => setNote(e.target.value)} placeholder={t('Any special instruction...')} />
 
-          <label>COUPON CODE (OPTIONAL)</label>
+          <label>{t('COUPON CODE (OPTIONAL)')}</label>
           <div style={{ display: 'flex', gap: 8 }}>
-            <input type="text" value={couponInput} onChange={e => setCouponInput(e.target.value)} placeholder="Enter coupon code" style={{ flex: 1, textTransform: 'uppercase' }} />
-            <button type="button" className="btn light" style={{ padding: '14px 18px' }} onClick={applyCoupon}>APPLY</button>
+            <input type="text" value={couponInput} onChange={e => setCouponInput(e.target.value)} placeholder={t('Enter coupon code')} style={{ flex: 1, textTransform: 'uppercase' }} />
+            <button type="button" className="btn light" style={{ padding: '14px 18px' }} onClick={applyCoupon}>{t('APPLY')}</button>
           </div>
-          <div style={{ fontSize: 11, color: couponMsg.bad ? 'var(--red)' : 'var(--gold)' }}>{couponMsg.text}</div>
+          <div style={{ fontSize: 11, color: couponMsg.bad ? 'var(--red)' : 'var(--gold)' }}>{cErr(couponMsg.text)}</div>
 
           <div style={{ marginTop: 8 }}>
-            <div className="summaryRow"><span>Subtotal</span><span>৳{cartSubtotal.toLocaleString()}</span></div>
+            <div className="summaryRow"><span>{t('Subtotal')}</span><span>৳{cartSubtotal.toLocaleString()}</span></div>
             {discount > 0 && (
               <div className="summaryRow" style={{ color: 'var(--gold)' }}>
-                <span>Discount ({coupon.code})</span><span>−৳{discount.toLocaleString()}</span>
+                <span>{t('Discount')} ({coupon.code})</span><span>−৳{discount.toLocaleString()}</span>
               </div>
             )}
             <div className="summaryRow">
-              <span>{delivery.label}</span>
-              <span>{delivery.isFree ? 'FREE' : '৳' + delivery.charge.toLocaleString()}</span>
+              <span>{t(delivery.label)}</span>
+              <span>{delivery.isFree ? t('FREE') : '৳' + delivery.charge.toLocaleString()}</span>
             </div>
-            <div className="summaryRow total"><span>Total</span><span>৳{total.toLocaleString()}</span></div>
+            <div className="summaryRow total"><span>{t('Total')}</span><span>৳{total.toLocaleString()}</span></div>
           </div>
 
-          <label>PAYMENT METHOD</label>
+          <label>{t('PAYMENT METHOD')}</label>
           <div className="payMethodList">
             <label className="payOption">
               <div className="payOptionHead">
                 <input type="radio" name="coPayment" checked={payment === 'COD'} onChange={() => setPayment('COD')} />
-                <span className="payOptionTitle">Cash on Delivery</span>
+                <span className="payOptionTitle">{t('Cash on Delivery')}</span>
               </div>
-              <div className="payOptionDesc">Pay in cash when your order arrives at the door.</div>
+              <div className="payOptionDesc">{t('Pay in cash when your order arrives at the door.')}</div>
             </label>
             <label className="payOption">
               <div className="payOptionHead">
                 <input type="radio" name="coPayment" checked={payment === 'ONLINE'} onChange={() => setPayment('ONLINE')} />
-                <span className="payOptionTitle">Pay Online</span>
+                <span className="payOptionTitle">{t('Pay Online')}</span>
               </div>
               <div className="payOptionDesc" style={{ display: 'block' }}>
-                🔒 Secured &amp; verified by Paymently
+                🔒 {t('Secured & verified by Paymently')}
                 <div className="paymentLogosRow">
                   {(settings.payment_logos || []).map((url, i) => (
                     <img key={i} src={url} alt="" onError={e => { e.currentTarget.style.display = 'none' }} />
@@ -417,14 +427,14 @@ export default function CheckoutPanel() {
 
           <button type="submit" className="btn light" disabled={busy || cart.length === 0}
             style={{ border: '1.5px solid #111', padding: '14px 46px', marginTop: 10 }}>
-            {busy ? 'PLACING ORDER...' : 'PLACE ORDER'}
+            {busy ? t('PLACING ORDER...') : t('PLACE ORDER')}
           </button>
         </form>
       </div>
 
       <div className={`panel${showSuccess ? ' show' : ''}`}>
         <div className="panelHead">
-          <h2>{paymentReturn ? (paymentReturn.isPaid ? 'Payment Successful!' : 'Payment Not Completed') : 'Order Placed!'}</h2>
+          <h2>{paymentReturn ? (paymentReturn.isPaid ? t('Payment Successful!') : t('Payment Not Completed')) : t('Order Placed!')}</h2>
           <button className="close" onClick={closePanel}>×</button>
         </div>
         {paymentReturn && (
@@ -442,16 +452,16 @@ export default function CheckoutPanel() {
             </div>
             <p style={{ fontSize: 13, marginBottom: 20 }}>
               {paymentReturn.isPaid
-                ? <>Your payment has been received and your order is confirmed.<br />We'll contact you shortly.</>
-                : <>Your order is saved, but the payment wasn't completed.<br />You can retry payment or contact us to arrange Cash on Delivery.</>}
+                ? <>{t('Your payment has been received and your order is confirmed.')}<br />{t("We'll contact you shortly.")}</>
+                : <>{t("Your order is saved, but the payment wasn't completed.")}<br />{t('You can retry payment or contact us to arrange Cash on Delivery.')}</>}
             </p>
             <div style={{ textAlign: 'left' }}>
-              <div className="summaryRow"><span>Order ID</span><b>#{paymentReturn.orderRef}</b></div>
-              <div className="summaryRow"><span>Total Amount</span><b>৳{paymentReturn.total.toLocaleString()}</b></div>
-              <div className="summaryRow"><span>Delivery</span><b>{paymentReturn.methodLabel}</b></div>
+              <div className="summaryRow"><span>{t('Order ID')}</span><b>#{paymentReturn.orderRef}</b></div>
+              <div className="summaryRow"><span>{t('Total Amount')}</span><b>৳{paymentReturn.total.toLocaleString()}</b></div>
+              <div className="summaryRow"><span>{t('Delivery')}</span><b>{paymentReturn.methodLabel}</b></div>
             </div>
             <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111', marginTop: 16 }} onClick={closePanel}>
-              CONTINUE SHOPPING
+              {t('CONTINUE SHOPPING')}
             </button>
           </div>
         )}
@@ -461,22 +471,22 @@ export default function CheckoutPanel() {
               <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#2e7d32" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
             </div>
             <p style={{ fontSize: 13, marginBottom: 20 }}>
-              Thank you! Your order has been received.<br />We'll contact you shortly to confirm.
+              {t('Thank you! Your order has been received.')}<br />{t("We'll contact you shortly to confirm.")}
             </p>
             <div style={{ textAlign: 'left' }}>
-              <div className="summaryRow"><span>Order ID</span><b>#{lastOrder.orderRef}</b></div>
-              <div className="summaryRow"><span>Total Amount</span><b>৳{lastOrder.total.toLocaleString()}</b></div>
-              <div className="summaryRow"><span>Delivery</span><b>{lastOrder.methodLabel}</b></div>
+              <div className="summaryRow"><span>{t('Order ID')}</span><b>#{lastOrder.orderRef}</b></div>
+              <div className="summaryRow"><span>{t('Total Amount')}</span><b>৳{lastOrder.total.toLocaleString()}</b></div>
+              <div className="summaryRow"><span>{t('Delivery')}</span><b>{lastOrder.methodLabel}</b></div>
             </div>
             <p style={{ fontSize: 11.5, color: 'var(--muted)', margin: '16px 0' }}>
-              Save this Order ID and your phone number — you can use them anytime to track your order.
+              {t('Save this Order ID and your phone number — you can use them anytime to track your order.')}
             </p>
             <a className="btn light" href={lastOrder.waUrl} target="_blank" rel="noopener noreferrer"
               style={{ display: 'block', border: '1px solid #111', marginBottom: 10 }}>
-              CONFIRM VIA WHATSAPP
+              {t('CONFIRM VIA WHATSAPP')}
             </a>
             <button className="btn light" type="button" style={{ width: '100%', border: '1.5px solid #111' }} onClick={closePanel}>
-              CONTINUE SHOPPING
+              {t('CONTINUE SHOPPING')}
             </button>
           </div>
         )}
