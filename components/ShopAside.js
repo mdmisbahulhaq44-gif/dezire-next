@@ -10,7 +10,7 @@ import { useShop } from './ShopContext'
 import Money from './Money'
 
 export default function ShopAside() {
-  const { openSearch } = useShop()
+  const { openSearch, t } = useShop()
   const [items, setItems] = useState([])
 
   useEffect(() => {
@@ -36,14 +36,14 @@ export default function ShopAside() {
   return (
     <div className="shopAside">
       <form className="shopSearch" onSubmit={go} role="search">
-        <input type="text" placeholder="Search" readOnly onClick={go} aria-label="Search" />
+        <input type="text" placeholder={t('Search')} readOnly onClick={go} aria-label="Search" />
         <button type="submit" aria-label="Search">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round"><circle cx="14" cy="10" r="6" /><path d="M9.8 14.2L4 20" /></svg>
         </button>
       </form>
       {items.length > 0 && (
         <>
-          <h2>Recently Viewed Products</h2>
+          <h2>{t('Recently Viewed Products')}</h2>
           <div className="shopRecent">
             {items.map(p => {
               const img = p.imgs ? p.imgs.split(',')[0].trim() : ''

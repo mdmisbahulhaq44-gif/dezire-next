@@ -16,7 +16,7 @@ function clean(q) {
 }
 
 export default function SearchPanel() {
-  const { activePanel, closePanel, hidePanel, showToast } = useShop()
+  const { activePanel, closePanel, hidePanel, showToast, t } = useShop()
   const pathname = usePathname()
   const pending = useRef(false)
   const clickT = useRef(0)
@@ -62,7 +62,7 @@ export default function SearchPanel() {
     const c = clean(query)
     if (!c) {
       setResults(null)
-      showToast('Enter a product name.')
+      showToast(t('Enter a product name.'))
       return
     }
     const { data } = await supabase
@@ -119,7 +119,7 @@ export default function SearchPanel() {
         </button>
         <div className="slField">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
-          <input ref={inputRef} type="search" enterKeyHint="search" placeholder="Search products" value={query} onChange={handleInput} />
+          <input ref={inputRef} type="search" enterKeyHint="search" placeholder={t('Search products')} value={query} onChange={handleInput} />
         </div>
       </form>
       <div className="slBody">
@@ -149,7 +149,7 @@ export default function SearchPanel() {
             ))}
           </div>
         ) : (
-          <div style={{ fontSize: 12, color: 'var(--muted)', padding: '10px 4px' }}>No matches</div>
+          <div style={{ fontSize: 12, color: 'var(--muted)', padding: '10px 4px' }}>{t('No matches')}</div>
         )
       )}
 
@@ -164,7 +164,7 @@ export default function SearchPanel() {
                   <Link href={`/product/${p.id}`} className="product" key={p.id} data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg, all: p.imgs || '' })} data-hold="800" onClick={openProduct}>
                     <div className="productImage">
                       {p.badge && (
-                        <span className={`badge ${/sale/i.test(p.badge) ? 'sale' : ''}`}>{p.badge}</span>
+                        <span className={`badge ${/sale/i.test(p.badge) ? 'sale' : ''}`}>{t(p.badge)}</span>
                       )}
                       {firstImg ? (
                         <img src={cldOpt(firstImg, 400)} alt={p.name} loading="lazy" decoding="async" />
@@ -179,17 +179,17 @@ export default function SearchPanel() {
                       {p.old && <span className="old"><Money n={p.old} /></span>}
                     </div>
                     {lowStock && (
-                      <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 3 }}>Only {p.stock} left</div>
+                      <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 3 }}>{t('Only {n} left', { n: p.stock })}</div>
                     )}
                     {p.stock !== null && p.stock !== undefined && Number(p.stock) <= 0 && (
-                      <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 3 }}>Sold out</div>
+                      <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 3 }}>{t('Sold out')}</div>
                     )}
                   </Link>
                 )
               })}
             </div>
           ) : (
-            <div className="empty">No products found for "{query.trim()}"</div>
+            <div className="empty">{t('No products found for "{q}"', { q: query.trim() })}</div>
           )}
         </div>
       )}

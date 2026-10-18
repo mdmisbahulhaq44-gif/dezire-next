@@ -9,7 +9,7 @@ import { useShop } from './ShopContext'
 import Money from './Money'
 
 export default function WishlistPanel() {
-  const { activePanel, closePanel, wishlist, removeFromWishlist, cartCount, openCart, openSearch } = useShop()
+  const { activePanel, closePanel, wishlist, removeFromWishlist, cartCount, openCart, openSearch, t } = useShop()
   const show = activePanel === 'wishlist'
   const [products, setProducts] = useState(null) // null = loading
 
@@ -42,7 +42,7 @@ export default function WishlistPanel() {
         <button type="button" className="acBackBtn" aria-label="Back" onClick={() => { const st = window.history.state || {}; if (st.dzDepth > 0) window.history.back(); else closePanel() }}>
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
         </button>
-        <h2 className="acTitle">Wishlist</h2>
+        <h2 className="acTitle">{t('Wishlist')}</h2>
         <div className="acHeadIcons">
           <button type="button" className="acHeadBtn" aria-label="Search" onClick={() => { closePanel(); openSearch() }}>
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
@@ -55,9 +55,9 @@ export default function WishlistPanel() {
       </div>
 
       {products === null && wishlist.length > 0 ? (
-        <div className="empty">Loading...</div>
+        <div className="empty">{t('Loading...')}</div>
       ) : items.length === 0 ? (
-        <div className="empty">♡<br /><br />Your wishlist is currently empty.<br /><small>Tap “Add to wishlist” on any product to save it here.</small></div>
+        <div className="empty">♡<br /><br />{t('Your wishlist is currently empty.')}<br /><small>{t('Tap “Add to wishlist” on any product to save it here.')}</small></div>
       ) : (
         items.map(p => {
           const img = p.imgs ? p.imgs.split(',')[0].trim() : ''
@@ -75,16 +75,16 @@ export default function WishlistPanel() {
                 <small>
                   <Money n={p.price} />
                   {p.old ? <> <s style={{ opacity: 0.6 }}><Money n={p.old} /></s></> : null}
-                  {soldOut ? ' • Out of stock' : ''}
+                  {soldOut ? ' • ' + t('Out of stock') : ''}
                 </small>
                 {dropped && (
                   <div style={{ fontSize: 11, color: 'var(--red)', fontWeight: 700, marginTop: 3 }}>
-                    ↓ Price dropped from <Money n={p.savedPrice} />
+                    ↓ {t('Price dropped from')} <Money n={p.savedPrice} />
                   </div>
                 )}
                 <div className="qtyRow">
-                  <Link href={`/product/${p.id}`} onClick={closePanel} className="removeBtn" style={{ textDecoration: 'underline', marginRight: 14 }}>View</Link>
-                  <button className="removeBtn" onClick={() => removeFromWishlist(p.id)}>Remove</button>
+                  <Link href={`/product/${p.id}`} onClick={closePanel} className="removeBtn" style={{ textDecoration: 'underline', marginRight: 14 }}>{t('View')}</Link>
+                  <button className="removeBtn" onClick={() => removeFromWishlist(p.id)}>{t('Remove')}</button>
                 </div>
               </div>
             </div>

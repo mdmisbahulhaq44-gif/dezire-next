@@ -3,6 +3,7 @@ import { supabaseServer as supabase } from "../../lib/supabaseServer"
 import ShopBrowser from "../../components/ShopBrowser"
 import { FlashBanner } from "../../components/FlashSection"
 import BackLink from "../../components/BackLink"
+import T from "../../components/T"
 
 export const revalidate = 30
 
@@ -15,7 +16,7 @@ function FlashHead() {
   return (
     <div className="fsHead">
       <BackLink className="back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg></BackLink>
-      <span className="spTitle">Flash Sale</span>
+      <span className="spTitle"><T>Flash Sale</T></span>
       <Link className="spHome" href="/" prefetch={false}>HEAVEN</Link>
     </div>
   )
@@ -50,9 +51,9 @@ export default async function FlashSalePage() {
       <div>
         <FlashHead />
         <div className="fsEmpty">
-          <h2>No flash sale right now</h2>
-          <p>New offers will appear here. Please check back soon.</p>
-          <Link href="/" className="btn">SHOP NEW ARRIVALS</Link>
+          <h2><T>No flash sale right now</T></h2>
+          <p><T>New offers will appear here. Please check back soon.</T></p>
+          <Link href="/" className="btn"><T>SHOP NEW ARRIVALS</T></Link>
         </div>
       </div>
     )

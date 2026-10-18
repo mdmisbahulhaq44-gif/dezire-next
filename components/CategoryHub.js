@@ -5,12 +5,13 @@ import HubTiles from "./HubTiles"
 import { cldOpt } from "../lib/cloudinary"
 import { buildShopPath } from "../lib/categories"
 import Money from "./Money"
+import T from "./T"
 
 export default function CategoryHub({ gender, path, heading, subs }) {
   return (
     <section className="section" id="categoryHub">
       <Breadcrumb gender={gender} path={path} />
-      <div className="heading"><div><h2>{heading}</h2></div></div>
+      <div className="heading"><div><h2><T>{heading}</T></h2></div></div>
       {subs.length && subs.every(s => s.count === 1) ? (
         <HubTiles gender={gender} path={path} subs={subs} />
       ) : subs.length ? (
@@ -27,17 +28,17 @@ export default function CategoryHub({ gender, path, heading, subs }) {
               }
             >
               <div className="catText">
-                <h3>{s.seg}</h3>
+                <h3><T>{s.seg}</T></h3>
                 {s.count === 1
                   ? (s.minPrice !== null ? <span><Money n={s.minPrice} /></span> : null)
-                  : <span>{s.count} PRODUCTS{s.minPrice !== null ? <> · FROM <Money n={s.minPrice} /></> : ""}</span>}
+                  : <span><T vars={{ n: s.count }}>{'{n} PRODUCTS'}</T>{s.minPrice !== null ? <> · <T>FROM</T> <Money n={s.minPrice} /></> : ""}</span>}
               </div>
             </Link>
           ))}
         </div>
       ) : (
         <p style={{ color: "var(--muted)", fontSize: 13 }}>
-          No products here yet — add some from the Admin Panel.
+          <T>No products here yet — add some from the Admin Panel.</T>
         </p>
       )}
       {subs.length > 0 && <ShopAside />}

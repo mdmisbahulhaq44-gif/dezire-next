@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import ProductGrid from './ProductGrid'
 import ShopAside from './ShopAside'
+import { useShop } from './ShopContext'
 
 function sizesOf(p) {
   if (Array.isArray(p.sizes)) return p.sizes
@@ -23,6 +24,7 @@ const pillStyle = {
 }
 
 export default function ShopBrowser({ products, heading, initialGender, hideGenderTabs, breadcrumb }) {
+  const { t } = useShop()
   const [gender, setGender] = useState(initialGender || 'ALL')
   const [sort, setSort] = useState('newest')
   const [boxOpen, setBoxOpen] = useState(false)
@@ -87,7 +89,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
       <div style={{ padding: '30px 5% 10px' }}>
         {breadcrumb}
         <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1 }}>
-          {heading}
+          {t(heading)}
         </h2>
       </div>
 
@@ -99,7 +101,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
               className={`filter${gender === val ? ' active' : ''}`}
               onClick={() => setGender(val)}
             >
-              {label}
+              {t(label)}
             </button>
           ))}
         </div>
@@ -112,24 +114,24 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M4 6h16M7 12h10M10 18h4" />
             </svg>
-            FILTER{activeCount > 0 ? ` (${activeCount})` : ''}
+            {t('FILTER')}{activeCount > 0 ? ` (${activeCount})` : ''}
           </button>
           <select value={sort} onChange={e => setSort(e.target.value)} style={pillStyle}>
-            <option value="newest">Newest First</option>
-            <option value="price_low">Price: Low to High</option>
-            <option value="price_high">Price: High to Low</option>
+            <option value="newest">{t('Newest First')}</option>
+            <option value="price_low">{t('Price: Low to High')}</option>
+            <option value="price_high">{t('Price: High to Low')}</option>
           </select>
         </div>
 
         {boxOpen && (
           <div style={{ background: '#faf9f6', border: '1px solid var(--line)', borderRadius: 10, padding: 16, marginBottom: 20 }}>
             <div style={{ marginBottom: 14 }}>
-              <strong style={{ fontSize: 12, letterSpacing: '.5px' }}>PRICE RANGE (৳)</strong>
+              <strong style={{ fontSize: 12, letterSpacing: '.5px' }}>{t('PRICE RANGE (৳)')}</strong>
             </div>
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 18 }}>
               <input
                 type="number"
-                placeholder="Min"
+                placeholder={t('Min')}
                 value={draft.min}
                 onChange={e => setDraft(d => ({ ...d, min: e.target.value }))}
                 style={{ width: '100%', border: '1px solid var(--line)', borderRadius: 8, padding: '8px 10px', fontSize: 13 }}
@@ -137,7 +139,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
               <span style={{ color: 'var(--muted)' }}>—</span>
               <input
                 type="number"
-                placeholder="Max"
+                placeholder={t('Max')}
                 value={draft.max}
                 onChange={e => setDraft(d => ({ ...d, max: e.target.value }))}
                 style={{ width: '100%', border: '1px solid var(--line)', borderRadius: 8, padding: '8px 10px', fontSize: 13 }}
@@ -147,7 +149,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
             {allSizes.length > 0 && (
               <>
                 <div style={{ marginBottom: 6 }}>
-                  <strong style={{ fontSize: 12, letterSpacing: '.5px' }}>SIZE</strong>
+                  <strong style={{ fontSize: 12, letterSpacing: '.5px' }}>{t('SIZE')}</strong>
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 18 }}>
                   {allSizes.map(s => (
@@ -171,7 +173,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
                 onChange={e => setDraft(d => ({ ...d, inStock: e.target.checked }))}
                 style={{ width: 16, height: 16 }}
               />
-              In Stock Only
+              {t('In Stock Only')}
             </label>
 
             <div style={{ display: 'flex', gap: 10 }}>
@@ -179,13 +181,13 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
                 onClick={clearFilters}
                 style={{ flex: 1, padding: 11, border: '1px solid var(--black)', borderRadius: 30, background: 'white', fontSize: 12, letterSpacing: '.5px', cursor: 'pointer' }}
               >
-                CLEAR
+                {t('CLEAR')}
               </button>
               <button
                 onClick={applyFilters}
                 style={{ flex: 1, padding: 11, border: 0, borderRadius: 30, background: 'var(--black)', color: 'white', fontSize: 12, letterSpacing: '.5px', cursor: 'pointer' }}
               >
-                APPLY
+                {t('APPLY')}
               </button>
             </div>
           </div>

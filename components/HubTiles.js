@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { cldOpt } from '../lib/cloudinary'
 import { buildShopPath } from '../lib/categories'
 import Money from './Money'
+import { useShop } from './ShopContext'
 
 // Category page whose tiles are single products: same FILTER + sort as the
 // other product listings, tiles keep their look.
@@ -21,6 +22,7 @@ const pillStyle = {
 const fieldStyle = { width: '100%', border: '1px solid var(--line)', borderRadius: 8, padding: '8px 10px', fontSize: 13 }
 
 export default function HubTiles({ gender, path, subs }) {
+  const { t } = useShop()
   const [sort, setSort] = useState('newest')
   const [boxOpen, setBoxOpen] = useState(false)
   const [draft, setDraft] = useState(EMPTY)
@@ -71,30 +73,30 @@ export default function HubTiles({ gender, path, subs }) {
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M4 6h16M7 12h10M10 18h4" />
           </svg>
-          FILTER{activeCount > 0 ? ` (${activeCount})` : ''}
+          {t('FILTER')}{activeCount > 0 ? ` (${activeCount})` : ''}
         </button>
         <select value={sort} onChange={e => setSort(e.target.value)} style={pillStyle}>
-          <option value="newest">Newest First</option>
-          <option value="price_low">Price: Low to High</option>
-          <option value="price_high">Price: High to Low</option>
+          <option value="newest">{t('Newest First')}</option>
+          <option value="price_low">{t('Price: Low to High')}</option>
+          <option value="price_high">{t('Price: High to Low')}</option>
         </select>
       </div>
 
       {boxOpen && (
         <div style={{ background: '#faf9f6', border: '1px solid var(--line)', borderRadius: 10, padding: 16, marginBottom: 20 }}>
           <div style={{ marginBottom: 14 }}>
-            <strong style={{ fontSize: 12, letterSpacing: '.5px' }}>PRICE RANGE (৳)</strong>
+            <strong style={{ fontSize: 12, letterSpacing: '.5px' }}>{t('PRICE RANGE (৳)')}</strong>
           </div>
           <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 18 }}>
-            <input type="number" placeholder="Min" value={draft.min} onChange={e => setDraft(d => ({ ...d, min: e.target.value }))} style={fieldStyle} />
+            <input type="number" placeholder={t('Min')} value={draft.min} onChange={e => setDraft(d => ({ ...d, min: e.target.value }))} style={fieldStyle} />
             <span style={{ color: 'var(--muted)' }}>—</span>
-            <input type="number" placeholder="Max" value={draft.max} onChange={e => setDraft(d => ({ ...d, max: e.target.value }))} style={fieldStyle} />
+            <input type="number" placeholder={t('Max')} value={draft.max} onChange={e => setDraft(d => ({ ...d, max: e.target.value }))} style={fieldStyle} />
           </div>
 
           {allSizes.length > 0 && (
             <>
               <div style={{ marginBottom: 6 }}>
-                <strong style={{ fontSize: 12, letterSpacing: '.5px' }}>SIZE</strong>
+                <strong style={{ fontSize: 12, letterSpacing: '.5px' }}>{t('SIZE')}</strong>
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 18 }}>
                 {allSizes.map(x => (
@@ -113,22 +115,22 @@ export default function HubTiles({ gender, path, subs }) {
 
           <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, marginBottom: 20, cursor: 'pointer' }}>
             <input type="checkbox" checked={draft.inStock} onChange={e => setDraft(d => ({ ...d, inStock: e.target.checked }))} style={{ width: 16, height: 16 }} />
-            In Stock Only
+            {t('In Stock Only')}
           </label>
 
           <div style={{ display: 'flex', gap: 10 }}>
             <button onClick={clearFilters} style={{ flex: 1, padding: 11, border: '1px solid var(--black)', borderRadius: 30, background: 'white', fontSize: 12, letterSpacing: '.5px', cursor: 'pointer' }}>
-              CLEAR
+              {t('CLEAR')}
             </button>
             <button onClick={applyFilters} style={{ flex: 1, padding: 11, border: 0, borderRadius: 30, background: 'var(--black)', color: 'white', fontSize: 12, letterSpacing: '.5px', cursor: 'pointer' }}>
-              APPLY
+              {t('APPLY')}
             </button>
           </div>
         </div>
       )}
 
       {visible.length === 0 ? (
-        <div className="empty">No products match these filters.</div>
+        <div className="empty">{t('No products match these filters.')}</div>
       ) : (
         <div className="hubTiles">
           {visible.map(s => (
@@ -143,10 +145,10 @@ export default function HubTiles({ gender, path, subs }) {
               }
             >
               <div className="catText">
-                <h3>{s.seg}</h3>
+                <h3>{t(s.seg)}</h3>
                 {s.count === 1
                   ? (s.minPrice !== null ? <span><Money n={s.minPrice} /></span> : null)
-                  : <span>{s.count} PRODUCTS{s.minPrice !== null ? <> · FROM <Money n={s.minPrice} /></> : ''}</span>}
+                  : <span>{t('{n} PRODUCTS', { n: s.count })}{s.minPrice !== null ? <> · {t('FROM')} <Money n={s.minPrice} /></> : ''}</span>}
               </div>
             </Link>
           ))}
