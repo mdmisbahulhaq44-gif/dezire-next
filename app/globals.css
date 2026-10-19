@@ -1142,7 +1142,7 @@ a.category{text-decoration:none;color:#fff}
           --line: #e9e7e2;
           --muted: #777;
           --gold: #b89545;
-          font-family: Jost, Arial, sans-serif;
+          font-family: var(--font-q), var(--font-hind), Quicksand, sans-serif;
           color: var(--black);
           background: var(--cream);
           line-height: 1.7;
