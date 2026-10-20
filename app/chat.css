@@ -56,3 +56,11 @@
 .chatSend:active{transform:scale(.92)}
 
 @media (prefers-reduced-motion:reduce){.chatMsg,.chatSend,.chatJump{animation:none !important}}
+
+/* keyboard open + browser bars showing: compact chat so messages keep room */
+.panel.chatPanel.kb .panelHead.acHead{padding:4px 10px 4px 4px}
+.panel.chatPanel.kb .acHeadIcons{display:none}
+.panel.chatPanel.kb .chatHead .chatAvatar{width:32px;height:32px;font-size:14px}
+.panel.chatPanel.kb .chatHeadSub{display:none}
+.panel.chatPanel.kb .chatBar{padding-top:6px;padding-bottom:6px}
+.panel.chatPanel.kb .chatChips{display:none}
