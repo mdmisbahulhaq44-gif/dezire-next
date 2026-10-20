@@ -1,6 +1,6 @@
 /* ===== customer chat panel layout: follows the visible area (keyboard safe) ===== */
 .panel.chatPanel{top:var(--vvt,0px);bottom:auto;height:var(--vvh,100dvh);padding:0;overflow:hidden;display:flex;flex-direction:column;overscroll-behavior:none}
-.panel.chatPanel .panelHead.acHead{position:static;flex:none;margin:0;padding:12px 14px 10px 14px;gap:10px;align-items:center}
+.panel.chatPanel .panelHead.acHead{position:static;flex:none;margin:0;padding:12px 14px 10px 14px;gap:2px;align-items:center}
 .panel.chatPanel .chatBody{flex:1;min-height:0;display:flex;flex-direction:column}
 .panel.chatPanel .chatListWrap{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
 .panel.chatPanel .chatList{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:10px 14px 8px}
