@@ -1,0 +1,13 @@
+.panel.chatPanel{top:var(--vvt,0px);bottom:auto;height:var(--vvh,100dvh);padding:0;overflow:hidden;display:flex;flex-direction:column;overscroll-behavior:none}
+.panel.chatPanel .panelHead.acHead{position:static;flex:none;margin:0;padding:12px 14px 10px}
+.panel.chatPanel .chatBody{flex:1;min-height:0;display:flex;flex-direction:column}
+.panel.chatPanel .chatList{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;gap:0;padding:10px 14px 8px}
+.panel.chatPanel .chatMsg{margin-top:10px}
+.panel.chatPanel .chatMsg.jp{margin-top:2px}
+.panel.chatPanel .chatList>:first-child{margin-top:auto}
+.panel.chatPanel .chatMsg.me.jp .chatBubble{border-top-right-radius:6px}
+.panel.chatPanel .chatMsg.them.jp .chatBubble{border-top-left-radius:6px}
+.panel.chatPanel .chatSep{align-self:center;font-size:11px;color:#aaa;margin:14px 0 6px;text-align:center}
+.panel.chatPanel .chatStat{font-size:10px;color:#aaa;margin:3px 4px 0}
+.panel.chatPanel .chatStat.failed{color:#111;font-weight:700;text-decoration:underline;cursor:pointer}
+.panel.chatPanel .chatBar{position:static;flex:none;padding:8px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid #eee;background:#fff}
