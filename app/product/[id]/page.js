@@ -1,7 +1,6 @@
 import { supabaseServer } from "../../../lib/supabaseServer"
 import ProductView from "../../../components/ProductView"
 import { getProduct } from "../../../lib/getProduct"
-import { cldOpt } from "../../../lib/cloudinary"
 
 // Cache each product page at the edge for a minute. Product data (price,
 // stock, etc.) rarely changes second-to-second, so this trades a small,
@@ -10,21 +9,44 @@ import { cldOpt } from "../../../lib/cloudinary"
 // server-rendered, always-correct-on-first-load pages.
 export const revalidate = 60
 
+// Share-preview picture: a square crop (1200x1200, subject-aware) so the whole
+// garment shows in WhatsApp, Messenger and Facebook cards. Non-Cloudinary or
+// already-transformed links are used as they are.
+function shareImage(url) {
+  if (!url || !url.includes("res.cloudinary.com") || !url.includes("/upload/")) return url
+  if (url.includes("/upload/w_") || url.includes("/upload/f_") || url.includes("/upload/c_")) return url
+  return url.replace("/upload/", "/upload/c_fill,g_auto,w_1200,h_1200,f_jpg,q_auto/")
+}
+
 export async function generateMetadata({ params }) {
   const { id } = await params
   const p = await getProduct(id)
   if (!p) return { title: "Product not found — HEAVEN" }
 
   const firstImg = p.imgs ? p.imgs.split(",")[0].trim() : ""
+  const img = firstImg ? shareImage(firstImg) : ""
   const title = `${p.name} — HEAVEN`
-  const description = `${p.name}${p.brand ? " by " + p.brand : ""} — ৳${Number(p.price).toLocaleString()} at HEAVEN. ${Number(p.stock) > 0 ? "In stock now" : "Currently out of stock"}, nationwide cash-on-delivery in Bangladesh.`
+  const price = "৳" + Number(p.price).toLocaleString("en-US")
+  const stockText = Number(p.stock) > 0 ? "In stock" : "Out of stock"
+  const description = `${price} · ${stockText} · Cash on delivery all over Bangladesh. Easy returns. Shop ${p.name} at HEAVEN.`
   return {
     title,
     description,
+    alternates: { canonical: `/product/${id}` },
     openGraph: {
+      type: "website",
+      siteName: "HEAVEN",
+      locale: "en_BD",
+      url: `/product/${id}`,
       title,
       description,
-      ...(firstImg ? { images: [cldOpt(firstImg, 1200)] } : {})
+      ...(img ? { images: [{ url: img, width: 1200, height: 1200, alt: p.name }] } : {})
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(img ? { images: [img] } : {})
     }
   }
 }

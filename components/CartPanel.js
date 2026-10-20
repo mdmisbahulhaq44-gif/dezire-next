@@ -7,14 +7,21 @@ import BagCount from './BagCount'
 import Money, { CurNote } from './Money'
 
 export default function CartPanel() {
-  const { cart, cartCount, cartSubtotal, activePanel, closePanel, changeQty, removeFromCart, openCheckout, t } = useShop()
+  const { cart, cartCount, cartSubtotal, activePanel, closePanel, changeQty, removeFromCart, openCheckout, openSearch, t } = useShop()
   const show = activePanel === 'cart'
 
   return (
     <div className={`panel${show ? ' show' : ''}`}>
-      <div className="panelHead">
-        <h2 style={{ display: 'flex', alignItems: 'center', gap: 10 }}><BagCount count={cartCount} />{t('Your Cart')}</h2>
-        <button className="close" onClick={closePanel}>×</button>
+      <div className="panelHead acHead">
+        <button type="button" className="acBackBtn" aria-label="Back" onClick={() => { const st = window.history.state || {}; if (st.dzDepth > 0) window.history.back(); else closePanel() }}>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+        </button>
+        <h2 className="acTitle" style={{ display: 'flex', alignItems: 'center', gap: 10 }}><BagCount count={cartCount} />{t('Your Cart')}</h2>
+        <div className="acHeadIcons">
+          <button type="button" className="acHeadBtn" aria-label="Search" onClick={() => { closePanel(); openSearch() }}>
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+          </button>
+        </div>
       </div>
 
       <div>
