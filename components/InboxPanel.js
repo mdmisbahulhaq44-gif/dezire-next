@@ -139,7 +139,6 @@ export default function InboxPanel() {
       const el = panelRef.current
       if (!el) return
       el.style.setProperty('--vvh', (vv ? vv.height : window.innerHeight) + 'px')
-      &
       if (stickRef.current) toBottom(false)
     }
     apply()
