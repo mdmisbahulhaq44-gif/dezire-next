@@ -251,7 +251,7 @@ export default function CheckoutPanel() {
             showToast(t('Could not start online payment. Please try Cash on Delivery, or contact us — your order is saved as #{r}.', { r: orderRef }))
             setBusy(false); return
           }
-          clearCart()
+          // the cart is emptied after the payment return is confirmed
           window.location.href = chargeData.payment_url
           return
         } catch (err) {

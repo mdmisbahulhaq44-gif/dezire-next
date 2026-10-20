@@ -8,13 +8,14 @@ import { getSavedOrders } from '../lib/checkout'
 
 export default function PaymentReturnCheck() {
   const router = useRouter()
-  const { setPaymentReturn, openSuccess } = useShop()
+  const { setPaymentReturn, openSuccess, clearCart } = useShop()
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const orderRef = params.get('order')
     const paid = params.get('paid')
     if (!orderRef || paid === null) return
+    if (paid === '1') clearCart()
 
     // Clean the URL right away so refreshing this page doesn't reopen the panel
     window.history.replaceState(null, '', window.location.pathname + window.location.hash)
