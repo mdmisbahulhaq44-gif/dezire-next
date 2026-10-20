@@ -3,16 +3,32 @@
 import { useRouter } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { supabase } from '../lib/supabaseClient'
+import { chatToken } from '../lib/chat'
 
 // Shop phone / WhatsApp number (same one used on the Contact page)
 const SHOP_PHONE = '8801877270165'
 
 export default function BottomNav() {
   const router = useRouter()
-  const { openAccount, openTrack, activePanel, hidePanel, fadeSwap, t } = useShop()
+  const { openAccount, openTrack, openInbox, activePanel, hidePanel, fadeSwap, t } = useShop()
   const onAccount = activePanel === 'account'
   // tab switches swap at once (no slide), like a native app
   function instant() { const r = document.documentElement; r.setAttribute('data-instant', '1'); clearTimeout(window.__dzInstant); window.__dzInstant = setTimeout(() => r.removeAttribute('data-instant'), 800) }
+  const [unread, setUnread] = useState(0)
+  useEffect(() => {
+    let alive = true
+    function check() {
+      const tok = chatToken(false)
+      if (!tok) return
+      supabase.rpc('chat_unread', { p_token: tok }).then(({ data }) => { if (alive) setUnread(Number(data) || 0) })
+    }
+    check()
+    const id = setInterval(() => { if (document.visibilityState === 'visible') check() }, 45000)
+    return () => { alive = false; clearInterval(id) }
+  }, [])
+  useEffect(() => { if (activePanel === 'inbox') setUnread(0) }, [activePanel])
   const pathname = usePathname()
   if (['/contact', '/terms', '/refund-policy', '/privacy'].includes(pathname)) return null
 
@@ -43,6 +59,15 @@ export default function BottomNav() {
           </svg>
         </span>
         {t('WhatsApp')}
+      </button>
+      <button onClick={() => { instant(); fadeSwap(() => openInbox()) }}>
+        <span className="bnIcon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
+            <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/>
+          </svg>
+          {unread > 0 && <span className="bnBadge">{unread > 9 ? '9+' : unread}</span>}
+        </span>
+        {t('Inbox')}
       </button>
       <button onClick={() => { instant(); fadeSwap(() => openTrack()) }}>
         <span className="bnIcon">

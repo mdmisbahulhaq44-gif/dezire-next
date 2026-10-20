@@ -1913,3 +1913,27 @@ html[data-acin] #main-content{animation:acSoftP .26s cubic-bezier(.22,.61,.36,1)
 
 /* Bangla mode: letter spacing breaks joined Bangla letters */
 html[lang="bn"] *:not(.logo){letter-spacing:normal !important}
+
+/* Inbox (customer chat + admin) */
+.chatBody{display:flex;flex-direction:column;min-height:calc(100vh - 110px)}
+.chatList{flex:1;display:flex;flex-direction:column;gap:10px;padding:4px 0 14px}
+.chatIntro{font-size:13px;line-height:1.7;color:#777;text-align:center;padding:30px 12px}
+.chatMsg{display:flex;flex-direction:column;max-width:82%}
+.chatMsg.me{align-self:flex-end;align-items:flex-end}
+.chatMsg.them{align-self:flex-start;align-items:flex-start}
+.chatWho{font-size:10px;font-weight:700;letter-spacing:1px;color:#999;margin:0 4px 3px}
+.chatBubble{padding:10px 14px;border-radius:18px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.chatMsg.me .chatBubble{background:#111;color:#fff;border-bottom-right-radius:6px}
+.chatMsg.them .chatBubble{background:#f1f1f1;color:#111;border-bottom-left-radius:6px}
+.chatTime{font-size:10px;color:#aaa;margin:3px 4px 0}
+.chatBar{position:sticky;bottom:-25px;background:#fff;padding:10px 0 calc(14px + env(safe-area-inset-bottom));border-top:1px solid #eee}
+.chatWho2{display:flex;gap:8px;margin-bottom:8px}
+.chatWho2 input{flex:1;min-width:0;padding:11px 12px;border:1px solid #ddd;border-radius:12px;font:inherit;font-size:14px;outline:none}
+.chatRow{display:flex;gap:8px;align-items:flex-end}
+.chatRow textarea{flex:1;min-width:0;resize:none;padding:11px 14px;border:1px solid #ddd;border-radius:18px;font:inherit;font-size:14px;line-height:1.4;outline:none;max-height:120px}
+.chatRow textarea:focus,.chatWho2 input:focus{border-color:#111}
+.chatSend{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.chatSend:disabled{opacity:.35;cursor:default}
+.adminChatList{max-height:60vh;overflow:auto;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}
+.adminDot{margin-left:auto;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#e53935;color:#fff;font-size:11px;line-height:18px;text-align:center;font-weight:700}
+.bottomNav .bnBadge{position:absolute;top:-5px;right:-9px;min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:#e53935;color:#fff;font-size:9px;line-height:15px;text-align:center;font-weight:700;letter-spacing:0}

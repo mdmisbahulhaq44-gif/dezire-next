@@ -235,7 +235,7 @@ export function ShopProvider({ children }) {
   }
 
   // Open / close a screen with the smooth cross-fade (no slide, no peek of the page behind)
-  const FADE_PANELS = ['account', 'track', 'wishlist', 'about', 'search']
+  const FADE_PANELS = ['account', 'track', 'wishlist', 'about', 'search', 'inbox']
   function setPanel(next) {
     const prev = prevPanel.current
     // My Account menu -> Wishlist / About Us: at once (no cross-fade), the new screen fades in softly; Back returns to the menu
@@ -301,6 +301,7 @@ export function ShopProvider({ children }) {
     openReset: () => setActivePanel('reset'),
     openTrack: () => swapPanel('track'),
     openAbout: () => swapPanel('about'),
+    openInbox: () => swapPanel('inbox'),
     openSuccess: () => setActivePanel('success'),
     closePanel: () => setPanel(null),
     fadeSwap,

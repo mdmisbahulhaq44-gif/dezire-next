@@ -12,6 +12,7 @@ import WishlistPanel from "../components/WishlistPanel"
 import SearchPanel from "../components/SearchPanel"
 import AccountPanel from "../components/AccountPanel"
 import AboutUsPanel from "../components/AboutUsPanel"
+import InboxPanel from "../components/InboxPanel"
 import ShopOverlay from "../components/ShopOverlay"
 import Toast from "../components/Toast"
 import Analytics from "../components/Analytics"
@@ -105,6 +106,7 @@ export default function RootLayout({ children, modal }) {
           <AccountPanel />
           <LazyTrackOrderPanel />
           <AboutUsPanel />
+          <InboxPanel />
           <Toast />
           <Analytics />
           <NavTransition />

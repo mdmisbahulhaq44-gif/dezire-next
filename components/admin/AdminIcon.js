@@ -4,6 +4,7 @@ const P = {
   products: <><path d="M6 8h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z" /><path d="M9 8V6a3 3 0 0 1 6 0v2" /></>,
   orders: <><path d="M21 8 12 3 3 8l9 5 9-5Z" /><path d="M3 8v8l9 5 9-5V8" /><path d="M12 13v8" /></>,
   returns: <><path d="M9 14 4 9l5-5" /><path d="M4 9h10a6 6 0 0 1 0 12h-3" /></>,
+  inbox: <><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z" /></>,
   customers: <><circle cx="9" cy="8" r="3.3" /><path d="M3 20c.8-3.3 3.2-5 6-5s5.2 1.7 6 5" /><circle cx="17" cy="9" r="2.5" /><path d="M16.5 14.3c2.2.2 3.8 1.8 4.5 4.2" /></>,
   settings: <><path d="M4 7h9" /><path d="M17 7h3" /><path d="M4 17h3" /><path d="M11 17h9" /><circle cx="15" cy="7" r="2" /><circle cx="9" cy="17" r="2" /></>,
   stock: <><path d="M22 17l-8.5-8.5-5 5L2 7" /><path d="M16 17h6v-6" /></>,

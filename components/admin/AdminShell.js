@@ -1,6 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { supabase } from '../../lib/supabaseClient'
+import AdminInbox from './AdminInbox'
 import { useRouter } from 'next/navigation'
 import AdminDashboard from './AdminDashboard'
 import AdminProducts from './AdminProducts'
@@ -21,6 +23,7 @@ const SECTIONS = [
   { key: 'products', label: 'Products' },
   { key: 'orders', label: 'Orders' },
   { key: 'returns', label: 'Returns' },
+  { key: 'inbox', label: 'Inbox' },
   { key: 'customers', label: 'Customers' },
   { key: 'settings', label: 'Settings' },
   { key: 'stock', label: 'Stock history' },
@@ -36,6 +39,7 @@ const TITLES = {
   products: 'Products',
   orders: 'Orders',
   returns: 'Returns',
+  inbox: 'Inbox',
   customers: 'Customers',
   settings: 'Settings',
   stock: 'Stock history',
@@ -50,6 +54,17 @@ export default function AdminShell() {
   const router = useRouter()
   const [section, setSection] = useState('dashboard')
   const [ordersSearch, setOrdersSearch] = useState('')
+  const [inboxUnread, setInboxUnread] = useState(0)
+
+  useEffect(() => {
+    let alive = true
+    function check() {
+      supabase.from('chat_threads').select('id', { count: 'exact', head: true }).gt('unread_admin', 0).then(({ count }) => { if (alive) setInboxUnread(count || 0) })
+    }
+    check()
+    const id = setInterval(check, 15000)
+    return () => { alive = false; clearInterval(id) }
+  }, [])
 
   return (
     <div className="admin">
@@ -62,6 +77,7 @@ export default function AdminShell() {
             onClick={() => setSection(s.key)}
           >
             <AdminIcon name={s.key} size={18} />{s.label}
+            {s.key === 'inbox' && inboxUnread > 0 && <span className="adminDot">{inboxUnread}</span>}
           </button>
         ))}
       </aside>
@@ -81,6 +97,7 @@ export default function AdminShell() {
         {section === 'customers' && <AdminCustomers onViewOrders={phone => { setOrdersSearch(phone); setSection('orders') }} />}
         {section === 'returns' && <AdminReturns onViewOrder={ref => { setOrdersSearch(ref); setSection('orders') }} />}
         {section === 'settings' && <AdminSettings />}
+        {section === 'inbox' && <AdminInbox />}
         {section === 'activity' && <AdminAuditLog />}
 {section === 'sales' && <AdminSales />}
 {section === 'coupons' && <AdminCoupons />}
