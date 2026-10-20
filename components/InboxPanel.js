@@ -107,7 +107,7 @@ export default function InboxPanel() {
             </div>
           )}
           <div className="chatRow">
-            <textarea rows={1} maxLength={1000} placeholder={t('Type your message...')} value={text} onChange={e => setText(e.target.value)} />
+            <textarea rows={1} maxLength={1000} placeholder={t('Type your message...')} value={text} onChange={e => setText(e.target.value)} onFocus={() => setTimeout(() => { if (endRef.current && endRef.current.scrollIntoView) endRef.current.scrollIntoView({ block: 'end' }) }, 350)} />
             <button type="submit" className="chatSend" disabled={busy || !text.trim()} aria-label="Send">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4 20-7Z" /></svg>
             </button>

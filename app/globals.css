@@ -1937,3 +1937,6 @@ html[lang="bn"] *:not(.logo){letter-spacing:normal !important}
 .adminChatList{max-height:60vh;overflow:auto;border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}
 .adminDot{margin-left:auto;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#e53935;color:#fff;font-size:11px;line-height:18px;text-align:center;font-weight:700}
 .bottomNav .bnBadge{position:absolute;top:-5px;right:-9px;min-width:15px;height:15px;padding:0 4px;border-radius:8px;background:#e53935;color:#fff;font-size:9px;line-height:15px;text-align:center;font-weight:700;letter-spacing:0}
+
+/* chat height follows the visible area when the keyboard opens */
+.chatBody{min-height:calc(100dvh - 110px)}
