@@ -243,7 +243,6 @@ export default function InboxPanel() {
   }
 
   const bn = lang === 'bn'
-  const sub = adminTyping ? t('typing...') : adminOn ? t('Active now') : (bn ? 'আমরা যত দ্রুত সম্ভব উত্তর দিই' : 'We reply as soon as we can')
   const rows = groupRows(all, m => m.sender !== 'admin', GAP)
   const lastIdx = all.length - 1
 
@@ -256,7 +255,6 @@ export default function InboxPanel() {
         <div className={'chatAvatar' + (adminOn ? ' on' : '')}>H<i /></div>
         <div className="chatHeadTxt">
           <div className="chatHeadName">HEAVEN</div>
-          <div className={'chatHeadSub' + (adminOn || adminTyping ? ' on' : '')}>{sub}</div>
         </div>
         <div className="acHeadIcons">
           <button type="button" className="acHeadBtn" aria-label="Search" onClick={() => { closePanel(); openSearch() }}>
