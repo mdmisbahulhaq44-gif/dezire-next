@@ -6,6 +6,10 @@
 .panel.chatPanel .chatList{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:10px 14px 8px}
 .panel.chatPanel .chatBar{position:static;flex:none;padding:8px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid #eee;background:#fff}
 
+/* message box: no stray scrollbar next to the send button (it only scrolls once it reaches its maximum height) */
+.panel.chatPanel .chatRow textarea{overflow-y:hidden;scrollbar-width:none}
+.panel.chatPanel .chatRow textarea::-webkit-scrollbar{display:none}
+
 /* header: avatar + name + live status */
 .chatHead .chatAvatar{width:40px;height:40px;flex:none;border-radius:50%;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;position:relative}
 .chatHead .chatAvatar i{position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:var(--teal);border:2px solid #fff;opacity:0;transform:scale(.4);transition:opacity .25s,transform .25s}

@@ -183,7 +183,9 @@ export default function InboxPanel() {
     const el = taRef.current
     if (!el) return
     el.style.height = 'auto'
-    el.style.height = Math.min(el.scrollHeight, 120) + 'px'
+    const h = el.scrollHeight + (el.offsetHeight - el.clientHeight)
+    el.style.height = Math.min(h, 120) + 'px'
+    el.style.overflowY = h > 120 ? 'auto' : 'hidden'
   }
 
   function onType(v) {
