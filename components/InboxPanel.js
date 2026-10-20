@@ -151,19 +151,6 @@ export default function InboxPanel() {
     }
   }, [show])
 
-  // hide browser bars while chatting (no address bar when the keyboard opens)
-  useEffect(() => {
-    if (!show) return
-    const standalone = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches
-    const touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches
-    const root = document.documentElement
-    if (standalone || !touch || !root.requestFullscreen || document.fullscreenElement) return
-    root.requestFullscreen({ navigationUI: 'hide' }).catch(() => {})
-    return () => {
-      if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {})
-    }
-  }, [show])
-
   const all = [...msgs, ...pending.map(p => ({ id: p.tempId, sender: 'user', body: p.body, created_at: p.created_at, status: p.status, temp: p }))]
   const total = all.length
 
