@@ -44,14 +44,6 @@ export default function BottomNav() {
         </span>
         {t('Home')}
       </button>
-      <button onClick={() => { window.location.href = 'tel:+' + SHOP_PHONE }}>
-        <span className="bnIcon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
-            <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/>
-          </svg>
-        </span>
-        {t('Call')}
-      </button>
       <button onClick={() => window.open('https://wa.me/' + SHOP_PHONE, '_blank', 'noopener')}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="currentColor" width="21" height="21">
@@ -63,7 +55,8 @@ export default function BottomNav() {
       <button onClick={() => { instant(); fadeSwap(() => openInbox()) }}>
         <span className="bnIcon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
-            <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/>
+            <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/>
+            <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
           </svg>
           {unread > 0 && <span className="bnBadge">{unread > 9 ? '9+' : unread}</span>}
         </span>
