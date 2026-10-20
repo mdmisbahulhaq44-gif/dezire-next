@@ -1,13 +1,58 @@
+/* ===== customer chat panel layout: follows the visible area (keyboard safe) ===== */
 .panel.chatPanel{top:var(--vvt,0px);bottom:auto;height:var(--vvh,100dvh);padding:0;overflow:hidden;display:flex;flex-direction:column;overscroll-behavior:none}
-.panel.chatPanel .panelHead.acHead{position:static;flex:none;margin:0;padding:12px 14px 10px}
+.panel.chatPanel .panelHead.acHead{position:static;flex:none;margin:0;padding:10px 12px 10px 8px;gap:10px;align-items:center}
 .panel.chatPanel .chatBody{flex:1;min-height:0;display:flex;flex-direction:column}
-.panel.chatPanel .chatList{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;gap:0;padding:10px 14px 8px}
-.panel.chatPanel .chatMsg{margin-top:10px}
-.panel.chatPanel .chatMsg.jp{margin-top:2px}
-.panel.chatPanel .chatList>:first-child{margin-top:auto}
-.panel.chatPanel .chatMsg.me.jp .chatBubble{border-top-right-radius:6px}
-.panel.chatPanel .chatMsg.them.jp .chatBubble{border-top-left-radius:6px}
-.panel.chatPanel .chatSep{align-self:center;font-size:11px;color:#aaa;margin:14px 0 6px;text-align:center}
-.panel.chatPanel .chatStat{font-size:10px;color:#aaa;margin:3px 4px 0}
-.panel.chatPanel .chatStat.failed{color:#111;font-weight:700;text-decoration:underline;cursor:pointer}
+.panel.chatPanel .chatListWrap{flex:1;min-height:0;position:relative;display:flex;flex-direction:column}
+.panel.chatPanel .chatList{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:10px 14px 8px}
 .panel.chatPanel .chatBar{position:static;flex:none;padding:8px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid #eee;background:#fff}
+
+/* header: avatar + name + live status */
+.chatHead .chatAvatar{width:40px;height:40px;flex:none;border-radius:50%;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;position:relative}
+.chatHead .chatAvatar i{position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:var(--teal);border:2px solid #fff;opacity:0;transform:scale(.4);transition:opacity .25s,transform .25s}
+.chatHead .chatAvatar.on i{opacity:1;transform:scale(1)}
+.chatHeadTxt{flex:1;min-width:0;line-height:1.25}
+.chatHeadName{font-size:15px;font-weight:700;color:#111;letter-spacing:.5px}
+.chatHeadSub{font-size:12px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chatHeadSub.on{color:#111}
+.chatOffline{flex:none;text-align:center;font-size:12px;padding:7px 12px;background:#111;color:#fff}
+
+/* ===== messages (customer + admin) ===== */
+.chatList.grouped{gap:0}
+.chatList.grouped .chatMsg{margin-top:10px}
+.chatList.grouped .chatMsg.jp{margin-top:2px}
+.chatList.grouped .chatMsg.me.jp .chatBubble{border-top-right-radius:6px}
+.chatList.grouped .chatMsg.them.jp .chatBubble{border-top-left-radius:6px}
+.chatList.grouped .chatSep{align-self:center;font-size:11px;color:#aaa;margin:16px 0 6px;text-align:center}
+.panel.chatPanel .chatList.grouped>:first-child{margin-top:auto}
+.chatMsg.me{transform-origin:100% 100%}
+.chatMsg.them{transform-origin:0 100%}
+.chatBubble{-webkit-user-select:text;user-select:text}
+.chatStat{font-size:10px;color:#aaa;margin:3px 4px 0}
+.chatStat.failed{color:#111;font-weight:700;text-decoration:underline;cursor:pointer}
+.chatStat.seen{color:#111;font-weight:600}
+
+@keyframes chatIn{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+.chatList.ready .chatMsg.them,.chatList.ready .chatMsg.pend{animation:chatIn .22s cubic-bezier(.22,.61,.36,1)}
+
+/* typing dots */
+.chatMsg.typing .chatBubble{display:flex;gap:4px;align-items:center;padding:14px 16px}
+.chatMsg.typing .chatBubble i{width:7px;height:7px;border-radius:50%;background:#999;animation:chatDot 1.2s infinite ease-in-out}
+.chatMsg.typing .chatBubble i:nth-child(2){animation-delay:.15s}
+.chatMsg.typing .chatBubble i:nth-child(3){animation-delay:.3s}
+@keyframes chatDot{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
+
+/* quick replies */
+.chatChips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.chatChips button{border:1px solid #ddd;background:#fff;color:#111;font:inherit;font-size:12.5px;padding:8px 14px;border-radius:999px;cursor:pointer}
+.chatChips button:active{background:#f1f1f1}
+
+/* jump to latest */
+.chatJump{position:absolute;right:14px;bottom:10px;height:36px;min-width:36px;padding:0 12px;border-radius:999px;border:0;background:#111;color:#fff;font:inherit;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.25);cursor:pointer;animation:chatPop .2s}
+
+/* send button */
+@keyframes chatPop{from{transform:scale(.7);opacity:.6}to{transform:none;opacity:1}}
+.chatSend{transition:transform .15s ease,opacity .2s}
+.chatSend:not(:disabled){animation:chatPop .2s}
+.chatSend:active{transform:scale(.92)}
+
+@media (prefers-reduced-motion:reduce){.chatMsg,.chatSend,.chatJump{animation:none !important}}
