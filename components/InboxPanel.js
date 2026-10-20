@@ -140,7 +140,6 @@ export default function InboxPanel() {
       if (!el) return
       el.style.setProperty('--vvh', (vv ? vv.height : window.innerHeight) + 'px')
       &
-      el.classList.toggle('kb', (vv ? vv.height : window.innerHeight) < (window.screen.height ? window.screen.height : 900) * 0.62)
       if (stickRef.current) toBottom(false)
     }
     apply()
