@@ -1942,14 +1942,15 @@ html[lang="bn"] *:not(.logo){letter-spacing:normal !important}
 .chatBody{min-height:calc(100dvh - 110px)}
 
 
-/* HEAVEN app: headers keep their normal size; the page runs full height behind the status bar (0 in a normal browser) */
+
+/* HEAVEN app: every header covers the status-bar area by itself, so nothing shows through above it (all values are 0 in a normal browser) */
 :root{--sat:var(--safe-area-inset-top,env(safe-area-inset-top,0px))}
-nav{margin-top:var(--sat);top:var(--sat)}
-.panel,.drawer{padding-top:calc(25px + var(--sat))}
-.staticPage header,.fsHead{top:var(--sat)}
+nav{height:calc(46px + var(--sat));padding-top:var(--sat)}
+.staticPage header,.fsHead{padding-top:calc(12px + var(--sat))}
+.panelHead.acHead,.panel.chatPanel .panelHead.acHead.chatHead{padding-top:calc(12px + var(--sat))}
+.panel:not(:has(.acHead)):not(.acMenuOn)::before,.drawer::before{content:"";display:flow-root;position:sticky;top:-25px;z-index:30;height:var(--sat);margin:-25px 0 25px;background:#fff;box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);pointer-events:none}
+.slBar{padding-top:calc(10px + var(--sat))}
+.pickerSheetHead{padding-top:calc(16px + var(--sat))}
+.pickerSheetClose{top:calc(14px + var(--sat))}
+.adminSide{padding-top:calc(14px + var(--sat))}
 .miniCart{padding-top:var(--sat)}
-
-
-
-/* HEAVEN app: the header itself covers the status bar area, as one piece (0 in a normal browser) */
-nav{margin-top:0;top:0;height:calc(46px + var(--sat));padding-top:var(--sat)}
