@@ -1950,5 +1950,6 @@ nav{margin-top:var(--sat);top:var(--sat)}
 .miniCart{padding-top:var(--sat)}
 
 
-/* HEAVEN app: the header glass continues up behind the status icons, as one piece (0 height in a normal browser) */
-body::before{content:"";position:fixed;top:0;left:0;right:0;height:var(--sat);background:rgba(255,255,255,.65);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);z-index:99;pointer-events:none}
+
+/* HEAVEN app: the header itself covers the status bar area, as one piece (0 in a normal browser) */
+nav{margin-top:0;top:0;height:calc(46px + var(--sat));padding-top:var(--sat)}
