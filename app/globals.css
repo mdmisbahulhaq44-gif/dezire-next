@@ -1940,3 +1940,11 @@ html[lang="bn"] *:not(.logo){letter-spacing:normal !important}
 
 /* chat height follows the visible area when the keyboard opens */
 .chatBody{min-height:calc(100dvh - 110px)}
+
+/* HEAVEN app: draw under the status bar (all values are 0 in a normal browser) */
+:root{--sat:var(--safe-area-inset-top,env(safe-area-inset-top,0px))}
+nav{height:calc(46px + var(--sat));padding-top:var(--sat)}
+.pdTopBar{height:calc(46px + var(--sat));padding-top:var(--sat);margin-top:calc(-25px - var(--sat))}
+.panel,.drawer{padding-top:calc(25px + var(--sat))}
+.staticPage header,.fsHead{padding-top:calc(12px + var(--sat))}
+.miniCart{padding-top:var(--sat)}

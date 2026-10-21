@@ -79,7 +79,8 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  interactiveWidget: "resizes-content"
+  interactiveWidget: "resizes-content",
+  viewportFit: "cover"
 }
 
 export default function RootLayout({ children, modal }) {
