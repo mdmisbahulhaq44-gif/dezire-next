@@ -1948,3 +1948,6 @@ nav{margin-top:var(--sat);top:var(--sat)}
 .panel,.drawer{padding-top:calc(25px + var(--sat))}
 .staticPage header,.fsHead{top:var(--sat)}
 .miniCart{padding-top:var(--sat)}
+
+/* HEAVEN app: solid white strip behind the clock and battery, so the page never shows through (0 height in a normal browser) */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:var(--sat);background:#fff;z-index:90;pointer-events:none}
