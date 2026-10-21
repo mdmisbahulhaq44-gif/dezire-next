@@ -1949,5 +1949,6 @@ nav{margin-top:var(--sat);top:var(--sat)}
 .staticPage header,.fsHead{top:var(--sat)}
 .miniCart{padding-top:var(--sat)}
 
-/* HEAVEN app: solid white strip behind the clock and battery, so the page never shows through (0 height in a normal browser) */
-body::before{content:"";position:fixed;top:0;left:0;right:0;height:var(--sat);background:#fff;z-index:90;pointer-events:none}
+
+/* HEAVEN app: the header glass continues up behind the status icons, as one piece (0 height in a normal browser) */
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:var(--sat);background:rgba(255,255,255,.65);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);z-index:99;pointer-events:none}
