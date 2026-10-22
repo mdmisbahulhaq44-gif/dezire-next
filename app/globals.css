@@ -1962,3 +1962,6 @@ nav{height:calc(46px + var(--sat));padding-top:var(--sat)}
 /* Wishlist / About from My Account: the gap frame is plain white (no grey flash), product names are not default-blue links */
 html[data-acin] .overlay{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}
 .cartInfo a:not(.removeBtn){color:inherit;text-decoration:none}
+
+/* no rubber-band / stretch when scrolling past the top or bottom (header and bottom bar stay fixed) */
+html,body{overscroll-behavior:none}
