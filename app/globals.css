@@ -1954,3 +1954,7 @@ nav{height:calc(46px + var(--sat));padding-top:var(--sat)}
 .pickerSheetClose{top:calc(14px + var(--sat))}
 .adminSide{padding-top:calc(14px + var(--sat))}
 .miniCart{padding-top:var(--sat)}
+
+/* My Account inner screens: header exactly as tall as the shop header, so opening Wishlist / Orders doesn't jump */
+.panelHead.acHead,.panel.chatPanel .panelHead.acHead.chatHead{padding-top:var(--sat);padding-bottom:0;box-sizing:border-box;min-height:calc(46px + var(--sat))}
+.panelHead.acHead{margin-bottom:25px}
