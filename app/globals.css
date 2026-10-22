@@ -1955,9 +1955,6 @@ nav{height:calc(46px + var(--sat));padding-top:var(--sat)}
 .adminSide{padding-top:calc(14px + var(--sat))}
 .miniCart{padding-top:var(--sat)}
 
-/* My Account inner screens: header exactly as tall as the shop header, so opening Wishlist / Orders doesn't jump */
-.panelHead.acHead,.panel.chatPanel .panelHead.acHead.chatHead{padding-top:var(--sat);padding-bottom:0;box-sizing:border-box;min-height:calc(46px + var(--sat))}
-.panelHead.acHead{margin-bottom:25px}
 
 /* Wishlist / About from My Account: the gap frame is plain white (no grey flash), product names are not default-blue links */
 html[data-acin] .overlay{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}
