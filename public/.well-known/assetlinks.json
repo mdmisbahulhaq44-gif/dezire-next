@@ -1,8 +1,1 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "com.heavenbd.app",
-        "sha256_cert_fingerprints": ["A9:96:8E:71:E7:90:91:77:11:BB:5C:88:A9:F7:7C:52:6E:4D:49:0C:84:DE:41:6F:61:74:59:F5:A6:01:CC:9E"]
-      }
-    }]
+[{"relation":["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"com.heavenbd.app","sha256_cert_fingerprints":["F7:EB:56:EC:86:E9:12:E2:64:E8:C9:75:5C:C5:18:74:32:76:D8:85:4C:CF:34:29:B6:D1:36:D9:98:C4:1E:0A"]}}]

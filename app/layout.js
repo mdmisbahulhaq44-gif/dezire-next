@@ -21,6 +21,7 @@ import NavTransition from "../components/NavTransition"
 import ProductPreview from "../components/ProductPreview"
 import NoZoom from "../components/NoZoom"
 import AppSplash from "../components/AppSplash"
+import AppNative from "../components/AppNative"
 import ServiceWorkerRegister from "../components/ServiceWorkerRegister"
 
 const quicksand = Quicksand({
@@ -118,6 +119,7 @@ export default function RootLayout({ children, modal }) {
           <ProductPreview />
           <NoZoom />
           <AppSplash />
+          <AppNative />
           <ServiceWorkerRegister />
         </ShopProvider>
       </body>
