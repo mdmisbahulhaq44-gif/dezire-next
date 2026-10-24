@@ -12,6 +12,7 @@ export default function AppNative() {
   useEffect(() => {
     const cap = window.Capacitor
     if (!cap || !cap.isNativePlatform || !cap.isNativePlatform()) return
+    document.documentElement.setAttribute('data-app', '1')
     const App = cap.Plugins && cap.Plugins.App
     const undo = []
 

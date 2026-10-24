@@ -1969,3 +1969,6 @@ html[data-acin] nav,html[data-acin] .panel.acFadeA > .panelHead,html[data-acin] 
 @keyframes acSoftA{from{opacity:.15}to{opacity:1}}
 @keyframes acSoftB{from{opacity:.15}to{opacity:1}}
 @keyframes acSoftP{from{opacity:.15}to{opacity:1}}
+
+/* inside the HEAVEN app: My Account screens change at once, no fades */
+html[data-app] nav,html[data-app] .panel > *,html[data-app] .panel > .panelHead,html[data-app] #main-content{animation:none !important}
