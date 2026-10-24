@@ -1962,3 +1962,10 @@ html[data-acin] .overlay{background:#fff;-webkit-backdrop-filter:none;backdrop-f
 
 /* no rubber-band / stretch when scrolling past the top or bottom (header and bottom bar stay fixed) */
 html,body{overscroll-behavior:none}
+
+/* My Account screen changes: header and body fade in together, so the header-size difference is not a hard jump */
+@keyframes acSoftH{from{opacity:.15}to{opacity:1}}
+html[data-acin] nav,html[data-acin] .panel.acFadeA > .panelHead,html[data-acin] .panel.acFadeB > .panelHead{animation:acSoftH .3s ease-out backwards}
+@keyframes acSoftA{from{opacity:.15}to{opacity:1}}
+@keyframes acSoftB{from{opacity:.15}to{opacity:1}}
+@keyframes acSoftP{from{opacity:.15}to{opacity:1}}
