@@ -8,6 +8,8 @@ const HOST = 'heaven-bd.vercel.app'
 // Only does anything inside the HEAVEN Android app: opens shared links in the app, shows the "update available" dialog and pull-to-refresh.
 export default function AppNative() {
   const [upd, setUpd] = useState(null)
+  const [prog, setProg] = useState(null)
+  useEffect(() => { window.__heavenUpdate = (p, s) => setProg({ p, s }); return () => { window.__heavenUpdate = null } }, [])
 
   useEffect(() => {
     const cap = window.Capacitor
@@ -93,10 +95,10 @@ export default function AppNative() {
     <div style={{ position: 'fixed', inset: 0, zIndex: 100000, background: 'rgba(0,0,0,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
       <div style={{ background: '#fff', borderRadius: 14, padding: '24px 22px 18px', width: 'min(340px,100%)', boxShadow: '0 10px 40px rgba(0,0,0,.3)' }}>
         <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 8 }}>Update available</div>
-        <div style={{ fontSize: 14, color: '#555', lineHeight: 1.6, marginBottom: 20 }}>A new version of HEAVEN is ready. Update now to get the latest improvements.</div>
+        <div style={{ fontSize: 14, color: '#555', lineHeight: 1.6, marginBottom: 20 }}>{prog ? (prog.s === 'perm' ? 'Allow HEAVEN to install updates, then come back to this screen.' : prog.s === 'error' ? 'Download failed. Please try again.' : prog.s === 'done' ? 'Opening installer...' : 'Downloading... ' + prog.p + '%') : 'A new version of HEAVEN is ready. Update now to get the latest improvements.'}</div>
         <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
           <button onClick={() => { try { localStorage.setItem('dz_upd_later', String(Date.now())) } catch (e) {} setUpd(null) }} style={{ padding: '10px 18px', border: 0, background: 'none', fontSize: 14, fontWeight: 600, color: '#555', cursor: 'pointer' }}>Later</button>
-          <button onClick={() => { setUpd(null); window.location.href = 'https://github.com/' + REPO + '/releases/latest/download/HEAVEN.apk' }} style={{ padding: '10px 20px', border: 0, borderRadius: 8, background: '#111', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>Update now</button>
+          <button onClick={() => { startUpdate() }} style={{ padding: '10px 20px', border: 0, borderRadius: 8, background: '#111', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>Update now</button>
         </div>
       </div>
     </div>
