@@ -90,6 +90,11 @@ export default function AppNative() {
     return () => undo.forEach(f => f())
   }, [])
 
+  function startUpdate() {
+    const url = 'https://github.com/' + REPO + '/releases/latest/download/HEAVEN.apk'
+    if (window.HeavenUpdater && window.HeavenUpdater.start) { setProg({ p: 0, s: 'load' }); window.HeavenUpdater.start(url) } else { setUpd(null); window.location.href = url }
+  }
+
   if (!upd) return null
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 100000, background: 'rgba(0,0,0,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
