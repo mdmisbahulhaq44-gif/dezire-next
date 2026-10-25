@@ -1972,3 +1972,6 @@ html[data-acin] nav,html[data-acin] .panel.acFadeA > .panelHead,html[data-acin] 
 
 /* inside the HEAVEN app: My Account screens change at once, no fades */
 html[data-app] nav,html[data-app] .panel > *,html[data-app] .panel > .panelHead,html[data-app] #main-content{animation:none !important}
+
+/* inside the app the inbox follows the keyboard in the same frame (no JS lag) */
+html[data-app] .panel.chatPanel{top:0 !important;bottom:0 !important;height:auto !important}
