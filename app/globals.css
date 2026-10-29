@@ -1978,3 +1978,6 @@ html[data-app] .panel.chatPanel{top:0 !important;bottom:0 !important;height:auto
 
 /* app: glass status-bar cover on panels (product page etc.), like the home header */
 html[data-app] .panel:not(:has(.acHead)):not(.acMenuOn)::before,html[data-app] .drawer::before{background:rgba(255,255,255,.65);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:none;clip-path:none;border-bottom:1px solid rgba(255,255,255,.4)}
+
+/* product open: the real panel stays hidden while the preview is on screen, so the two never fade on top of each other */
+body:has(#productPreview) #productPanel{visibility:hidden}

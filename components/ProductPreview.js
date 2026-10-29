@@ -17,6 +17,7 @@ export default function ProductPreview() {
   const [p, setP] = useState(null)
   const closeAfter = useRef(false)
   const hold = useRef(0)
+  const shownAt = useRef(0)
   const timer = useRef(null)
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function ProductPreview() {
       try { data = JSON.parse(a.dataset.preview) } catch (err) { return }
       closeAfter.current = false
       const target = url.pathname
+      shownAt.current = performance.now()
       hold.current = a.dataset.hold ? performance.now() + Number(a.dataset.hold) : 0
       const show = () => {
         if (location.pathname === target) return
@@ -62,7 +64,7 @@ export default function ProductPreview() {
   useEffect(() => {
     if (!pathname || !pathname.startsWith('/product/')) return
     clearTimeout(timer.current)
-    const wait = hold.current ? Math.max(0, hold.current - performance.now()) : 0
+    const wait = Math.max(hold.current ? Math.max(0, hold.current - performance.now()) : 0, shownAt.current ? Math.max(0, shownAt.current + 340 - performance.now()) : 0)
     hold.current = 0
     const finish = () => {
       const ims = document.querySelectorAll('#productPanel .pdSlide img[aria-hidden="true"]')
