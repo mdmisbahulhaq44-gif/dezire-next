@@ -256,6 +256,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             {images.length ? images.map((url, i) => (
               <div className="pdSlide" key={i} style={{ position: 'relative' }}>
                 {i === 0 && <img src={cldOpt(url, 500)} alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
+                {i === 0 && <img src={cldOpt(url, 900)} alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
                 <Image
                   src={cldOpt(url, 900)}
                   alt={product.name}

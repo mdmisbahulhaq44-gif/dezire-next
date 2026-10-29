@@ -64,8 +64,15 @@ export default function ProductPreview() {
     clearTimeout(timer.current)
     const wait = hold.current ? Math.max(0, hold.current - performance.now()) : 0
     hold.current = 0
-    if (wait > 0) timer.current = setTimeout(() => setP(null), wait)
-    else setP(null)
+    const finish = () => {
+      const ims = document.querySelectorAll('#productPanel .pdSlide img[aria-hidden="true"]')
+      const im = ims[ims.length - 1]
+      const done = () => requestAnimationFrame(() => requestAnimationFrame(() => setP(null)))
+      if (im && im.decode) Promise.race([im.decode(), new Promise(r => setTimeout(r, 400))]).then(done, done)
+      else done()
+    }
+    if (wait > 0) timer.current = setTimeout(finish, wait)
+    else finish()
     if (closeAfter.current) {
       closeAfter.current = false
       closeWithFade(router)
