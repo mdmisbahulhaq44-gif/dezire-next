@@ -18,6 +18,16 @@ export default function ProductPreview() {
   const closeAfter = useRef(false)
   const hold = useRef(0)
   const shownAt = useRef(0)
+  const readyRef = useRef(false)
+  const readyTimer = useRef(null)
+  const [ready, setReady] = useState(false)
+  const markReady = () => {
+    if (readyRef.current) return
+    readyRef.current = true
+    clearTimeout(readyTimer.current)
+    shownAt.current = performance.now()
+    setReady(true)
+  }
   const timer = useRef(null)
 
   useEffect(() => {
@@ -39,6 +49,8 @@ export default function ProductPreview() {
       closeAfter.current = false
       const target = url.pathname
       shownAt.current = performance.now()
+      readyRef.current = false
+      setReady(false)
       hold.current = a.dataset.hold ? performance.now() + Number(a.dataset.hold) : 0
       const show = () => {
         if (location.pathname === target) return
@@ -46,6 +58,8 @@ export default function ProductPreview() {
       }
       window.__dzEnter = { t: performance.now(), mode: 'preview', still: location.pathname.startsWith('/product/') }
       show()
+      clearTimeout(readyTimer.current)
+      readyTimer.current = setTimeout(markReady, 250)
       clearTimeout(timer.current)
       // Safety net: never leave the preview stuck if navigation fails
       timer.current = setTimeout(() => setP(null), 12000)
@@ -96,7 +110,7 @@ export default function ProductPreview() {
     <div
       className="panel show"
       id="productPreview"
-      style={{ transform: 'none', opacity: 1, transition: 'none', animation: p.__still ? 'none' : 'pdFadeIn 320ms cubic-bezier(.22,.61,.36,1) backwards', pointerEvents: 'auto', overscrollBehavior: 'contain' }}
+      style={{ transform: 'none', opacity: 1, transition: 'none', animation: p.__still ? 'none' : 'pdFadeIn 320ms cubic-bezier(.22,.61,.36,1) backwards', animationPlayState: (ready || p.__still) ? 'running' : 'paused', pointerEvents: 'auto', overscrollBehavior: 'contain' }}
     >
       <PdTopBar onBack={() => { closeAfter.current = true }} />
 
@@ -115,6 +129,9 @@ export default function ProductPreview() {
                   src={cldOpt(p.img, 900)}
                   alt={p.name}
                   fetchPriority="high"
+                  onLoad={markReady}
+                  onError={markReady}
+                  ref={el => { if (el && el.complete && el.naturalWidth > 0) markReady() }}
                   style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </>
