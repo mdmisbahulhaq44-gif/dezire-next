@@ -73,8 +73,7 @@ export default function NavTransition() {
       const url = new URL(a.href, location.href)
       if (url.origin !== location.origin || url.pathname.startsWith('/admin')) return
       if (url.pathname === location.pathname) return
-      if (a.dataset.preview) return
-      if (url.pathname.startsWith('/product/')) window.__dzEnter = { t: performance.now(), mode: 'link' }
+      if (url.pathname.startsWith('/product/')) window.__dzEnter = { t: performance.now(), mode: 'link', still: location.pathname.startsWith('/product/') }
       else if (document.startViewTransition && url.pathname !== '/' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         // Forward step (home > men > shirt ...): cross-fade old page into new, like product close.
         // The wait is capped (250ms) so a slow network can never freeze the tap.

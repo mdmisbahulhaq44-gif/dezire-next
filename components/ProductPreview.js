@@ -11,6 +11,11 @@ import PdTopBar from './PdTopBar'
 // data the card already has (name, price, photo). The real panel (fetched
 // from the server) replaces it the moment it arrives, so a slow network no
 // longer leaves the shopper staring at the old page.
+// ONE RULE FOR EVERY PRODUCT LINK: all products open the same way (straight to the real page, no instant-preview step).
+// The preview step caused a white flash / photo jump on some pages, so it is switched off for the whole site.
+// Do not turn it on for a single page: if you ever need it, turn it on for all links and test every list.
+const PREVIEW_ON = false
+
 export default function ProductPreview() {
   const pathname = usePathname()
   const router = useRouter()
@@ -38,6 +43,7 @@ export default function ProductPreview() {
     }
 
     function onClick(e) {
+      if (!PREVIEW_ON) return
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
       const a = e.target.closest && e.target.closest('a[data-preview]')
       if (!a) return
