@@ -193,7 +193,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
           </div>
         )}
 
-        <ProductGrid products={visible} />
+        <ProductGrid products={visible} noPreview />
         {breadcrumb && <ShopAside />}
       </div>
     </div>
