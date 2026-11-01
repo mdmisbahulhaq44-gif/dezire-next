@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useShop } from './ShopContext'
-import { supabase } from '../lib/supabaseClient'
+import { getWallet, refreshWallet, subscribeWallet, clearWallet } from '../lib/walletCache'
 
 // "My Account" home: profile card + list of rows (icon, label, arrow).
 const SHOP_PHONE = '8801877270165'
@@ -34,12 +34,12 @@ function Icon({ name, className = 'acIcon', style }) {
   )
 }
 
-function Row({ icon, label, onClick, value }) {
+function Row({ icon, label, onClick, value, dim }) {
   return (
     <button type="button" className="acRow" onClick={onClick}>
       <Icon name={icon} />
       <span>{label}</span>
-      {value ? <span style={{ marginLeft: 'auto', fontWeight: 700, fontSize: 13 }}>{value}</span> : null}
+      {value ? <span style={{ marginLeft: 'auto', fontWeight: 700, fontSize: 13, minWidth: 30, textAlign: 'right', opacity: dim ? 0 : 1, transition: 'opacity .3s ease' }}>{value}</span> : null}
       <Icon name="arrow" className="acArrow" style={value ? { marginLeft: 10 } : undefined} />
     </button>
   )
@@ -50,13 +50,17 @@ export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSu
   const name = session?.user?.user_metadata?.full_name || ''
   const rawEmail = session?.user?.email || ''
   const email = rawEmail.endsWith('@phone.heaven-bd.vercel.app') ? (session?.user?.user_metadata?.phone || '') : rawEmail
-  const [bal, setBal] = useState(null)
+  const uid = session?.user?.id || null
+  const [bal, setBal] = useState(() => { const w = uid ? getWallet(uid) : null; return w ? Number(w.balance) : null })
   useEffect(() => {
-    if (!session) { setBal(null); return }
+    if (!uid) { clearWallet(); setBal(null); return }
     let live = true
-    supabase.from('wallets').select('balance').eq('user_id', session.user.id).maybeSingle().then(({ data }) => { if (live) setBal(data ? Number(data.balance) : 0) })
-    return () => { live = false }
-  }, [session])
+    const w = getWallet(uid)
+    if (w) setBal(Number(w.balance))
+    const off = subscribeWallet((u, data) => { if (live && u === uid) setBal(Number(data.balance)) })
+    refreshWallet(uid)
+    return () => { live = false; off() }
+  }, [uid])
   const initial = (name || email || '').trim().charAt(0).toUpperCase()
   const avatarUrl = session?.user?.user_metadata?.avatar_url || ''
 
@@ -86,7 +90,7 @@ export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSu
         <Row icon="orders" label={t("My Orders")} onClick={onOrders} />
         <Row icon="heart" label={t("Wishlist")} onClick={() => openPanel('wishlist')} />
         <Row icon="offers" label={t("Flash Sale / Offers")} onClick={() => go('/flash-sale')} />
-        {session && <Row icon="wallet" label={t("Wallet")} value={bal === null ? '' : '৳' + bal} onClick={onRefer} />}
+        {session && <Row icon="wallet" label={t("Wallet")} value={'৳' + (bal === null ? 0 : bal)} dim={bal === null} onClick={onRefer} />}
         <Row icon="gift" label={t("Refer & Earn")} onClick={onRefer} />
       </div>
       <div className="acGroup">

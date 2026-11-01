@@ -492,7 +492,7 @@ export default function AccountPanel() {
         )}
 
         {view === 'support' && <AccountSupport />}
-        {view === 'refer' && session && <ReferView showToast={showToast} />}
+        {view === 'refer' && session && <ReferView showToast={showToast} uid={session.user.id} />}
         {view === 'profile' && session && <ProfileView session={session} showToast={showToast} onEdit={() => navView('editProfile')} />}
         {view === 'editProfile' && session && <EditProfile session={session} showToast={showToast} onDone={() => backView('profile')} />}
 
