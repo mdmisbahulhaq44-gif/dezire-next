@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import { getWallet, refreshWallet, subscribeWallet } from '../lib/walletCache'
 import { useShop } from './ShopContext'
 import {
   DHAKA_CITY, DEFAULT_SETTINGS, fetchDeliverySettings,
@@ -51,6 +52,27 @@ export default function CheckoutPanel() {
   const [couponMsg, setCouponMsg] = useState({ text: '', bad: false })
   const [payment, setPayment] = useState('COD')
   const [busy, setBusy] = useState(false)
+  const [uid, setUid] = useState(null)
+  const [walletBal, setWalletBal] = useState(0)
+  const [useWallet, setUseWallet] = useState(true)
+
+  // wallet balance of the logged-in customer (the server re-checks it when the order is placed)
+  useEffect(() => {
+    if (!show) return
+    let live = true
+    let off = () => {}
+    supabase.auth.getSession().then(({ data }) => {
+      if (!live) return
+      const id = data.session ? data.session.user.id : null
+      setUid(id)
+      if (!id) { setWalletBal(0); return }
+      const w = getWallet(id)
+      if (w) setWalletBal(Number(w.balance))
+      off = subscribeWallet((u, d) => { if (live && u === id) setWalletBal(Number(d.balance)) })
+      refreshWallet(id)
+    })
+    return () => { live = false; off() }
+  }, [show])
 
   useEffect(() => {
     if (!show || loaded) return
@@ -163,6 +185,8 @@ export default function CheckoutPanel() {
   const delivery = deliveryFor(settings, cartSubtotal, method, city)
   const discount = coupon ? Math.min(Number(coupon.discount) || 0, cartSubtotal) : 0
   const total = cartSubtotal - discount + delivery.charge
+  const walletUse = useWallet && walletBal > 0 ? Math.min(walletBal, Math.max(total, 0)) : 0
+  const payable = total - walletUse
 
   // coupon messages come from the server in English; show them in the chosen language
   function cErr(msg) {
@@ -224,7 +248,8 @@ export default function CheckoutPanel() {
         p_delivery_address: fullAddress,
         p_note: noteBase,
         p_coupon: coupon ? coupon.code : '',
-        p_payment: payment
+        p_payment: payment,
+        p_use_wallet: !!(useWallet && walletBal > 0)
       })
       if (error || !result) {
         console.error(error)
@@ -236,12 +261,14 @@ export default function CheckoutPanel() {
       const itemsText = result.items_text
       const charge = Number(result.delivery_charge)
       const purchaseTotal = Number(result.total)
+      const dueNow = result.due != null ? Number(result.due) : purchaseTotal
       saveOrder(orderRef, ph)
+      if (uid) refreshWallet(uid)
 
       if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: purchaseTotal, currency: 'BDT', content_ids: cart.map(i => String(i.id)), content_type: 'product', num_items: cart.reduce((s, i) => s + i.qty, 0) })
       if (typeof window.gtag === 'function') window.gtag('event', 'purchase', { transaction_id: orderRef, value: purchaseTotal, currency: 'BDT', items: cart.map(i => ({ item_id: String(i.id), item_name: i.name, price: i.price, quantity: i.qty })) })
 
-      if (payment === 'ONLINE') {
+      if (payment === 'ONLINE' && dueNow > 0) {
         try {
           const { data: chargeData, error: chargeError } = await supabase.functions.invoke('create-charge', {
             body: { orderRef, fullName: nm, amount: purchaseTotal }
@@ -386,6 +413,14 @@ export default function CheckoutPanel() {
           </div>
           <div style={{ fontSize: 11, color: couponMsg.bad ? 'var(--red)' : 'var(--gold)' }}>{cErr(couponMsg.text)}</div>
 
+          {walletBal > 0 && (
+            <label style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 14px', border: '1px solid #ddd', borderRadius: 14, fontSize: 13, letterSpacing: 0, color: '#111', marginTop: 4 }}>
+              <input type="checkbox" checked={useWallet} onChange={e => setUseWallet(e.target.checked)} style={{ width: 18, height: 18, flex: 'none', padding: 0 }} />
+              <span style={{ flex: 1 }}>{t('Use my wallet balance')}</span>
+              <b>৳{walletBal.toLocaleString()}</b>
+            </label>
+          )}
+
           <div style={{ marginTop: 8 }}>
             <div className="summaryRow"><span>{t('Subtotal')}</span><span>৳{cartSubtotal.toLocaleString()}</span></div>
             {discount > 0 && (
@@ -397,7 +432,12 @@ export default function CheckoutPanel() {
               <span>{t(delivery.label)}</span>
               <span>{delivery.isFree ? t('FREE') : '৳' + delivery.charge.toLocaleString()}</span>
             </div>
-            <div className="summaryRow total"><span>{t('Total')}</span><span>৳{total.toLocaleString()}</span></div>
+            {walletUse > 0 && (
+              <div className="summaryRow" style={{ color: 'var(--gold)' }}>
+                <span>{t('Wallet')}</span><span>−৳{walletUse.toLocaleString()}</span>
+              </div>
+            )}
+            <div className="summaryRow total"><span>{t('Total')}</span><span>৳{payable.toLocaleString()}</span></div>
           </div>
 
           <label>{t('PAYMENT METHOD')}</label>
