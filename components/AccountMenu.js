@@ -1,6 +1,8 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useShop } from './ShopContext'
+import { supabase } from '../lib/supabaseClient'
 
 // "My Account" home: profile card + list of rows (icon, label, arrow).
 const SHOP_PHONE = '8801877270165'
@@ -20,31 +22,41 @@ const ICONS = {
   lock: 'M6 11h12v9H6z M8 11V8a4 4 0 0 1 8 0v3',
   login: 'M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4 M10 17l5-5-5-5 M15 12H3',
   logout: 'M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4 M16 17l5-5-5-5 M21 12H9',
+  wallet: 'M3 7a2 2 0 0 1 2-2h13v4 M3 7v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-3 M21 9H5a2 2 0 0 1-2-2 M21 9v6h-4a3 3 0 0 1 0-6h4z',
   arrow: 'M9 6l6 6-6 6'
 }
 
-function Icon({ name, className = 'acIcon' }) {
+function Icon({ name, className = 'acIcon', style }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <svg style={style} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d={ICONS[name]} />
     </svg>
   )
 }
 
-function Row({ icon, label, onClick }) {
+function Row({ icon, label, onClick, value }) {
   return (
     <button type="button" className="acRow" onClick={onClick}>
       <Icon name={icon} />
       <span>{label}</span>
-      <Icon name="arrow" className="acArrow" />
+      {value ? <span style={{ marginLeft: 'auto', fontWeight: 700, fontSize: 13 }}>{value}</span> : null}
+      <Icon name="arrow" className="acArrow" style={value ? { marginLeft: 10 } : undefined} />
     </button>
   )
 }
 
-export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSupport, onOrders, onLogout, go, openPanel, showToast }) {
+export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSupport, onRefer, onOrders, onLogout, go, openPanel, showToast }) {
   const { t } = useShop()
   const name = session?.user?.user_metadata?.full_name || ''
-  const email = session?.user?.email || ''
+  const rawEmail = session?.user?.email || ''
+  const email = rawEmail.endsWith('@phone.heaven-bd.vercel.app') ? (session?.user?.user_metadata?.phone || '') : rawEmail
+  const [bal, setBal] = useState(null)
+  useEffect(() => {
+    if (!session) { setBal(null); return }
+    let live = true
+    supabase.from('wallets').select('balance').eq('user_id', session.user.id).maybeSingle().then(({ data }) => { if (live) setBal(data ? Number(data.balance) : 0) })
+    return () => { live = false }
+  }, [session])
   const initial = (name || email || '').trim().charAt(0).toUpperCase()
   const avatarUrl = session?.user?.user_metadata?.avatar_url || ''
 
@@ -74,7 +86,8 @@ export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSu
         <Row icon="orders" label={t("My Orders")} onClick={onOrders} />
         <Row icon="heart" label={t("Wishlist")} onClick={() => openPanel('wishlist')} />
         <Row icon="offers" label={t("Flash Sale / Offers")} onClick={() => go('/flash-sale')} />
-        <Row icon="gift" label={t("Refer & Earn")} onClick={() => showToast('Refer & Earn is coming soon.')} />
+        {session && <Row icon="wallet" label={t("Wallet")} value={bal === null ? '' : '৳' + bal} onClick={onRefer} />}
+        <Row icon="gift" label={t("Refer & Earn")} onClick={onRefer} />
       </div>
       <div className="acGroup">
         <Row icon="support" label={t("Support")} onClick={onSupport} />

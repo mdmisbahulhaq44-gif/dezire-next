@@ -11,6 +11,8 @@ import OtpBoxes from './OtpBoxes'
 import AccountMenu from './AccountMenu'
 import { ProfileView, EditProfile } from './ProfileView'
 import AccountSupport from './AccountSupport'
+import AuthSwitch from './PhoneAuth'
+import ReferView from './ReferView'
 
 const ADMIN_EMAIL = "mdmisbahulhaq44@gmail.com"
 
@@ -396,13 +398,13 @@ export default function AccountPanel() {
         {(view !== 'menu' || !realHeader) && (
           <div className="panelHead acHead">
             {view !== 'menu' && (
-              <button type="button" className="acBackBtn" aria-label="Back" onClick={() => backView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', orders: 'menu', profile: 'menu', editProfile: 'profile', support: 'menu' }[view] || 'menu')}>
+              <button type="button" className="acBackBtn" aria-label="Back" onClick={() => backView({ login: 'menu', signup1: 'login', signup2: 'signup1', forgot: 'login', refer: 'menu', orders: 'menu', profile: 'menu', editProfile: 'profile', support: 'menu' }[view] || 'menu')}>
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
               </button>
             )}
             {view === 'menu'
               ? <div className="acBrand">HEAVEN</div>
-              : <h2 className="acTitle">{t(({ login: 'Login', signup1: 'Create Account', signup2: 'Verify Email', forgot: 'Reset Password', orders: 'My Orders', profile: 'Profile', editProfile: 'Update Profile', support: 'Support' })[view] || 'My Account')}</h2>}
+              : <h2 className="acTitle">{t(({ login: 'Login', signup1: 'Create Account', signup2: 'Verify Email', forgot: 'Reset Password', refer: 'Refer & Earn', orders: 'My Orders', profile: 'Profile', editProfile: 'Update Profile', support: 'Support' })[view] || 'My Account')}</h2>}
             <div className="acHeadIcons">
               {view !== 'menu' && (
                 <button type="button" className="acHeadBtn" aria-label="Search" onClick={() => { closePanel(); openSearch() }}>
@@ -424,6 +426,7 @@ export default function AccountPanel() {
             onLogin={() => navView('login')}
             onProfile={() => navView('profile')}
             onSupport={() => navView('support')}
+            onRefer={() => navView(session ? 'refer' : 'login')}
             onOrders={() => { if (session) navView('orders'); else { closePanel(); if (openTrack) openTrack() } }}
             onLogout={logout}
             go={path => { const target = path.split('?')[0]; navTo.current = target; window.__dzFromAccount = target; window.__dzRet = { from: pathname, to: target }; document.documentElement.setAttribute('data-nav', '1'); router.push(path); setTimeout(() => { if (navTo.current === target) window.location.assign(path) }, 4000) }}
@@ -433,6 +436,7 @@ export default function AccountPanel() {
         )}
 
         {view === 'login' && (
+          <AuthSwitch kind="login" showToast={showToast} onDone={closePanel} onGoSignup={() => navView('signup1')}>
           <form className="form" onSubmit={login}>
             <input type="email" placeholder={t("Email address")} required value={loginEmail} onChange={e => setLoginEmail(e.target.value)} />
             <input type="password" placeholder={t("Password")} required value={loginPassword} onChange={e => setLoginPassword(e.target.value)} />
@@ -445,9 +449,11 @@ export default function AccountPanel() {
               <a href="#" onClick={e => { e.preventDefault(); navView('signup1') }} style={{ fontSize: 12, color: '#111', fontWeight: 700, textDecoration: 'underline' }}>{t('Create one')}</a>
             </div>
           </form>
+          </AuthSwitch>
         )}
 
         {view === 'signup1' && (
+          <AuthSwitch kind="signup" showToast={showToast} onDone={closePanel} onGoLogin={() => backView('login')}>
           <form className="form" onSubmit={sendSignupOtp}>
             <input type="text" placeholder={t("Full name")} required value={suName} onChange={e => setSuName(e.target.value)} />
             <input type="email" placeholder={t("Email address")} required value={suEmail} onChange={e => setSuEmail(e.target.value)} />
@@ -458,6 +464,7 @@ export default function AccountPanel() {
               <a href="#" onClick={e => { e.preventDefault(); backView('login') }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>{t('Back to login')}</a>
             </div>
           </form>
+          </AuthSwitch>
         )}
 
         {view === 'signup2' && (
@@ -485,6 +492,7 @@ export default function AccountPanel() {
         )}
 
         {view === 'support' && <AccountSupport />}
+        {view === 'refer' && session && <ReferView showToast={showToast} />}
         {view === 'profile' && session && <ProfileView session={session} showToast={showToast} onEdit={() => navView('editProfile')} />}
         {view === 'editProfile' && session && <EditProfile session={session} showToast={showToast} onDone={() => backView('profile')} />}
 
