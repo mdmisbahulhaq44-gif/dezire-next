@@ -89,7 +89,7 @@ export default function ReferView({ showToast, uid }) {
           {x.history.map((h, i) => (
             <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '9px 0', borderTop: i ? '1px solid #f0f0f0' : 0, fontSize: 13 }}>
               <div>
-                <div>{kindLabel(h.kind)}</div>
+                <div>{h.kind === 'admin_adjust' && h.note ? h.note : kindLabel(h.kind)}</div>
                 <div style={{ fontSize: 11, color: 'var(--muted)' }}>{new Date(h.at).toLocaleDateString()}{h.order_ref ? ' · ' + h.order_ref : ''}</div>
               </div>
               <div style={{ fontWeight: 700, color: Number(h.amount) < 0 ? '#c0392b' : '#1e8e3e' }}>{Number(h.amount) > 0 ? '+' : ''}{money(h.amount)}</div>

@@ -17,6 +17,7 @@ import AdminSales from './AdminSales'
 import AdminCoupons from './AdminCoupons'
 import AdminCurrency from './AdminCurrency'
 import AdminIcon from './AdminIcon'
+import AdminWallet from './AdminWallet'
 
 const SECTIONS = [
   { key: 'dashboard', label: 'Dashboard' },
@@ -31,6 +32,7 @@ const SECTIONS = [
   { key: 'sales', label: 'Sales' },
   { key: 'coupons', label: 'Coupons' },
   { key: 'currency', label: 'Currency' },
+  { key: 'wallet', label: 'Wallet & Referral' },
   { key: 'activity', label: 'Activity log' }
 ]
 
@@ -47,6 +49,7 @@ const TITLES = {
   sales: 'Sales',
   coupons: 'Coupons',
   currency: 'Currency',
+  wallet: 'Wallet & Referral',
   activity: 'Activity log'
 }
 
@@ -102,6 +105,7 @@ export default function AdminShell() {
 {section === 'sales' && <AdminSales />}
 {section === 'coupons' && <AdminCoupons />}
 {section === 'currency' && <AdminCurrency />}
+{section === 'wallet' && <AdminWallet />}
 {section === 'backup' && <AdminBackup />}
 {section === 'stock' && <AdminStockHistory />}
       </main>
