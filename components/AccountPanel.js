@@ -55,7 +55,7 @@ export default function AccountPanel() {
   const router = useRouter()
   const pathname = usePathname()
   const navTo = useRef(null)
-  const { activePanel, closePanel, hidePanel, showToast: rawToast, openReset, openTrack, openWishlist, openAbout, openSearch, openCart, cartCount, fadeSwap, t, lang } = useShop()
+  const { activePanel, closePanel, hidePanel, showToast: rawToast, openReset, openTrack, openWishlist, openAbout, openSearch, openCart, openAccount, cartCount, fadeSwap, t, lang } = useShop()
   const showAccount = activePanel === 'account'
   const showReset = activePanel === 'reset'
   // translate toast text (the part after a colon is the server's own message and stays as is)
@@ -81,6 +81,24 @@ export default function AccountPanel() {
   }, [pathname])
 
   const [view, setView] = useState('menu')
+
+  // Someone opened a friend's invite link (?ref=CODE): remember the code and open the registration screen
+  useEffect(() => {
+    try {
+      const u = new URL(window.location.href)
+      const c = (u.searchParams.get('ref') || '').toUpperCase()
+      if (!/^[A-Z0-9]{6}$/.test(c)) return
+      u.searchParams.delete('ref')
+      window.history.replaceState(window.history.state, '', u.pathname + u.search + u.hash)
+      supabase.auth.getSession().then(({ data }) => {
+        if (data.session) { try { localStorage.removeItem('dz_ref') } catch (e) {} return }
+        try { localStorage.setItem('dz_ref', c) } catch (e) {}
+        window.__dzOpenView = 'signup1'
+        openAccount()
+      })
+    } catch (e) {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   // Back from a page opened out of My Account (Contact, Privacy, Flash Sale ...) must land on My Account again,
   // even if the browser lost the saved panel state on the way
@@ -187,7 +205,13 @@ export default function AccountPanel() {
     if (!showAccount) return
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session || null)
-      setView((window.history.state && window.history.state.dzView) || 'menu')
+      const want = window.__dzOpenView
+      if (want) {
+        window.__dzOpenView = null
+        const st0 = window.history.state || {}
+        try { window.history.replaceState({ ...st0, dzPanel: 'account', dzView: want, dzDepth: st0.dzDepth || 1 }, '') } catch (e) {}
+        setView(want)
+      } else setView((window.history.state && window.history.state.dzView) || 'menu')
     })
   }, [showAccount])
 

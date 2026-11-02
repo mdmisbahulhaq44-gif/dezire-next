@@ -35,7 +35,7 @@ export default function ReferView({ showToast, uid }) {
 
   async function share() {
     if (loading) return
-    const text = `Join HEAVEN with my referral code ${d.code} when you create your account, and shop your favourites! ${SITE}`
+    const text = `Join HEAVEN with my link and my referral code ${d.code} is added for you: ${SITE}/?ref=${d.code}`
     try {
       if (navigator.share) await navigator.share({ title: 'HEAVEN', text })
       else { await navigator.clipboard.writeText(text); showToast('Invite message copied') }

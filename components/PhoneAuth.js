@@ -184,8 +184,8 @@ function PhoneSignup({ showToast, onDone, onGoLogin }) {
   const [country, setCountry] = useCountry()
   const [num, setNum] = useState('')
   const [pw, setPw] = useState('')
-  const [refOpen, setRefOpen] = useState(false)
-  const [ref, setRef] = useState('')
+  const [ref, setRef] = useState(() => { try { const c = localStorage.getItem('dz_ref') || ''; return /^[A-Z0-9]{6}$/.test(c) ? c : '' } catch (e) { return '' } })
+  const [refOpen, setRefOpen] = useState(() => { try { return /^[A-Z0-9]{6}$/.test(localStorage.getItem('dz_ref') || '') } catch (e) { return false } })
   const [busy, setBusy] = useState(false)
   const numRef = useRef(null)
   const pwRef = useRef(null)
@@ -226,7 +226,7 @@ function PhoneSignup({ showToast, onDone, onGoLogin }) {
     if (code) {
       try {
         const { data } = await supabase.rpc('register_referral', { p_code: code })
-        if (data && data.ok) msg = 'Welcome to HEAVEN! Referral code added.'
+        if (data && data.ok) { msg = 'Welcome to HEAVEN! Referral code added.'; try { localStorage.removeItem('dz_ref') } catch (e) {} }
         else if (data && data.error) msg = 'Welcome to HEAVEN! (' + data.error + ')'
       } catch (err) {}
     }
@@ -258,7 +258,11 @@ function PhoneSignup({ showToast, onDone, onGoLogin }) {
 // kind: 'login' | 'signup'. children = the existing email form.
 export default function AuthSwitch({ kind, children, showToast, onDone, onGoSignup, onGoLogin }) {
   const [mode, setMode] = useState('mobile')
-  useEffect(() => { setMode(readMode()) }, [])
+  useEffect(() => {
+    let hasRef = false
+    try { hasRef = kind === 'signup' && /^[A-Z0-9]{6}$/.test(localStorage.getItem('dz_ref') || '') } catch (e) {}
+    setMode(hasRef ? 'mobile' : readMode())
+  }, [kind])
   function pick(m) {
     setMode(m)
     try { localStorage.setItem(MODE_KEY, m) } catch (e) {}
