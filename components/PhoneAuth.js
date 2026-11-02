@@ -203,7 +203,7 @@ function PhoneSignup({ showToast, onDone, onGoLogin }) {
     if (nm.length < 2) { showToast('Please enter your name.'); return }
     const bad = validatePhone(country, num)
     if (bad) { showToast(bad); return }
-    if (pw.length < 6 || !/[a-z]/.test(pw) || !/[A-Z]/.test(pw) || !/[0-9]/.test(pw)) { showToast('Password: at least 6 characters with a small letter, a CAPITAL letter and a number.'); return }
+    if (pw.length < 8 || !/[a-z]/.test(pw) || !/[A-Z]/.test(pw) || !/[0-9]/.test(pw)) { showToast('Password: at least 8 characters with a small letter, a CAPITAL letter and a number.'); return }
     const code = ref.trim().toUpperCase()
     if (code && !/^[A-Z0-9]{6}$/.test(code)) { showToast('A referral code has 6 letters/numbers.'); return }
 
@@ -246,7 +246,7 @@ function PhoneSignup({ showToast, onDone, onGoLogin }) {
           onFocus={keepVisible} onChange={e => setRef(e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase())}
           onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); pwRef.current && pwRef.current.focus() } }} />
       </div>
-      <PasswordField value={pw} setValue={setPw} placeholder="Create password (Aa + 1 number, min 6)" inputRef={pwRef} autoComplete="new-password" onEnter={submit} />
+      <PasswordField value={pw} setValue={setPw} placeholder="Create password (Aa + 1 number, min 8)" inputRef={pwRef} autoComplete="new-password" onEnter={submit} />
       <button className="btn" disabled={busy}>{busy ? 'CREATING...' : 'CREATE ACCOUNT'}</button>
       <div style={{ textAlign: 'center', marginTop: 6 }}>
         <a href="#" onClick={e => { e.preventDefault(); onGoLogin && onGoLogin() }} style={{ fontSize: 11, color: 'var(--muted)', textDecoration: 'underline' }}>Back to login</a>

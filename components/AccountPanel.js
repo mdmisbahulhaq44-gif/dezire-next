@@ -369,8 +369,8 @@ export default function AccountPanel() {
       showToast('Passwords do not match.')
       return
     }
-    if (newPassword.length < 6) {
-      showToast('Password should be at least 6 characters.')
+    if (newPassword.length < 8) {
+      showToast('Password should be at least 8 characters.')
       return
     }
     const { error } = await supabase.auth.updateUser({ password: newPassword })
