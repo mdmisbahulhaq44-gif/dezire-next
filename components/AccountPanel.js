@@ -106,7 +106,20 @@ export default function AccountPanel() {
   const apRef = useRef(activePanel)
   apRef.current = activePanel
   useEffect(() => {
-    const f = () => { lastPop.current = Date.now() }
+    const f = () => {
+      lastPop.current = Date.now()
+      const r = window.__dzRet
+      if (r && window.location.pathname === r.from && !apRef.current) {
+        const st = window.history.state || {}
+        if (st.dzPanel !== 'account') {
+          const ns = { ...st, dzPanel: 'account', dzView: 'menu', dzDepth: 1 }
+          try { window.history.replaceState(ns, '') } catch (e) {}
+          const ev = new Event('dzrestore')
+          ev.state = ns
+          window.dispatchEvent(ev)
+        }
+      }
+    }
     window.addEventListener('popstate', f, true)
     return () => window.removeEventListener('popstate', f, true)
   }, [])

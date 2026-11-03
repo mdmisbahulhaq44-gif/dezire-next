@@ -29,6 +29,7 @@ export default function NavTransition() {
     function onPop(e) {
       window.__dzEnter = null
       if (replaying) return
+      if (window.__dzRet && location.pathname === window.__dzRet.from) return
       const st = e.state
       if (!st || !(st.__NA || st.__PRIVATE_NEXTJS_INTERNALS_TREE)) return
       if (st.dzPanel === 'account' || (st.dzPanel && pathRef.current.startsWith('/product/'))) return
