@@ -26,7 +26,7 @@ const officeIcon = (
 )
 
 export default function CheckoutPanel() {
-  const { cart, cartSubtotal, activePanel, closePanel, clearCart, showToast, setLastOrder, openSuccess, lastOrder, paymentReturn, t } = useShop()
+  const { cart, cartSubtotal, activePanel, closePanel, clearCart, showToast, setLastOrder, openSuccess, lastOrder, paymentReturn, openAccount, t } = useShop()
   const show = activePanel === 'checkout'
   const showSuccess = activePanel === 'success'
 
@@ -53,6 +53,7 @@ export default function CheckoutPanel() {
   const [payment, setPayment] = useState('COD')
   const [busy, setBusy] = useState(false)
   const [uid, setUid] = useState(null)
+  const [authChecked, setAuthChecked] = useState(false)
   const [walletBal, setWalletBal] = useState(0)
   const [useWallet, setUseWallet] = useState(true)
 
@@ -65,6 +66,7 @@ export default function CheckoutPanel() {
       if (!live) return
       const id = data.session ? data.session.user.id : null
       setUid(id)
+      setAuthChecked(true)
       if (!id) { setWalletBal(0); return }
       const w = getWallet(id)
       if (w) setWalletBal(Number(w.balance))
@@ -201,6 +203,7 @@ export default function CheckoutPanel() {
   async function placeOrder(e) {
     e.preventDefault()
     if (busy) return
+    if (!uid) { showToast(t('Please log in to place your order.')); return }
     if (!cart.length) { showToast(t('Your cart is empty.')); return }
     const nm = name.trim()
     const ph = phone.trim()
@@ -327,7 +330,14 @@ export default function CheckoutPanel() {
           <button className="close" onClick={closePanel}>×</button>
         </div>
 
-        <form className="form" onSubmit={placeOrder}>
+        {authChecked && !uid && (
+          <div style={{ padding: '36px 22px', textAlign: 'center' }}>
+            <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{t('Log in to place your order')}</div>
+            <div style={{ fontSize: 13, color: '#666', lineHeight: 1.7, marginBottom: 20 }}>{t('Create a free account or log in to continue. Your cart is saved and will be waiting for you.')}</div>
+            <button type="button" className="btn" style={{ width: '100%' }} onClick={() => openAccount()}>{t('LOG IN / SIGN UP')}</button>
+          </div>
+        )}
+        <form className="form" onSubmit={placeOrder} style={authChecked && !uid ? { display: 'none' } : undefined}>
           <label>{t('FULL NAME')}</label>
           <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder={t('Your full name')} required />
 

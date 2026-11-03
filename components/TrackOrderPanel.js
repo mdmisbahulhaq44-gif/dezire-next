@@ -45,7 +45,7 @@ const fmtTime = (iso, lang) => new Date(iso).toLocaleString(loc(lang), { month: 
 
 export default function TrackOrderPanel() {
   const router = useRouter()
-  const { activePanel, closePanel, showToast, cartCount, openCart, openSearch, t, lang } = useShop()
+  const { activePanel, closePanel, showToast, cartCount, openCart, openSearch, openAccount, t, lang } = useShop()
   const show = activePanel === 'track'
 
   // listState: none | loading | error | emptyProfile | groups | verifying | nomatch
@@ -53,6 +53,7 @@ export default function TrackOrderPanel() {
   const [listSource, setListSource] = useState('phone')
   const [groups, setGroups] = useState({})
   const [manualOpen, setManualOpen] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(null)
   const [orderId, setOrderId] = useState('')
   const [phone, setPhone] = useState('')
   const [receiptRows, setReceiptRows] = useState(null)
@@ -96,28 +97,38 @@ export default function TrackOrderPanel() {
 
   async function runOpen() {
     setReceiptRows(null)
-    const saved = getSavedOrders()
-    if (saved.length) {
-      setManualOpen(false)
-      setListState('loading')
-      await loadSavedOrders(saved)
+    const { data: sess } = await supabase.auth.getSession()
+    if (!sess.session) {
+      setLoggedIn(false); setListState('none'); setManualOpen(false)
       return
     }
-    setListState('none')
-    setManualOpen(true)
+    setLoggedIn(true)
+    setManualOpen(false)
+    setListState('loading')
+    const ok = await loadSavedOrders(getSavedOrders())
+    if (!ok) { setListState('none'); setManualOpen(true) }
   }
 
   // Each order is read with its own order number + phone (track_order),
   // so nobody can list orders by guessing a phone number or customer id.
   async function loadSavedOrders(saved) {
-    const results = await Promise.all(
-      saved.slice(0, 20).map(s => supabase.rpc('track_order', { p_ref: s.ref, p_phone: s.phone }))
-    )
+    const { data: sess } = await supabase.auth.getSession()
+    const uid = sess.session ? sess.session.user.id : null
+    const [own, ...results] = await Promise.all([
+      uid
+        ? supabase.from('orders').select('*').eq('user_id', uid).order('created_at', { ascending: false }).limit(200)
+        : Promise.resolve({ data: [] }),
+      ...saved.slice(0, 20).map(s => supabase.rpc('track_order', { p_ref: s.ref, p_phone: s.phone }))
+    ])
     const rows = []
+    const seen = new Set()
     let failed = false
+    const add = r => { if (!seen.has(r.id)) { seen.add(r.id); rows.push(r) } }
+    if (own.error) failed = true
+    else (own.data || []).forEach(add)
     results.forEach(r => {
       if (r.error) failed = true
-      else if (r.data) rows.push(...r.data)
+      else if (r.data) r.data.forEach(add)
     })
     if (!rows.length) {
       setListState(failed ? 'error' : 'emptyProfile')
@@ -372,7 +383,14 @@ export default function TrackOrderPanel() {
         </div>
       </div>
 
-      <div>{renderList()}</div>
+      {loggedIn === false && (
+        <div style={{ padding: '40px 22px', textAlign: 'center' }}>
+          <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{t('Log in to see your orders')}</div>
+          <div style={{ fontSize: 13, color: '#666', lineHeight: 1.7, marginBottom: 20 }}>{t('Log in to your account to view and track your orders.')}</div>
+          <button type="button" className="btn" style={{ width: '100%' }} onClick={() => openAccount()}>{t('LOG IN / SIGN UP')}</button>
+        </div>
+      )}
+      <div>{loggedIn === false ? null : renderList()}</div>
 
       {manualOpen && (
         <div>
