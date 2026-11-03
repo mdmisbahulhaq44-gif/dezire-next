@@ -17,6 +17,7 @@ import ShopOverlay from "../components/ShopOverlay"
 import Toast from "../components/Toast"
 import Analytics from "../components/Analytics"
 import ErrorReporter from "../components/ErrorReporter"
+import VersionGuard from "../components/VersionGuard"
 import NavTransition from "../components/NavTransition"
 import ProductPreview from "../components/ProductPreview"
 import NoZoom from "../components/NoZoom"
@@ -115,6 +116,7 @@ export default function RootLayout({ children, modal }) {
           <Toast />
           <Analytics />
           <ErrorReporter />
+          <VersionGuard />
           <NavTransition />
           <ProductPreview />
           <NoZoom />
