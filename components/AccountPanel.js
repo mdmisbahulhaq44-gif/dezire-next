@@ -161,20 +161,42 @@ export default function AccountPanel() {
   const [realHeader, setRealHeader] = useState(false)
   useLayoutEffect(() => {
     const root = document.documentElement
-    if (showAccount && view === 'menu') {
-      // the shop's own top bar stays visible above My Account (same header as the home page)
+    if (!(showAccount && view === 'menu')) {
+      root.removeAttribute('data-acmenu')
+      root.removeAttribute('data-achead')
+      return
+    }
+    // The shop's own top bar stays visible above My Account (same header as the home page).
+    // Measured when My Account opens and again after the browser comes back from the background:
+    // a later measurement may only upgrade to the real header, never downgrade (no flicker).
+    const measure = first => {
+      if (!first && document.visibilityState !== 'visible') return
       const nav = document.querySelector('nav')
       const r = nav ? nav.getBoundingClientRect() : null
       const ok = !!r && r.height > 0 && r.top > -20 && r.top < 100
+      if (!first && !ok) return
       root.style.setProperty('--acTop', ok ? Math.round(r.bottom) + 'px' : (NO_NAV_ROUTES.includes(pathname) || window.__dzRet ? '46px' : '0px'))
       if (ok) root.setAttribute('data-achead', '1')
+      else root.removeAttribute('data-achead')
       setRealHeader(ok)
-      root.setAttribute('data-acmenu', '1')
-    } else {
+    }
+    measure(true)
+    root.setAttribute('data-acmenu', '1')
+    const timers = [120, 450, 1200].map(ms => setTimeout(() => measure(false), ms))
+    const again = () => { [150, 600].forEach(ms => timers.push(setTimeout(() => measure(false), ms))); measure(false) }
+    document.addEventListener('visibilitychange', again)
+    window.addEventListener('pageshow', again)
+    window.addEventListener('resize', again)
+    window.addEventListener('focus', again)
+    return () => {
+      timers.forEach(clearTimeout)
+      document.removeEventListener('visibilitychange', again)
+      window.removeEventListener('pageshow', again)
+      window.removeEventListener('resize', again)
+      window.removeEventListener('focus', again)
       root.removeAttribute('data-acmenu')
       root.removeAttribute('data-achead')
     }
-    return () => { root.removeAttribute('data-acmenu'); root.removeAttribute('data-achead') }
   }, [showAccount, view, pathname])
   // product opened from My Orders: if the visitor leaves the product by a forward link (not Back), My Orders steps aside
   useEffect(() => {
