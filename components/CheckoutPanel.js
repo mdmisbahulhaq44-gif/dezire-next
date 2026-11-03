@@ -274,7 +274,7 @@ export default function CheckoutPanel() {
       if (payment === 'ONLINE' && dueNow > 0) {
         try {
           const { data: chargeData, error: chargeError } = await supabase.functions.invoke('create-charge', {
-            body: { orderRef, fullName: nm, amount: purchaseTotal }
+            body: { orderRef, fullName: nm, amount: purchaseTotal, web: !document.documentElement.hasAttribute('data-app') }
           })
           if (chargeError || !chargeData || !chargeData.payment_url) {
             console.error('create-charge failed:', chargeError, chargeData)
