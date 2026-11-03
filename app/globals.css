@@ -1985,3 +1985,8 @@ body:has(#productPreview) #productPanel{visibility:hidden}
 /* My Account (web): ONE soft fade per screen change (same animation name with and without data-acin) */
 html[data-acin]:not([data-app]) .panel.acFadeA > *:not(.panelHead){animation-name:acSoftA !important}
 html[data-acin]:not([data-app]) .panel.acFadeB > *:not(.panelHead){animation-name:acSoftB !important}
+
+/* product opened from the wishlist: the wishlist stays under the product until it is ready (Home is never seen) */
+html[data-wprod] .panel.left.show{z-index:502}
+html[data-wprod] .panel.left.show > *{visibility:hidden}
+html[data-wprod] #productPanel,html[data-wprod] #productPreview{z-index:503}

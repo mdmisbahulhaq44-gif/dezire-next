@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
@@ -9,8 +10,32 @@ import { useShop } from './ShopContext'
 import Money from './Money'
 
 export default function WishlistPanel() {
-  const { activePanel, closePanel, wishlist, removeFromWishlist, cartCount, openCart, openSearch, t } = useShop()
+  const { activePanel, closePanel, hidePanel, wishlist, removeFromWishlist, cartCount, openCart, openSearch, t } = useShop()
   const show = activePanel === 'wishlist'
+  const pathname = usePathname()
+  const pending = useRef(false)
+  const clickT = useRef(0)
+
+  // A product was tapped: the wishlist stays under the product while it fades in, then hides behind it (Home is never seen)
+  function openProduct() {
+    pending.current = true
+    clickT.current = performance.now()
+    document.documentElement.setAttribute('data-wprod', '1')
+    setTimeout(() => {
+      if (!pending.current) return
+      pending.current = false
+      document.documentElement.removeAttribute('data-wprod')
+      closePanel()
+    }, 8000)
+  }
+
+  useEffect(() => {
+    if (!pending.current || !pathname || !pathname.startsWith('/product/')) return
+    pending.current = false
+    setTimeout(() => hidePanel(true, true), Math.max(0, 780 - (performance.now() - clickT.current)))
+    setTimeout(() => document.documentElement.removeAttribute('data-wprod'), 1200)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
   const [products, setProducts] = useState(null) // null = loading
 
   const idKey = wishlist.map(w => w.id).join(',')
@@ -65,13 +90,13 @@ export default function WishlistPanel() {
           const dropped = p.savedPrice > 0 && Number(p.price) < p.savedPrice
           return (
             <div className="cartItem" key={p.id}>
-              <Link href={`/product/${p.id}`} onClick={closePanel} className="cartImg" style={{ position: 'relative' }}>
+              <Link href={`/product/${p.id}`} onClick={openProduct} className="cartImg" style={{ position: 'relative' }}>
                 {img
                   ? <Image src={cldOpt(img, 200)} alt="" fill sizes="70px" style={{ objectFit: 'cover' }} loading="lazy" quality={75} />
                   : '🛍️'}
               </Link>
               <div className="cartInfo">
-                <Link href={`/product/${p.id}`} onClick={closePanel}><h4>{p.name}</h4></Link>
+                <Link href={`/product/${p.id}`} onClick={openProduct}><h4>{p.name}</h4></Link>
                 <small>
                   <Money n={p.price} />
                   {p.old ? <> <s style={{ opacity: 0.6 }}><Money n={p.old} /></s></> : null}
@@ -83,7 +108,7 @@ export default function WishlistPanel() {
                   </div>
                 )}
                 <div className="qtyRow">
-                  <Link href={`/product/${p.id}`} onClick={closePanel} className="removeBtn" style={{ textDecoration: 'underline', marginRight: 14 }}>{t('View')}</Link>
+                  <Link href={`/product/${p.id}`} onClick={openProduct} className="removeBtn" style={{ textDecoration: 'underline', marginRight: 14 }}>{t('View')}</Link>
                   <button className="removeBtn" onClick={() => removeFromWishlist(p.id)}>{t('Remove')}</button>
                 </div>
               </div>
