@@ -1990,3 +1990,6 @@ html[data-acin]:not([data-app]) .panel.acFadeB > *:not(.panelHead){animation-nam
 html[data-wprod] .panel.left.show{z-index:502}
 html[data-wprod] .panel.left.show > *{visibility:hidden}
 html[data-wprod] #productPanel,html[data-wprod] #productPreview{z-index:503}
+
+/* product page: the grey band above the photo has exactly the photo's width (same left and right edges) */
+.panel#productPanel .pdTopBar::after,.panel#productPreview .pdTopBar::after{left:18px;right:18px}
