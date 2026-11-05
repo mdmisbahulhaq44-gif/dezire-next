@@ -91,7 +91,7 @@ function CatBuilder({ allProducts, gender, levels, custom, onChange }) {
 const BLANK = {
   id: '', name: '', brand: 'HEAVEN', gender: 'men',
   price: '', old: '', badge: '', stock: '', imgs: '', cost: '',
-  sku: '', fabric: '', description: '', sizes: '', color_name: '', color_group: '', size_chart: ''
+  sku: '', fabric: '', description: '', features: '', sizes: '', color_name: '', color_group: '', size_chart: ''
 }
 
 export default function ProductFormPanel({ open, product, allProducts, onClose, onSaved, showToast }) {
@@ -115,6 +115,7 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
         imgs: product.imgs || '',
         fabric: product.fabric || '',
         description: product.description || '',
+        features: product.features || '',
         sku: product.sku || '',
         sizes: Array.isArray(product.sizes) ? product.sizes.join(', ') : '',
         color_name: product.color_name || '',
@@ -172,6 +173,7 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
       imgs: f.imgs.trim(),
       fabric: f.fabric.trim() || null,
       description: f.description.trim() || null,
+      features: f.features.trim() || null,
       sku: f.sku.trim() || null,
       sizes: sizesArr,
       color_name: f.color_name.trim() || null,
@@ -272,6 +274,9 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
 
         <label>DESCRIPTION (OPTIONAL — blank line = new paragraph, "• " at line start = bullet point, **text** = bold)</label>
         <textarea style={{ minHeight: 150 }} placeholder="Write about the product: fit, fabric, care instructions..." value={f.description} onChange={e => set('description', e.target.value)} />
+
+        <label>FEATURES (OPTIONAL — one per line, shown as a bullet list under the description)</label>
+        <textarea style={{ minHeight: 110 }} placeholder={'Fit: Boxy Fit, Unisex\nColor: Mint with Navy Stripes\nFabric: Polyester'} value={f.features} onChange={e => set('features', e.target.value)} />
 
         <label>FABRIC (OPTIONAL)</label>
         <input type="text" placeholder="e.g. 100% Cotton" value={f.fabric} onChange={e => set('fabric', e.target.value)} />

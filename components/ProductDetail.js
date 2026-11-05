@@ -396,14 +396,25 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           )}
 
 
-          {(product.description || product.fabric || product.color_name || sizes.length > 0) && (
+          {(product.description || product.features || product.fabric || product.color_name || sizes.length > 0 || hasChart) && (
             <div className="pdTabs">
               <div className="pdTabBar">
                 <button type="button" className={tab === 'desc' ? 'active' : ''} onClick={() => setTab('desc')}>{t('Description')}</button>
                 <button type="button" className={tab === 'info' ? 'active' : ''} onClick={() => setTab('info')}>{t('Additional Information')}</button>
               </div>
               {tab === 'desc' ? (
-                <div className="pdDesc">{renderDesc(product.description, t)}</div>
+                <div className="pdDesc">
+                  {renderDesc(product.description, t)}
+                  {product.features && renderDesc(product.features.split('\n').filter(Boolean).map(l => '• ' + l.replace(/^[•\-*·]\s*/, '')).join('\n'), t)}
+                  {hasChart && (
+                    <div className="pdMeasure" style={{ marginTop: 16 }}>
+                      <b>{t('Measurements (in inches):')}</b>
+                      {chartSizes.map(s => (
+                        <div key={s}><span>{s}</span>: {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ) : (
                 <table className="pdInfoTable"><tbody>
                   {product.fabric && <tr><th>{t('Fabric')}</th><td>{product.fabric}</td></tr>}
