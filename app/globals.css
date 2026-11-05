@@ -2003,3 +2003,29 @@ html[data-wprod] #productPanel,html[data-wprod] #productPreview{z-index:503}
 .panel#productPanel .pdThumbs,.panel#productPreview .pdThumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
 .pdThumbs::-webkit-scrollbar{display:none}
 .panel#productPanel .pdThumb,.panel#productPreview .pdThumb{width:auto;min-width:0}
+
+/* product page: Description / Additional information as two bordered boxes with + / - (like gorurghash.com) */
+.pdAcc{margin-top:26px}
+.pdAccBox{border:1px solid #ddd;background:transparent}
+.pdAccBox + .pdAccBox{border-top:0}
+.pdAccHead{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:55px;padding:0 20px;background:none;border:0;font:inherit;font-size:20px;color:#333;text-align:left;cursor:pointer}
+.pdAccBox.open > .pdAccHead{color:var(--pdAcc,#111)}
+.pdAccIc{position:relative;flex:none;width:16px;height:16px;margin-left:12px}
+.pdAccIc::before,.pdAccIc::after{content:"";position:absolute;background:currentColor;border-radius:1px}
+.pdAccIc::before{left:0;right:0;top:7px;height:2px}
+.pdAccIc::after{top:0;bottom:0;left:7px;width:2px;transform-origin:center;transition:transform .3s ease}
+.pdAccBox.open .pdAccIc::after{transform:scaleY(0)}
+.pdAccBody{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s cubic-bezier(.22,.61,.36,1)}
+.pdAccBox.open .pdAccBody{grid-template-rows:1fr}
+.pdAccInner{overflow:hidden;min-height:0;visibility:hidden;transition:visibility 0s linear .35s}
+.pdAccBox.open .pdAccInner{visibility:visible;transition:visibility 0s}
+.pdAccPad{padding:15px 20px 20px}
+.pdAccBox .pdDesc{padding:0;font-size:15px;line-height:1.75}
+.pdAccBox .pdDesc ul{padding-left:26px}
+.pdAccBox .pdDesc li{font-size:15px}
+.pdAccBox .pdDesc li strong{font-weight:600;color:#111}
+.pdAccBox .pdMeasure{margin-top:22px;font-size:15px;line-height:1.75;color:#333}
+.pdAccBox .pdMeasure b{display:block;margin-bottom:8px;font-size:17px;font-weight:600;color:#111}
+.pdAccBox .pdMeasure span{min-width:0;font-weight:400;color:inherit}
+.pdAccBox .pdMeasure > div{margin-bottom:6px}
+.pdAccBox .pdInfoTable{margin-top:0}

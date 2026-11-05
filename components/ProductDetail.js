@@ -17,6 +17,22 @@ import Money from './Money'
 
 const LABELS = { waist: 'Waist', length: 'Length', hip: 'Hip', leg_opening: 'Leg Opening', chest: 'Chest', shoulder: 'Shoulder', sleeve: 'Sleeve' }
 
+const SIZE_NAMES = { XS: 'Extra Small', S: 'Small', M: 'Medium', L: 'Large', XL: 'Extra Large', XXL: 'Double Extra Large', '2XL': 'Double Extra Large' }
+const SIZE_ORDER = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '2XL', '3XL', '4XL', '5XL']
+// sizes in the natural order (S, M, L, XL, XXL), not the alphabetical order the database returns (L, M, S, XL, XXL)
+function sortSizes(list) {
+  const rank = s => SIZE_ORDER.indexOf(String(s).trim().toUpperCase())
+  if (list.every(s => rank(s) >= 0)) return [...list].sort((a, b) => rank(a) - rank(b))
+  if (list.every(s => !isNaN(parseFloat(s)))) return [...list].sort((a, b) => parseFloat(a) - parseFloat(b))
+  return list
+}
+// bullet "Fit: boxy fit" -> bold label, normal value (like the reference); text that already has **bold** is left alone
+function boldLabel(text, k) {
+  if (text.includes('**')) return inlineBold(text, k)
+  const m = text.match(/^([^:/]{1,32}:)(?!\/)\s*(.*)$/)
+  return m ? <><strong>{m[1]}</strong>{m[2] ? ' ' + m[2] : ''}</> : text
+}
+
 function starString(rating) {
   const r = Math.round(rating)
   return '★★★★★'.slice(0, r) + '☆☆☆☆☆'.slice(0, 5 - r)
@@ -38,7 +54,7 @@ function renderDesc(text, tr) {
     let para = []
     let items = []
     const flushPara = () => { if (para.length) { out.push(<p key={bi + 'p' + out.length}>{para.map((l, i) => <span key={i}>{i > 0 && <br />}{inlineBold(l, bi + '-' + i)}</span>)}</p>); para = [] } }
-    const flushList = () => { if (items.length) { out.push(<ul key={bi + 'u' + out.length}>{items.map((l, i) => <li key={i}>{inlineBold(l, bi + '-' + i)}</li>)}</ul>); items = [] } }
+    const flushList = () => { if (items.length) { out.push(<ul key={bi + 'u' + out.length}>{items.map((l, i) => <li key={i}>{boldLabel(l, bi + '-' + i)}</li>)}</ul>); items = [] } }
     lines.forEach(l => {
       if (isBullet(l)) { flushPara(); items.push(l.replace(/^[•\-*·]\s+/, '')) }
       else { flushList(); para.push(l) }
@@ -55,7 +71,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const images = product.imgs ? product.imgs.split(',').map(s => s.trim()).filter(Boolean) : []
   const sizes = Array.isArray(product.sizes) ? product.sizes : []
   const chart = product.size_chart && typeof product.size_chart === 'object' ? product.size_chart : {}
-  const chartSizes = Object.keys(chart)
+  const chartSizes = sortSizes(Object.keys(chart))
   const hasChart = chartSizes.length > 0
 
   // category path without the product's own name (some products have it as the last category, which showed the name twice)
@@ -66,7 +82,8 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const shown = true
   const [index, setIndex] = useState(0)
   const [size, setSize] = useState('')
-  const [tab, setTab] = useState('desc')
+  const [openDesc, setOpenDesc] = useState(true)
+  const [openInfo, setOpenInfo] = useState(false)
   const [barOn, setBarOn] = useState(false)
   const [atEnd, setAtEnd] = useState(false)
   const addRef = useRef(null)
@@ -320,15 +337,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             {product.fabric && <div style={{ marginTop: 4 }}><b>{t('Fabric')}:</b> {product.fabric}</div>}
           </div>
 
-          {hasChart && (
-            <div className="pdMeasure">
-              <b>{t('Measurements (in inches):')}</b>
-              {chartSizes.map(s => (
-                <div key={s}><span>{s}</span>: {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</div>
-              ))}
-            </div>
-          )}
-
+          
 
           {colors.length > 1 && (
             <div style={{ marginTop: 14 }}>
@@ -397,32 +406,39 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
 
           {(product.description || product.features || product.fabric || product.color_name || sizes.length > 0 || hasChart) && (
-            <div className="pdTabs">
-              <div className="pdTabBar">
-                <button type="button" className={tab === 'desc' ? 'active' : ''} onClick={() => setTab('desc')}>{t('Description')}</button>
-                <button type="button" className={tab === 'info' ? 'active' : ''} onClick={() => setTab('info')}>{t('Additional Information')}</button>
+            <div className="pdAcc">
+              <div className={`pdAccBox${openDesc ? ' open' : ''}`}>
+                <button type="button" className="pdAccHead" aria-expanded={openDesc} onClick={() => setOpenDesc(o => !o)}>
+                  <span>{t('Description')}</span><i className="pdAccIc" aria-hidden="true" />
+                </button>
+                <div className="pdAccBody"><div className="pdAccInner"><div className="pdAccPad">
+                  <div className="pdDesc">
+                    {renderDesc(product.description, t)}
+                    {product.features && renderDesc(product.features.split('\n').filter(Boolean).map(l => '• ' + l.replace(/^[•\-*·]\s*/, '')).join('\n'), t)}
+                    {hasChart && (
+                      <div className="pdMeasure">
+                        <b>{t('Measurements (in inches):')}</b>
+                        {chartSizes.map(s => (
+                          <div key={s}><span>{SIZE_NAMES[String(s).trim().toUpperCase()] || s}</span>: {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div></div></div>
               </div>
-              {tab === 'desc' ? (
-                <div className="pdDesc">
-                  {renderDesc(product.description, t)}
-                  {product.features && renderDesc(product.features.split('\n').filter(Boolean).map(l => '• ' + l.replace(/^[•\-*·]\s*/, '')).join('\n'), t)}
-                  {hasChart && (
-                    <div className="pdMeasure" style={{ marginTop: 16 }}>
-                      <b>{t('Measurements (in inches):')}</b>
-                      {chartSizes.map(s => (
-                        <div key={s}><span>{s}</span>: {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <table className="pdInfoTable"><tbody>
-                  {product.fabric && <tr><th>{t('Fabric')}</th><td>{product.fabric}</td></tr>}
-                  {product.color_name && <tr><th>{t('Color')}</th><td>{product.color_name}</td></tr>}
-                  {sizes.length > 0 && <tr><th>{t('Sizes')}</th><td>{sizes.join(', ')}</td></tr>}
-                  {catSegs.length > 0 && <tr><th>{t('Category')}</th><td>{catSegs.map(c => t(c)).join(' › ')}</td></tr>}
-                </tbody></table>
-              )}
+              <div className={`pdAccBox${openInfo ? ' open' : ''}`}>
+                <button type="button" className="pdAccHead" aria-expanded={openInfo} onClick={() => setOpenInfo(o => !o)}>
+                  <span>{t('Additional Information')}</span><i className="pdAccIc" aria-hidden="true" />
+                </button>
+                <div className="pdAccBody"><div className="pdAccInner"><div className="pdAccPad">
+                  <table className="pdInfoTable"><tbody>
+                    {product.fabric && <tr><th>{t('Fabric')}</th><td>{product.fabric}</td></tr>}
+                    {product.color_name && <tr><th>{t('Color')}</th><td>{product.color_name}</td></tr>}
+                    {sizes.length > 0 && <tr><th>{t('Sizes')}</th><td>{sizes.join(', ')}</td></tr>}
+                    {catSegs.length > 0 && <tr><th>{t('Category')}</th><td>{catSegs.map(c => t(c)).join(' › ')}</td></tr>}
+                  </tbody></table>
+                </div></div></div>
+              </div>
             </div>
           )}
 
