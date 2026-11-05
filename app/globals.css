@@ -2000,6 +2000,6 @@ html[data-wprod] #productPanel,html[data-wprod] #productPreview{z-index:503}
 .panel#productPanel .pdTopBar::after,.panel#productPreview .pdTopBar::after{display:none}
 .panel#productPanel .pdFooter{margin-left:-20px;margin-right:-20px}
 .panel#productPanel .pdGallery,.panel#productPreview .pdGallery{aspect-ratio:4/5;background:#fff}
-.panel#productPanel .pdThumbs,.panel#productPreview .pdThumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:15px}
+.panel#productPanel .pdThumbs,.panel#productPreview .pdThumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
 .pdThumbs::-webkit-scrollbar{display:none}
 .panel#productPanel .pdThumb,.panel#productPreview .pdThumb{width:auto;min-width:0}
