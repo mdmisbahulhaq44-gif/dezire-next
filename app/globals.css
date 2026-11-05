@@ -2029,3 +2029,16 @@ html[data-wprod] #productPanel,html[data-wprod] #productPreview{z-index:503}
 .pdAccBox .pdMeasure span{min-width:0;font-weight:400;color:inherit}
 .pdAccBox .pdMeasure > div{margin-bottom:6px}
 .pdAccBox .pdInfoTable{margin-top:0}
+
+/* product page header like the reference (gorurghash.com): logo at the left edge, account + search + boxed menu button on the right (sizes and spacing measured from the reference) */
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{padding:0 20px;background:#fff}
+.pdTopRight{flex:1;justify-content:flex-end;gap:23.5px}
+.pdTopRight .pdTopIc{display:inline-flex;align-items:center;justify-content:center;width:auto;height:auto;padding:0;margin:0;background:none;border:0;color:#2a2a2a;cursor:pointer}
+.pdTopRight .pdTopIc svg{display:block;width:16.5px;height:16.5px}
+.pdTopRight .pdTopSearch{color:#000;transform:translateY(-2.7px)}
+.pdTopRight .pdTopSearch svg{width:15.6px;height:15.6px}
+.pdTopRight .pdTopMenu{flex:none;width:37px;height:37px;padding:0;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2.3px;background:none;border:1px solid #c7c4c5;border-radius:0;cursor:pointer}
+.pdTopRight .pdTopMenu span{display:block;width:13px;height:2px;background:#c7c4c5}
+/* the side menu opens above the product page */
+body:has(#productPanel) .drawer,body:has(#productPreview) .drawer{z-index:700}
+body:has(#productPanel) .overlay:has(+ .drawer),body:has(#productPreview) .overlay:has(+ .drawer){z-index:699}

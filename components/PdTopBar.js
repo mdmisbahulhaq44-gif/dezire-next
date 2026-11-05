@@ -2,9 +2,16 @@
 
 import { useShop } from './ShopContext'
 
-// Top bar of the product page: back, logo, search, wishlist, bag (same look as the site header)
+// Top bar of the product page, like the reference (gorurghash.com): logo on the left; account, search and the boxed menu button on the right
 export default function PdTopBar({ onBack }) {
-  const { cartCount, wishlistCount, openCart, openWishlist, openSearch } = useShop()
+  const { openSearch, openAccount, openDrawer, fadeSwap } = useShop()
+  function openMyAccount() {
+    const r = document.documentElement
+    r.setAttribute('data-instant', '1')
+    clearTimeout(window.__dzInstant)
+    window.__dzInstant = setTimeout(() => r.removeAttribute('data-instant'), 800)
+    fadeSwap(() => openAccount())
+  }
   return (
     <div className="pdTopBar">
       <button type="button" className="pdTopBtn" onClick={onBack} aria-label="Back">
@@ -12,20 +19,13 @@ export default function PdTopBar({ onBack }) {
       </button>
       <div className="logo">HEAVEN</div>
       <div className="pdTopRight">
-        <button type="button" className="pdTopBtn" onClick={openSearch} aria-label="Search">⌕</button>
-        <button type="button" className="pdTopBtn" onClick={openWishlist} aria-label="Wishlist" style={{ position: 'relative' }}>
-          <svg viewBox="0 0 24 24" fill={wishlistCount > 0 ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="21" height="21">
-            <path d="M12 20.8l-1.2-1.1C5.6 15.1 2.5 12.3 2.5 8.7 2.5 5.9 4.7 3.7 7.5 3.7c1.9 0 3.7.9 4.5 2.3.8-1.4 2.6-2.3 4.5-2.3 2.8 0 5 2.2 5 5 0 3.6-3.1 6.4-8.3 11l-1.2 1.1z" />
-          </svg>
-          <span className="cartCount" style={{ display: wishlistCount > 0 ? 'flex' : 'none' }}>{wishlistCount}</span>
+        <button type="button" className="pdTopIc" onClick={openMyAccount} aria-label="My account">
+          <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7.2" r="4.7" /><path d="M3.2 21.2c0-4.7 3.8-7.7 8.8-7.7s8.8 3 8.8 7.7c0 .5-.4.8-.8.8H4c-.4 0-.8-.3-.8-.8z" /></svg>
         </button>
-        <button type="button" className="pdTopBtn" onClick={openCart} aria-label="Cart" style={{ position: 'relative' }}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
-            <path d="M6 8h12l-1.2 11a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z" />
-            <path d="M9 8V6a3 3 0 0 1 6 0v2" />
-          </svg>
-          <span className="cartCount" style={{ display: cartCount > 0 ? 'flex' : 'none' }}>{cartCount}</span>
+        <button type="button" className="pdTopIc pdTopSearch" onClick={openSearch} aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round"><circle cx="10" cy="10" r="7" strokeWidth="2.7" /><path d="M15.2 15.2L21.2 21.2" strokeWidth="3" /></svg>
         </button>
+        <button type="button" className="pdTopMenu" onClick={openDrawer} aria-label="Menu"><span /><span /><span /></button>
       </div>
     </div>
   )
