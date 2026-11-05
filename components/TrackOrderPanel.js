@@ -6,6 +6,7 @@ import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
 import Image from 'next/image'
+import Link from 'next/link'
 import { getSavedOrders, saveOrder, clearSavedOrders } from '../lib/checkout'
 import ReturnRequest from './ReturnRequest'
 
@@ -336,9 +337,11 @@ export default function TrackOrderPanel() {
         {rows.map((r, idx) => {
           const label = (r.items || '').split(',')[0]?.trim() || 'Item'
           const img = imgById[r.product_id]
+          // product opens above this panel, which stays in place under it (same as My Orders in My Account)
+          const Row = r.product_id ? Link : 'div'
+          const rowProps = r.product_id ? { href: `/product/${r.product_id}`, onClick: () => document.documentElement.setAttribute('data-acprod', '1') } : {}
           return (
-            <div key={idx} style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,.08)', cursor: 'pointer' }}
-              onClick={() => { closePanel(); router.push(`/product/${r.product_id}`) }}>
+            <Row key={idx} {...rowProps} style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,.08)', cursor: 'pointer', color: 'inherit', textDecoration: 'none' }}>
               <div style={{ width: 52, height: 62, background: 'var(--cream)', borderRadius: 10, overflow: 'hidden', flexShrink: 0, position: 'relative' }}>
                 {img ? <Image src={cldOpt(img, 150)} alt="" fill sizes="52px" style={{ objectFit: 'cover' }} loading="lazy" quality={75} /> : null}
               </div>
@@ -347,7 +350,7 @@ export default function TrackOrderPanel() {
                 <div style={{ fontSize: 11, color: 'var(--muted)', marginTop: 2 }}>{t('Qty')}: {r.quantity || 1} × ৳{Number(r.unit_price || 0).toLocaleString()}</div>
               </div>
               <div style={{ fontWeight: 700, fontSize: 13 }}>৳{Number((r.unit_price || 0) * (r.quantity || 1)).toLocaleString()}</div>
-            </div>
+            </Row>
           )
         })}
         <div className="summaryRow total" style={{ marginTop: 14 }}><span>{t('Total')}</span><span>৳{grandTotal.toLocaleString()}</span></div>
