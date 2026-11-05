@@ -1993,3 +1993,13 @@ html[data-wprod] #productPanel,html[data-wprod] #productPreview{z-index:503}
 
 /* product page: the grey band above the photo has exactly the photo's width (same left and right edges) */
 .panel#productPanel .pdTopBar::after,.panel#productPreview .pdTopBar::after{left:18px;right:18px}
+
+/* product page like the reference screenshot (gorurghash.com): light grey page, white header, white photo card, square thumbnail row */
+.panel#productPanel,.panel#productPreview{background:#f9f9f9;padding-left:20px;padding-right:20px}
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{height:70px;margin-left:-20px;margin-right:-20px;margin-bottom:22px;background:#fff}
+.panel#productPanel .pdTopBar::after,.panel#productPreview .pdTopBar::after{display:none}
+.panel#productPanel .pdFooter{margin-left:-20px;margin-right:-20px}
+.panel#productPanel .pdGallery,.panel#productPreview .pdGallery{aspect-ratio:4/5;background:#fff}
+.panel#productPanel .pdThumbs,.panel#productPreview .pdThumbs{display:flex;gap:15px;margin-top:15px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.pdThumbs::-webkit-scrollbar{display:none}
+.panel#productPanel .pdThumb,.panel#productPreview .pdThumb{flex:0 0 80px;width:80px}
