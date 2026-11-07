@@ -2047,4 +2047,4 @@ body:has(#productPanel) .overlay:has(+ .drawer),body:has(#productPreview) .overl
 nav.navShop{position:relative;justify-content:space-between;height:calc(70px + var(--sat));padding:var(--sat) 20px 0;background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;border-bottom:1px solid #f1f1f1}
 nav.navShop .logo{flex:none;margin:0;text-align:left}
 html[data-achead] nav.navShop{position:sticky;top:0}
-html:has(nav.navShop),body:has(nav.navShop){background:#f9f9f9}
+html:has(nav.navGrey),body:has(nav.navGrey){background:#f9f9f9}
