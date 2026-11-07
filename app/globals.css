@@ -2042,3 +2042,9 @@ html[data-wprod] #productPanel,html[data-wprod] #productPreview{z-index:503}
 /* the side menu opens above the product page */
 body:has(#productPanel) .drawer,body:has(#productPreview) .drawer{z-index:700}
 body:has(#productPanel) .overlay:has(+ .drawer),body:has(#productPreview) .overlay:has(+ .drawer){z-index:699}
+
+/* category and subcategory pages (/shop/...): header like the product page; it scrolls away with the page (while My Account is open it sticks to the top); light grey page like the reference */
+nav.navShop{position:relative;justify-content:space-between;height:calc(70px + var(--sat));padding:var(--sat) 20px 0;background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;border-bottom:1px solid #f1f1f1}
+nav.navShop .logo{flex:none;margin:0;text-align:left}
+html[data-achead] nav.navShop{position:sticky;top:0}
+html:has(nav.navShop),body:has(nav.navShop){background:#f9f9f9}

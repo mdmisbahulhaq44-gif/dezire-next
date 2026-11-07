@@ -171,10 +171,12 @@ export default function AccountPanel() {
     // a later measurement may only upgrade to the real header, never downgrade (no flicker).
     const measure = first => {
       if (!first && document.visibilityState !== 'visible') return
+      const had = root.hasAttribute('data-achead')
+      root.setAttribute('data-achead', '1') // a header that scrolls away (category pages) sticks to the top while it is measured
       const nav = document.querySelector('nav')
       const r = nav ? nav.getBoundingClientRect() : null
       const ok = !!r && r.height > 0 && r.top > -20 && r.top < 100
-      if (!first && !ok) return
+      if (!first && !ok) { if (!had) root.removeAttribute('data-achead'); return }
       root.style.setProperty('--acTop', ok ? Math.round(r.bottom) + 'px' : (NO_NAV_ROUTES.includes(pathname) || window.__dzRet ? '46px' : '0px'))
       if (ok) root.setAttribute('data-achead', '1')
       else root.removeAttribute('data-achead')
