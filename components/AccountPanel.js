@@ -171,12 +171,21 @@ export default function AccountPanel() {
     // a later measurement may only upgrade to the real header, never downgrade (no flicker).
     const measure = first => {
       if (!first && document.visibilityState !== 'visible') return
-      const had = root.hasAttribute('data-achead')
-      root.setAttribute('data-achead', '1') // a header that scrolls away (category pages) sticks to the top while it is measured
       const nav = document.querySelector('nav')
-      const r = nav ? nav.getBoundingClientRect() : null
-      const ok = !!r && r.height > 0 && r.top > -20 && r.top < 100
-      if (!first && !ok) { if (!had) root.removeAttribute('data-achead'); return }
+      let r = nav ? nav.getBoundingClientRect() : null
+      let ok = !!r && r.height > 0 && r.top > -20 && r.top < 100
+      // A category-page header (nav.navShop) scrolls away with the page by design, so it can
+      // measure as "not there" even though it really is — pin it just long enough to read its
+      // real height. Only do this when it's actually needed and wasn't pinned already, so a
+      // normal page's header — already sticky, already measuring fine — is never touched and
+      // never flashes its background/z-index on every re-measure for nothing.
+      if (!ok && nav && nav.classList.contains('navShop') && !root.hasAttribute('data-achead')) {
+        root.setAttribute('data-achead', '1')
+        r = nav.getBoundingClientRect()
+        ok = !!r && r.height > 0 && r.top > -20 && r.top < 100
+        if (!ok) root.removeAttribute('data-achead')
+      }
+      if (!first && !ok) return
       root.style.setProperty('--acTop', ok ? Math.round(r.bottom) + 'px' : (NO_NAV_ROUTES.includes(pathname) || window.__dzRet ? '46px' : '0px'))
       if (ok) root.setAttribute('data-achead', '1')
       else root.removeAttribute('data-achead')
