@@ -2048,3 +2048,30 @@ nav.navShop{position:relative;justify-content:space-between;height:calc(70px + v
 nav.navShop .logo{flex:none;margin:0;text-align:left}
 html[data-achead] nav.navShop{position:sticky;top:0}
 html:has(nav.navGrey),body:has(nav.navGrey){background:#f9f9f9}
+
+/* menu like the reference (gorurghash.com): drops down under the header over the page, light list, chevron rows */
+nav.navShop,.pdTopBar{overflow:visible}
+.pdTopRight .pdTopMenu.open span:nth-child(2){display:none}
+.pdTopRight .pdTopMenu.open span:nth-child(1){transform:translateY(2.15px) rotate(45deg)}
+.pdTopRight .pdTopMenu.open span:nth-child(3){transform:translateY(-2.15px) rotate(-45deg)}
+.navMenu{position:absolute;left:0;right:0;top:100%;z-index:60;background:#f9f9f9;display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .32s cubic-bezier(.22,.61,.36,1),visibility 0s linear .32s}
+.navMenu.show{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .32s cubic-bezier(.22,.61,.36,1),visibility 0s}
+.navMenu .nmInner{overflow:hidden;min-height:0;text-align:left}
+.navMenu a.nmLink,.navMenu .dtLink{display:block;font-size:16px;line-height:44px;color:#878787;text-decoration:none;padding:0 26px;background:none;border:0;font-weight:400}
+.navMenu a.nmLink.on,.navMenu a.nmLink:active,.navMenu .dtLink:active{color:#111}
+.navMenu .dtRowWrap{display:flex;align-items:center;justify-content:space-between;padding-right:12px}
+.navMenu .dtRowWrap .dtLink{flex:1}
+.navMenu .dtPlus{flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;margin:0;background:none;border:0;color:#444;cursor:pointer}
+.navMenu .dtPlus svg{display:none}
+.navMenu .dtPlus::before{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s ease}
+.navMenu .dtPlus[aria-expanded="true"]::before{transform:rotate(-135deg) translate(-2px,-2px)}
+.navMenu .dtWrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.navMenu .dtWrap.open{grid-template-rows:1fr}
+.navMenu .dtWrap > div{overflow:hidden;min-height:0}
+.navMenu .dtWrap .dtLink{padding-left:50px;position:relative}
+.navMenu .dtWrap .dtLink::before{content:"";position:absolute;left:34px;top:50%;width:6px;height:6px;border-top:1.5px solid #999;border-right:1.5px solid #999;transform:translateY(-50%) rotate(45deg)}
+.navMenu .dtWrap .dtWrap .dtLink{padding-left:74px}
+.navMenu .dtWrap .dtWrap .dtLink::before{left:58px}
+.navMenu .dtProd{display:flex;justify-content:space-between;gap:12px;padding:0 26px 0 50px;line-height:38px;font-size:14px;color:#9a9a9a;text-decoration:none}
+.navMenu .dtNote{display:block;padding:0 26px 0 50px;line-height:38px;font-size:13px;color:#9a9a9a;background:none;border:0;text-align:left}
+.navMenu .nmTools{display:flex;gap:12px;align-items:center;padding:10px 26px 16px}

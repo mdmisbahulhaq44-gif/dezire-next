@@ -139,7 +139,7 @@ export function ShopProvider({ children }) {
   }, [activePanel])
 
   useEffect(() => {
-    document.body.style.overflow = (activePanel || drawerOpen || miniOpen) ? 'hidden' : ''
+    document.body.style.overflow = (activePanel || miniOpen) ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [activePanel, drawerOpen, miniOpen])
 
