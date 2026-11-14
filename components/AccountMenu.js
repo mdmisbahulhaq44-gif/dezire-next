@@ -23,7 +23,9 @@ const ICONS = {
   login: 'M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4 M10 17l5-5-5-5 M15 12H3',
   logout: 'M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4 M16 17l5-5-5-5 M21 12H9',
   wallet: 'M3 7a2 2 0 0 1 2-2h13v4 M3 7v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-3 M21 9H5a2 2 0 0 1-2-2 M21 9v6h-4a3 3 0 0 1 0-6h4z',
-  arrow: 'M9 6l6 6-6 6'
+  arrow: 'M9 6l6 6-6 6',
+  coin: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M14.5 9.2c-.5-.8-1.4-1.2-2.5-1.2-1.4 0-2.5.7-2.5 1.8 0 2.6 5 1.2 5 3.8 0 1.1-1.1 1.9-2.6 1.9-1.2 0-2.2-.5-2.7-1.3 M12 6.5V8 M12 16v1.5',
+  globe: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M3 12h18 M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z'
 }
 
 function Icon({ name, className = 'acIcon', style }) {
@@ -46,7 +48,7 @@ function Row({ icon, label, onClick, value, dim }) {
 }
 
 export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSupport, onRefer, onOrders, onLogout, go, openPanel, showToast }) {
-  const { t } = useShop()
+  const { t, currency, setCurrency, lang, setLang } = useShop()
   const name = session?.user?.user_metadata?.full_name || ''
   const rawEmail = session?.user?.email || ''
   const email = rawEmail.endsWith('@phone.heaven-bd.vercel.app') ? (session?.user?.user_metadata?.phone || '') : rawEmail
@@ -102,6 +104,24 @@ export default function AccountMenu({ session, isAdmin, onLogin, onProfile, onSu
         <Row icon="refund" label={t("Return & Refund Policy")} onClick={() => go('/refund-policy')} />
         <Row icon="shield" label={t("Privacy Policy")} onClick={() => go('/privacy')} />
         <Row icon="doc" label={t("Terms & Conditions")} onClick={() => go('/terms')} />
+      </div>
+      <div className="acGroup">
+        <div className="acRow acPref">
+          <Icon name="coin" />
+          <span>{t('Currency')}</span>
+          <div className="acSeg" role="group" aria-label="Currency">
+            <button type="button" className={currency === 'BDT' ? 'on' : ''} onClick={() => setCurrency('BDT')}>৳ BDT</button>
+            <button type="button" className={currency === 'USD' ? 'on' : ''} onClick={() => setCurrency('USD')}>$ USD</button>
+          </div>
+        </div>
+        <div className="acRow acPref">
+          <Icon name="globe" />
+          <span>{t('Language')}</span>
+          <div className="acSeg" role="group" aria-label="Language">
+            <button type="button" className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
+            <button type="button" className={lang === 'bn' ? 'on' : ''} onClick={() => setLang('bn')}>বাংলা</button>
+          </div>
+        </div>
       </div>
       <div className="acGroup">
         {isAdmin && <Row icon="lock" label={t("Admin Panel")} onClick={() => go('/admin')} />}

@@ -2075,3 +2075,9 @@ nav.navShop,.pdTopBar{overflow:visible}
 .navMenu .dtProd{display:flex;justify-content:space-between;gap:12px;padding:0 26px 0 50px;line-height:38px;font-size:14px;color:#9a9a9a;text-decoration:none}
 .navMenu .dtNote{display:block;padding:0 26px 0 50px;line-height:38px;font-size:13px;color:#9a9a9a;background:none;border:0;text-align:left}
 .navMenu .nmTools{display:flex;gap:12px;align-items:center;padding:10px 26px 16px}
+
+/* My Account: Currency and Language rows with a small two-option switch at the right */
+.acRow.acPref{cursor:default}
+.acSeg{margin-left:auto;display:flex;border:1px solid rgba(0,0,0,.14);border-radius:999px;overflow:hidden;flex:none}
+.acSeg button{border:0;background:none;padding:6px 13px;font:inherit;font-size:12px;font-weight:600;color:#777;cursor:pointer;line-height:1.2}
+.acSeg button.on{background:#111;color:#fff}

@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useShop } from './ShopContext'
 import DrawerTree from './DrawerTree'
-import { CurrencyToggle } from './Money'
-import LangToggle from './LangToggle'
 
 // Menu like the reference (gorurghash.com): a light list that drops down right under the header, over the page (no dimming); rows with a chevron open their categories
 export default function NavMenu() {
@@ -25,7 +23,6 @@ export default function NavMenu() {
         <Link className="nmLink" href="/#new" onClick={close}>{t('Sale')}</Link>
         <a className="nmLink" href="#" onClick={e => { e.preventDefault(); close(); openAbout() }}>{t('About Us')}</a>
         <a className="nmLink" href="#" onClick={e => { e.preventDefault(); close(); openTrack() }}>{t('Track Order')}</a>
-        <div className="nmTools"><CurrencyToggle /><LangToggle /></div>
       </div>
     </div>
   )
