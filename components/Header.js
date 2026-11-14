@@ -28,6 +28,13 @@ export default function Header() {
     fadeSwap(() => openAccount())
   }
 
+  // opening the menu first brings the page to the top, so the menu is always right under the header
+  function toggleMenu() {
+    if (drawerOpen) { closeDrawer(); return }
+    try { window.scrollTo({ top: 0, behavior: 'instant' }) } catch (e) { window.scrollTo(0, 0) }
+    openDrawer()
+  }
+
   return (
     <nav className={isShop ? 'navShop navGrey' : 'navShop'}>
       <div className="logo">HEAVEN</div>
@@ -38,7 +45,7 @@ export default function Header() {
         <button type="button" className="pdTopIc pdTopSearch" onClick={() => { closeDrawer(); openSearch() }} aria-label="Search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round"><circle cx="10" cy="10" r="7" strokeWidth="2.7" /><path d="M15.2 15.2L21.2 21.2" strokeWidth="3" /></svg>
         </button>
-        <button type="button" className={'pdTopMenu' + (drawerOpen ? ' open' : '')} onClick={() => (drawerOpen ? closeDrawer() : openDrawer())} aria-label={drawerOpen ? 'Close menu' : 'Open menu'} aria-expanded={drawerOpen}><span /><span /><span /></button>
+        <button type="button" className={'pdTopMenu' + (drawerOpen ? ' open' : '')} onClick={toggleMenu} aria-label={drawerOpen ? 'Close menu' : 'Open menu'} aria-expanded={drawerOpen}><span /><span /><span /></button>
       </div>
       <NavMenu />
     </nav>

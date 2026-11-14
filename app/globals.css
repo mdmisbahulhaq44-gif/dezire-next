@@ -2090,3 +2090,6 @@ nav.navShop,.pdTopBar{overflow:visible}
 .navMenu .dtWrap .dtLink::before{left:30px}
 .navMenu .dtWrap .dtWrap .dtLink{padding-left:73px}
 .navMenu .dtWrap .dtWrap .dtLink::before{left:54px}
+
+/* menu v3: a long menu scrolls inside itself (the page never grows, so closing it cannot make the page jump) */
+.navMenu .nmInner{max-height:calc(100dvh - 140px - var(--sat));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
