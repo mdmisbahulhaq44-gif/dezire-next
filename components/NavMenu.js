@@ -7,7 +7,7 @@ import DrawerTree from './DrawerTree'
 
 // Menu like the reference (gorurghash.com): a light list that drops down right under the header, over the page (no dimming); rows with a chevron open their categories
 export default function NavMenu() {
-  const { drawerOpen, closeDrawer, openAbout, openTrack, t } = useShop()
+  const { drawerOpen, closeDrawer, openAbout, t } = useShop()
   const pathname = usePathname()
   const close = () => closeDrawer()
   const cls = p => 'nmLink' + (pathname === p ? ' on' : '')
@@ -22,7 +22,6 @@ export default function NavMenu() {
         <Link className="nmLink" href="/#women" onClick={close}>{t('Accessories')}</Link>
         <Link className="nmLink" href="/#new" onClick={close}>{t('Sale')}</Link>
         <a className="nmLink" href="#" onClick={e => { e.preventDefault(); close(); openAbout() }}>{t('About Us')}</a>
-        <a className="nmLink" href="#" onClick={e => { e.preventDefault(); close(); openTrack() }}>{t('Track Order')}</a>
       </div>
     </div>
   )

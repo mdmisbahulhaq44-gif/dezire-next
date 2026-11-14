@@ -2081,3 +2081,12 @@ nav.navShop,.pdTopBar{overflow:visible}
 .acSeg{margin-left:auto;display:flex;border:1px solid rgba(0,0,0,.14);border-radius:999px;overflow:hidden;flex:none}
 .acSeg button{border:0;background:none;padding:6px 13px;font:inherit;font-size:12px;font-weight:600;color:#777;cursor:pointer;line-height:1.2}
 .acSeg button.on{background:#111;color:#fff}
+
+/* menu v2 (like gorurghash.com): thin black arrow, dotted rounded box when the arrow is tapped, sub-rows aligned like the reference */
+.navMenu .dtPlus::before{border-right-width:1.5px;border-bottom-width:1.5px}
+.navMenu .dtPlus{color:#000;border-radius:10px}
+.navMenu .dtPlus:focus,.navMenu .dtPlus:active{outline:1px dotted #000 !important;outline-offset:1px}
+.navMenu .dtWrap .dtLink{padding-left:49px}
+.navMenu .dtWrap .dtLink::before{left:30px}
+.navMenu .dtWrap .dtWrap .dtLink{padding-left:73px}
+.navMenu .dtWrap .dtWrap .dtLink::before{left:54px}

@@ -4,24 +4,22 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { supabase } from '../lib/supabaseClient'
 import { parseCatPath, buildShopPath } from '../lib/categories'
-import Money from './Money'
 import { useShop } from './ShopContext'
 
-// Menu tree for Men / Women: every category row has a + at its side; the + opens the rows inside it
-// (categories, then sub-categories, then products). The name itself opens that category's page.
-// The products are loaded once, the first time a section is opened.
+// Menu tree for Men / Women: categories and sub-categories only (no products).
+// A row with deeper sub-categories has an arrow button that opens them; the name itself opens that category's page.
+// Rows with nothing deeper have no arrow, they just open their page.
 const cache = {}
 
 function buildTree(products) {
-  const root = { kids: new Map(), items: [] }
+  const root = { kids: new Map() }
   products.forEach(p => {
     let node = root
     parseCatPath(p).forEach(seg => {
       const key = seg.toLowerCase()
-      if (!node.kids.has(key)) node.kids.set(key, { name: seg, kids: new Map(), items: [] })
+      if (!node.kids.has(key)) node.kids.set(key, { name: seg, kids: new Map() })
       node = node.kids.get(key)
     })
-    node.items.push(p)
   })
   return root
 }
@@ -39,31 +37,16 @@ function Collapse({ open, children }) {
   return <div className={'dtWrap' + (open ? ' open' : '')}><div>{children}</div></div>
 }
 
-function ProductRow({ p, onNavigate }) {
-  const img = p.imgs ? p.imgs.split(',')[0].trim() : ''
-  return (
-    <Link
-      className="dtProd"
-      href={'/product/' + p.id}
-      prefetch={false}
-      // the menu stays under the product while it fades in, then closes behind it (so the page underneath is never seen)
-      onClick={() => { document.documentElement.setAttribute('data-acprod', '1'); setTimeout(onNavigate, 600); setTimeout(() => document.documentElement.removeAttribute('data-acprod'), 2500) }}
-      data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img, all: p.imgs || '' })}
-    >
-      <span className="dtProdName">{p.name}</span>
-      <span className="dtProdPrice"><Money n={p.price} /></span>
-    </Link>
-  )
-}
-
-function Row({ label, href, open, onToggle, onNavigate }) {
+function Row({ label, href, open, onToggle, onNavigate, expandable }) {
   const { t } = useShop()
   return (
     <div className="dtRowWrap">
       <Link className="dtLink" href={href} onClick={onNavigate}>{t(label)}</Link>
-      <button type="button" className="dtPlus" aria-expanded={open} aria-label={(open ? 'Close ' : 'Open ') + label} onClick={onToggle}>
-        <Plus open={open} />
-      </button>
+      {expandable && (
+        <button type="button" className="dtPlus" aria-expanded={open} aria-label={(open ? 'Close ' : 'Open ') + label} onClick={onToggle}>
+          <Plus open={open} />
+        </button>
+      )}
     </div>
   )
 }
@@ -71,15 +54,17 @@ function Row({ label, href, open, onToggle, onNavigate }) {
 function Node({ node, gender, path, onNavigate }) {
   const [open, setOpen] = useState(false)
   const here = [...path, node.name]
+  const expandable = node.kids.size > 0
   return (
     <div className="dtNode">
-      <Row label={node.name} href={buildShopPath(gender, here)} open={open} onToggle={() => setOpen(o => !o)} onNavigate={onNavigate} />
-      <Collapse open={open}>
-        <div>
-          {Array.from(node.kids.values()).map(k => <Node key={k.name.toLowerCase()} node={k} gender={gender} path={here} onNavigate={onNavigate} />)}
-          {node.items.map(p => <ProductRow key={p.id} p={p} onNavigate={onNavigate} />)}
-        </div>
-      </Collapse>
+      <Row label={node.name} href={buildShopPath(gender, here)} open={open} expandable={expandable} onToggle={() => setOpen(o => !o)} onNavigate={onNavigate} />
+      {expandable && (
+        <Collapse open={open}>
+          <div>
+            {Array.from(node.kids.values()).map(k => <Node key={k.name.toLowerCase()} node={k} gender={gender} path={here} onNavigate={onNavigate} />)}
+          </div>
+        </Collapse>
+      )}
     </div>
   )
 }
@@ -94,9 +79,8 @@ export default function DrawerTree({ gender, label, onNavigate }) {
     setState('loading')
     supabase
       .from('products')
-      .select('id,name,price,old,imgs,gender,cat')
+      .select('gender,cat')
       .in('gender', [gender, 'unisex'])
-      .order('created_at', { ascending: false })
       .limit(1000)
       .then(({ data, error }) => {
         if (error || !data) { setState('error'); return }
@@ -112,21 +96,18 @@ export default function DrawerTree({ gender, label, onNavigate }) {
   }
 
   const tree = cache[gender]
-  const empty = tree && !tree.kids.size && !tree.items.length
+  const empty = tree && !tree.kids.size
 
   return (
     <div className="dtNode dtTop">
-      <Row label={label} href={buildShopPath(gender, [])} open={open} onToggle={toggle} onNavigate={onNavigate} />
+      <Row label={label} href={buildShopPath(gender, [])} open={open} expandable onToggle={toggle} onNavigate={onNavigate} />
       <Collapse open={open}>
         <div>
           {state === 'loading' && <div className="dtNote">{t('Loading...')}</div>}
           {state === 'error' && <button type="button" className="dtNote dtRetry" onClick={load}>{t('Could not load. Tap to try again')}</button>}
           {state === 'ok' && tree && (empty
             ? <div className="dtNote">{t('Nothing here yet')}</div>
-            : <>
-                {Array.from(tree.kids.values()).map(k => <Node key={k.name.toLowerCase()} node={k} gender={gender} path={[]} onNavigate={onNavigate} />)}
-                {tree.items.map(p => <ProductRow key={p.id} p={p} onNavigate={onNavigate} />)}
-              </>)}
+            : Array.from(tree.kids.values()).map(k => <Node key={k.name.toLowerCase()} node={k} gender={gender} path={[]} onNavigate={onNavigate} />))}
         </div>
       </Collapse>
     </div>
