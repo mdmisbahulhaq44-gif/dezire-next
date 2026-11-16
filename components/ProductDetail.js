@@ -98,6 +98,23 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const [comment, setComment] = useState('')
   const touchStartX = useRef(0)
   const panelRef = useRef(null)
+  const thumbsRef = useRef(null)
+  const [thumbMore, setThumbMore] = useState(false)
+  const [zoomOpen, setZoomOpen] = useState(false)
+  function onThumbScroll() {
+    const el = thumbsRef.current
+    if (el) setThumbMore(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
+  }
+  function nextThumbs() {
+    const el = thumbsRef.current
+    if (el) el.scrollBy({ left: el.clientWidth * 0.75, behavior: 'smooth' })
+  }
+  useEffect(() => { onThumbScroll() }, [images.length]) // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const el = thumbsRef.current
+    const b = el && el.children[index]
+    if (b && el.scrollTo) el.scrollTo({ left: Math.max(0, b.offsetLeft - 8), behavior: 'smooth' })
+  }, [index]) // eslint-disable-line react-hooks/exhaustive-deps
   useIsoLayoutEffect(() => {
     const info = window.__dzEnter
     window.__dzEnter = null
@@ -297,18 +314,27 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
               <button className="pdArrow pdArrowRight" onClick={() => slide(1)}>›</button>
             </>
           )}
+          <button type="button" className="pdZoomBtn" aria-label="Zoom photo" onClick={() => setZoomOpen(true)}>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+          </button>
           <div className="pdDots">
             {images.length > 1 && images.map((_, i) => <span key={i} className={i === index ? 'active' : ''}></span>)}
           </div>
         </div>
 
         {images.length > 1 && (
-          <div className="pdThumbs">
-            {images.map((url, i) => (
-              <button type="button" key={i} className={`pdThumb${i === index ? ' active' : ''}`} onClick={() => setIndex(i)} aria-label={`Photo ${i + 1}`}>
+          <div className="pdThumbsWrap">
+            <div className="pdThumbs" ref={thumbsRef} onScroll={onThumbScroll}>
+              {images.map((url, i) => (<button type="button" key={i} className={`pdThumb${i === index ? ' active' : ''}`} onClick={() => setIndex(i)} aria-label={`Photo ${i + 1}`}>
                 <Image src={cldOpt(url, 240)} alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} loading={i < 8 ? 'eager' : 'lazy'} quality={60} />
               </button>
-            ))}
+              ))}
+            </div>
+            {thumbMore && (
+              <button type="button" className="pdThumbNext" aria-label="More photos" onClick={nextThumbs}>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+              </button>
+            )}
           </div>
         )}
 
@@ -338,6 +364,15 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           </div>
 
           
+
+          {hasChart && (
+            <div className="pdMeasureTop">
+              <b>{t('Measurements (in inches):')}</b>
+              {chartSizes.map(s => (
+                <div key={s}><span>{s}</span> : {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</div>
+              ))}
+            </div>
+          )}
 
           {colors.length > 1 && (
             <div style={{ marginTop: 14 }}>
@@ -415,14 +450,6 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                   <div className="pdDesc">
                     {renderDesc(product.description, t)}
                     {product.features && renderDesc(product.features.split('\n').filter(Boolean).map(l => '• ' + l.replace(/^[•\-*·]\s*/, '')).join('\n'), t)}
-                    {hasChart && (
-                      <div className="pdMeasure">
-                        <b>{t('Measurements (in inches):')}</b>
-                        {chartSizes.map(s => (
-                          <div key={s}><span>{SIZE_NAMES[String(s).trim().toUpperCase()] || s}</span>: {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</div>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </div></div></div>
               </div>
@@ -453,6 +480,12 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
         <div className="pdFooter"><Footer /></div>
       </div>
 
+      {zoomOpen && images[index] && (
+        <div className="pdZoomLayer" onClick={() => setZoomOpen(false)}>
+          <button type="button" className="pdZoomClose" aria-label="Close" onClick={() => setZoomOpen(false)}>×</button>
+          <img src={cldOpt(images[index], 1200)} alt={product.name} />
+        </div>
+      )}
       <div className={`pdBuyBar${showBar ? ' show' : ''}`} aria-hidden={!showBar}>
         <button type="button" className="btn" tabIndex={showBar ? 0 : -1} disabled={!inStock} onClick={barAction}>
           {!inStock ? t('Out of stock') : (sizes.length && !size) ? t('Select options') : t('Add to cart')}
