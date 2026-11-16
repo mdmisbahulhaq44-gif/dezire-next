@@ -2097,3 +2097,9 @@ nav.navShop,.pdTopBar{overflow:visible}
 /* menu v4: no scrollbar line inside the menu */
 .navMenu .nmInner{scrollbar-width:none}
 .navMenu .nmInner::-webkit-scrollbar{display:none}
+
+/* search -> product: while the product page is on its way, the header + a grey page show at once (like the reference) */
+.slHold{display:none;position:absolute;inset:0;z-index:5;background:#f9f9f9}
+html[data-sprod] .slHold{display:block}
+.slHoldBar{display:flex;align-items:center;justify-content:space-between;box-sizing:border-box;height:calc(70px + var(--sat));padding:var(--sat) 20px 0;background:#fff}
+.slHoldBar .logo{flex:none;font-size:20px;letter-spacing:4px;margin:0}

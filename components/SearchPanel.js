@@ -2,24 +2,38 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useShop } from './ShopContext'
 import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
 import Money from './Money'
 
 // Characters that break PostgREST's .or() filter syntax or act as LIKE
-// wildcards are turned into spaces. (The original site filtered in the
-// browser, so it never had this problem.)
+// wildcards are turned into spaces.
 function clean(q) {
   return q.replace(/[,()*%_\\]/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+// the best match for what was typed: the whole phrase in the name first, then a name holding every word, then the newest one
+function bestMatch(list, c) {
+  const q = c.toLowerCase()
+  const words = q.split(' ').filter(Boolean)
+  const score = p => {
+    const n = String(p.name || '').toLowerCase()
+    if (n === q) return 4
+    if (n.startsWith(q)) return 3
+    if (n.includes(q)) return 2
+    return words.every(w => n.includes(w)) ? 1 : 0
+  }
+  return list.reduce((b, p) => (score(p) > score(b) ? p : b), list[0])
 }
 
 export default function SearchPanel() {
   const { activePanel, closePanel, hidePanel, showToast, t } = useShop()
   const pathname = usePathname()
+  const router = useRouter()
   const pending = useRef(false)
-  const clickT = useRef(0)
+  const failTimer = useRef(null)
   const show = activePanel === 'search'
 
   const [query, setQuery] = useState('')
@@ -29,8 +43,26 @@ export default function SearchPanel() {
   const reqRef = useRef(0)
   const inputRef = useRef(null)
 
+  function runSuggest(c) {
+    const id = ++reqRef.current
+    supabase
+      .from('products')
+      .select('id,name,price,imgs')
+      .or(`name.ilike.%${c}%,brand.ilike.%${c}%,cat.ilike.%${c}%`)
+      .limit(5)
+      .then(({ data }) => { if (id === reqRef.current) setSuggestions(data || []) }, () => {})
+  }
+
+  // opened fresh: keyboard up. Coming back from a product: the words are still there, no keyboard, the suggestions return.
   useEffect(() => {
-    if (show) { const t = setTimeout(() => inputRef.current && inputRef.current.focus(), 30); return () => clearTimeout(t) }
+    if (!show) return
+    const tm = setTimeout(() => {
+      const el = inputRef.current
+      if (!el) return
+      if (el.value) { const c = clean(el.value); if (c.length >= 2) runSuggest(c) }
+      else el.focus()
+    }, 30)
+    return () => clearTimeout(tm)
   }, [show])
 
   function handleInput(e) {
@@ -43,15 +75,20 @@ export default function SearchPanel() {
       setSuggestions(null)
       return
     }
-    debounceRef.current = setTimeout(async () => {
-      const id = ++reqRef.current
-      const { data } = await supabase
-        .from('products')
-        .select('id,name,price,imgs')
-        .or(`name.ilike.%${c}%,brand.ilike.%${c}%,cat.ilike.%${c}%`)
-        .limit(5)
-      if (id === reqRef.current) setSuggestions(data || [])
-    }, 300)
+    debounceRef.current = setTimeout(() => runSuggest(c), 300)
+  }
+
+  // a product is on its way: the header + grey page show at once (like the reference) until the product page arrives
+  function begin() {
+    pending.current = true
+    document.documentElement.setAttribute('data-sprod', '1')
+    clearTimeout(failTimer.current)
+    failTimer.current = setTimeout(() => { if (pending.current) cancel() }, 10000)
+  }
+  function cancel() {
+    pending.current = false
+    clearTimeout(failTimer.current)
+    document.documentElement.removeAttribute('data-sprod')
   }
 
   async function handleSubmit(e) {
@@ -65,33 +102,40 @@ export default function SearchPanel() {
       showToast(t('Enter a product name.'))
       return
     }
-    const { data } = await supabase
+    if (inputRef.current) inputRef.current.blur()
+    begin()
+    const words = c.toLowerCase().split(' ')
+    const key = words.reduce((a, b) => (b.length > a.length ? b : a), words[0])
+    const { data, error } = await supabase
       .from('products')
-      .select('id,name,brand,price,old,badge,imgs,stock')
-      .or(`name.ilike.%${c}%,brand.ilike.%${c}%`)
+      .select('id,name,brand,cat')
+      .or(`name.ilike.%${key}%,brand.ilike.%${key}%,cat.ilike.%${key}%`)
       .order('created_at', { ascending: false })
       .limit(1000)
-    setResults(data || [])
+    if (error) { cancel(); showToast(t('Something went wrong. Please try again.')); return }
+    const list = (data || []).filter(p => {
+      const hay = [p.name, p.brand, p.cat].join(' ').toLowerCase()
+      return words.every(w => hay.includes(w))
+    })
+    if (!list.length) { cancel(); setResults([]); return }
+    const hit = bestMatch(list, c)
+    if (pathname === '/product/' + hit.id) { cancel(); handleClose(); return }
+    window.__dzEnter = null
+    router.push('/product/' + hit.id)
   }
 
-  // A result was tapped: the search screen stays under the product while it fades in, then hides behind it (Home is never seen)
+  // a result was tapped: no fade, the product page replaces the search screen at once
   function openProduct() {
-    pending.current = true
-    clickT.current = performance.now()
-    document.documentElement.setAttribute('data-sprod', '1')
-    setTimeout(() => {
-      if (!pending.current) return
-      pending.current = false
-      document.documentElement.removeAttribute('data-sprod')
-      handleClose()
-    }, 8000)
+    window.__dzEnter = null
+    begin()
   }
 
   useEffect(() => {
     if (!pending.current || !pathname || !pathname.startsWith('/product/')) return
     pending.current = false
-    setTimeout(() => hidePanel(true, true), Math.max(0, 780 - (performance.now() - clickT.current)))
-    setTimeout(() => document.documentElement.removeAttribute('data-sprod'), 1200)
+    clearTimeout(failTimer.current)
+    hidePanel(true, true)
+    setTimeout(() => document.documentElement.removeAttribute('data-sprod'), 400)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
@@ -131,8 +175,6 @@ export default function SearchPanel() {
               <Link
                 href={`/product/${p.id}`}
                 key={p.id}
-                data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: null, img: p.imgs ? p.imgs.split(',')[0].trim() : '', all: p.imgs || '' })}
-                data-hold="800"
                 onClick={openProduct}
                 style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 4px', borderBottom: '1px solid rgba(0,0,0,.08)', textDecoration: 'none', color: 'inherit' }}
               >
@@ -155,44 +197,20 @@ export default function SearchPanel() {
 
       {results !== null && (
         <div style={{ marginTop: 20 }}>
-          {results.length ? (
-            <div className="products" style={{ gridTemplateColumns: 'repeat(2,1fr)' }}>
-              {results.map(p => {
-                const firstImg = p.imgs ? p.imgs.split(',')[0].trim() : ''
-                const lowStock = p.stock !== null && p.stock !== undefined && p.stock > 0 && p.stock <= 5
-                return (
-                  <Link href={`/product/${p.id}`} className="product" key={p.id} data-preview={JSON.stringify({ id: p.id, name: p.name, price: p.price, old: p.old || null, img: firstImg, all: p.imgs || '' })} data-hold="800" onClick={openProduct}>
-                    <div className="productImage">
-                      {p.badge && (
-                        <span className={`badge ${/sale/i.test(p.badge) ? 'sale' : ''}`}>{t(p.badge)}</span>
-                      )}
-                      {firstImg ? (
-                        <img src={cldOpt(firstImg, 400)} alt={p.name} loading="lazy" decoding="async" />
-                      ) : (
-                        <div className="placeholder">👕</div>
-                      )}
-                    </div>
-                    <div className="brand">{p.brand || ''}</div>
-                    <h3>{p.name}</h3>
-                    <div className="price">
-                      <Money n={p.price} />{' '}
-                      {p.old && <span className="old"><Money n={p.old} /></span>}
-                    </div>
-                    {lowStock && (
-                      <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 3 }}>{t('Only {n} left', { n: p.stock })}</div>
-                    )}
-                    {p.stock !== null && p.stock !== undefined && Number(p.stock) <= 0 && (
-                      <div style={{ fontSize: 11, color: 'var(--red)', marginTop: 3 }}>{t('Sold out')}</div>
-                    )}
-                  </Link>
-                )
-              })}
-            </div>
-          ) : (
-            <div className="empty">{t('No products found for "{q}"', { q: query.trim() })}</div>
-          )}
+          <div className="empty">{t('No products found for "{q}"', { q: query.trim() })}</div>
         </div>
       )}
+      </div>
+
+      <div className="slHold" aria-hidden="true">
+        <div className="slHoldBar">
+          <div className="logo">HEAVEN</div>
+          <div className="pdTopRight">
+            <span className="pdTopIc"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="7.2" r="4.7" /><path d="M3.2 21.2c0-4.7 3.8-7.7 8.8-7.7s8.8 3 8.8 7.7c0 .5-.4.8-.8.8H4c-.4 0-.8-.3-.8-.8z" /></svg></span>
+            <span className="pdTopIc pdTopSearch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round"><circle cx="10" cy="10" r="7" strokeWidth="2.7" /><path d="M15.2 15.2L21.2 21.2" strokeWidth="3" /></svg></span>
+            <span className="pdTopMenu"><span /><span /><span /></span>
+          </div>
+        </div>
       </div>
     </div>
   )
