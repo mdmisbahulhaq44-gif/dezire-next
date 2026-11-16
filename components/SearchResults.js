@@ -26,17 +26,17 @@ export default function SearchResults({ items, q }) {
       {q && !items.length && <div className="srEmpty">No products found for &quot;{q}&quot;</div>}
       {items.map((p, i) => (
         <div className="srCard" key={p.id}>
-          <Link className="srImg" href={`/product/${p.id}`} prefetch={false} data-no-vt="1" onClick={open}>
+          <Link className="srImg" href={`/product/${p.id}`} data-no-vt="1" onClick={open}>
             {p.img && <img src={cldOpt(p.img, 700)} alt={p.name} loading={i < 2 ? 'eager' : 'lazy'} decoding="async" />}
           </Link>
-          <h2 className="srName"><Link href={`/product/${p.id}`} prefetch={false} data-no-vt="1" onClick={open}>{p.name}</Link></h2>
+          <h2 className="srName"><Link href={`/product/${p.id}`} data-no-vt="1" onClick={open}>{p.name}</Link></h2>
           {p.lines.length > 0 && (
             <div className="srMeas">
               <b>Measurements (in inches):</b>
               {p.lines.map((l, k) => <div key={k}>{l}</div>)}
             </div>
           )}
-          <Link className="srMore" href={`/product/${p.id}`} prefetch={false} data-no-vt="1" onClick={open}>Read More »</Link>
+          <Link className="srMore" href={`/product/${p.id}`} data-no-vt="1" onClick={open}>Read More »</Link>
         </div>
       ))}
       <div className="srHold" aria-hidden="true">
