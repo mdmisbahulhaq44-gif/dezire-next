@@ -8,24 +8,8 @@ import { supabase } from '../lib/supabaseClient'
 import { cldOpt } from '../lib/cloudinary'
 import Money from './Money'
 
-// Characters that break PostgREST's .or() filter syntax or act as LIKE
-// wildcards are turned into spaces.
 function clean(q) {
   return q.replace(/[,()*%_\\]/g, ' ').replace(/\s+/g, ' ').trim()
-}
-
-// the best match for what was typed: the whole phrase in the name first, then a name holding every word, then the newest one
-function bestMatch(list, c) {
-  const q = c.toLowerCase()
-  const words = q.split(' ').filter(Boolean)
-  const score = p => {
-    const n = String(p.name || '').toLowerCase()
-    if (n === q) return 4
-    if (n.startsWith(q)) return 3
-    if (n.includes(q)) return 2
-    return words.every(w => n.includes(w)) ? 1 : 0
-  }
-  return list.reduce((b, p) => (score(p) > score(b) ? p : b), list[0])
 }
 
 export default function SearchPanel() {
@@ -37,8 +21,7 @@ export default function SearchPanel() {
   const show = activePanel === 'search'
 
   const [query, setQuery] = useState('')
-  const [suggestions, setSuggestions] = useState(null) // null = nothing typed yet
-  const [results, setResults] = useState(null)
+  const [suggestions, setSuggestions] = useState(null)
   const debounceRef = useRef(null)
   const reqRef = useRef(0)
   const inputRef = useRef(null)
@@ -53,7 +36,7 @@ export default function SearchPanel() {
       .then(({ data }) => { if (id === reqRef.current) setSuggestions(data || []) }, () => {})
   }
 
-  // opened fresh: keyboard up. Coming back from a product: the words are still there, no keyboard, the suggestions return.
+  // opened fresh: keyboard up. Coming back: the words are still there, no keyboard, the suggestions return.
   useEffect(() => {
     if (!show) return
     const tm = setTimeout(() => {
@@ -78,7 +61,7 @@ export default function SearchPanel() {
     debounceRef.current = setTimeout(() => runSuggest(c), 300)
   }
 
-  // a product is on its way: the header + grey page show at once (like the reference) until the product page arrives
+  // the next page is on its way: header + grey page show at once, like the reference
   function begin() {
     pending.current = true
     document.documentElement.setAttribute('data-sprod', '1')
@@ -90,69 +73,60 @@ export default function SearchPanel() {
     clearTimeout(failTimer.current)
     document.documentElement.removeAttribute('data-sprod')
   }
+  function arrived() {
+    if (!pending.current) return
+    pending.current = false
+    clearTimeout(failTimer.current)
+    hidePanel(true, true)
+    setTimeout(() => document.documentElement.removeAttribute('data-sprod'), 400)
+  }
 
-  async function handleSubmit(e) {
+  // Enter: the results page opens (one column of products, like the reference)
+  function handleSubmit(e) {
     e.preventDefault()
     clearTimeout(debounceRef.current)
     reqRef.current++
     setSuggestions(null)
     const c = clean(query)
-    if (!c) {
-      setResults(null)
-      showToast(t('Enter a product name.'))
-      return
-    }
+    if (!c) { showToast(t('Enter a product name.')); return }
     if (inputRef.current) inputRef.current.blur()
     begin()
-    const words = c.toLowerCase().split(' ')
-    const key = words.reduce((a, b) => (b.length > a.length ? b : a), words[0])
-    const { data, error } = await supabase
-      .from('products')
-      .select('id,name,brand,cat')
-      .or(`name.ilike.%${key}%,brand.ilike.%${key}%,cat.ilike.%${key}%`)
-      .order('created_at', { ascending: false })
-      .limit(1000)
-    if (error) { cancel(); showToast(t('Something went wrong. Please try again.')); return }
-    const list = (data || []).filter(p => {
-      const hay = [p.name, p.brand, p.cat].join(' ').toLowerCase()
-      return words.every(w => hay.includes(w))
-    })
-    if (!list.length) { cancel(); setResults([]); return }
-    const hit = bestMatch(list, c)
-    if (pathname === '/product/' + hit.id) { cancel(); handleClose(); return }
     window.__dzEnter = null
-    router.push('/product/' + hit.id)
+    router.push('/search?q=' + encodeURIComponent(c))
   }
 
-  // a result was tapped: no fade, the product page replaces the search screen at once
+  // a suggestion was tapped: no fade, the product page replaces the search screen at once
   function openProduct() {
     window.__dzEnter = null
     begin()
   }
 
   useEffect(() => {
-    if (!pending.current || !pathname || !pathname.startsWith('/product/')) return
-    pending.current = false
-    clearTimeout(failTimer.current)
-    hidePanel(true, true)
-    setTimeout(() => document.documentElement.removeAttribute('data-sprod'), 400)
+    if (!pathname || !(pathname.startsWith('/product/') || pathname.startsWith('/search'))) return
+    arrived()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
-  // search closed for real (not because a product opened): forget the old words and results
+  // the results page tells us it is on screen (also when searching again while already on it)
+  useEffect(() => {
+    window.addEventListener('dz-search-ready', arrived)
+    return () => window.removeEventListener('dz-search-ready', arrived)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hidePanel])
+
+  // search closed for real (not because a page opened): forget the old words
   useEffect(() => {
     if (show || pending.current) return
-    if (window.location.pathname.startsWith('/product/')) return
+    const p = window.location.pathname
+    if (p.startsWith('/product/') || p.startsWith('/search')) return
     setQuery('')
     setSuggestions(null)
-    setResults(null)
   }, [show])
 
   function handleClose() {
     closePanel()
     setQuery('')
     setSuggestions(null)
-    setResults(null)
   }
 
   return (
@@ -193,12 +167,6 @@ export default function SearchPanel() {
         ) : (
           <div style={{ fontSize: 12, color: 'var(--muted)', padding: '10px 4px' }}>{t('No matches')}</div>
         )
-      )}
-
-      {results !== null && (
-        <div style={{ marginTop: 20 }}>
-          <div className="empty">{t('No products found for "{q}"', { q: query.trim() })}</div>
-        </div>
       )}
       </div>
 
