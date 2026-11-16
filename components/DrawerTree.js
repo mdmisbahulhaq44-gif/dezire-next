@@ -8,7 +8,7 @@ import { useShop } from './ShopContext'
 
 // Menu tree for Men / Women: categories and sub-categories only (no products).
 // A row with deeper sub-categories has an arrow button that opens them; the name itself opens that category's page.
-// Rows with nothing deeper have no arrow, they just open their page.
+// Rows with nothing deeper have no arrow. A last-level group with only ONE product opens that product directly.
 const cache = {}
 
 // A product's own name is often saved as the last part of its category path: that part is the product, not a category.
@@ -25,8 +25,10 @@ function buildTree(products) {
     let node = root
     catPath(p).forEach(seg => {
       const key = seg.toLowerCase()
-      if (!node.kids.has(key)) node.kids.set(key, { name: seg, kids: new Map() })
+      if (!node.kids.has(key)) node.kids.set(key, { name: seg, kids: new Map(), count: 0, pid: null })
       node = node.kids.get(key)
+      node.count += 1
+      node.pid = p.id
     })
   })
   return root
@@ -49,7 +51,7 @@ function Row({ label, href, open, onToggle, onNavigate, expandable }) {
   const { t } = useShop()
   return (
     <div className="dtRowWrap">
-      <Link className="dtLink" href={href} onClick={onNavigate}>{t(label)}</Link>
+      <Link className="dtLink" href={href} prefetch data-no-vt="1" onClick={() => onNavigate && onNavigate(href)}>{t(label)}</Link>
       {expandable && (
         <button type="button" className="dtPlus" aria-expanded={open} aria-label={(open ? 'Close ' : 'Open ') + label} onClick={onToggle}>
           <Plus open={open} />
@@ -63,9 +65,10 @@ function Node({ node, gender, path, onNavigate }) {
   const [open, setOpen] = useState(false)
   const here = [...path, node.name]
   const expandable = node.kids.size > 0
+  const href = (!expandable && node.count === 1 && node.pid != null) ? '/product/' + node.pid : buildShopPath(gender, here)
   return (
     <div className="dtNode">
-      <Row label={node.name} href={buildShopPath(gender, here)} open={open} expandable={expandable} onToggle={() => setOpen(o => !o)} onNavigate={onNavigate} />
+      <Row label={node.name} href={href} open={open} expandable={expandable} onToggle={() => setOpen(o => !o)} onNavigate={onNavigate} />
       {expandable && (
         <Collapse open={open}>
           <div>
@@ -87,7 +90,7 @@ export default function DrawerTree({ gender, label, onNavigate }) {
     setState('loading')
     supabase
       .from('products')
-      .select('name,gender,cat')
+      .select('id,name,gender,cat')
       .in('gender', [gender, 'unisex'])
       .limit(1000)
       .then(({ data, error }) => {
