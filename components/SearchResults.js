@@ -1,8 +1,28 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { cldOpt } from '../lib/cloudinary'
+
+// Search result photo: shown in its own ratio (nothing cropped), like the reference.
+// Until the photo has loaded, a 4:5 grey box holds its place so the list does not jump.
+function SrPhoto({ src, alt, eager }) {
+  const [loaded, setLoaded] = useState(false)
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      onLoad={() => setLoaded(true)}
+      ref={el => { if (el && el.complete && el.naturalWidth > 0) setLoaded(true) }}
+      style={loaded
+        ? { width: '100%', height: 'auto', objectFit: 'contain', display: 'block' }
+        : { width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
+      data-loaded={loaded ? '1' : '0'}
+    />
+  )
+}
 
 export default function SearchResults({ items, q }) {
   useEffect(() => {
@@ -26,8 +46,9 @@ export default function SearchResults({ items, q }) {
       {q && !items.length && <div className="srEmpty">No products found for &quot;{q}&quot;</div>}
       {items.map((p, i) => (
         <div className="srCard" key={p.id}>
-          <Link className="srImg" href={`/product/${p.id}`}>
-            {p.img && <img src={cldOpt(p.img, 700)} alt={p.name} loading={i < 2 ? 'eager' : 'lazy'} decoding="async" />}
+          {/* the 4:5 grey box only holds the place until the photo has loaded; then the box follows the photo ratio */}
+          <Link className="srImg srImgNat" href={`/product/${p.id}`}>
+            {p.img && <SrPhoto src={cldOpt(p.img, 700)} alt={p.name} eager={i < 2} />}
           </Link>
           <h2 className="srName"><Link href={`/product/${p.id}`}>{p.name}</Link></h2>
           {p.lines.length > 0 && (
@@ -39,6 +60,9 @@ export default function SearchResults({ items, q }) {
           <Link className="srMore" href={`/product/${p.id}`}>Read More »</Link>
         </div>
       ))}
+      <style>{`
+        .srImgNat:has(img[data-loaded="1"]){aspect-ratio:auto;background:transparent}
+      `}</style>
       <div className="srHold" aria-hidden="true">
         <div className="slHoldBar">
           <div className="logo">HEAVEN</div>
