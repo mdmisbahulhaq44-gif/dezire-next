@@ -2085,7 +2085,11 @@ nav.navShop,.pdTopBar{overflow:visible}
 /* menu v2 (like gorurghash.com): thin black arrow, dotted rounded box when the arrow is tapped, sub-rows aligned like the reference */
 .navMenu .dtPlus::before{border-right-width:1.5px;border-bottom-width:1.5px}
 .navMenu .dtPlus{color:#000;border-radius:10px}
-.navMenu .dtPlus.dtLit,.navMenu .dtPlus:active{outline:1px dotted #000 !important;outline-offset:1px}
+.navMenu .dtPlus{position:relative}
+.navMenu .dtPlus.dtLit,.navMenu .dtPlus:active,.navMenu .dtPlus:focus{outline:0 !important}
+/* the dotted box is drawn INSIDE the button (not as an outline outside it), so the menu's clipping (overflow:hidden) and neighbouring rows can never cut or cover it */
+.navMenu .dtPlus::after{content:"";position:absolute;inset:1px;border:1px dotted #000;border-radius:10px;opacity:0;pointer-events:none}
+.navMenu .dtPlus.dtLit::after,.navMenu .dtPlus:active::after{opacity:1}
 .navMenu .dtWrap .dtLink{padding-left:49px}
 .navMenu .dtWrap .dtLink::before{left:30px}
 .navMenu .dtWrap .dtWrap .dtLink{padding-left:73px}
