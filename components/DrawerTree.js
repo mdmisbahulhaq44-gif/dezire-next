@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import { supabase } from '../lib/supabaseClient'
 import { parseCatPath, buildShopPath } from '../lib/categories'
@@ -10,6 +10,15 @@ import { useShop } from './ShopContext'
 // A row with deeper sub-categories has an arrow button that opens them; the name itself opens that category's page.
 // Rows with nothing deeper have no arrow. A last-level group with only ONE product opens that product directly.
 const cache = {}
+
+// Which arrow shows the dotted box: the last one tapped. Kept in our own state (not the browser's :focus), because the browser drops
+// focus whenever the page re-lays out or another spot is tapped, which made the box disappear at random.
+let litKey = null
+const litSubs = new Set()
+function setLit(k) { litKey = k; litSubs.forEach(f => f()) }
+function useLit() {
+  return useSyncExternalStore(cb => { litSubs.add(cb); return () => litSubs.delete(cb) }, () => litKey, () => null)
+}
 
 // A product's own name is often saved as the last part of its category path: that part is the product, not a category.
 function catPath(p) {
@@ -49,11 +58,13 @@ function Collapse({ open, children }) {
 
 function Row({ label, href, open, onToggle, onNavigate, expandable }) {
   const { t } = useShop()
+  const id = useId()
+  const lit = useLit() === id
   return (
     <div className="dtRowWrap">
       <Link className="dtLink" href={href} prefetch data-no-vt="1" onClick={() => onNavigate && onNavigate(href)}>{t(label)}</Link>
       {expandable && (
-        <button type="button" className="dtPlus" aria-expanded={open} aria-label={(open ? 'Close ' : 'Open ') + label} onClick={onToggle}>
+        <button type="button" className={'dtPlus' + (lit ? ' dtLit' : '')} aria-expanded={open} aria-label={(open ? 'Close ' : 'Open ') + label} onClick={() => { setLit(id); onToggle() }}>
           <Plus open={open} />
         </button>
       )}
@@ -102,6 +113,8 @@ export default function DrawerTree({ gender, label, onNavigate }) {
 
   // start loading as soon as the menu opens, so the rows are ready before Women / Men is tapped
   useEffect(() => { if (drawerOpen && state === 'idle') load() }, [drawerOpen]) // eslint-disable-line react-hooks/exhaustive-deps
+  // closing the menu clears the box
+  useEffect(() => { if (!drawerOpen) setLit(null) }, [drawerOpen])
 
   function toggle() {
     const next = !open

@@ -2085,7 +2085,7 @@ nav.navShop,.pdTopBar{overflow:visible}
 /* menu v2 (like gorurghash.com): thin black arrow, dotted rounded box when the arrow is tapped, sub-rows aligned like the reference */
 .navMenu .dtPlus::before{border-right-width:1.5px;border-bottom-width:1.5px}
 .navMenu .dtPlus{color:#000;border-radius:10px}
-.navMenu .dtPlus:focus,.navMenu .dtPlus:active{outline:1px dotted #000 !important;outline-offset:1px}
+.navMenu .dtPlus.dtLit,.navMenu .dtPlus:active{outline:1px dotted #000 !important;outline-offset:1px}
 .navMenu .dtWrap .dtLink{padding-left:49px}
 .navMenu .dtWrap .dtLink::before{left:30px}
 .navMenu .dtWrap .dtWrap .dtLink{padding-left:73px}
