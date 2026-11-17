@@ -64,6 +64,81 @@ function renderDesc(text, tr) {
   })
 }
 
+// Full-screen photo viewer like the reference: counter (1 / 13), fullscreen button, close, swipe left/right, every photo in its own ratio
+function Lightbox({ images, start, name, onClose }) {
+  const [i, setI] = useState(start)
+  const [dx, setDx] = useState(0)
+  const [drag, setDrag] = useState(false)
+  const [fs, setFs] = useState(false)
+  const x0 = useRef(0)
+  const y0 = useRef(0)
+  const horiz = useRef(null)
+  const n = images.length
+
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    function onFs() { setFs(!!document.fullscreenElement) }
+    document.addEventListener('fullscreenchange', onFs)
+    return () => {
+      document.body.style.overflow = prev
+      document.removeEventListener('fullscreenchange', onFs)
+      if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {})
+    }
+  }, [])
+
+  function go(d) { setI(k => Math.min(n - 1, Math.max(0, k + d))) }
+  function ts(e) { x0.current = e.touches[0].clientX; y0.current = e.touches[0].clientY; horiz.current = null; setDrag(true) }
+  function tm(e) {
+    const mx = e.touches[0].clientX - x0.current
+    const my = e.touches[0].clientY - y0.current
+    if (horiz.current === null && (Math.abs(mx) > 8 || Math.abs(my) > 8)) horiz.current = Math.abs(mx) > Math.abs(my)
+    if (horiz.current) setDx(mx)
+  }
+  function te() {
+    setDrag(false)
+    if (horiz.current && Math.abs(dx) > 50) go(dx < 0 ? 1 : -1)
+    setDx(0)
+  }
+  function toggleFs() {
+    if (document.fullscreenElement) { if (document.exitFullscreen) document.exitFullscreen().catch(() => {}) }
+    else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {})
+  }
+
+  const iconBtn = { width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 0, color: '#eee', cursor: 'pointer', padding: 0 }
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 900, background: 'rgba(0,0,0,.88)', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 'calc(44px + var(--sat, 0px))', paddingTop: 'var(--sat, 0px)', paddingLeft: 14, background: 'rgba(0,0,0,.5)', color: '#ddd', fontSize: 14 }}>
+        <span>{i + 1} / {n}</span>
+        <div style={{ display: 'flex' }}>
+          <button type="button" aria-label={fs ? 'Exit full screen' : 'Full screen'} onClick={toggleFs} style={iconBtn}>
+            {fs ? (
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5" /></svg>
+            ) : (
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg>
+            )}
+          </button>
+          <button type="button" aria-label="Close" onClick={() => onClose(i)} style={iconBtn}>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" /></svg>
+          </button>
+        </div>
+      </div>
+      <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', touchAction: 'pan-y' }} onTouchStart={ts} onTouchMove={tm} onTouchEnd={te} onTouchCancel={te}>
+        <div style={{ display: 'flex', height: '100%', transform: `translateX(calc(-${i * 100}% + ${dx}px))`, transition: drag ? 'none' : 'transform .25s ease' }}>
+          {images.map((url, k) => (
+            <div key={k} style={{ minWidth: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              {Math.abs(k - i) <= 1 && (
+                <img src={cldOpt(url, 1200)} alt={name} draggable="false" style={{ width: '100%', height: 'auto', maxHeight: '100%', objectFit: 'contain', display: 'block' }} />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function ProductDetail({ product, related, saleEndsAt, colors = [] }) {
   const router = useRouter()
   const { addToCart, openMini, openCheckout, openAccount, showToast, wishlist, toggleWishlist, activePanel, drawerOpen, t, lang } = useShop()
@@ -101,6 +176,12 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const thumbsRef = useRef(null)
   const [thumbMore, setThumbMore] = useState(false)
   const [zoomOpen, setZoomOpen] = useState(false)
+  const [ratios, setRatios] = useState({})
+  function setRatio(i, el) {
+    if (!el || !el.naturalWidth || !el.naturalHeight) return
+    const r = el.naturalWidth / el.naturalHeight
+    setRatios(o => (o[i] && Math.abs(o[i] - r) < 0.001 ? o : { ...o, [i]: r }))
+  }
   function onThumbScroll() {
     const el = thumbsRef.current
     if (el) setThumbMore(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
@@ -286,22 +367,19 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
       <div className={`panel${shown ? ' show' : ''}`} id="productPanel" ref={panelRef} style={{ overscrollBehavior: 'contain' }}>
         <PdTopBar onBack={closeProduct} />
 
-        <div className="pdGallery" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+        <div className="pdGallery" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ aspectRatio: ratios[index] || 1, background: '#fff' }}>
           <div className="pdGalleryTrack" style={{ transform: `translateX(-${index * 100}%)` }}>
             {images.length ? images.map((url, i) => (
-              <div className="pdSlide" key={i} style={{ position: 'relative' }}>
-                {i === 0 && <img src={cldOpt(url, 500)} alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
-                {i === 0 && <img src={cldOpt(url, 900)} alt="" aria-hidden="true" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />}
-                <Image
+              <div className="pdSlide" key={i}>
+                <img
                   src={cldOpt(url, 900)}
                   alt={product.name}
-                  fill
-                  sizes="(min-width: 901px) 400px, 100vw"
-                  style={{ objectFit: 'cover' }}
-                  priority={i === 0}
+                  loading={Math.abs(i - index) <= 1 ? 'eager' : 'lazy'}
                   fetchPriority={i === 0 ? 'high' : 'auto'}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  quality={75}
+                  decoding="async"
+                  onLoad={e => setRatio(i, e.currentTarget)}
+                  ref={el => { if (el && el.complete) setRatio(i, el) }}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
                 />
               </div>
             )) : (
@@ -480,11 +558,8 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
         <div className="pdFooter"><Footer /></div>
       </div>
 
-      {zoomOpen && images[index] && (
-        <div className="pdZoomLayer" onClick={() => setZoomOpen(false)}>
-          <button type="button" className="pdZoomClose" aria-label="Close" onClick={() => setZoomOpen(false)}>×</button>
-          <img src={cldOpt(images[index], 1200)} alt={product.name} />
-        </div>
+      {zoomOpen && images.length > 0 && (
+        <Lightbox images={images} start={index} name={product.name} onClose={k => { setIndex(k); setZoomOpen(false) }} />
       )}
       <div className={`pdBuyBar${showBar ? ' show' : ''}`} aria-hidden={!showBar}>
         <button type="button" className="btn" tabIndex={showBar ? 0 : -1} disabled={!inStock} onClick={barAction}>
