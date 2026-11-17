@@ -1,9 +1,11 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import ProductGrid from './ProductGrid'
 import ShopAside from './ShopAside'
 import { useShop } from './ShopContext'
+
+const PER_PAGE = 50
 
 function sizesOf(p) {
   if (Array.isArray(p.sizes)) return p.sizes
@@ -11,6 +13,34 @@ function sizesOf(p) {
     return p.sizes.split(',').map(s => s.trim()).filter(Boolean)
   }
   return []
+}
+
+// 1 2 3 … 5 style page list: first, last and the pages around the current one
+function pageList(cur, total) {
+  const set = new Set([1, total, cur - 1, cur, cur + 1])
+  if (cur <= 2) set.add(3)
+  const nums = [...set].filter(n => n >= 1 && n <= total).sort((a, b) => a - b)
+  const out = []
+  nums.forEach((n, i) => {
+    if (i > 0) {
+      const gap = n - nums[i - 1]
+      if (gap === 2) out.push(n - 1)
+      else if (gap > 2) out.push('...')
+    }
+    out.push(n)
+  })
+  return out
+}
+
+const pagerBtn = {
+  background: 'none',
+  border: 0,
+  padding: 0,
+  cursor: 'pointer',
+  fontFamily: 'inherit',
+  fontWeight: 300,
+  color: '#555',
+  lineHeight: 1.4
 }
 
 const EMPTY = { min: '', max: '', sizes: [], inStock: false }
@@ -30,6 +60,8 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
   const [boxOpen, setBoxOpen] = useState(false)
   const [draft, setDraft] = useState(EMPTY)
   const [applied, setApplied] = useState(EMPTY)
+  const [page, setPage] = useState(1)
+  const gridTop = useRef(null)
 
   const byGender = useMemo(
     () => products.filter(p => gender === 'ALL' || p.gender === gender || p.gender === 'unisex'),
@@ -55,6 +87,24 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
     if (sort === 'price_high') list = [...list].sort((a, b) => Number(b.price) - Number(a.price))
     return list
   }, [byGender, applied, sort])
+
+  // filters, gender tab or sorting changed: back to page 1
+  useEffect(() => { setPage(1) }, [gender, sort, applied])
+
+  const totalPages = Math.max(1, Math.ceil(visible.length / PER_PAGE))
+  const cur = Math.min(page, totalPages)
+  const pageItems = visible.slice((cur - 1) * PER_PAGE, cur * PER_PAGE)
+
+  function goPage(n) {
+    setPage(n)
+    // bring the top of the product list into view
+    setTimeout(() => {
+      const el = gridTop.current
+      if (!el) return
+      const y = el.getBoundingClientRect().top + window.scrollY - 70
+      window.scrollTo({ top: Math.max(0, y), behavior: 'auto' })
+    }, 0)
+  }
 
   const activeCount =
     (applied.min !== '' || applied.max !== '' ? 1 : 0) +
@@ -193,7 +243,44 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
           </div>
         )}
 
-        <ProductGrid products={visible} noPreview />
+        <div ref={gridTop} />
+        <ProductGrid products={pageItems} noPreview />
+
+        {totalPages > 1 && (
+          <nav
+            aria-label="Pagination"
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 14, margin: '34px 0 6px' }}
+          >
+            {cur > 1 && (
+              <button type="button" onClick={() => goPage(cur - 1)} style={{ ...pagerBtn, fontSize: 17 }}>
+                ← {t('Previous')}
+              </button>
+            )}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {pageList(cur, totalPages).map((n, i) =>
+                n === '...' ? (
+                  <span key={'d' + i} style={{ ...pagerBtn, cursor: 'default', width: 40, textAlign: 'center', fontSize: 15 }}>…</span>
+                ) : (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => n !== cur && goPage(n)}
+                    aria-current={n === cur ? 'page' : undefined}
+                    style={{ ...pagerBtn, width: 40, textAlign: 'center', fontSize: 15, color: n === cur ? '#111' : '#555', cursor: n === cur ? 'default' : 'pointer' }}
+                  >
+                    {n}
+                  </button>
+                )
+              )}
+            </div>
+            {cur < totalPages && (
+              <button type="button" onClick={() => goPage(cur + 1)} style={{ ...pagerBtn, fontSize: 17 }}>
+                {t('Next')} →
+              </button>
+            )}
+          </nav>
+        )}
+
         {breadcrumb && <ShopAside />}
       </div>
     </div>
