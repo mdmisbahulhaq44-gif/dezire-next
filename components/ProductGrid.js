@@ -4,9 +4,45 @@ import { cldOpt } from "../lib/cloudinary"
 import Money from "./Money"
 import T from "./T"
 
-export default function ProductGrid({ products, replaceLinks, noPreview }) {
+export default function ProductGrid({ products, replaceLinks, noPreview, tiles }) {
   if (!products.length) {
     return <div className="empty"><T>No products available right now.</T></div>
+  }
+
+  // Category pages: name + price sit on the photo (glass box), same look as the Shirt tiles
+  if (tiles) {
+    return (
+      <div className="hubTiles">
+        {products.map(p => {
+          const firstImg = p.imgs ? p.imgs.split(",")[0].trim() : ""
+          const soldOut = p.stock !== null && p.stock !== undefined && Number(p.stock) <= 0
+          return (
+            <Link
+              href={`/product/${p.id}`}
+              className="category"
+              key={p.id}
+              style={{
+                opacity: soldOut ? 0.6 : 1,
+                ...(firstImg
+                  ? { backgroundImage: `url('${cldOpt(firstImg, 700).replace(/'/g, "%27")}')` }
+                  : { background: "#1a1a1a" })
+              }}
+            >
+              <div className="catText">
+                <h3>{p.name}</h3>
+                <span>
+                  <Money n={p.price} />
+                  {p.old && (
+                    <s style={{ marginLeft: 6, opacity: 0.7 }}><Money n={p.old} /></s>
+                  )}
+                  {soldOut && <> · <T>SOLD OUT</T></>}
+                </span>
+              </div>
+            </Link>
+          )
+        })}
+      </div>
+    )
   }
 
   return (

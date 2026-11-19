@@ -244,7 +244,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
         )}
 
         <div ref={gridTop} />
-        <ProductGrid products={pageItems} noPreview />
+        <ProductGrid products={pageItems} noPreview tiles />
 
         {totalPages > 1 && (
           <nav
