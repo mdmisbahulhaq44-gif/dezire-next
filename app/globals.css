@@ -2135,3 +2135,20 @@ html[data-sprod] .slHold{display:block}
 .srEmpty{padding:40px 16px;text-align:center;color:#777;font-size:14px}
 .srHold{display:none;position:fixed;inset:0;z-index:600;background:#f9f9f9}
 html[data-rhold] .srHold{display:block}
+
+/* category tiles: name + price in a neat centered glass strip */
+.hubTiles .category{padding:10px}
+.hubTiles .catText{
+display:block;width:100%;box-sizing:border-box;text-align:center;
+padding:9px 10px;border-radius:12px;
+background:rgba(0,0,0,.34);border:1px solid rgba(255,255,255,.14)
+}
+.hubTiles .catText h3{font-size:11px;line-height:1.35;letter-spacing:.6px}
+.hubTiles .catText span{font-size:10.5px;margin-top:4px;letter-spacing:.4px;font-weight:600}
+
+/* sort dropdown: arrow sits right next to the text */
+.sortSelect{
+-webkit-appearance:none;appearance:none;field-sizing:content;
+padding:9px 32px 9px 16px!important;
+background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23111' stroke-width='1.6'/></svg>") no-repeat right 13px center/11px!important
+}

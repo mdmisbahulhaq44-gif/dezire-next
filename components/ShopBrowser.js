@@ -166,7 +166,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
             </svg>
             {t('FILTER')}{activeCount > 0 ? ` (${activeCount})` : ''}
           </button>
-          <select value={sort} onChange={e => setSort(e.target.value)} style={pillStyle}>
+          <select className="sortSelect" value={sort} onChange={e => setSort(e.target.value)} style={pillStyle}>
             <option value="newest">{t('Newest First')}</option>
             <option value="price_low">{t('Price: Low to High')}</option>
             <option value="price_high">{t('Price: High to Low')}</option>
