@@ -2161,3 +2161,9 @@ nav.navShop .logo,.pdTopBar .logo{font-size:20px;font-weight:600;letter-spacing:
 
 /* product photos: sharp square corners everywhere */
 .productImage,.hubTiles .category,.hubTiles .catText,.hubTiles .leafImg,.cartImg,.miniItem .cartImg,.pdGallery,.pdThumb{border-radius:0!important}
+
+/* tiles: 7:8 ratio (like the reference site) */
+.hubTiles .category{aspect-ratio:7/8}
+
+/* product photos: sharp square corners everywhere */
+.productImage,.hubTiles .category,.hubTiles .catText,.hubTiles .leafImg,.cartImg,.miniItem .cartImg,.pdGallery,.pdThumb{border-radius:0!important}
