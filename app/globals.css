@@ -2142,3 +2142,6 @@ html[data-rhold] .srHold{display:block}
 padding:9px 32px 9px 16px!important;
 background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23111' stroke-width='1.6'/></svg>") no-repeat right 13px center/11px!important
 }
+
+/* same HEAVEN logo size on every header (category pages and product page), so nothing jumps during the transition */
+nav.navShop .logo,.pdTopBar .logo{font-size:20px;font-weight:600;letter-spacing:4px;line-height:1.2;margin:0}
