@@ -67,7 +67,7 @@ export default function HubTiles({ gender, path, subs }) {
     <>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, margin: '4px 0 16px', flexWrap: 'wrap' }}>
         <button
-          onClick={toggleBox}
+          onClick={toggleBox} className="filterBtnOff"
           style={{ ...pillStyle, padding: '9px 16px', letterSpacing: '.5px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}
         >
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2">

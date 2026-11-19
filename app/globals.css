@@ -2151,3 +2151,10 @@ nav.navShop .logo,.pdTopBar .logo{font-size:20px;font-weight:600;letter-spacing:
 @keyframes vtIn{from{opacity:0}to{opacity:1}}
 :root:has(#productPanel)::view-transition-old(root){animation:vtOut .16s ease-out both;mix-blend-mode:normal}
 :root:has(#productPanel)::view-transition-new(root){animation:vtIn .3s cubic-bezier(.22,.61,.36,1) .1s both;mix-blend-mode:normal}
+
+/* no filter button on product lists; sort stays on the right */
+.filterBtnOff{display:none!important}
+.sortSelect{margin-left:auto}
+
+/* product / category tiles: sharp square corners (3:4 ratio stays) */
+.hubTiles .category{border-radius:0}
