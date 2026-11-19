@@ -2158,3 +2158,6 @@ nav.navShop .logo,.pdTopBar .logo{font-size:20px;font-weight:600;letter-spacing:
 
 /* product / category tiles: sharp square corners (3:4 ratio stays) */
 .hubTiles .category{border-radius:0}
+
+/* product photos: sharp square corners everywhere */
+.productImage,.hubTiles .category,.hubTiles .catText,.hubTiles .leafImg,.cartImg,.miniItem .cartImg,.pdGallery,.pdThumb{border-radius:0!important}
