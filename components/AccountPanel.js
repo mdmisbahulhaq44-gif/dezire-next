@@ -439,7 +439,7 @@ export default function AccountPanel() {
   // Photo of the ordered product; tapping it opens the product instantly (ProductPreview picks up data-preview)
   function orderThumb(o) {
     const p = o.product_id ? orderProds[o.product_id] : null
-    const box = { width: 64, height: 78, borderRadius: 0, overflow: 'hidden', flexShrink: 0, display: 'block', position: 'relative' }
+    const box = { width: 64, height: 73, borderRadius: 0, overflow: 'hidden', flexShrink: 0, display: 'block', position: 'relative' }
     if (!p || !p.img) return <div style={box} />
     return (
       <Link

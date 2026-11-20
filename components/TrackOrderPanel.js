@@ -342,7 +342,7 @@ export default function TrackOrderPanel() {
           const rowProps = r.product_id ? { href: `/product/${r.product_id}`, onClick: () => document.documentElement.setAttribute('data-acprod', '1') } : {}
           return (
             <Row key={idx} {...rowProps} style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,.08)', cursor: 'pointer', color: 'inherit', textDecoration: 'none' }}>
-              <div style={{ width: 52, height: 62, background: 'var(--cream)', borderRadius: 10, overflow: 'hidden', flexShrink: 0, position: 'relative' }}>
+              <div style={{ width: 54, height: 62, background: 'var(--cream)', borderRadius: 0, overflow: 'hidden', flexShrink: 0, position: 'relative' }}>
                 {img ? <Image src={cldOpt(img, 150)} alt="" fill sizes="52px" style={{ objectFit: 'cover' }} loading="lazy" quality={75} /> : null}
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
