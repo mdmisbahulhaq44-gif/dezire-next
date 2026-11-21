@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { supabase } from '../lib/supabaseClient'
 import { COUNTRIES, findCountry, flagOf, nationalDigits, validatePhone, phoneEmail } from '../lib/countries'
 
@@ -48,11 +49,11 @@ const CSS = `
 .phRef.open{max-height:64px;opacity:1}
 .phRef input{padding:9px 14px;font-size:13px;letter-spacing:3px;text-transform:uppercase;border-radius:11px}
 .phSheetBg{position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;justify-content:center;animation:phFade .18s ease}
-.phSheet{background:#fff;width:100%;max-width:520px;max-height:82vh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;animation:phUp .24s cubic-bezier(.22,.61,.36,1)}
+.phSheet{box-sizing:border-box;min-width:0;background:#fff;width:100%;max-width:520px;max-height:82vh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;animation:phUp .24s cubic-bezier(.22,.61,.36,1)}
 .phSheetHead{padding:14px 16px 8px;display:flex;align-items:center;gap:10px}
 .phSheetHead b{font-size:15px;flex:1}
 .phSheetHead button{border:0;background:transparent;font-size:22px;line-height:1;color:#666;padding:4px 8px;cursor:pointer}
-.phSheet .phSearch{margin:0 16px 8px;padding:11px 14px;border:1px solid #ddd;border-radius:12px;font:inherit;font-size:14px;outline:none}
+.phSheet .phSearch{box-sizing:border-box;width:calc(100% - 32px);margin:0 16px 8px;padding:11px 14px;border:1px solid #ddd;border-radius:12px;font:inherit;font-size:14px;outline:none}
 .phList{overflow:auto;-webkit-overflow-scrolling:touch;padding:0 6px 14px;overscroll-behavior:contain}
 .phItem{display:flex;align-items:center;gap:12px;width:100%;border:0;background:transparent;text-align:left;padding:12px 12px;font:inherit;font-size:14px;color:#111;border-radius:10px;cursor:pointer}
 .phItem:active{background:#f4f4f4}
@@ -115,7 +116,7 @@ function PhoneField({ country, setCountry, value, setValue, inputRef, onEnter, e
         />
       </div>
       {error ? <div className="phHint">{error}</div> : null}
-      {open && <CountrySheet current={country} onClose={() => setOpen(false)} onPick={c => { setCountry(c); setOpen(false) }} />}
+      {open && createPortal(<CountrySheet current={country} onClose={() => setOpen(false)} onPick={c => { setCountry(c); setOpen(false) }} />, document.body)}
     </>
   )
 }
