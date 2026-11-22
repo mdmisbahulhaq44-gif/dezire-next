@@ -2173,3 +2173,11 @@ nav.navShop .logo,.pdTopBar .logo{font-size:20px;font-weight:600;letter-spacing:
 
 /* sort dropdown hidden */
 .sortSelect{display:none!important}
+
+/* footer: one white colour, only a thin line above copyright (like gorurghash) */
+footer:has(.footergrid),footer:has(.footergrid) .copy,.pdFooter footer .copy{background:#fff!important}
+footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5}
+
+/* footer: one white colour, only a thin line above copyright (like gorurghash) */
+footer:has(.footergrid),footer:has(.footergrid) .copy,.pdFooter footer .copy{background:#fff!important}
+footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5}
