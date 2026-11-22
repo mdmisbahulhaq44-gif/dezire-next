@@ -6,6 +6,7 @@ import { cldOpt } from '../lib/cloudinary'
 import { buildShopPath } from '../lib/categories'
 import Money from './Money'
 import { useShop } from './ShopContext'
+import SortMenu from './SortMenu'
 
 // Category page whose tiles are single products: same FILTER + sort as the
 // other product listings, tiles keep their look.
@@ -75,11 +76,7 @@ export default function HubTiles({ gender, path, subs }) {
           </svg>
           {t('FILTER')}{activeCount > 0 ? ` (${activeCount})` : ''}
         </button>
-        <select className="sortSelect" value={sort} onChange={e => setSort(e.target.value)} style={pillStyle}>
-          <option value="newest">{t('Newest First')}</option>
-          <option value="price_low">{t('Price: Low to High')}</option>
-          <option value="price_high">{t('Price: High to Low')}</option>
-        </select>
+        <SortMenu value={sort} onChange={setSort} t={t} />
       </div>
 
       {boxOpen && (
