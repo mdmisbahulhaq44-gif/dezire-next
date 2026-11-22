@@ -6,11 +6,11 @@ import { getRecent } from '../lib/recent'
 import ProductGrid from './ProductGrid'
 import T from './T'
 
-export default function RecentlyViewed() {
+export default function RecentlyViewed({ exclude, compact }) {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    const ids = getRecent().slice(0, 4)
+    const ids = getRecent().filter(x => String(x) !== String(exclude)).slice(0, 4)
     if (!ids.length) return
     let alive = true
     supabase
@@ -26,6 +26,15 @@ export default function RecentlyViewed() {
   }, [])
 
   if (!products.length) return null
+
+  if (compact) {
+    return (
+      <div style={{ borderTop: '1px solid rgba(0,0,0,.08)', marginTop: 30, paddingTop: 20 }}>
+        <div className="pdRelTitle"><T>Recently Viewed Products</T></div>
+        <ProductGrid products={products} noPreview />
+      </div>
+    )
+  }
 
   return (
     <>
