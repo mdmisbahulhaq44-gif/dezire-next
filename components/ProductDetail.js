@@ -177,6 +177,8 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const [thumbMore, setThumbMore] = useState(false)
   const [zoomOpen, setZoomOpen] = useState(false)
   const [ratios, setRatios] = useState({})
+  const [galAnim, setGalAnim] = useState(false)
+  useEffect(() => { const id = setTimeout(() => setGalAnim(true), 700); return () => clearTimeout(id) }, [])
   function setRatio(i, el) {
     if (!el || !el.naturalWidth || !el.naturalHeight) return
     const r = el.naturalWidth / el.naturalHeight
@@ -367,7 +369,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
       <div className={`panel${shown ? ' show' : ''}`} id="productPanel" ref={panelRef} style={{ overscrollBehavior: 'contain' }}>
         <PdTopBar onBack={closeProduct} />
 
-        <div className="pdGallery" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ aspectRatio: ratios[index] || 1, background: '#fff' }}>
+        <div className="pdGallery" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ aspectRatio: ratios[index] || 1, background: '#fff', transition: galAnim ? 'aspect-ratio .3s ease' : 'none' }}>
           <div className="pdGalleryTrack" style={{ transform: `translateX(-${index * 100}%)` }}>
             {images.length ? images.map((url, i) => (
               <div className="pdSlide" key={i}>
