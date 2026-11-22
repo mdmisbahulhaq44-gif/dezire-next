@@ -2181,3 +2181,9 @@ footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5}
 /* footer: one white colour, only a thin line above copyright (like gorurghash) */
 footer:has(.footergrid),footer:has(.footergrid) .copy,.pdFooter footer .copy{background:#fff!important}
 footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5}
+
+/* product page related cards: like gorurghash (small grey name wrapping to more lines, bold price, black square "Select options") */
+#productPanel .product h3{font-size:13px;font-weight:400;color:#666;line-height:1.55;margin:12px 0 4px;padding-right:22px;-webkit-line-clamp:4}
+#productPanel .product .price{font-size:13px;font-weight:700;color:#111;padding-right:22px}
+#productPanel .product .buyNow{display:inline-flex;align-items:center;justify-content:center;margin-top:12px;padding:11px 18px;background:#111;color:#fff;border:0;border-radius:0;font-size:0;letter-spacing:0;line-height:1;text-transform:none}
+#productPanel .product .buyNow::after{content:"Select options";font-size:13px;font-weight:500;color:#fff}
