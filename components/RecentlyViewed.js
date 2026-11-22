@@ -15,7 +15,7 @@ export default function RecentlyViewed({ exclude, compact }) {
     let alive = true
     supabase
       .from('products')
-      .select('id,name,price,old,badge,imgs,stock')
+      .select('id,name,price,old,badge,imgs,stock,cat')
       .in('id', ids)
       .then(({ data }) => {
         if (!alive || !data) return
@@ -31,7 +31,7 @@ export default function RecentlyViewed({ exclude, compact }) {
     return (
       <div style={{ borderTop: '1px solid rgba(0,0,0,.08)', marginTop: 30, paddingTop: 20 }}>
         <div className="pdRelTitle"><T>Recently Viewed Products</T></div>
-        <ProductGrid products={products} noPreview />
+        <ProductGrid products={products} noPreview detailed />
       </div>
     )
   }

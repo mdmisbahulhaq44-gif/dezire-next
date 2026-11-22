@@ -53,6 +53,30 @@ const pillStyle = {
   background: 'white'
 }
 
+function SortMenu({ value, onChange, t }) {
+  const [open, setOpen] = useState(false)
+  const opts = [['newest', 'Newest First'], ['price_low', 'Price: Low to High'], ['price_high', 'Price: High to Low']]
+  const cur = opts.find(o => o[0] === value) || opts[0]
+  return (
+    <div className="sortWrap">
+      <button type="button" className={`sortBtn${open ? ' open' : ''}`} onClick={() => setOpen(o => !o)} aria-haspopup="listbox" aria-expanded={open}>
+        <span>{t(cur[1])}</span>
+        <svg viewBox="0 0 12 8" fill="none" stroke="#111" strokeWidth="1.6" aria-hidden="true"><path d="M1 1l5 5 5-5" /></svg>
+      </button>
+      {open && <div className="sortBg" onClick={() => setOpen(false)} />}
+      {open && (
+        <div className="sortList" role="listbox">
+          {opts.map(o => (
+            <button type="button" key={o[0]} role="option" aria-selected={o[0] === value} className={o[0] === value ? 'on' : ''} onClick={() => { onChange(o[0]); setOpen(false) }}>
+              <span>{t(o[1])}</span><i />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function ShopBrowser({ products, heading, initialGender, hideGenderTabs, breadcrumb }) {
   const { t } = useShop()
   const [gender, setGender] = useState(initialGender || 'ALL')
@@ -166,11 +190,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
             </svg>
             {t('FILTER')}{activeCount > 0 ? ` (${activeCount})` : ''}
           </button>
-          <select className="sortSelect" value={sort} onChange={e => setSort(e.target.value)} style={pillStyle}>
-            <option value="newest">{t('Newest First')}</option>
-            <option value="price_low">{t('Price: Low to High')}</option>
-            <option value="price_high">{t('Price: High to Low')}</option>
-          </select>
+          <SortMenu value={sort} onChange={setSort} t={t} />
         </div>
 
         {boxOpen && (

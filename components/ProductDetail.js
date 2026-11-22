@@ -553,7 +553,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           {related.length > 0 && (
             <div style={{ borderTop: '1px solid rgba(0,0,0,.08)', marginTop: 30, paddingTop: 20 }}>
               <div className="pdRelTitle">{t('Related products')}</div>
-              <ProductGrid products={related} replaceLinks />
+              <ProductGrid products={related} replaceLinks detailed />
             </div>
           )}
 

@@ -7,7 +7,7 @@ import { parseCatPath, buildShopPath, capitalize } from "../lib/categories"
 
 const SITE = (process.env.NEXT_PUBLIC_SITE_URL || "https://heaven-bd.vercel.app").replace(/\/$/, "")
 
-const CARD_FIELDS = "id,name,brand,price,old,badge,imgs,stock,color_name,color_group"
+const CARD_FIELDS = "id,name,brand,price,old,badge,imgs,stock,color_name,color_group,cat"
 
 export default async function ProductView({ id }) {
   const product = await getProduct(id)

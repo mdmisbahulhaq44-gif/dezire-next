@@ -4,7 +4,23 @@ import { cldOpt } from "../lib/cloudinary"
 import Money from "./Money"
 import T from "./T"
 
-export default function ProductGrid({ products, replaceLinks, noPreview, tiles }) {
+function twoWords(name) {
+  const w = String(name || '').trim().split(/\s+/)
+  const out = []
+  for (let i = 0; i < w.length; i += 2) {
+    if (i) out.push(<br key={i} />)
+    out.push(w.slice(i, i + 2).join(' '))
+  }
+  return out
+}
+
+function lastCat(p) {
+  const parts = String(p.cat || '').split('/').map(x => x.trim()).filter(Boolean)
+  if (parts.length && parts[parts.length - 1].toLowerCase() === String(p.name || '').trim().toLowerCase()) parts.pop()
+  return parts.length ? parts[parts.length - 1] : ''
+}
+
+export default function ProductGrid({ products, replaceLinks, noPreview, tiles, detailed }) {
   if (!products.length) {
     return <div className="empty"><T>No products available right now.</T></div>
   }
@@ -81,7 +97,8 @@ export default function ProductGrid({ products, replaceLinks, noPreview, tiles }
                 <div className="placeholder">👕</div>
               )}
             </div>
-            <h3>{p.name}</h3>
+            <h3 className={detailed ? "pName2" : undefined}>{detailed ? twoWords(p.name) : p.name}</h3>
+            {detailed && lastCat(p) && <div className="pCatLine">{lastCat(p)}</div>}
             <div className="price">
               <Money n={p.price} />{" "}
               {p.old && <span className="old"><Money n={p.old} /></span>}

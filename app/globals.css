@@ -2187,3 +2187,23 @@ footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5}
 #productPanel .product .price{font-size:13px;font-weight:700;color:#111;padding-right:22px}
 #productPanel .product .buyNow{display:inline-flex;align-items:center;justify-content:center;margin-top:12px;padding:11px 18px;background:#111;color:#fff;border:0;border-radius:0;font-size:0;letter-spacing:0;line-height:1;text-transform:none}
 #productPanel .product .buyNow::after{content:"Select options";font-size:13px;font-weight:500;color:#fff}
+
+/* sort menu: no border, arrow right after the text, tap highlight, white square list */
+.sortWrap{position:relative;margin-left:auto}
+.sortBtn{display:flex;align-items:center;gap:9px;background:transparent;border:0;border-radius:0;padding:10px 8px 10px 10px;font:inherit;font-size:13px;color:#333;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .15s}
+.sortBtn:active,.sortBtn.open{background:#ececec}
+.sortBtn svg{width:11px;height:8px;transition:transform .2s}
+.sortBtn.open svg{transform:rotate(180deg)}
+.sortBg{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.22);animation:sortFade .15s ease}
+.sortList{position:absolute;right:0;top:calc(100% + 6px);z-index:61;min-width:236px;background:#fff;border:1px solid #e3e3e3;border-radius:0;box-shadow:0 10px 28px rgba(0,0,0,.16);animation:sortFade .15s ease}
+.sortList button{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;padding:15px 16px;background:#fff;border:0;border-bottom:1px solid #eee;border-radius:0;font:inherit;font-size:14px;color:#222;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sortList button:last-child{border-bottom:0}
+.sortList button:active{background:#f3f3f3}
+.sortList button.on{font-weight:600;color:#111}
+.sortList button i{flex:none;width:14px;height:14px;border:1.5px solid #999;border-radius:0}
+.sortList button.on i{border-color:#111;background:#111;box-shadow:inset 0 0 0 2.5px #fff}
+@keyframes sortFade{from{opacity:0}to{opacity:1}}
+
+/* product page cards: name max 2 words per line, small grey category under it */
+#productPanel .product h3.pName2{-webkit-line-clamp:unset;display:block;overflow:visible;padding-right:0}
+#productPanel .product .pCatLine{font-size:12px;color:#888;line-height:1.5;margin:0 0 5px}
