@@ -67,6 +67,7 @@ export default function HubTiles({ gender, path, subs }) {
   return (
     <>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, margin: '4px 0 16px', flexWrap: 'wrap' }}>
+        <div className="resCount">{visible.length === 1 ? t('Showing the single result') : t('Showing all {n} results', { n: visible.length })}</div>
         <button
           onClick={toggleBox} className="filterBtnOff"
           style={{ ...pillStyle, padding: '9px 16px', letterSpacing: '.5px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}

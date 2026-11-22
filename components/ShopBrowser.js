@@ -181,7 +181,8 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginBottom: 16, flexWrap: 'wrap' }}>
-          <button
+          <div className="resCount">{visible.length === 1 ? t('Showing the single result') : t('Showing all {n} results', { n: visible.length })}</div>
+        <button
             onClick={toggleBox} className="filterBtnOff"
             style={{ ...pillStyle, padding: '9px 16px', letterSpacing: '.5px', display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}
           >

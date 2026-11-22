@@ -2207,3 +2207,10 @@ footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5}
 /* product page cards: name max 2 words per line, small grey category under it */
 #productPanel .product h3.pName2{-webkit-line-clamp:unset;display:block;overflow:visible;padding-right:0}
 #productPanel .product .pCatLine{font-size:12px;color:#888;line-height:1.5;margin:0 0 5px}
+
+/* list pages like gorurghash: "Showing all N results", then sort on the left */
+.resCount{flex:0 0 100%;font-size:16px;font-weight:300;color:#222;margin:6px 0 18px}
+.sortWrap{margin-left:0!important;flex:0 0 min(62%,270px)}
+.sortBtn{width:100%;justify-content:space-between;padding:13px 14px;font-size:15px;font-weight:300;color:#555}
+.sortBtn:active,.sortBtn.open{background:#ececec;outline:1px dotted #555;outline-offset:-1px}
+.sortList{left:0;right:auto;min-width:100%}
