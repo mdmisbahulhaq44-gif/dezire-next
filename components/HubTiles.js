@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { cldOpt } from '../lib/cloudinary'
 import { buildShopPath } from '../lib/categories'
 import Money from './Money'
@@ -11,6 +12,16 @@ import SortMenu from './SortMenu'
 // Category page whose tiles are single products: same FILTER + sort as the
 // other product listings, tiles keep their look.
 const EMPTY = { min: '', max: '', sizes: [], inStock: false }
+
+function twoWords(name) {
+  const w = String(name || '').trim().split(/\s+/)
+  const out = []
+  for (let i = 0; i < w.length; i += 2) {
+    if (i) out.push(<br key={i} />)
+    out.push(w.slice(i, i + 2).join(' '))
+  }
+  return out
+}
 
 const pillStyle = {
   border: '1px solid var(--line)',
@@ -130,26 +141,28 @@ export default function HubTiles({ gender, path, subs }) {
       {visible.length === 0 ? (
         <div className="empty">{t('No products match these filters.')}</div>
       ) : (
-        <div className="hubTiles">
-          {visible.map(s => (
-            <Link
-              key={s.seg}
-              href={s.count === 1 && s.id ? `/product/${s.id}` : buildShopPath(gender, [...path, s.seg])}
-              className="category"
-              style={
-                s.image
-                  ? { backgroundImage: `url('${cldOpt(s.image, 700).replace(/'/g, "%27")}')` }
-                  : { background: '#1a1a1a' }
-              }
-            >
-              <div className="catText">
-                <h3>{t(s.seg)}</h3>
-                {s.count === 1
-                  ? (s.minPrice !== null ? <span><Money n={s.minPrice} /></span> : null)
-                  : <span>{t('{n} PRODUCTS', { n: s.count })}{s.minPrice !== null ? <> · {t('FROM')} <Money n={s.minPrice} /></> : ''}</span>}
-              </div>
-            </Link>
-          ))}
+        <div className="listCards">
+          <div className="products">
+            {visible.map(s => (
+              <Link
+                key={s.seg}
+                href={s.count === 1 && s.id ? `/product/${s.id}` : buildShopPath(gender, [...path, s.seg])}
+                className="product"
+              >
+                <div className="productImage" style={{ position: 'relative' }}>
+                  {s.image ? (
+                    <Image src={cldOpt(s.image, 500)} alt={s.seg} fill sizes="(min-width:901px) 25vw, 50vw" style={{ objectFit: 'cover' }} loading="lazy" quality={75} />
+                  ) : (
+                    <div className="placeholder">👕</div>
+                  )}
+                </div>
+                <h3 className="pName2">{twoWords(s.seg)}</h3>
+                {path.length > 0 && <div className="pCatLine">{path[path.length - 1]}</div>}
+                {s.minPrice !== null && <div className="price"><Money n={s.minPrice} /></div>}
+                <span className="buyNow">{t('Buy Now')}</span>
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </>
