@@ -2214,3 +2214,15 @@ footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5}
 .sortBtn{width:100%;justify-content:space-between;padding:13px 14px;font-size:15px;font-weight:300;color:#555}
 .sortBtn:active,.sortBtn.open{background:#ececec;outline:1px dotted #555;outline-offset:-1px}
 .sortList{left:0;right:auto;min-width:100%}
+
+/* sub-category pages like gorurghash: thin title, square photo cards with name / grey category / price / black Select options */
+.pgTitle,#categoryHub .heading h2{font-weight:300!important;text-transform:none!important;letter-spacing:0!important;color:#444;font-size:28px!important;line-height:1.3}
+.listCards .products{gap:34px 16px}
+.listCards .productImage{aspect-ratio:1/1;border-radius:0!important;background:#fff}
+.listCards .product h3{font-size:13px;font-weight:400;color:#666;line-height:1.55;margin:12px 0 4px;padding-right:0}
+.listCards .product h3.pName2{-webkit-line-clamp:unset;display:block;overflow:visible}
+.listCards .product .pCatLine{font-size:12px;color:#888;line-height:1.5;margin:0 0 5px}
+.listCards .product .price{font-size:13px;font-weight:700;color:#111}
+.listCards .product .buyNow{display:inline-flex;align-items:center;justify-content:center;margin-top:12px;padding:11px 18px;background:#111;color:#fff;border:0;border-radius:0;font-size:0;letter-spacing:0;line-height:1;text-transform:none}
+.listCards .product .buyNow::after{content:"Select options";font-size:13px;font-weight:500;color:#fff}
+#productPanel .productImage{background:#fff}

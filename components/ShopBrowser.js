@@ -162,7 +162,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
     <div>
       <div style={{ padding: '30px 5% 10px' }}>
         {breadcrumb}
-        <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1 }}>
+        <h2 className="pgTitle" style={{ fontSize: 24, fontWeight: 800, textTransform: 'uppercase', letterSpacing: 1 }}>
           {t(heading)}
         </h2>
       </div>
@@ -265,7 +265,7 @@ export default function ShopBrowser({ products, heading, initialGender, hideGend
         )}
 
         <div ref={gridTop} />
-        <ProductGrid products={pageItems} noPreview tiles />
+        <div className="listCards"><ProductGrid products={pageItems} noPreview detailed /></div>
 
         {totalPages > 1 && (
           <nav
