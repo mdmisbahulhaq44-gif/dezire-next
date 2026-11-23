@@ -2226,3 +2226,12 @@ footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5}
 .listCards .product .buyNow{display:inline-flex;align-items:center;justify-content:center;margin-top:12px;padding:11px 18px;background:#111;color:#fff;border:0;border-radius:0;font-size:0;letter-spacing:0;line-height:1;text-transform:none}
 .listCards .product .buyNow::after{content:"Select options";font-size:13px;font-weight:500;color:#fff}
 #productPanel .productImage{background:#fff}
+
+/* quantity: [ - | 1 | + ] square box like the reference */
+.pdQtyBox{display:flex;align-items:stretch;flex:none;height:42px;border:1px solid #ddd;border-radius:0;background:#fff}
+.pdQtyBox button{width:42px;border:0;border-radius:0;background:transparent;font:inherit;font-size:20px;line-height:1;color:#555;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pdQtyBox button:active{background:#f1f1f1}
+.pdQtyBox .pdQty{width:44px;height:auto;border:0;border-left:1px solid #ddd;border-right:1px solid #ddd}
+
+/* Description / Additional information: blue heading and icon like the reference */
+.pdAccHead,.pdAccBox.open > .pdAccHead{color:#306cae}

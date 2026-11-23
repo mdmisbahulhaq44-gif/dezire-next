@@ -165,7 +165,13 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const addRef = useRef(null)
   const sizeRef = useRef(null)
   const [qty, setQty] = useState(1)
-  const qtyNum = () => Math.max(1, parseInt(qty, 10) || 1)
+  const maxQty = Number(product.stock) > 0 ? Number(product.stock) : 99
+  const qtyNum = () => Math.min(maxQty, Math.max(1, parseInt(qty, 10) || 1))
+  function stepQty(d) {
+    const cur = Math.max(1, parseInt(qty, 10) || 1)
+    if (d > 0 && cur >= maxQty) { showToast(t('Only {n} left in stock!', { n: maxQty })); return }
+    setQty(Math.min(maxQty, Math.max(1, cur + d)))
+  }
   const [chartOpen, setChartOpen] = useState(false)
   const [reviews, setReviews] = useState(null) // null = loading, 'error' = failed
   const [session, setSession] = useState(undefined) // undefined = not checked yet
@@ -504,7 +510,11 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           <div className="pdAvail">{t('Availability:')}</div>
           <div className="pdBuyRow">
-            <input className="pdQty" type="text" inputMode="numeric" pattern="[0-9]*" value={qty} onChange={e => setQty(e.target.value.replace(/[^0-9]/g, '').slice(0, 3))} onBlur={() => setQty(qtyNum())} aria-label="Quantity" />
+            <div className="pdQtyBox">
+              <button type="button" aria-label="Decrease quantity" onClick={() => stepQty(-1)}>−</button>
+              <input className="pdQty" type="text" inputMode="numeric" pattern="[0-9]*" value={qty} onChange={e => setQty(e.target.value.replace(/[^0-9]/g, '').slice(0, 3))} onBlur={() => setQty(qtyNum())} aria-label="Quantity" />
+              <button type="button" aria-label="Increase quantity" onClick={() => stepQty(1)}>+</button>
+            </div>
             <button ref={addRef} className="btn pdAddBtn" disabled={!inStock} onClick={handleAddToCart}>
               {inStock ? t('Add to cart') : t('Out of stock')}
             </button>
