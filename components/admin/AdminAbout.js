@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
 import { useShop } from '../ShopContext'
 import { ytId } from '../../lib/ytId'
+import { siteInfo } from '../../lib/siteInfo'
 
 const head = { display: 'block', fontSize: 12, fontWeight: 700, letterSpacing: '.5px', marginBottom: 8 }
 const note = { fontSize: 12, color: 'var(--muted)', marginBottom: 14, lineHeight: 1.7 }
@@ -106,7 +107,7 @@ function PressEditor({ showToast }) {
   const [saved] = useSetting('about_press')
   const [rows, setRows] = useState(null)
   useEffect(() => {
-    if (saved && rows === null) setRows(saved.map(p => ({ name: p.name || '', logo: p.logo || '', url: p.url || '' })))
+    if (saved && rows === null) setRows(saved.map(p => ({ url: p.url || '', name: p.name || '', logo: p.logo || '' })))
   }, [saved, rows])
   if (rows === null) return <p style={{ fontSize: 12, color: 'var(--muted)' }}>Loading...</p>
 
@@ -116,12 +117,11 @@ function PressEditor({ showToast }) {
     const out = []
     for (let i = 0; i < rows.length; i++) {
       const r = rows[i]
-      const name = r.name.trim(), logo = r.logo.trim(), url = r.url.trim()
-      if (!name && !logo && !url) continue
-      if (!name) { showToast(`Logo ${i + 1}: please type the newspaper / site name.`); return }
-      if (!/^https?:\/\//i.test(logo)) { showToast(`Logo ${i + 1}: the LOGO IMAGE LINK must start with https://`); return }
-      if (url && !/^https?:\/\//i.test(url)) { showToast(`Logo ${i + 1}: the website link must start with https://`); return }
-      out.push({ name, logo, url })
+      const url = r.url.trim(), name = r.name.trim(), logo = r.logo.trim()
+      if (!url && !name && !logo) continue
+      if (!siteInfo(url).host) { showToast(`Item ${i + 1}: please paste the article link (it must start with https://).`); return }
+      if (logo && !/^https?:\/\//i.test(logo)) { showToast(`Item ${i + 1}: the custom logo link must start with https://`); return }
+      out.push({ url, name, logo })
     }
     const { error } = await saveSetting('about_press', out)
     if (error) { showToast('Could not save: ' + (error.message || 'Unknown error')); return }
@@ -131,34 +131,43 @@ function PressEditor({ showToast }) {
 
   return (
     <div style={{ maxWidth: 520 }}>
-      <label style={head}>2. FEATURED ON (NEWSPAPER / WEBSITE LOGOS)</label>
+      <label style={head}>2. FEATURED ON (NEWS / WEBSITES)</label>
       <p style={note}>
-        Logos of newspapers, magazines or websites that really wrote about HEAVEN. They show in two columns on the About Us page under "Featured On". Please add only places that truly featured you. If you add nothing, this section stays hidden.
+        Add the newspapers, magazines or websites that really wrote about HEAVEN. Just paste the link of the article. The website icon and name are taken automatically, so you do not need to upload any logo. They show on the About Us page two per row, and the list grows downwards as you add more. If you add nothing, this section stays hidden.
       </p>
-      <Steps title="HOW TO ADD A LOGO" items={[
-        'Get the logo as a picture (PNG with a clear / white background looks best).',
-        'Upload the picture to Cloudinary, then copy the image link (it starts with https://res.cloudinary.com/...).',
-        'Tap "+ ADD LOGO" below.',
-        'Type the name in NAME, paste the picture link in LOGO IMAGE LINK.',
-        'Optional: paste the link of the article in ARTICLE LINK, so tapping the logo opens it.',
+      <Steps title="HOW TO ADD" items={[
+        'Open the article that mentions HEAVEN and copy its link from the browser.',
+        'Tap "+ ADD ITEM" below (tap it again for each new article - you can add as many as you like).',
+        'Paste the link in ARTICLE LINK. The website icon and name appear right away as a preview.',
+        'Optional: if you want a different name, type it in NAME.',
+        'Optional: if the automatic icon looks too small, paste your own logo picture link in CUSTOM LOGO LINK.',
         'Tap SAVE FEATURED ON.'
       ]} />
-      {rows.map((r, i) => (
-        <div key={i} style={card}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-            <b style={{ fontSize: 12, letterSpacing: '.5px' }}>LOGO {i + 1}</b>
-            <button type="button" style={rm} onClick={() => setRows(p => p.filter((_, x) => x !== i))}>Remove</button>
+      {rows.map((r, i) => {
+        const info = siteInfo(r.url, r.name, r.logo)
+        return (
+          <div key={i} style={card}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+              <b style={{ fontSize: 12, letterSpacing: '.5px' }}>ITEM {i + 1}</b>
+              <button type="button" style={rm} onClick={() => setRows(p => p.filter((_, x) => x !== i))}>Remove</button>
+            </div>
+            {info.host ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10, background: '#f7f7f5', borderRadius: 8, padding: 10 }}>
+                {info.icon ? <img src={info.icon} alt="" style={{ width: 40, height: 40, objectFit: 'contain' }} /> : null}
+                <span style={{ fontSize: 13 }}>{info.name}</span>
+              </div>
+            ) : null}
+            <label style={lbl}>ARTICLE LINK</label>
+            <input type="text" value={r.url} onChange={e => upd(i, 'url', e.target.value)} placeholder="https://www.example.com/article..." style={{ marginBottom: 6 }} />
+            {r.url.trim() && !info.host ? <div style={{ fontSize: 11, color: 'var(--red)', marginBottom: 8 }}>This does not look like a web link (start with https://).</div> : null}
+            <label style={lbl}>NAME (OPTIONAL - AUTOMATIC IF EMPTY)</label>
+            <input type="text" value={r.name} onChange={e => upd(i, 'name', e.target.value)} placeholder="e.g. The Daily Star" style={{ marginBottom: 10 }} />
+            <label style={lbl}>CUSTOM LOGO LINK (OPTIONAL)</label>
+            <input type="text" value={r.logo} onChange={e => upd(i, 'logo', e.target.value)} placeholder="https://res.cloudinary.com/..." />
           </div>
-          {r.logo ? <img src={r.logo} alt="" style={{ width: '100%', maxHeight: 90, objectFit: 'contain', marginBottom: 10, background: '#f7f7f5', borderRadius: 8 }} onError={e => { e.currentTarget.style.display = 'none' }} /> : null}
-          <label style={lbl}>NAME (e.g. The Daily Star)</label>
-          <input type="text" value={r.name} onChange={e => upd(i, 'name', e.target.value)} style={{ marginBottom: 10 }} />
-          <label style={lbl}>LOGO IMAGE LINK</label>
-          <input type="text" value={r.logo} onChange={e => upd(i, 'logo', e.target.value)} placeholder="https://res.cloudinary.com/..." style={{ marginBottom: 10 }} />
-          <label style={lbl}>ARTICLE LINK (OPTIONAL)</label>
-          <input type="text" value={r.url} onChange={e => upd(i, 'url', e.target.value)} placeholder="https://..." />
-        </div>
-      ))}
-      <button type="button" style={addBtn} onClick={() => setRows(p => [...p, { name: '', logo: '', url: '' }])}>+ ADD LOGO</button>
+        )
+      })}
+      <button type="button" style={addBtn} onClick={() => setRows(p => [...p, { url: '', name: '', logo: '' }])}>+ ADD ITEM</button>
       <button className="btn" onClick={save}>SAVE FEATURED ON</button>
     </div>
   )

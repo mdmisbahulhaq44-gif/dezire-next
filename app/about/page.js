@@ -2,6 +2,7 @@ import T from '../../components/T'
 import YouTubeLite from '../../components/YouTubeLite'
 import { supabaseServer as supabase } from '../../lib/supabaseServer'
 import { ytId } from '../../lib/ytId'
+import { siteInfo } from '../../lib/siteInfo'
 
 export const revalidate = 60
 
@@ -22,7 +23,7 @@ async function getList(key) {
 export default async function AboutPage() {
   const [vids, pressRaw, legalRaw] = await Promise.all([getList('about_videos'), getList('about_press'), getList('about_legal')])
   const videos = vids.map(v => ({ id: ytId(v.id), title: v.title || '' })).filter(v => v.id)
-  const press = pressRaw.filter(p => p && p.name && /^https?:\/\//i.test(p.logo || ''))
+  const press = pressRaw.map(p => ({ ...siteInfo(p && p.url, p && p.name, p && p.logo), link: p && p.url })).filter(p => p.host || p.icon)
   const legal = legalRaw.map(s => String(s || '').trim()).filter(Boolean)
 
   return (
@@ -48,11 +49,11 @@ export default async function AboutPage() {
         <>
           <h2><T>Featured On</T></h2>
           <div className="abPress">
-            {press.map(p => {
-              const img = <img src={p.logo} alt={p.name} loading="lazy" />
-              return /^https?:\/\//i.test(p.url || '')
-                ? <a key={p.name + p.logo} href={p.url} target="_blank" rel="noopener noreferrer">{img}</a>
-                : <span key={p.name + p.logo}>{img}</span>
+            {press.map((p, i) => {
+              const inner = <><img src={p.icon} alt={p.name} loading="lazy" /><em>{p.name}</em></>
+              return /^https?:\/\//i.test(p.link || '')
+                ? <a key={i} href={p.link} target="_blank" rel="noopener noreferrer">{inner}</a>
+                : <span key={i}>{inner}</span>
             })}
           </div>
         </>
