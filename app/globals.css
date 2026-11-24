@@ -2235,3 +2235,27 @@ footer:has(.footergrid) .copy{border-top:1px solid #e5e5e5}
 
 /* Description / Additional information: blue heading and icon like the reference */
 .pdAccHead,.pdAccBox.open > .pdAccHead{color:#306cae}
+
+/* About Us page: plain white page under the normal site header (measured from the reference video) */
+body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
+.aboutPg{background:#fff;padding:76px 0 70px;color:#222}
+.aboutPg h1{text-align:center;font-size:32px;font-weight:300;line-height:1.2;letter-spacing:0;margin:0 0 33px;color:#222}
+.aboutPg h2{text-align:center;font-size:24px;font-weight:300;line-height:1.25;letter-spacing:0;margin:56px 0 24px;color:#333}
+.abText{padding:0 8%}
+.abText p{font-size:14px;font-weight:300;line-height:1.5;margin:0 0 15px;color:#111}
+.abText p b{font-weight:600}
+.abVideos{padding:0 8%;display:flex;flex-direction:column;gap:22px}
+.abVideo{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden}
+.abPlay{display:block;position:relative;width:100%;height:100%;padding:0;border:0;border-radius:0;background:#000;cursor:pointer}
+.abPlay img{width:100%;height:100%;object-fit:cover;display:block}
+.abBtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);line-height:0}
+.abVideo iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.abPress{padding:0 8%;display:grid;grid-template-columns:1fr 1fr;gap:34px 18px;align-items:center}
+.abPress a,.abPress span{display:flex;align-items:center;justify-content:center}
+.abPress img{width:100%;max-height:92px;object-fit:contain;display:block}
+.abContact{margin:34px 5.5% 0;padding:20px 5.5% 14px;background:#bcc5d0}
+.abContact h3{font-size:26px;font-weight:300;line-height:1.25;margin:0 0 26px;color:#333;letter-spacing:0}
+.abContact p{font-size:14px;font-weight:300;line-height:1.7;margin:0 0 14px;color:#111}
+.abContact a{color:inherit;text-decoration:none}
+.abLegal{padding:22px 8% 0}
+.abLegal p{font-size:14px;font-weight:300;line-height:1.7;margin:0 0 8px;color:#111}

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, useRef } from 'react'
 import { flushSync } from 'react-dom'
+import { useRouter } from 'next/navigation'
 import { getCart, saveCart, cartCount, cartSubtotal } from '../lib/cart'
 import { formatMoney, USD_RATE } from '../lib/currency'
 import { translate } from '../lib/i18n'
@@ -11,6 +12,7 @@ import { getWishlist, saveWishlist } from '../lib/wishlist'
 const ShopContext = createContext(null)
 
 export function ShopProvider({ children }) {
+  const router = useRouter()
   const [cart, setCart] = useState([])
   const [currency, setCurrencyState] = useState('BDT')
   const [rate, setRate] = useState(USD_RATE)
@@ -300,7 +302,7 @@ export function ShopProvider({ children }) {
     openAccount: () => setPanel('account'),
     openReset: () => setActivePanel('reset'),
     openTrack: () => swapPanel('track'),
-    openAbout: () => swapPanel('about'),
+    openAbout: () => { if (prevPanel.current) keepHistory.current = true; setActivePanel(null); router.push('/about') },
     openInbox: () => swapPanel('inbox'),
     openSuccess: () => setActivePanel('success'),
     closePanel: () => setPanel(null),

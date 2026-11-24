@@ -21,7 +21,7 @@ export default function Footer() {
         <div>
           <h3>HEAVEN</h3>
           <p>{t('Modern fashion with timeless elegance. Discover our latest collections and find your signature style.')}</p>
-          <p><a href="#" onClick={e => { e.preventDefault(); openAbout() }}>{t('About Us')}</a></p>
+          <p><Link href="/about">{t('About Us')}</Link></p>
         </div>
 
         <div>
