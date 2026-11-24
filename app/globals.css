@@ -2265,3 +2265,7 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 .abPress a,.abPress span{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:10px;text-align:center;color:#111;text-decoration:none;min-width:0}
 .abPress img{height:64px!important;width:auto!important;max-width:100%;object-fit:contain}
 .abPress em{font-style:normal;font-size:14px;line-height:1.35;word-break:break-word}
+
+/* Featured On: logo only, no name text */
+.abPress em{display:none!important}
+.abPress img{height:72px!important}
