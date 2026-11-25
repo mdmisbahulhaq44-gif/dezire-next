@@ -2319,3 +2319,7 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 .pdTopRight .pdTopSearch svg{width:18.18px;height:18.18px}
 .pdTopRight .pdTopSearch{transform:translateY(-2.35px);margin-right:-1.11px}
 .pdTopRight .pdTopIc:first-child{margin-right:-1.16px}
+
+/* header search icon v7: a little bolder than the reference so it reads clearly from a distance */
+.pdTopRight .pdTopSearch svg path{stroke:currentColor;stroke-width:.75;stroke-linejoin:round;paint-order:stroke}
+.pdTopRight .pdTopSearch{color:#000}
