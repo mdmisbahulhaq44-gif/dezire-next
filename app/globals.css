@@ -2314,3 +2314,8 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 
 /* user icon: body centred under the head (a 0.27px shift) */
 .pdTopRight .pdTopIc:first-child svg{overflow:visible}
+
+/* header search icon v6: traced from the reference, so positions are re-aligned */
+.pdTopRight .pdTopSearch svg{width:18.18px;height:18.18px}
+.pdTopRight .pdTopSearch{transform:translateY(-2.35px);margin-right:-1.11px}
+.pdTopRight .pdTopIc:first-child{margin-right:-1.16px}
