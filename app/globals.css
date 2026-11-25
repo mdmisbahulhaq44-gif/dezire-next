@@ -2311,3 +2311,6 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 /* header icons v5: search lens a little smaller, ring a little thicker, handle slightly thinner (measured from the reference) */
 .pdTopRight .pdTopSearch svg circle{stroke-width:2.35}
 .pdTopRight .pdTopSearch svg path{stroke-width:2.47}
+
+/* user icon: body centred under the head (a 0.27px shift) */
+.pdTopRight .pdTopIc:first-child svg{overflow:visible}
