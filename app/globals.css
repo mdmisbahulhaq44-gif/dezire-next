@@ -2307,3 +2307,7 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 /* header icons v4: search stroke weight and handle matched to the reference */
 .pdTopRight .pdTopSearch svg circle{stroke-width:2.25}
 .pdTopRight .pdTopSearch svg path{stroke-width:2.55}
+
+/* header icons v5: search lens a little smaller, ring a little thicker, handle slightly thinner (measured from the reference) */
+.pdTopRight .pdTopSearch svg circle{stroke-width:2.35}
+.pdTopRight .pdTopSearch svg path{stroke-width:2.47}

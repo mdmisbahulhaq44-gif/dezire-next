@@ -43,7 +43,7 @@ export default function Header() {
           <svg viewBox="0 0 53 53" fill="currentColor"><defs><mask id="hdUserMask"><rect width="53" height="53" fill="#fff" /><circle cx="26.5" cy="14" r="17.75" fill="#000" /></mask></defs><circle cx="26.5" cy="14" r="14" /><path mask="url(#hdUserMask)" d="M0 51.3A26.5 24.3 0 0 1 53 51.3Q53 52.5 51.7 52.5H1.3Q0 52.5 0 51.3Z" /></svg>
         </button>
         <button type="button" className="pdTopIc pdTopSearch" onClick={() => { closeDrawer(); openSearch() }} aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round"><circle cx="10" cy="10" r="7" strokeWidth="2.7" /><path d="M15.2 15.2L21.9 21.9" strokeWidth="3" strokeLinecap="butt" /></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round"><circle cx="9.65" cy="9.65" r="6.6" strokeWidth="2.7" /><path d="M14.96 15.44L21.66 22.14" strokeWidth="3" strokeLinecap="butt" /></svg>
         </button>
         <button type="button" className={'pdTopMenu' + (drawerOpen ? ' open' : '')} onClick={toggleMenu} aria-label={drawerOpen ? 'Close menu' : 'Open menu'} aria-expanded={drawerOpen}><span /><span /><span /></button>
       </div>
