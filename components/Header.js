@@ -40,7 +40,7 @@ export default function Header() {
       <div className="logo">HEAVEN</div>
       <div className="pdTopRight">
         <button type="button" className="pdTopIc" onClick={openMyAccount} aria-label="My account">
-          <svg viewBox="0 0 53 53" fill="currentColor"><defs><mask id="hdUserMask"><rect width="53" height="53" fill="#fff" /><circle cx="26.5" cy="14.25" r="17.5" fill="#000" /></mask></defs><circle cx="26.5" cy="14.25" r="14.25" /><path mask="url(#hdUserMask)" d="M0 51C0 40 5 29 15.5 29H37.5C48 29 53 40 53 51C53 51.9 52.4 52.5 51.5 52.5H1.5C.6 52.5 0 51.9 0 51Z" /></svg>
+          <svg viewBox="0 0 53 53" fill="currentColor"><defs><mask id="hdUserMask"><rect width="53" height="53" fill="#fff" /><circle cx="26.5" cy="14" r="17.75" fill="#000" /></mask></defs><circle cx="26.5" cy="14" r="14" /><path mask="url(#hdUserMask)" d="M0 51.3A26.5 24.3 0 0 1 53 51.3Q53 52.5 51.7 52.5H1.3Q0 52.5 0 51.3Z" /></svg>
         </button>
         <button type="button" className="pdTopIc pdTopSearch" onClick={() => { closeDrawer(); openSearch() }} aria-label="Search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round"><circle cx="10" cy="10" r="7" strokeWidth="2.7" /><path d="M15.2 15.2L21.9 21.9" strokeWidth="3" strokeLinecap="butt" /></svg>
