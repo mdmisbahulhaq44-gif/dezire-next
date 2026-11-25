@@ -52,7 +52,7 @@ export default async function AboutPage() {
             {press.map((p, i) => {
               const inner = <><img src={p.icon} alt={p.name} loading="lazy" /><em>{p.name}</em></>
               return /^https?:\/\//i.test(p.link || '')
-                ? <a key={i} href={p.link} target="_blank" rel="noopener noreferrer">{inner}</a>
+                ? <a key={i} href={p.link}>{inner}</a>
                 : <span key={i}>{inner}</span>
             })}
           </div>
