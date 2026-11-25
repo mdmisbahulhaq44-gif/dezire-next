@@ -2303,3 +2303,7 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 .pdTopRight .pdTopSearch svg{width:18.2px;height:18.2px}
 .pdTopRight .pdTopSearch svg circle{stroke-width:2.65}
 .pdTopRight .pdTopSearch svg path{stroke-width:3}
+
+/* header icons v4: search stroke weight and handle matched to the reference */
+.pdTopRight .pdTopSearch svg circle{stroke-width:2.25}
+.pdTopRight .pdTopSearch svg path{stroke-width:2.55}
