@@ -2290,3 +2290,9 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 .pdTopRight .pdTopMenu.open span{width:11.4px;height:1.2px}
 .pdTopRight .pdTopMenu.open span:nth-child(1){transform:translateY(1.75px) rotate(45deg)}
 .pdTopRight .pdTopMenu.open span:nth-child(3){transform:translateY(-1.75px) rotate(-45deg)}
+
+/* menu v4: every dotted box is the same size (46x49) and double-ringed like the reference; the groups no longer clip it */
+.navMenu .dtWrap > div{overflow:clip;overflow-clip-margin:8px}
+.navMenu .dtWrap:not(.open) > div{visibility:hidden;transition:visibility 0s linear .3s}
+.navMenu .dtWrap.open > div{visibility:visible;transition:none}
+.navMenu .dtPlus::after,.navMenu .dtWrap .dtPlus::after{inset:.5px 1px -3.5px 1px;border:1px dotted #000;outline:1px dotted #000;outline-offset:0;border-radius:9px}
