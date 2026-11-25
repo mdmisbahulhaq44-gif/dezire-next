@@ -2329,3 +2329,7 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 .pdTopRight .pdTopSearch{color:#000}
 .pdTopRight .pdTopSearch .astraSearch{display:block;position:relative;width:18.18px;height:18.18px}
 .pdTopRight .pdTopSearch .astraSearch::before{content:"\e8b6";font-family:AstraIc;font-size:22px;line-height:1;font-weight:400;font-style:normal;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);-webkit-font-smoothing:antialiased}
+
+/* Home tiles: show each picture at its own ratio, text is part of the picture */
+.categories .category.catNat{aspect-ratio:auto;display:block;padding:0;background:none}
+.categories .category.catNat:after,.categories .category.catNat .catText{display:none}
