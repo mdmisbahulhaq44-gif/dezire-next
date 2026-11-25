@@ -40,7 +40,7 @@ export default function Header() {
       <div className="logo">HEAVEN</div>
       <div className="pdTopRight">
         <button type="button" className="pdTopIc" onClick={openMyAccount} aria-label="My account">
-          <svg viewBox="0 0 53 53" fill="currentColor"><circle cx="26.5" cy="11.5" r="11.5" /><path d="M0 50.5C0 36 11 26 26.5 26S53 36 53 50.5c0 1.4-1.1 2.5-2.5 2.5h-48C1.1 53 0 51.9 0 50.5z" /></svg>
+          <svg viewBox="0 0 53 53" fill="currentColor"><defs><mask id="hdUserMask"><rect width="53" height="53" fill="#fff" /><circle cx="26.5" cy="13.75" r="15.75" fill="#000" /></mask></defs><circle cx="26.5" cy="13.75" r="13.75" /><path mask="url(#hdUserMask)" d="M0 51C0 37.5 6.5 27.5 16.5 27.5H36.5C46.5 27.5 53 37.5 53 51C53 51.9 52.4 52.5 51.5 52.5H1.5C.6 52.5 0 51.9 0 51Z" /></svg>
         </button>
         <button type="button" className="pdTopIc pdTopSearch" onClick={() => { closeDrawer(); openSearch() }} aria-label="Search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round"><circle cx="10" cy="10" r="7" strokeWidth="2.7" /><path d="M15.2 15.2L21.2 21.2" strokeWidth="3" /></svg>

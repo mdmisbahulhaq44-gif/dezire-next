@@ -2296,3 +2296,10 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 .navMenu .dtWrap:not(.open) > div{visibility:hidden;transition:visibility 0s linear .3s}
 .navMenu .dtWrap.open > div{visibility:visible;transition:none}
 .navMenu .dtPlus::after,.navMenu .dtWrap .dtPlus::after{inset:.5px 1px -3.5px 1px;border:1px dotted #000;outline:1px dotted #000;outline-offset:0;border-radius:9px}
+
+/* header icons v3: head and shoulders with the white notch like the reference, thicker search lens and handle */
+.pdTopRight .pdTopIc:first-child{transform:translateY(.6px);margin-right:-1.35px}
+.pdTopRight .pdTopSearch{transform:translateY(-2.1px);margin-right:-1.3px}
+.pdTopRight .pdTopSearch svg{width:18.2px;height:18.2px}
+.pdTopRight .pdTopSearch svg circle{stroke-width:2.65}
+.pdTopRight .pdTopSearch svg path{stroke-width:3}
