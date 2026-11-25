@@ -2269,3 +2269,12 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 /* Featured On: logo only, no name text */
 .abPress em{display:none!important}
 .abPress img{height:72px!important}
+
+/* menu v3: copy of gorurghash look - darker text, bigger dotted box, arrow always points down */
+.navMenu a.nmLink,.navMenu .dtLink{color:#474747}
+.navMenu .dtRowWrap{padding-right:19px}
+.navMenu .dtPlus{width:46px}
+.navMenu .dtPlus::before{width:9px;height:9px}
+.navMenu .dtPlus::after{inset:-.5px 0 -4.5px 0;border-radius:10px}
+.navMenu .dtWrap .dtPlus::after{inset:0;border-radius:10px}
+.navMenu .dtPlus[aria-expanded="true"]::before{transform:rotate(45deg) translate(-2px,-2px)}
