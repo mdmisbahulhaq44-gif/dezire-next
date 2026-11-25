@@ -2278,3 +2278,15 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 .navMenu .dtPlus::after{inset:-.5px 0 -4.5px 0;border-radius:10px}
 .navMenu .dtWrap .dtPlus::after{inset:0;border-radius:10px}
 .navMenu .dtPlus[aria-expanded="true"]::before{transform:rotate(45deg) translate(-2px,-2px)}
+
+/* header icons v2: sizes and weights copied from the reference (close box stays square) */
+.pdTopRight .pdTopIc{color:#383838}
+.pdTopRight .pdTopIc svg{width:16.9px;height:16.9px}
+.pdTopRight .pdTopIc:first-child{transform:translateY(.3px);margin-right:-1.1px}
+.pdTopRight .pdTopSearch{color:#000;transform:translateY(-2.4px);margin-right:-1.05px}
+.pdTopRight .pdTopSearch svg{width:17.7px;height:17.7px}
+.pdTopRight .pdTopSearch svg circle{stroke-width:2.2}
+.pdTopRight .pdTopSearch svg path{stroke-width:2.5}
+.pdTopRight .pdTopMenu.open span{width:11.4px;height:1.2px}
+.pdTopRight .pdTopMenu.open span:nth-child(1){transform:translateY(1.75px) rotate(45deg)}
+.pdTopRight .pdTopMenu.open span:nth-child(3){transform:translateY(-1.75px) rotate(-45deg)}
