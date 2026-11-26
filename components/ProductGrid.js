@@ -20,7 +20,7 @@ function lastCat(p) {
   return parts.length ? parts[parts.length - 1] : ''
 }
 
-export default function ProductGrid({ products, replaceLinks, noPreview, tiles, detailed }) {
+export default function ProductGrid({ products, replaceLinks, noPreview, tiles, detailed, showCat }) {
   if (!products.length) {
     return <div className="empty"><T>No products available right now.</T></div>
   }
@@ -98,7 +98,7 @@ export default function ProductGrid({ products, replaceLinks, noPreview, tiles, 
               )}
             </div>
             <h3 className={detailed ? "pName2" : undefined}>{detailed ? twoWords(p.name) : p.name}</h3>
-            {detailed && lastCat(p) && <div className="pCatLine">{lastCat(p)}</div>}
+            {(detailed || showCat) && lastCat(p) && <div className="pCatLine">{lastCat(p)}</div>}
             <div className="price">
               <Money n={p.price} />{" "}
               {p.old && <span className="old"><Money n={p.old} /></span>}

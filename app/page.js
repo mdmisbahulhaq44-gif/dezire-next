@@ -36,9 +36,9 @@ export default async function HomePage() {
       supabase.from("settings").select("key,value").in("key", ["hero_slides", "homepage_categories"]),
       supabase
         .from("products")
-        .select("id,name,price,old,badge,imgs,stock,created_at")
+        .select("id,name,price,old,badge,imgs,stock,cat,created_at")
         .order("created_at", { ascending: false })
-        .limit(8),
+        .limit(16),
       supabase
         .from("reviews")
         .select("name,rating,comment")
@@ -107,7 +107,7 @@ export default async function HomePage() {
       <div id="new" style={{ scrollMarginTop: 46 }} />
 
       <div className="homeGrid" style={{ padding: "20px 11.3px 40px" }}>
-        <ProductGrid products={products} noPreview />
+        <ProductGrid products={products} noPreview showCat />
       </div>
 
 <RecentlyViewed />
