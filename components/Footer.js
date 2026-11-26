@@ -5,53 +5,53 @@ import { useShop } from "./ShopContext"
 import { usePathname } from "next/navigation"
 import PaymentStrip from "./PaymentStrip"
 
-// Static pages (contact / terms / refund / privacy) still live on the old
-// GitHub Pages site until they are migrated, so link there for now.
-const OLD = "https://mdmisbahulhaq44-gif.github.io"
-
 export default function Footer() {
-  const { openAbout, openTrack, t } = useShop()
+  const { openTrack, t } = useShop()
   const pathname = usePathname()
+  const tt = (s) => { const r = t(s); return r || s }
   if (["/contact", "/terms", "/refund-policy", "/privacy"].includes(pathname)) return null
   return (
     <>
     <PaymentStrip />
-    <footer>
-      <div className="footergrid">
-        <div>
-          <h3>HEAVEN</h3>
-          <p>{t('Modern fashion with timeless elegance. Discover our latest collections and find your signature style.')}</p>
-          <p><Link href="/about">{t('About Us')}</Link></p>
-        </div>
+    <footer className="gf">
+      <div className="gfTop">
+        <div className="gfRow">
+          <div className="gfCol"><div className="gfIn">
+            <h4 className="gfHead">{tt('Pages')}</h4>
+            <ul className="gfList">
+              <li><Link href="/">{tt('Home')}</Link></li>
+              <li><Link href="/about">{tt('About Us')}</Link></li>
+              <li><Link href="/shop/women">{tt('Women')}</Link></li>
+              <li><Link href="/shop/men">{tt('Men')}</Link></li>
+              <li><Link href="/shop?cat=Accessories">{tt('Accessories')}</Link></li>
+            </ul>
+          </div></div>
 
-        <div>
-          <h3>{t('SHOP')}</h3>
-          <p><Link href="/shop/women">{t('Women')}</Link></p>
-          <p><Link href="/shop/men">{t('Men')}</Link></p>
-          <p><Link href="/shop?cat=Accessories">{t('Accessories')}</Link></p>
-          <p><Link href="/#new">{t('Sale')}</Link></p>
-        </div>
+          <div className="gfCol"><div className="gfIn">
+            <h4 className="gfHead">{tt('Help')}</h4>
+            <ul className="gfList">
+              <li><a href="/privacy">{tt('Privacy Policy')}</a></li>
+              <li><a href="/refund-policy">{tt('Returns')}</a></li>
+              <li><a href="/contact">{tt('Contact Us')}</a></li>
+              <li><a href="/terms">{tt('Terms & Conditions')}</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); openTrack() }}>{tt('Track Order')}</a></li>
+            </ul>
+          </div></div>
 
-        <div>
-          <h3>{t('HELP')}</h3>
-          <p><a href="/contact">{t('Contact Us')}</a></p>
-          <p><a href="/terms">{t('Shipping')}</a></p>
-          <p><a href="/refund-policy">{t('Returns')}</a></p>
-          <p onClick={openTrack} style={{ cursor: "pointer" }}>{t('Track Order')}</p>
-        </div>
-
-        <div>
-          <h3>{t('FOLLOW')}</h3>
-          <p><a href="https://www.facebook.com/profile.php?id=61583860210132" target="_blank" rel="noopener noreferrer">Facebook</a></p>
-          <p><a href="https://www.instagram.com/tanjumishu_2.0" target="_blank" rel="noopener noreferrer">Instagram</a></p>
-          <p>TikTok</p>
+          <div className="gfCol"><div className="gfIn">
+            <h4 className="gfHead">{tt('Follow')}</h4>
+            <ul className="gfList">
+              <li><a href="https://www.facebook.com/profile.php?id=61583860210132" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+              <li><a href="https://www.instagram.com/tanjumishu_2.0" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            </ul>
+          </div></div>
         </div>
       </div>
 
-      <div className="copy">
-        {t('© 2026 HEAVEN. All rights reserved.')} ·{" "}
-        <a href="/privacy" style={{ color: "#999" }}>{t('Privacy Policy')}</a> ·{" "}
-        <a href="/terms" style={{ color: "#999" }}>{t('Terms & Conditions')}</a>
+      <div className="gfBottom">
+        <div className="gfBRow">
+          <div className="gfBHalf">{tt('© 2026 HEAVEN. All rights reserved.')}</div>
+        </div>
       </div>
     </footer>
     </>

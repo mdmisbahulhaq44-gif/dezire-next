@@ -2382,3 +2382,29 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 .homeGrid .product .buyNow{display:inline-flex;align-items:center;justify-content:center;margin-top:12px;padding:11px 18px;height:auto;background:#111;color:#fff;border:0;border-radius:0;font-size:0;letter-spacing:0;line-height:1;text-transform:none}
 .homeGrid .product .buyNow::after{content:"Select options";font-size:13px;font-weight:500;color:#fff}
 .homeGrid .product:active .buyNow{background:#111;opacity:.85}
+
+
+/* ref-footer: footer copied from the reference (Astra + Elementor): 3 columns, white, Poppins 300 14.592px, link colour #4e4e4e, heading #333 */
+footer.gf{background:#fff;color:#000;padding:0;margin:0;border:0;font-family:PoppinsRef,Poppins,sans-serif;font-weight:300;font-size:14.592px;line-height:1.88}
+.gfTop{background:#fff;padding:50px 10px 10px}
+.gfRow{display:flex;flex-wrap:wrap;max-width:1240px;margin:0 auto}
+.gfCol{width:50%;box-sizing:border-box}
+.gfIn{margin:20px;padding:10px}
+footer.gf .gfHead{margin:0 0 20px;padding:0;font-family:Lato,PoppinsRef,Poppins,sans-serif;font-weight:300;font-size:18.24px;line-height:1.2;color:#333;text-transform:none;letter-spacing:0}
+footer.gf .gfList{list-style:none;margin:0;padding:0}
+footer.gf .gfList li{margin:0;padding:0}
+footer.gf .gfList li:not(:last-child){padding-bottom:2.5px}
+footer.gf .gfList li:not(:first-child){margin-top:2.5px}
+footer.gf .gfList a{display:flex;align-items:center;color:#4e4e4e;font-size:inherit;line-height:inherit;text-decoration:none}
+.gfBottom{background:#fff;border-top:1px solid rgba(122,122,122,.13);padding:30px 0 calc(86px + env(safe-area-inset-bottom))}
+.pdFooter footer.gf .gfBottom{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+.gfBRow{display:flex;flex-wrap:wrap;max-width:1240px;margin:0 auto}
+.gfBHalf{width:100%;box-sizing:border-box;padding:10px;text-align:center;color:#000}
+@media(min-width:768px){
+.gfTop{padding:50px 0}
+.gfCol{width:33.333%}
+.gfIn{margin:10px}
+.gfBHalf{text-align:left}
+}
+@media(min-width:768px) and (max-width:1024px){.gfCol{width:25%}}
+@media(min-width:1025px){.gfRow,.gfBRow{padding:0 10px}}
