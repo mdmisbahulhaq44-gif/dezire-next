@@ -2357,3 +2357,9 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 .pdTopRight .pdTopMenu.open span{width:11.4px;height:1.2px;border-radius:0}
 .pdTopRight .pdTopMenu.open span:nth-child(1){transform:translateY(1.67px) rotate(45deg)}
 .pdTopRight .pdTopMenu.open span:nth-child(3){transform:translateY(-1.67px) rotate(-45deg)}
+
+/* ref-home-grid: reference home product grid (2 cols, 20px/40px gaps, square pictures, text 20px in) and tile side gap 11.3px */
+.homeGrid .products{gap:40px 20px}
+.homeGrid .productImage{aspect-ratio:1/1}
+.homeGrid .product > :not(.productImage){margin-left:20px;margin-right:0}
+.categories{padding-left:11.3px!important;padding-right:11.3px!important}

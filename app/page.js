@@ -104,13 +104,9 @@ export default async function HomePage() {
         </FlashSection>
       )}
 
-      <div id="new" style={{ padding: "30px 5% 10px", scrollMarginTop: 46 }}>
-        <h2 style={{ fontSize: 24, fontWeight: 800, textTransform: "uppercase", letterSpacing: 1 }}>
-          <T>New Arrivals</T>
-        </h2>
-      </div>
+      <div id="new" style={{ scrollMarginTop: 46 }} />
 
-      <div style={{ padding: "0 5% 40px" }}>
+      <div className="homeGrid" style={{ padding: "20px 11.3px 40px" }}>
         <ProductGrid products={products} noPreview />
       </div>
 
