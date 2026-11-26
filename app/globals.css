@@ -2350,3 +2350,10 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 /* ref-menu-arrow: on the home page the dropdown arrows are #7c7c7c too, black when tapped */
 .navHome .navMenu .dtPlus{color:#7c7c7c}
 .navHome .navMenu .dtPlus.dtLit,.navHome .navMenu .dtPlus:active{color:#000}
+
+/* ref-hamburger: reference icon is a 24x28 svg scaled into 15x15 -> bars 12.86 x 2.14, gap 2.14, colour #ccc2c2 */
+.pdTopRight .pdTopMenu{border-color:#ccc2c2;gap:2.14px}
+.pdTopRight .pdTopMenu span{width:12.86px;height:2.14px;border-radius:.54px;background:#ccc2c2}
+.pdTopRight .pdTopMenu.open span{width:11.4px;height:1.2px;border-radius:0}
+.pdTopRight .pdTopMenu.open span:nth-child(1){transform:translateY(1.67px) rotate(45deg)}
+.pdTopRight .pdTopMenu.open span:nth-child(3){transform:translateY(-1.67px) rotate(-45deg)}
