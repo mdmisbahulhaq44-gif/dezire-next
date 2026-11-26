@@ -1,0 +1,243 @@
+=== FOOTER HTML ===
+<footer itemtype="https://schema.org/WPFooter" itemscope="itemscope" id="colophon" role="contentinfo">
+			<div class='footer-width-fixer'><style>.elementor-1165 .elementor-element.elementor-element-012b4cf > .elementor-container > .elementor-column > .elementor-widget-wrap{align-content:center;align-items:center;}.elementor-1165 .elementor-element.elementor-element-012b4cf:not(.elementor-motion-effects-element-type-background), .elementor-1165 .elementor-element.elementor-element-012b4cf > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#ffffff;}.elementor-1165 .elementor-element.elementor-element-012b4cf > .elementor-container{max-width:1240px;}.elementor-1165 .elementor-element.elementor-element-012b4cf{transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;padding:50px 0px 50px 0px;}.elementor-1165 .elementor-element.elementor-element-012b4cf > .elementor-background-overlay{transition:background 0.3s, border-radius 0.3s, opacity 0.3s;}.elementor-1165 .elementor-element.elementor-element-f474c86 > .elementor-element-populated{margin:10px 10px 10px 10px;--e-column-margin-right:10px;--e-column-margin-left:10px;}.elementor-1165 .elementor-element.elementor-element-f5fc0f7 .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:last-child){padding-block-end:calc(5px/2);}.elementor-1165 .elementor-element.elementor-element-f5fc0f7 .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:first-child){margin-block-start:calc(5px/2);}.elementor-1165 .elementor-element.elementor-element-f5fc0f7 .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item{margin-inline:calc(5px/2);}.elementor-1165 .elementor-element.elementor-element-f5fc0f7 .elementor-icon-list-items.elementor-inline-items{margin-inline:calc(-5px/2);}.elementor-1165 .elementor-element.elementor-element-f5fc0f7 .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item:after{inset-inline-end:calc(-5px/2);}.elementor-1165 .elementor-element.elementor-element-f5fc0f7 .elementor-icon-list-icon i{transition:color 0.3s;}.elementor-1165 .elementor-element.elementor-element-f5fc0f7 .elementor-icon-list-icon svg{transition:fill 0.3s;}.elementor-1165 .elementor-element.elementor-element-f5fc0f7{--e-icon-list-icon-size:14px;--icon-vertical-offset:0px;}.elementor-1165 .elementor-element.elementor-element-f5fc0f7 .elementor-icon-list-text{transition:color 0.3s;}.elementor-1165 .elementor-element.elementor-element-e6bcc0e > .elementor-element-populated{margin:10px 10px 10px 10px;--e-column-margin-right:10px;--e-column-margin-left:10px;}.elementor-1165 .elementor-element.elementor-element-176b705 .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:last-child){padding-block-end:calc(5px/2);}.elementor-1165 .elementor-element.elementor-element-176b705 .elementor-icon-list-items:not(.elementor-inline-items) .elementor-icon-list-item:not(:first-child){margin-block-start:calc(5px/2);}.elementor-1165 .elementor-element.elementor-element-176b705 .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item{margin-inline:calc(5px/2);}.elementor-1165 .elementor-element.elementor-element-176b705 .elementor-icon-list-items.elementor-inline-items{margin-inline:calc(-5px/2);}.elementor-1165 .elementor-element.elementor-element-176b705 .elementor-icon-list-items.elementor-inline-items .elementor-icon-list-item:after{inset-inline-end:calc(-5px/2);}.elementor-1165 .elementor-element.elementor-element-176b705 .elementor-icon-list-icon i{transition:color 0.3s;}.elementor-1165 .elementor-element.elementor-element-176b705 .elementor-icon-list-icon svg{transition:fill 0.3s;}.elementor-1165 .elementor-element.elementor-element-176b705{--e-icon-list-icon-size:14px;--icon-vertical-offset:0px;}.elementor-1165 .elementor-element.elementor-element-176b705 .elementor-icon-list-text{transition:color 0.3s;}.elementor-1165 .elementor-element.elementor-element-c6c7e3a > .elementor-element-populated{margin:10px 10px 10px 10px;--e-column-margin-right:10px;--e-column-margin-left:10px;}.elementor-1165 .elementor-element.elementor-element-cc45d63:not(.elementor-motion-effects-element-type-background), .elementor-1165 .elementor-element.elementor-element-cc45d63 > .elementor-motion-effects-container > .elementor-motion-effects-layer{background-color:#ffffff;}.elementor-1165 .elementor-element.elementor-element-cc45d63{border-style:solid;border-width:1px 0px 0px 0px;border-color:rgba(122,122,122,0.13);transition:background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;padding:30px 0px 30px 0px;}.elementor-1165 .elementor-element.elementor-element-cc45d63 > .elementor-background-overlay{transition:background 0.3s, border-radius 0.3s, opacity 0.3s;}.elementor-1165 .elementor-element.elementor-element-063b7fa .hfe-copyright-wrapper{text-align:left;}.elementor-1165 .elementor-element.elementor-element-216ef7d .hfe-copyright-wrapper{text-align:right;}@media(max-width:1024px) and (min-width:768px){.elementor-1165 .elementor-element.elementor-element-f474c86{width:25%;}.elementor-1165 .elementor-element.elementor-element-e6bcc0e{width:25%;}.elementor-1165 .elementor-element.elementor-element-c6c7e3a{width:25%;}}@media(max-width:1024px){.elementor-1165 .elementor-element.elementor-element-8a51de1 > .elementor-element-populated{padding:0px 0px 0px 0px;}}@media(max-width:767px){.elementor-1165 .elementor-element.elementor-element-012b4cf{padding:50px 10px 10px 10px;}.elementor-1165 .elementor-element.elementor-element-f474c86{width:50%;}.elementor-1165 .elementor-element.elementor-element-f474c86 > .elementor-element-populated{margin:20px 20px 20px 20px;--e-column-margin-right:20px;--e-column-margin-left:20px;}.elementor-1165 .elementor-element.elementor-element-e6bcc0e{width:50%;}.elementor-1165 .elementor-element.elementor-element-e6bcc0e > .elementor-element-populated{margin:20px 20px 20px 20px;--e-column-margin-right:20px;--e-column-margin-left:20px;}.elementor-1165 .elementor-element.elementor-element-c6c7e3a{width:50%;}.elementor-1165 .elementor-element.elementor-element-c6c7e3a > .elementor-element-populated{margin:20px 20px 20px 20px;--e-column-margin-right:20px;--e-column-margin-left:20px;}.elementor-1165 .elementor-element.elementor-element-063b7fa .hfe-copyright-wrapper{text-align:center;}.elementor-1165 .elementor-element.elementor-element-216ef7d .hfe-copyright-wrapper{text-align:center;}}</style>		<div data-elementor-type="wp-post" data-elementor-id="1165" class="elementor elementor-1165" data-elementor-post-type="elementor-hf">
+						<section class="elementor-section elementor-top-section elementor-element elementor-element-012b4cf elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="012b4cf" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-8a51de1" data-id="8a51de1" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<section class="elementor-section elementor-inner-section elementor-element elementor-element-e74ede8 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="e74ede8" data-element_type="section" data-e-type="section">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-f474c86" data-id="f474c86" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-bc08fba elementor-widget elementor-widget-heading" data-id="bc08fba" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h4 class="elementor-heading-title elementor-size-default">Pages</h4>				</div>
+				</div>
+				<div class="elementor-element elementor-element-f5fc0f7 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="f5fc0f7" data-element_type="widget" data-e-type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="https://gorurghash.com/my-account-2/">
+
+											<span class="elementor-icon-list-text">My Account</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://gorurghash.com/">
+
+											<span class="elementor-icon-list-text">Home</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://gorurghash.com/about/">
+
+											<span class="elementor-icon-list-text">About Us</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://gorurghash.com/legal/">
+
+											<span class="elementor-icon-list-text">Legal Info</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-e6bcc0e" data-id="e6bcc0e" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-dcdce7d elementor-widget elementor-widget-heading" data-id="dcdce7d" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h4 class="elementor-heading-title elementor-size-default">Help</h4>				</div>
+				</div>
+				<div class="elementor-element elementor-element-176b705 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="176b705" data-element_type="widget" data-e-type="widget" data-widget_type="icon-list.default">
+				<div class="elementor-widget-container">
+							<ul class="elementor-icon-list-items">
+							<li class="elementor-icon-list-item">
+											<a href="https://gorurghash.com/policies-2/">
+
+											<span class="elementor-icon-list-text">Privacy Policy</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://gorurghash.com/policies-2/">
+
+											<span class="elementor-icon-list-text">Refund, Trial &amp; Exchange Policy</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://gorurghash.com/contact-us/">
+
+											<span class="elementor-icon-list-text">Contact Us</span>
+											</a>
+									</li>
+								<li class="elementor-icon-list-item">
+											<a href="https://gorurghash.com/terms-conditions">
+
+											<span class="elementor-icon-list-text">Terms &amp; Conditions</span>
+											</a>
+									</li>
+						</ul>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-c6c7e3a" data-id="c6c7e3a" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-4762bf8 elementor-widget elementor-widget-heading" data-id="4762bf8" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+					<h4 class="elementor-heading-title elementor-size-default">Contact Information</h4>				</div>
+				</div>
+				<div class="elementor-element elementor-element-24c325d elementor-widget elementor-widget-text-editor" data-id="24c325d" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+									<p><b>Main Office:</b> 11 Badaldi Main road Baunia Turag Dhaka 1230</p><p><b>Uttara office:</b> House 57, Road 3, Sector 5, Uttara, Dhaka 1230 </p><p><b>Phone:</b> +880 1339913140</p>								</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-cc45d63 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="cc45d63" data-element_type="section" data-e-type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+					<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-189d278" data-id="189d278" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-063b7fa elementor-widget elementor-widget-copyright" data-id="063b7fa" data-element_type="widget" data-e-type="widget" data-settings="{&quot;align&quot;:&quot;left&quot;,&quot;align_mobile&quot;:&quot;center&quot;}" data-widget_type="copyright.default">
+				<div class="elementor-widget-container">
+							<div class="hfe-copyright-wrapper">
+							<span>Copyright © 2026 Gorur Ghash</span>
+					</div>
+						</div>
+				</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-ae51c79" data-id="ae51c79" data-element_type="column" data-e-type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+						<div class="elementor-element elementor-element-216ef7d elementor-widget elementor-widget-copyright" data-id="216ef7d" data-element_type="widget" data-e-type="widget" data-settings="{&quot;align&quot;:&quot;right&quot;,&quot;align_mobile&quot;:&quot;center&quot;}" data-widget_type="copyright.default">
+				<div class="elementor-widget-container">
+							<div class="hfe-copyright-wrapper">
+							<span>Powered by Gorur Ghash</span>
+					</div>
+						</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		</div>		</footer>
+=== FOOTER CSS ===
+div.heateor_ss_mobile_footer{display:none;}
+@media screen and (max-width:783px) | div.heateor_ss_mobile_footer{display:block;height:40px;}
+.site-footer a:hover + .post-count,.site-footer a:focus + .post-count{background:#4e4e4e;border-color:#4e4e4e;}
+.footer-widget-area[data-section^="section-fb-html-"] .ast-builder-html-element{text-align:center;}
+.site-below-footer-wrap{padding-top:20px;padding-bottom:20px;}
+.site-below-footer-wrap[data-section="section-below-footer-builder"]{background-color:#ffffff;min-height:80px;border-style:solid;border-width:0px;border-top-width:1px;border-top-color:rgba(122,122,122,0.13);}
+.site-below-footer-wrap[data-section="section-below-footer-builder"] .ast-builder-grid-row{max-width:1200px;min-height:80px;margin-left:auto;margin-right:auto;}
+.site-below-footer-wrap[data-section="section-below-footer-builder"] .ast-builder-grid-row,.site-below-footer-wrap[data-section="section-below-footer-builder"] .site-footer-section{align-items:flex-start;}
+.site-below-footer-wrap[data-section="section-below-footer-builder"].ast-footer-row-inline .site-footer-section{display:flex;margin-bottom:0;}
+@media (max-width:921px) | .site-below-footer-wrap[data-section="section-below-footer-builder"].ast-footer-row-tablet-inline .site-footer-section{display:flex;margin-bottom:0;}
+@media (max-width:921px) | .site-below-footer-wrap[data-section="section-below-footer-builder"].ast-footer-row-tablet-stack .site-footer-section{display:block;margin-bottom:10px;}
+@media (max-width:544px) | .site-below-footer-wrap[data-section="section-below-footer-builder"].ast-footer-row-mobile-inline .site-footer-section{display:flex;margin-bottom:0;}
+@media (max-width:544px) | .site-below-footer-wrap[data-section="section-below-footer-builder"].ast-footer-row-mobile-stack .site-footer-section{display:block;margin-bottom:10px;}
+.site-below-footer-wrap[data-section="section-below-footer-builder"]{display:grid;}
+@media (max-width:921.99px) | .ast-header-break-point .site-below-footer-wrap[data-section="section-below-footer-builder"]{display:grid;}
+@media (max-width:544px) | .ast-header-break-point .site-below-footer-wrap[data-section="section-below-footer-builder"]{display:grid;}
+.footer-widget-area[data-section="section-fb-html-1"]{display:block;}
+@media (max-width:921.99px) | .ast-header-break-point .footer-widget-area[data-section="section-fb-html-1"]{display:block;}
+@media (max-width:544px) | .ast-header-break-point .footer-widget-area[data-section="section-fb-html-1"]{display:block;}
+.footer-widget-area[data-section="section-fb-html-1"] .ast-builder-html-element{text-align:right;}
+@media (max-width:921px) | .footer-widget-area[data-section="section-fb-html-1"] .ast-builder-html-element{text-align:right;}
+@media (max-width:544px) | .footer-widget-area[data-section="section-fb-html-1"] .ast-builder-html-element{text-align:center;}
+.ast-footer-copyright{text-align:left;}
+.ast-footer-copyright.site-footer-focus-item{color:#000000;}
+@media (max-width:921px) | .ast-footer-copyright{text-align:left;}
+@media (max-width:544px) | .ast-footer-copyright{text-align:center;}
+.ast-footer-copyright.ast-builder-layout-element{display:flex;}
+@media (max-width:921.99px) | .ast-header-break-point .ast-footer-copyright.ast-builder-layout-element{display:flex;}
+@media (max-width:544px) | .ast-header-break-point .ast-footer-copyright.ast-builder-layout-element{display:flex;}
+.xoo-wsc-footer{
+	background-color: #ffffff;
+	color: #000000;
+	padding: 10px 20px;
+	box-shadow: 0 -5px 10px #0000001a;
+}
+.xoo-wsc-footer, .xoo-wsc-footer a, .xoo-wsc-footer .amount{
+	font-size: 18px;
+}
+.ast-small-footer{color:#000000;}
+.ast-small-footer a{color:#434343;}
+.ast-small-footer a:hover{color:#3197d6;}
+.ast-footer-copyright a{color:#434343;}
+.ast-footer-copyright a:hover{color:#3197d6;}
+.entry-footer{display:none !important;}
+.home .entry-footer{ display: none; }
+#primary:after,#primary:before,#secondary:after,#secondary:before,.ast-container:after,.ast-container:before,.ast-row:after,.ast-row:before,.clear:after,.clear:before,.sidebar-main:after,.sidebar-main:before,.site-content:after,.site-content:before,.site-footer:after,.site-footer:before,.site-header:after,.site-header:before,.site-main:after,.site-main:before{content:"";display:table}
+#primary:after,#secondary:after,.ast-container:after,.ast-row:after,.clear:after,.sidebar-main:after,.site-content:after,.site-footer:after,.site-header:after,.site-main:after{clear:both}
+.secondary a *,.site-footer a *,.site-header a *,a{transition:all .2s linear}
+.ast-builder-footer-grid-columns{grid-column-gap:50px}
+.ast-footer-copyright p{margin-bottom:0}
+.ast-footer-copyright,.ast-footer-social-wrap,.site-footer-focus-item{width:100%}
+#astra-footer-menu{margin:0;list-style:none;background:inherit}
+#astra-footer-menu>ul{margin:0;list-style:none;background:inherit}
+.site-footer-section{justify-content:center}
+.site-footer-section>*{margin-bottom:10px}
+.site-footer-section>:last-child{margin-bottom:0}
+.site-primary-footer-wrap{padding-top:45px;padding-bottom:45px}
+.site-above-footer-wrap,.site-below-footer-wrap{padding-top:20px;padding-bottom:20px}
+@media (min-width:769px) | .footer-nav-wrap .astra-footer-horizontal-menu li{margin:0}
+@media (min-width:769px) | .footer-nav-wrap .astra-footer-horizontal-menu li:first-child a{padding-left:0}
+@media (min-width:769px) | .footer-nav-wrap .astra-footer-horizontal-menu li:last-child a{padding-right:0}
+@media (min-width:769px) | .footer-nav-wrap .astra-footer-horizontal-menu a{padding:0 .5em}
+.wc-block-mini-cart__footer-actions:has(.wp-block-woocommerce-paypal-payments-mini-cart-smart-buttons){flex-wrap:wrap}
+.wc-block-mini-cart__footer-actions:has(.wp-block-woocommerce-paypal-payments-mini-cart-smart-buttons) .block-editor-block-list__layout{flex-wrap:wrap}
+.wc-block-mini-cart__footer-actions .wp-block-woocommerce-paypal-payments-mini-cart-smart-buttons{flex:1 0 100%}
+.wc-block-mini-cart__footer-actions .wp-block-woocommerce-paypal-payments-mini-cart-smart-buttons .woocommerce-mini-cart__buttons{margin:0}
+.footer-width-fixer{
+    width: 100%;
+}
+.ehf-template-genesis.ehf-header .site-header .wrap,
+.ehf-template-genesis.ehf-footer .site-footer .wrap,
+.ehf-template-generatepress.ehf-header .site-header .inside-header{
+    width: 100%;
+    padding: 0;
+    max-width: 100%;
+}
+.ehf-template-generatepress.ehf-header .site-header,
+.ehf-template-generatepress.ehf-footer .site-footer{
+    width: 100%;
+    padding: 0;
+    max-width: 100%;
+    background-color: transparent !important; 
+}
+span.xoo-wsc-footer-txt{
+    text-align: center;
+    margin: -8px auto 15px;
+    display: block;
+    font-size: 90%;
+}
+.xoo-wsc-footer .xoo-wsc-ft-amt-savings .amount{
+    font-size: inherit;
+}
+.infinite-scroll .posts-navigation,.infinite-scroll.neverending .site-footer{display:none}
+.infinity-end.neverending .site-footer{display:block}
+.ast-hb-account-login-form-footer a.ast-header-account-footer-link:not(:last-child) span:after{content:"|";margin:0 .4em}
+.footer-widget-area .ast-footer-divider-element{position:relative;align-items:center}
+.footer-widget-area .ast-divider-wrapper{display:inline-block}
+.ast-builder-footer-grid-columns .ast-fb-divider-layout-horizontal{-js-display:inline-flex;display:inline-flex;vertical-align:middle}
+.site-footer-section{position:relative}
+.ast-lswitcher-item-footer,.ast-lswitcher-item-header{-js-display:inline-flex;display:inline-flex}
+span.ast-lswitcher-item-footer:last-child,span.ast-lswitcher-item-header:last-child{margin-right:0}
+.ast-footer-sticky-active .ast-custom-footer{position:fixed!important;right:0;left:0;bottom:0;margin:0 auto;z-index:99}
+#the_champ_sharing_more_providers .footer-panel{background:#fff;border-top:1px solid #D7D7D7;padding:6px 0;width:100%;color:#fff}
+#the_champ_sharing_more_providers .footer-panel p{background-color:transparent;top:0;text-align:left!important;color:#000;font-family:'helvetica neue',arial,helvetica,sans-serif;font-size:12px;line-height:1.2;margin:0!important;padding:0 6px!important;text-indent:0!important}
+#the_champ_sharing_more_providers .footer-panel a{color:#fff;text-decoration:none;font-weight:700;text-indent:0!important}
+.eicon-footer:before{content:"\e961"}
+.elementor-widget-blockquote blockquote .e-q-footer:after,.elementor-widget-blockquote blockquote .e-q-footer:before,.elementor-widget-blockquote blockquote cite:after,.elementor-widget-blockquote blockquote cite:before,.elementor-widget-blockquote blockquote:after,.elementor-widget-blockquote blockquote:before{content:none}
+.elementor-blockquote .e-q-footer{display:flex;justify-content:space-between;margin-top:12px}
+.elementor-blockquote--align-left .elementor-blockquote .e-q-footer{flex-direction:row}
+.elementor-blockquote--align-right .elementor-blockquote .e-q-footer{flex-direction:row-reverse}
+.elementor-blockquote--align-center .elementor-blockquote .e-q-footer,.elementor-blockquote--align-center .elementor-blockquote__author{display:block}
