@@ -1,119 +1,57 @@
-=== PRODUCT 1: https://gorurghash.com/product/gift-cards/ ===
+=== PRODUCT 1: https://gorurghash.com/product/half-sleeve-embroidered-boxy-shirt-in-cream/ ===
 <main id="main" class="site-main">
 					<div class="ast-woocommerce-container">
 			
 					
-			<div class="woocommerce-notices-wrapper"></div><div id="product-54308" class="...">
+			<div class="woocommerce-notices-wrapper"></div><div id="product-210609" class="...">
 
-	<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" style="opacity: 0; transition: opacity .25s ease-in-out;">
-	<figure class="woocommerce-product-gallery__wrapper">
-		<div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/8-150x150.jpg" data-thumb-alt="Gift Cards" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/8-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/8-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/8-100x100.jpg 100w" data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/8.jpg"><img width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/8-600x343.jpg" class="wp-post-image" alt="Gift Cards" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/8.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/8.jpg" data-large_image_width="1050" data-large_image_height="600" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/11-150x150.jpg" data-thumb-alt="Gift Cards - Image 2" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/11-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/11-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/11-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/11.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/11-600x343.jpg" class="" alt="Gift Cards - Image 2" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/11.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/11.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/12-150x150.jpg" data-thumb-alt="Gift Cards - Image 3" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/12-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/12-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/12-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/12.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/12-600x343.jpg" class="" alt="Gift Cards - Image 3" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/12.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/12.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/13-150x150.jpg" data-thumb-alt="Gift Cards - Image 4" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/13-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/13-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/13-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/13.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/13-600x343.jpg" class="" alt="Gift Cards - Image 4" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/13.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/13.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/14-150x150.jpg" data-thumb-alt="Gift Cards - Image 5" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/14-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/14-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/14-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/14.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/14-600x343.jpg" class="" alt="Gift Cards - Image 5" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/14.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/14.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/15-150x150.jpg" data-thumb-alt="Gift Cards - Image 6" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/15-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/15-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/15-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/15.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/15-600x343.jpg" class="" alt="Gift Cards - Image 6" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/15.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/15.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/16-150x150.jpg" data-thumb-alt="Gift Cards - Image 7" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/16-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/16-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/16-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/16.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/16-600x343.jpg" class="" alt="Gift Cards - Image 7" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/16.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/16.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/17-150x150.jpg" data-thumb-alt="Gift Cards - Image 8" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/17-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/17-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/17-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/17.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/17-600x343.jpg" class="" alt="Gift Cards - Image 8" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/17.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/17.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/18-150x150.jpg" data-thumb-alt="Gift Cards - Image 9" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/18-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/18-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/18-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/18.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/18-600x343.jpg" class="" alt="Gift Cards - Image 9" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/18.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/18.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/19-150x150.jpg" data-thumb-alt="Gift Cards - Image 10" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/19-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/19-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/19-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/19.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/19-600x343.jpg" class="" alt="Gift Cards - Image 10" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/19.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/19.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/20-150x150.jpg" data-thumb-alt="Gift Cards - Image 11" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/20-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/20-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/20-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/20.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/20-600x343.jpg" class="" alt="Gift Cards - Image 11" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/20.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/20.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/21-150x150.jpg" data-thumb-alt="Gift Cards - Image 12" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/21-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/21-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/21-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/21.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/21-600x343.jpg" class="" alt="Gift Cards - Image 12" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/21.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/21.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/1-150x150.jpg" data-thumb-alt="Gift Cards - Image 13" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/1-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/1-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/1-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/1.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/1-600x343.jpg" class="" alt="Gift Cards - Image 13" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/1.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/1.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/2-150x150.jpg" data-thumb-alt="Gift Cards - Image 14" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/2-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/2-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/2-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/2.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/2-600x343.jpg" class="" alt="Gift Cards - Image 14" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/2.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/2.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/3-150x150.jpg" data-thumb-alt="Gift Cards - Image 15" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/3-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/3-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/3-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/3.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/3-600x343.jpg" class="" alt="Gift Cards - Image 15" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/3.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/3.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/4-150x150.jpg" data-thumb-alt="Gift Cards - Image 16" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/4-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/4-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/4-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/4.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/4-600x343.jpg" class="" alt="Gift Cards - Image 16" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/4.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/4.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/5-150x150.jpg" data-thumb-alt="Gift Cards - Image 17" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/5-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/5-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/5-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/5.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/5-600x343.jpg" class="" alt="Gift Cards - Image 17" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/5.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/5.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/7-150x150.jpg" data-thumb-alt="Gift Cards - Image 18" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/7-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/7-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/7-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/7.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/7-600x343.jpg" class="" alt="Gift Cards - Image 18" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/7.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/7.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/9-150x150.jpg" data-thumb-alt="Gift Cards - Image 19" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/9-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/9-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/9-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/9.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/9-600x343.jpg" class="" alt="Gift Cards - Image 19" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/9.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/9.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/10-150x150.jpg" data-thumb-alt="Gift Cards - Image 20" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/10-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/10-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/10-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/10.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/10-600x343.jpg" class="" alt="Gift Cards - Image 20" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/10.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/10.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div>	</figure>
+	<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" style="opacity: 0; transition: opacity .25s ease-in-out;">
+	<!--gallery removed-->
 
 		<!-- Product gallery thumbnail -->
 			<div class="ast-single-product-thumbnails " aria-label="Product image gallery">
 			<div class="woocommerce-product-gallery-thumbnails__wrapper">
-				<div data-slide-number="0" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/8-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image flex-active-slide"><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/8-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/8.jpg" /></div><div data-slide-number="1" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/11-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/11-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/11.jpg" /></div><div data-slide-number="2" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/12-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/12-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/12.jpg" /></div><div data-slide-number="3" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/13-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/13-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/13.jpg" /></div><div data-slide-number="4" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/14-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/14-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/14.jpg" /></div><div data-slide-number="5" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/15-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/15-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/15.jpg" /></div><div data-slide-number="6" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/16-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/16-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/16.jpg" /></div><div data-slide-number="7" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/17-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/17-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/17.jpg" /></div><div data-slide-number="8" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/18-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/18-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/18.jpg" /></div><div data-slide-number="9" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/19-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/19-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/19.jpg" /></div><div data-slide-number="10" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/20-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/20-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/20.jpg" /></div><div data-slide-number="11" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/21-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/21-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/21.jpg" /></div><div data-slide-number="12" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/1-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/1-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/1.jpg" /></div><div data-slide-number="13" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/2-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/2-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/2.jpg" /></div><div data-slide-number="14" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/3-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/3-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/3.jpg" /></div><div data-slide-number="15" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/4-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/4-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/4.jpg" /></div><div data-slide-number="16" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/5-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/5-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/5.jpg" /></div><div data-slide-number="17" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/7-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/7-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/7.jpg" /></div><div data-slide-number="18" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/9-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/9-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/9.jpg" /></div><div data-slide-number="19" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/10-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/10-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/10.jpg" /></div>			</div>
+				<div class="ast-woocommerce-product-gallery__image flex-active-slide"><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0713-copy2-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0717-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0713-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0719-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0708-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0705-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0711-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div>			</div>
 		</div>
 	</div>
 
 	<div class="summary entry-summary">
-		<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a href="https://gorurghash.com">Home</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/unisex/">Unisex</a>&nbsp;&#47;&nbsp;Gift Cards</nav><h1 class="product_title entry-title">Gift Cards</h1><p class="price"><span class="wcpbc-price wcpbc-price-54308 loading" data-product-id="54308"><span class="woocommerce-Price-amount amount" aria-hidden="true"><bdi><span class="woocommerce-Price-currencySymbol" translate="no" dir="auto">Tk</span>1,000.00</bdi></span> <span aria-hidden="true">&ndash;</span> <span class="woocommerce-Price-amount amount" aria-hidden="true"><bdi><span class="woocommerce-Price-currencySymbol" translate="no" dir="auto">Tk</span>20,000.00</bdi></span><span class="screen-reader-text">Price range: Tk1,000.00 through Tk20,000.00</span><span class="wcpbc-placeholder -dots"></span></span></p>
+		<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a href="https://gorurghash.com">Home</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/women/">Women</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/women/womens-shirt/">Shirt</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/women/womens-shirt/crochet-embroidered-shirts-women/">Crochet &amp; Embroidered Shirts</a>&nbsp;&#47;&nbsp;Half Sleeve Embroidered Boxy Shirt in Cream</nav><h1 class="product_title entry-title">Half Sleeve Embroidered Boxy Shirt in Cream</h1><p class="price"><span class="wcpbc-price wcpbc-price-210609 loading"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol" translate="no" dir="auto">Tk</span>1,800.00</bdi></span><span class="wcpbc-placeholder -dots"></span></span></p>
  <span class="ast-shipping-text">Order now and get it in 1-3 Days inside BD and 5-7 Days Internationally</span><div class="woocommerce-product-details__short-description">
-	<p>What size do they wear? What design would they like? What do I get them?! These are questions you no longer have to stress about. Introducing Gift Cards by Ghash! Get these as a present for your loved ones and allow them to choose the items they want!  The Gift Cards come in real nice designs for a variety of occasions!</p>
+	<p><strong>Measurements (in inches):</strong></p>
+<p>S      : Length-25.5 | Chest- 45 | Sleeve length- 10.5 | Shoulder- 19.5 | Collar- 17<br />
+M     : Length- 26.5 | Chest- 47 | Sleeve length- 10.5 | Shoulder- 20.5 | Collar- 18<br />
+L      : Length- 27.5 | Chest- 49 | Sleeve length- 11.5 | Shoulder- 21.5 | Collar- 19<br />
+XL    : Length- 28.5 | Chest- 51 | Sleeve length- 12 | Shoulder- 22.5 | Collar- 20<br />
+XXL  : Length- 29.5 | Chest- 53 | Sleeve length- 12.5 | Shoulder- 23.5 | Collar- 21</p>
+<p><strong>Male Model:</strong> Height- 5’11, Wearing- M<br />
+<strong>Female Model:</strong> Height- 5’6, Wearing- S</p>
+<p><strong>This product features a built-in wash allowance. It is designed slightly oversized to achieve the perfect fit after its initial wash.</strong></p>
 </div>
 
-<form class="variations_form cart" action="https://gorurghash.com/product/gift-cards/" method="post" enctype='multipart/form-data' data-product_id="54308" data-product_variations="...">
+<form class="variations_form cart" action="https://gorurghash.com/product/half-sleeve-embroidered-boxy-shirt-in-cream/" method="post" enctype='multipart/form-data'>
 	
 			<table class="variations" cellspacing="0" role="presentation">
 			<tbody>
 									<tr>
-						<th class="label"><label for="gift-card-amount">Gift Card Amount</label></th>
+						<th class="label"><label for="pa_embroidered-boxy-shirts">Embroidered Boxy Shirts</label></th>
 						<td class="value">
-							<select id="gift-card-amount" class="" name="attribute_gift-card-amount" data-attribute_name="attribute_gift-card-amount" data-show_option_none="yes"><option value="">Choose an amount</option><option value="Tk1,000" >Tk1,000.00</option><option value="Tk1,500" >Tk1,500.00</option><option value="Tk2,000" >Tk2,000.00</option><option value="Tk2,500" >Tk2,500.00</option><option value="Other amount" >Other amount</option></select><a class="reset_variations" href="#" aria-label="Clear options">Clear</a>						</td>
+							<select id="pa_embroidered-boxy-shirts" class="" name="attribute_pa_embroidered-boxy-shirts"><option value="">Choose an option</option><option value="l" >L</option><option value="m" >M</option><option value="s" >S</option><option value="xl" >XL</option><option value="xxl" >XXL</option></select><a class="reset_variations" href="#" aria-label="Clear options">Clear</a>						</td>
 					</tr>
 							</tbody>
 		</table>
 		<div class="reset_variations_alert screen-reader-text" role="alert" aria-live="polite" aria-relevant="all"></div>
-				<template class="wc-product-gallery-default-template"><div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" style="opacity: 0; transition: opacity .25s ease-in-out;">
-	<figure class="woocommerce-product-gallery__wrapper">
-		<div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/8-150x150.jpg" data-thumb-alt="Gift Cards" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/8-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/8-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/8-100x100.jpg 100w" data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/8.jpg"><img width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/8-600x343.jpg" class="wp-post-image" alt="Gift Cards" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/8.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/8.jpg" data-large_image_width="1050" data-large_image_height="600" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/11-150x150.jpg" data-thumb-alt="Gift Cards - Image 2" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/11-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/11-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/11-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/11.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/11-600x343.jpg" class="" alt="Gift Cards - Image 2" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/11.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/11.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/12-150x150.jpg" data-thumb-alt="Gift Cards - Image 3" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/12-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/12-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/12-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/12.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/12-600x343.jpg" class="" alt="Gift Cards - Image 3" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/12.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/12.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/13-150x150.jpg" data-thumb-alt="Gift Cards - Image 4" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/13-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/13-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/13-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/13.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/13-600x343.jpg" class="" alt="Gift Cards - Image 4" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/13.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/13.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/14-150x150.jpg" data-thumb-alt="Gift Cards - Image 5" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/14-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/14-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/14-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/14.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/14-600x343.jpg" class="" alt="Gift Cards - Image 5" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/14.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/14.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/15-150x150.jpg" data-thumb-alt="Gift Cards - Image 6" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/15-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/15-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/15-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/15.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/15-600x343.jpg" class="" alt="Gift Cards - Image 6" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/15.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/15.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/16-150x150.jpg" data-thumb-alt="Gift Cards - Image 7" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/16-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/16-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/16-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/16.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/16-600x343.jpg" class="" alt="Gift Cards - Image 7" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/16.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/16.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/17-150x150.jpg" data-thumb-alt="Gift Cards - Image 8" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/17-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/17-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/17-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/17.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/17-600x343.jpg" class="" alt="Gift Cards - Image 8" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/17.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/17.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/18-150x150.jpg" data-thumb-alt="Gift Cards - Image 9" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/18-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/18-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/18-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/18.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/18-600x343.jpg" class="" alt="Gift Cards - Image 9" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/18.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/18.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/19-150x150.jpg" data-thumb-alt="Gift Cards - Image 10" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/19-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/19-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/19-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/19.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/19-600x343.jpg" class="" alt="Gift Cards - Image 10" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/19.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/19.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/20-150x150.jpg" data-thumb-alt="Gift Cards - Image 11" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/20-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/20-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/20-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/20.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/20-600x343.jpg" class="" alt="Gift Cards - Image 11" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/20.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/20.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/21-150x150.jpg" data-thumb-alt="Gift Cards - Image 12" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/21-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/21-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/21-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/21.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/21-600x343.jpg" class="" alt="Gift Cards - Image 12" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/21.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/21.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/1-150x150.jpg" data-thumb-alt="Gift Cards - Image 13" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/1-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/1-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/1-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/1.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/1-600x343.jpg" class="" alt="Gift Cards - Image 13" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/1.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/1.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/2-150x150.jpg" data-thumb-alt="Gift Cards - Image 14" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/2-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/2-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/2-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/2.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/2-600x343.jpg" class="" alt="Gift Cards - Image 14" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/2.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/2.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/3-150x150.jpg" data-thumb-alt="Gift Cards - Image 15" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/3-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/3-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/3-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/3.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/3-600x343.jpg" class="" alt="Gift Cards - Image 15" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/3.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/3.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/4-150x150.jpg" data-thumb-alt="Gift Cards - Image 16" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/4-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/4-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/4-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/4.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/4-600x343.jpg" class="" alt="Gift Cards - Image 16" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/4.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/4.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/5-150x150.jpg" data-thumb-alt="Gift Cards - Image 17" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/5-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/5-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/5-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/5.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/5-600x343.jpg" class="" alt="Gift Cards - Image 17" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/5.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/5.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/7-150x150.jpg" data-thumb-alt="Gift Cards - Image 18" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/7-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/7-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/7-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/7.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/7-600x343.jpg" class="" alt="Gift Cards - Image 18" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/7.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/7.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/9-150x150.jpg" data-thumb-alt="Gift Cards - Image 19" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/9-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/9-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/9-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/9.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/9-600x343.jpg" class="" alt="Gift Cards - Image 19" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/9.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/9.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div><div data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/10-150x150.jpg" data-thumb-alt="Gift Cards - Image 20" data-thumb-srcset="https://gorurghash.com/wp-content/uploads/2023/10/10-150x150.jpg 150w, https://gorurghash.com/wp-content/uploads/2023/10/10-300x300.jpg 300w, https://gorurghash.com/wp-content/uploads/2023/10/10-100x100.jpg 100w"  data-thumb-sizes="(max-width: 150px) 100vw, 150px" class="woocommerce-product-gallery__image"><a href="https://gorurghash.com/wp-content/uploads/2023/10/10.jpg"><img loading="lazy" width="600" height="343" src="https://gorurghash.com/wp-content/uploads/2023/10/10-600x343.jpg" class="" alt="Gift Cards - Image 20" data-caption="" data-src="https://gorurghash.com/wp-content/uploads/2023/10/10.jpg" data-large_image="https://gorurghash.com/wp-content/uploads/2023/10/10.jpg" data-large_image_width="1050" data-large_image_height="600" decoding="async" /></a></div>	</figure>
-
-		<!-- Product gallery thumbnail -->
-			<div class="ast-single-product-thumbnails " aria-label="Product image gallery">
-			<div class="woocommerce-product-gallery-thumbnails__wrapper">
-				<div data-slide-number="0" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/8-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image flex-active-slide"><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/8-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/8.jpg" /></div><div data-slide-number="1" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/11-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/11-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/11.jpg" /></div><div data-slide-number="2" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/12-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/12-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/12.jpg" /></div><div data-slide-number="3" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/13-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/13-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/13.jpg" /></div><div data-slide-number="4" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/14-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/14-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/14.jpg" /></div><div data-slide-number="5" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/15-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/15-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/15.jpg" /></div><div data-slide-number="6" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/16-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/16-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/16.jpg" /></div><div data-slide-number="7" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/17-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/17-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/17.jpg" /></div><div data-slide-number="8" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/18-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/18-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/18.jpg" /></div><div data-slide-number="9" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/19-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/19-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/19.jpg" /></div><div data-slide-number="10" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/20-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/20-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/20.jpg" /></div><div data-slide-number="11" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/21-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/21-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/21.jpg" /></div><div data-slide-number="12" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/1-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/1-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/1.jpg" /></div><div data-slide-number="13" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/2-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/2-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/2.jpg" /></div><div data-slide-number="14" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/3-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/3-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/3.jpg" /></div><div data-slide-number="15" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/4-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/4-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/4.jpg" /></div><div data-slide-number="16" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/5-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/5-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/5.jpg" /></div><div data-slide-number="17" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/7-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/7-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/7.jpg" /></div><div data-slide-number="18" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/9-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/9-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/9.jpg" /></div><div data-slide-number="19" data-thumb="https://gorurghash.com/wp-content/uploads/2023/10/10-300x300.jpg" data-thumb-alt="" class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2023/10/10-300x300.jpg" class="attachment-300x300 size-300x300" alt="" data-original-src="https://gorurghash.com/wp-content/uploads/2023/10/10.jpg" /></div>			</div>
-		</div>
-	</div></template>
+				
 		
 		<div class="single_variation_wrap">
 			<div class="woocommerce-variation single_variation" role="alert" aria-relevant="additions"></div><div class="woocommerce-variation-add-to-cart variations_button">
 			<input type="hidden" name="wps_wpr_verify_cart_nonce" value="edb3e99404">
 		
-<div id="pwgc-purchase-container" style="display: none;" data-min-amount="1000" data-max-amount="20000">
-    <div id="pwgc-custom-amount-form" class="pwgc-field-container pwgc-hidden">
-        <label for="pwgc-custom-amount" class="pwgc-label">Other amount (Tk)&nbsp;</label>
-        <input type="text" id="pwgc-custom-amount" class="short wc_input_price" name="pw_gift_cards_custom_amount" value="" />
-        <div id="pwgc-custom-amount-error" class="pwgc-subtitle" style="color: red !important;"></div>
-    </div>
-
-                <div id="pwgc-form-to" class="pwgc-field-container">
-                <label for="pwgc-to" class="pwgc-label">To</label>
-                                    <input type="text" id="pwgc-to" name="pw_gift_card_to" class="pwgc-input-text" placeholder="Enter an email address for each recipient" value="" required>
-                    <div class="pwgc-subtitle">Separate multiple email addresses with a comma.</div>
-                                </div>
-            
-                <div id="pwgc-form-recipient-name" class="pwgc-field-container">
-                <label for="pwgc-recipient-name" class="pwgc-label">Recipient</label>
-                <input type="text" id="pwgc-recipient-name" name="pw_gift_card_recipient_name" class="pwgc-input-text" placeholder="Enter a friendly name for the recipient (optional)." value="">
-            </div>
-            
-    <div id="pwgc-form-from" class="pwgc-field-container">
-        <label for="pwgc-from" class="pwgc-label">From</label>
-        <input type="text" id="pwgc-from" name="pw_gift_card_from" class="pwgc-input-text" placeholder="Your name" value="" required>
-    </div>
-
-    <div id="pwgc-form-message" class="pwgc-field-container">
-        <label for="pwgc-message" class="pwgc-label">Message (optional)</label>
-        <textarea id="pwgc-message" name="pw_gift_card_message" placeholder="Add a message" maxlength="500"></textarea>
-        <div class="pwgc-subtitle"><span id="pwgc-message-characters-remaining">500</span> characters remaining</div>
-    </div>
-
-                <div id="pwgc-form-delivery-date" class="pwgc-field-container">
-                <label for="pwgc-delivery-date" class="pwgc-label">Delivery Date</label>
-                <input type="text" id="pwgc-delivery-date" name="pw_gift_card_delivery_date" class="pwgc-input-text" placeholder="Now" value="" autocomplete="off">
-                <div class="pwgc-subtitle">Up to a year from today</div>
-            </div>
-            
-        <div id="pwgc-form-email-design" class="pwgc-field-container">
-                        <label for="pwgc-email-design" class="pwgc-label">Design</label>
-                <select id="pwgc-email-design-id" name="pw_gift_card_email_design_id">
-                                                <option value="0" >Puja</option>
-                                                        <option value="1" >Happy Birthday (Getting older)</option>
-                                                        <option value="2" >Happy Anniversary</option>
-                                                        <option value="3" >Congrats</option>
-                                                        <option value="5" >Merry Christmas</option>
-                                                        <option value="7" >Happy Anniversary ( Forever ) </option>
-                                                        <option value="6" >Happy Puja</option>
-                                                        <option value="8" >Happy New Year</option>
-                                                        <option value="10" >Sorry</option>
-                                                        <option value="9" >You Da Champ</option>
-                                                        <option value="14" >Eid Moobarak</option>
-                                                        <option value="11" >Hang in there</option>
-                                            </select>
-                                <button id="pwgc-email-preview-button" class="button pwgc-email-preview-button">Preview</button>
-                <iframe id="pwgc-email-preview-container"></iframe>
-                    </div>
-    <div id="pwgc-quantity-one-per-recipient" class="pwgc-field-container">
-        <div class="pwgc-label">Quantity: <span id="pwgc-recipient-count">1</span></div>
-        <div class="pwgc-subtitle">1 to each recipient</div>
-    </div>
-</div>
-
 	<div class="quantity">
-	<a href="javascript:void(0)" class="ast-qty-placeholder minus">-</a>	<label class="screen-reader-text" for="quantity_6b07d861490a2">Gift Cards quantity</label>
+	<a href="javascript:void(0)" class="ast-qty-placeholder minus">-</a>	<label class="screen-reader-text" for="quantity_6b07e8292083c">Half Sleeve Embroidered Boxy Shirt in Cream quantity</label>
 	<input
 		type="number"
-				id="quantity_6b07d861490a2"
+				id="quantity_6b07e8292083c"
 		class="input-text qty text"
 		name="quantity"
 		value="1"
@@ -129,8 +67,8 @@
 	<button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
 
 	
-	<input type="hidden" name="add-to-cart" value="54308" />
-	<input type="hidden" name="product_id" value="54308" />
+	<input type="hidden" name="add-to-cart" value="210609" />
+	<input type="hidden" name="product_id" value="210609" />
 	<input type="hidden" name="variation_id" class="variation_id" value="0" />
 </div>
 		</div>
@@ -141,10 +79,10 @@
 
 	
 	
-		<span class="sku_wrapper">SKU: <span class="sku">Gift Card</span></span>
+		<span class="sku_wrapper">SKU: <span class="sku">SEBW</span></span>
 
 	
-	<span class="posted_in">Categories: <a href="https://gorurghash.com/product-category/accessories/" rel="tag">Accessories</a>, <a href="https://gorurghash.com/product-category/unisex/" rel="tag">Unisex</a></span>
+	<span class="posted_in">Categories: <a href="https://gorurghash.com/product-category/men/mens-shirt/crochet-embroidered-shirts/" rel="tag">Crochet &amp; Embroidered Shirts</a>, <a href="https://gorurghash.com/product-category/women/womens-shirt/crochet-embroidered-shirts-women/" rel="tag">Crochet &amp; Embroidered Shirts</a>, <a href="https://gorurghash.com/product-category/unisex/" rel="tag">Unisex</a></span>
 	
 	
 </div>
@@ -158,91 +96,351 @@
 					<div class="ast-accordion-wrap">
 					
 
-<p><strong style="font-size: 16px">Unleash the Power of Choice with Our Gift Cards by Gorur Ghash.</strong></p>
-<div class="flex-1 overflow-hidden">
-<div class="react-scroll-to-bottom--css-oajgv-79elbk h-full dark:bg-gray-800">
-<div class="react-scroll-to-bottom--css-oajgv-1n7m0yu">
-<div class="flex flex-col text-sm dark:bg-gray-800">
-<div class="group final-completion w-full text-token-text-primary border-b border-black/10 gizmo:border-0 dark:border-gray-900/50 gizmo:dark:border-0 bg-gray-50 gizmo:bg-transparent dark:bg-[#444654] gizmo:dark:bg-transparent" data-testid="conversation-turn-9">
-<div class="p-4 justify-center text-base md:gap-6 md:py-6 m-auto">
-<div class="flex flex-1 gap-4 text-base mx-auto md:gap-6 gizmo:gap-3 gizmo:md:px-5 gizmo:lg:px-1 gizmo:xl:px-5 md:max-w-2xl lg:max-w-[38rem] gizmo:md:max-w-3xl gizmo:lg:max-w-[40rem] gizmo:xl:max-w-[48rem] xl:max-w-3xl }">
-<div class="relative flex w-[calc(100%-50px)] flex-col gizmo:w-full lg:w-[calc(100%-115px)] agent-turn">
-<div class="flex-col gap-1 md:gap-3">
-<div class="flex flex-grow flex-col gap-3 max-w-full">
-<div class="min-h-[20px] flex flex-col items-start gap-3 whitespace-pre-wrap break-words overflow-x-auto">
-<div class="markdown prose w-full break-words dark:prose-invert dark">
-<p>Looking for the perfect gift that&#8217;s guaranteed to delight, every time? Look no further. Our Digital Gift Cards offer a world of endless possibilities, providing the recipient with the power to shop and explore our website to their heart&#8217;s content. Make the choice to let your loved ones make the choice with our Gift Card. Show you care, and give the gift of freedom and thoughtfulness. Here&#8217;s what makes our Gift Cards truly exceptional:</p>
+<div class="ng-tns-c1391038415-45">
+<section id="processing-state-0" class="processing-state_container is-gpi-avatar ng-tns-c1391038415-45 ng-trigger ng-trigger-processingStateShowHide ng-star-inserted is-done-processing">
+<div id="processing-state-0-summary" class="processing-state_details is-gpi-avatar ng-trigger ng-trigger-menuExpansion ng-tns-c1391038415-45 ng-star-inserted" aria-hidden="true">
+<div class="tool-summary ng-tns-c1391038415-45">
+<div class="tool-summary-message ng-tns-c1391038415-45 gds-body-l ng-star-inserted">
+<div class="ng-tns-c1391038415-45"><span style="font-size: 16px">Make a bold statement with the </span><b style="font-style: inherit">Half Sleeve Embroidered Boxy Shirt in Cream by Gorur Ghash</b><span style="font-size: 16px">. Featuring an intricate, high-contrast floral vine embroidery against a deep cream backdrop, this piece perfectly captures a modern, artisanal aesthetic. </span></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="ng-tns-c1391038415-45">
+<section id="processing-state-0" class="processing-state_container is-gpi-avatar ng-tns-c1391038415-45 ng-trigger ng-trigger-processingStateShowHide ng-star-inserted is-done-processing">
+<div id="processing-state-0-summary" class="processing-state_details is-gpi-avatar ng-trigger ng-trigger-menuExpansion ng-tns-c1391038415-45 ng-star-inserted" aria-hidden="true"></div>
+</section>
+</div>
 <p>&nbsp;</p>
-<p><strong>No Limits, No Expiry, No Worries:</strong><br />
-With our Digital Gift Cards, there are no strings attached. There&#8217;s no usage limit, no expiration date, and absolutely no rush to redeem. Your recipient can take their time, carefully selecting the items that matter most to them. This gift keeps on giving until the balance is used up, ensuring a long-lasting and joyful shopping experience.</p>
+<p><span style="font-size: 16px">The relaxed </span><b style="font-style: inherit">boxy shirt</b><span style="font-size: 16px"> silhouette combined with a <strong>classic collar </strong>makes it an effortless standout for everything from upscale streetwear looks to relaxed evening gatherings. </span>Crafted from a premium, <b>lightweight mixed polyester fabric</b>, this shirt prioritizes everyday comfort without sacrificing structure. The breathable blend ensures a breezy, fluid drape that keeps you cool while maintaining its clean, distinct shape all day long. Finished with contrast black buttons that echo the detailed embroidery, this unique piece styles perfectly with <a href="https://gorurghash.com/product-category/men/men-pants/denim-pants-men/">denims</a> or barrel pants for a high-fashion, effortless vibe.</p>
 <p>&nbsp;</p>
-<p><strong>Digital Delight Straight to Your Inbox:</strong><br />
-Gone are the days of waiting for physical gift cards in the mail. Our Digital Gift Cards are delivered directly to the recipient&#8217;s email inbox, making the process quick, convenient, and eco-friendly. Just provide us with the recipient&#8217;s email address, and we&#8217;ll handle the rest.</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>Fit:</strong> Boxy Fit, <strong>Unisex</strong></li>
+<li><strong>Silhouette: </strong>Wide Cut, Cropped Length</li>
+<li><strong>Color:</strong> Cream with Black Embroidery</li>
+<li><strong>Fabric: </strong>Mixed Polyester</li>
+<li><strong>GSM:</strong> 140</li>
+<li><strong>Details:</strong> Classic collar, Half sleeve, Button closure.</li>
+<li><strong>Care:</strong> Follow the care label.</li>
+<li><strong>A Gorur Ghash Original</strong></li>
+<li><strong>Made in Bangladesh</strong></li>
+</ul>
 <p>&nbsp;</p>
-<p><strong>Thoughtful and Stress-Free:<br />
-</strong>Choosing the right gift can be a nerve-wracking experience, fraught with the fear of getting it wrong. Our Gift Card eliminates that stress. It&#8217;s a thoughtful and considerate way to express your love without the burden of decision-making. You&#8217;re saying, &#8220;I care about your happiness, and I respect your unique tastes.&#8221;</p>
+<p><strong>Measurements of Embroidered Shirts (in inches):</strong></p>
+<p>S      : Length-25.5 | Chest- 45 | Sleeve length- 10.5 | Shoulder- 19.5 | Collar- 17<br />
+M     : Length- 26.5 | Chest- 47 | Sleeve length- 10.5 | Shoulder- 20.5 | Collar- 18<br />
+L      : Length- 27.5 | Chest- 49 | Sleeve length- 11.5 | Shoulder- 21.5 | Collar- 19<br />
+XL    : Length- 28.5 | Chest- 51 | Sleeve length- 12 | Shoulder- 22.5 | Collar- 20<br />
+XXL  : Length- 29.5 | Chest- 53 | Sleeve length- 12.5 | Shoulder- 23.5 | Collar- 21</p>
+					</div>
+				</div>
+			</div>
+								<div class="ast-single-tab additional_information_tab">
+				<h3 class="ast-accordion-header ast-tab-header ">
+					Additional information					<span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg></span><span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M0 10h24v4h-24z" /></svg></span>				</h3>
+				<div class="ast-accordion-content  woocommerce-Tabs-panel woocommerce-Tabs-panel--additional_information panel entry-content wc-tab" id="tab-additional_information" role="tabpanel" aria-labelledby="tab-title-additional_information">
+					<div class="ast-accordion-wrap">
+					
+
+<table class="woocommerce-product-attributes shop_attributes" aria-label="Product Details">
+			<tr class="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_embroidered-boxy-shirts">
+			<th class="woocommerce-product-attributes-item__label" scope="row">Embroidered Boxy Shirts</th>
+			<td class="woocommerce-product-attributes-item__value"><p>L, M, S, XL, XXL</p>
+</td>
+		</tr>
+	</table>
+					</div>
+				</div>
+			</div>
+			</div>
+
+	
+
+=== PRODUCT 2: https://gorurghash.com/product/crochet-shirt-in-off-white-with-black-stripes/ ===
+<main id="main" class="site-main">
+					<div class="ast-woocommerce-container">
+			
+					
+			<div class="woocommerce-notices-wrapper"></div><div id="product-210317" class="...">
+
+	<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" style="opacity: 0; transition: opacity .25s ease-in-out;">
+	<!--gallery removed-->
+
+		<!-- Product gallery thumbnail -->
+			<div class="ast-single-product-thumbnails " aria-label="Product image gallery">
+			<div class="woocommerce-product-gallery-thumbnails__wrapper">
+				<div class="ast-woocommerce-product-gallery__image flex-active-slide"><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0312-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0313-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0310-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0589-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0594-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0593-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0581-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0585-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div><div class="ast-woocommerce-product-gallery__image "><img loading="lazy" width="300" height="300" src="https://gorurghash.com/wp-content/uploads/2026/05/DSC0584-copy-300x300.jpg" class="attachment-300x300 size-300x300" alt="" /></div>			</div>
+		</div>
+	</div>
+
+	<div class="summary entry-summary">
+		<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a href="https://gorurghash.com">Home</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/women/">Women</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/women/womens-shirt/">Shirt</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/women/womens-shirt/crochet-embroidered-shirts-women/">Crochet &amp; Embroidered Shirts</a>&nbsp;&#47;&nbsp;Crochet Shirt in Off-White with Black Stripes</nav><h1 class="product_title entry-title">Crochet Shirt in Off-White with Black Stripes</h1><p class="price"><span class="wcpbc-price wcpbc-price-210317 loading"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol" translate="no" dir="auto">Tk</span>1,800.00</bdi></span><span class="wcpbc-placeholder -dots"></span></span></p>
+ <span class="ast-shipping-text">Order now and get it in 1-3 Days inside BD and 5-7 Days Internationally</span><div class="woocommerce-product-details__short-description">
+	<p><strong>Measurements (in inches):</strong></p>
+<p>S: Length-24| Chest- 42 | Sleeve length- 9.5</p>
+<p>M: Length- 25 | Chest- 44 | Sleeve length- 10</p>
+<p>L: Length- 26 | Chest- 46 | Sleeve length- 10.5</p>
+<p>XL: Length- 27 | Chest- 48 | Sleeve length- 11</p>
+<p>XXL: Length- 28 | Chest- 50 | Sleeve length- 11.5</p>
 <p>&nbsp;</p>
-<p><strong>Unlimited Design and Value Options:<br />
-</strong>We believe in making gifting as personal as possible. That&#8217;s why our Digital Gift Cards come in a variety of designs and denominations to suit every occasion. From stylish and elegant to fun and festive, there&#8217;s a design to match your recipient&#8217;s tastes. Plus, we offer flexibility for the gift amount – you can choose from preset values or enter any amount that suits your budget and the recipient&#8217;s preferences.</p>
+</div>
+
+<form class="variations_form cart" action="https://gorurghash.com/product/crochet-shirt-in-off-white-with-black-stripes/" method="post" enctype='multipart/form-data'>
+	
+			<table class="variations" cellspacing="0" role="presentation">
+			<tbody>
+									<tr>
+						<th class="label"><label for="pa_crochet-shirts">Crochet Shirts</label></th>
+						<td class="value">
+							<select id="pa_crochet-shirts" class="" name="attribute_pa_crochet-shirts"><option value="">Choose an option</option><option value="s" >S</option><option value="m" >M</option><option value="l" >L</option><option value="xl" >XL</option><option value="xxl" >XXL</option></select><a class="reset_variations" href="#" aria-label="Clear options">Clear</a>						</td>
+					</tr>
+							</tbody>
+		</table>
+		<div class="reset_variations_alert screen-reader-text" role="alert" aria-live="polite" aria-relevant="all"></div>
+				
+		
+		<div class="single_variation_wrap">
+			<div class="woocommerce-variation single_variation" role="alert" aria-relevant="additions"></div><div class="woocommerce-variation-add-to-cart variations_button">
+			<input type="hidden" name="wps_wpr_verify_cart_nonce" value="edb3e99404">
+		
+	<div class="quantity">
+	<a href="javascript:void(0)" class="ast-qty-placeholder minus">-</a>	<label class="screen-reader-text" for="quantity_6b07fdf0ac2b6">Crochet Shirt in Off-White with Black Stripes quantity</label>
+	<input
+		type="number"
+				id="quantity_6b07fdf0ac2b6"
+		class="input-text qty text"
+		name="quantity"
+		value="1"
+		aria-label="Product quantity"
+				min="1"
+							step="1"
+			placeholder=""
+			inputmode="numeric"
+			autocomplete="off"
+			/>
+	<a href="javascript:void(0)" class="ast-qty-placeholder plus">+</a></div>
+
+	<button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
+
+	
+	<input type="hidden" name="add-to-cart" value="210317" />
+	<input type="hidden" name="product_id" value="210317" />
+	<input type="hidden" name="variation_id" class="variation_id" value="0" />
+</div>
+		</div>
+	
+	</form>
+
+<div class="ppcp-messages"></div><div class="product_meta">
+
+	
+	
+		<span class="sku_wrapper">SKU: <span class="sku">SCBW</span></span>
+
+	
+	<span class="posted_in">Categories: <a href="https://gorurghash.com/product-category/men/mens-shirt/crochet-embroidered-shirts/" rel="tag">Crochet &amp; Embroidered Shirts</a>, <a href="https://gorurghash.com/product-category/women/womens-shirt/crochet-embroidered-shirts-women/" rel="tag">Crochet &amp; Embroidered Shirts</a>, <a href="https://gorurghash.com/product-category/unisex/" rel="tag">Unisex</a></span>
+	
+	
+</div>
+	</div>
+
+		<div class="ast-woocommerce-accordion woocommerce-tabs ast-woocommerce-tabs">
+							<div class="ast-single-tab description_tab">
+				<h3 class="ast-accordion-header ast-tab-header active">
+					Description					<span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg></span><span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M0 10h24v4h-24z" /></svg></span>				</h3>
+				<div class="ast-accordion-content active woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" role="tabpanel" aria-labelledby="tab-title-description">
+					<div class="ast-accordion-wrap">
+					
+
+<p><strong>Turn heads effortlessly with the Crochet Shirt in Off-White with Black Stripes by Gorur Ghash</strong>, a bold twist on classic style and a staple for your next holiday, made for sun-filled days. Crafted from premium <strong>polyester</strong>, its <strong>knitted construction</strong> features tiny gaps that allow <strong>natural airflow</strong>, keeping you cool and comfortable during warm afternoons and relaxed summer outings. <strong>The boxy fit</strong> creates an easygoing silhouette perfect for beach walks, vacation evenings, or casual city days.</p>
 <p>&nbsp;</p>
-<p><strong>Endless Shopping Awaits:</strong><br />
-Our website is a treasure trove of products and experiences, from the latest tech gadgets to fashionable clothing, gourmet delights, home decor, and so much more. With a Digital Gift Card in hand, your loved one can explore and shop for exactly what they desire, ensuring your gift is truly meaningful and cherished.</p>
-<p>Give the gift of choice with our Digital Gift Cards, and watch your loved ones&#8217; faces light up with joy. It&#8217;s the perfect present for birthdays, holidays, special occasions, or simply to express your appreciation. Order one today, and let the shopping adventures begin!</p>
+<p>Designed with a <strong>slightly oversized collar</strong> for a modern edge, this crochet shirt blends structure with laid-back style. Wear it open over a tee or buttoned for a refined look. <strong>Cool, comfy, and effortlessly bold</strong>, turn comfort into a statement with <strong>the Crochet Shirt in Off-White with Black Stripes</strong>.</p>
 <p>&nbsp;</p>
-<p><strong>Perfect for All Occasions:<br />
-</strong>Whether it&#8217;s a birthday, an anniversary, a holiday, or simply a day to say, &#8220;I&#8217;m thinking of you,&#8221; our Gift Card is versatile and fits every occasion. It&#8217;s also a brilliant option for corporate gifting, demonstrating your appreciation for employees or clients while letting them choose the perfect reward.</p>
-<p>In essence, our Gift Card is a beautiful paradox: a gift that&#8217;s simultaneously personal and versatile. It&#8217;s a testament to your love and thoughtfulness, a token of freedom for your loved ones to select what their heart desires, and ultimately, a celebration of the uniqueness of the recipient. So, when you&#8217;re unsure about what to gift but sure about your love, our Gift Card is your best choice.&#8221;</p>
-<p>Make the choice to let your loved ones make the choice with our Gift Card. Show you care, and give the gift of freedom and thoughtfulness.</p>
+<p><strong>Features:</strong></p>
+<ul>
+<li><strong>Fit:</strong> Boxy Fit, <strong>Unisex</strong></li>
+<li><strong>Color:</strong> Off-White with Black Stripes</li>
+<li><strong>Fabric: </strong>Polyester</li>
+<li><strong>GSM:</strong> 270+</li>
+<li><strong>Button Closure</strong></li>
+<li><strong>Half Sleeve</strong></li>
+<li><strong>Comes with an additional button for the body.</strong></li>
+<li><strong>Styling:</strong> Wear it casually (buttoned or unbuttoned), and pair it with your favorite Pants.</li>
+<li><strong>Care:</strong> Follow the care label.</li>
+<li><strong>A Gorur Ghash Original</strong></li>
+<li><strong>Made in Bangladesh</strong></li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>Measurements (in inches):</strong></p>
+<p>S: Length-24| Chest- 42 | Sleeve length- 9.5</p>
+<p>M: Length- 25 | Chest- 44 | Sleeve length- 10</p>
+<p>L: Length- 26 | Chest- 46 | Sleeve length- 10.5</p>
+<p>XL: Length- 27 | Chest- 48 | Sleeve length- 11</p>
+<p>XXL: Length- 28 | Chest- 50 | Sleeve length- 11.5</p>
+<p>&nbsp;</p>
+					</div>
+				</div>
+			</div>
+								<div class="ast-single-tab additional_information_tab">
+				<h3 class="ast-accordion-header ast-tab-header ">
+					Additional information					<span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg></span><span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M0 10h24v4h-24z" /></svg></span>				</h3>
+				<div class="ast-accordion-content  woocommerce-Tabs-panel woocommerce-Tabs-panel--additional_information panel entry-content wc-tab" id="tab-additional_information" role="tabpanel" aria-labelledby="tab-title-additional_information">
+					<div class="ast-accordion-wrap">
+					
+
+<table class="woocommerce-product-attributes shop_attributes" aria-label="Product Details">
+			<tr class="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_crochet-shirts">
+			<th class="woocommerce-product-attributes-item__label" scope="row">Crochet Shirts</th>
+			<td class="woocommerce-product-attributes-item__value"><p>S, M, L, XL, XXL</p>
+</td>
+		</tr>
+	</table>
+					</div>
+				</div>
+			</div>
+			</div>
+
+	
+
+=== PRODUCT 3: https://gorurghash.com/product/unisex-henley-full-sleeve-textured-t-shirt-in-soft-white/ ===
+<main id="main" class="site-main">
+					<div class="ast-woocommerce-container">
+			
+					
+			<div class="woocommerce-notices-wrapper"></div><div id="product-268128" class="...">
+
+	<div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" style="opacity: 0; transition: opacity .25s ease-in-out;">
+	<!--gallery removed-->
+
+		<!-- Product gallery thumbnail -->
+	</div>
+
+	<div class="summary entry-summary">
+		<nav class="woocommerce-breadcrumb" aria-label="Breadcrumb"><a href="https://gorurghash.com">Home</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/men/">Men</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/men/t-shirts-men/">T-shirts</a>&nbsp;&#47;&nbsp;<a href="https://gorurghash.com/product-category/men/t-shirts-men/henley/">Henley</a>&nbsp;&#47;&nbsp;Unisex Henley Full Sleeve Textured T-shirt in Soft White</nav><h1 class="product_title entry-title">Unisex Henley Full Sleeve Textured T-shirt in Soft White</h1><p class="price"><span class="wcpbc-price wcpbc-price-268128 loading"><span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol" translate="no" dir="auto">Tk</span>900.00</bdi></span><span class="wcpbc-placeholder -dots"></span></span></p>
+ <span class="ast-shipping-text">Order now and get it in 1-3 Days inside BD and 5-7 Days Internationally</span><div class="woocommerce-product-details__short-description">
+	<p><strong>Measurements of Henley T-shirt (in inches):</strong></p>
+<p>S : Length-26 | Chest- 42 | Sleeve length- 22.5<br />
+M : Length- 27 | Chest- 44 | Sleeve length- 23<br />
+L : Length- 28 | Chest- 46 | Sleeve length- 23.5<br />
+XL : Length- 29 | Chest- 48 | Sleeve length- 24<br />
+XXL: Length- 30 | Chest- 50 | Sleeve length- 24.5</p>
+<p><strong>Male Model:</strong> Height- 5&#8217;11, Wearing- L<br />
+<strong>Female Model:</strong> Height- 5’4, Wearing- S</p>
+</div>
+
+<form class="variations_form cart" action="https://gorurghash.com/product/unisex-henley-full-sleeve-textured-t-shirt-in-soft-white/" method="post" enctype='multipart/form-data'>
+	
+			<table class="variations" cellspacing="0" role="presentation">
+			<tbody>
+									<tr>
+						<th class="label"><label for="pa_henley-t-shirts">Henley T-shirts</label></th>
+						<td class="value">
+							<select id="pa_henley-t-shirts" class="" name="attribute_pa_henley-t-shirts"><option value="">Choose an option</option><option value="m" >M</option><option value="l" >L</option><option value="xl" >XL</option><option value="s" >S</option><option value="xxl" >XXL</option></select><a class="reset_variations" href="#" aria-label="Clear options">Clear</a>						</td>
+					</tr>
+							</tbody>
+		</table>
+		<div class="reset_variations_alert screen-reader-text" role="alert" aria-live="polite" aria-relevant="all"></div>
+				
+		
+		<div class="single_variation_wrap">
+			<div class="woocommerce-variation single_variation" role="alert" aria-relevant="additions"></div><div class="woocommerce-variation-add-to-cart variations_button">
+			<input type="hidden" name="wps_wpr_verify_cart_nonce" value="7206debf30">
+		
+	<div class="quantity">
+	<a href="javascript:void(0)" class="ast-qty-placeholder minus">-</a>	<label class="screen-reader-text" for="quantity_6b086cd8a07b7">Unisex Henley Full Sleeve Textured T-shirt in Soft White quantity</label>
+	<input
+		type="number"
+				id="quantity_6b086cd8a07b7"
+		class="input-text qty text"
+		name="quantity"
+		value="1"
+		aria-label="Product quantity"
+				min="1"
+							step="1"
+			placeholder=""
+			inputmode="numeric"
+			autocomplete="off"
+			/>
+	<a href="javascript:void(0)" class="ast-qty-placeholder plus">+</a></div>
+
+	<button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
+
+	
+	<input type="hidden" name="add-to-cart" value="268128" />
+	<input type="hidden" name="product_id" value="268128" />
+	<input type="hidden" name="variation_id" class="variation_id" value="0" />
+</div>
+		</div>
+	
+	</form>
+
+<div class="ppcp-messages"></div><div class="product_meta">
+
+	
+	
+		<span class="sku_wrapper">SKU: <span class="sku">THW2</span></span>
+
+	
+	<span class="posted_in">Categories: <a href="https://gorurghash.com/product-category/men/t-shirts-men/henley/" rel="tag">Henley</a>, <a href="https://gorurghash.com/product-category/women/tshirt/henley-tshirt/" rel="tag">Henley</a>, <a href="https://gorurghash.com/product-category/unisex/" rel="tag">Unisex</a></span>
+	
+	
+</div>
+	</div>
+
+		<div class="ast-woocommerce-accordion woocommerce-tabs ast-woocommerce-tabs">
+							<div class="ast-single-tab description_tab">
+				<h3 class="ast-accordion-header ast-tab-header active">
+					Description					<span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg></span><span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M0 10h24v4h-24z" /></svg></span>				</h3>
+				<div class="ast-accordion-content active woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" role="tabpanel" aria-labelledby="tab-title-description">
+					<div class="ast-accordion-wrap">
+					
+
+<p>Introducing the <strong>Unisex Henley Full Sleeve Waffle Textured T-shirt in Soft White by Gorur Ghash</strong>, where texture meets everyday style. With a <strong>regular fit and dropped shoulders</strong>, it balances relaxed ease with subtle structure. The soft white color and waffle texture add visual interest, while the Henley-button neckline introduces a hint of classic charm. Perfect for city walks, weekend adventures, or relaxed outings.</p>
+<p>&nbsp;</p>
+<p>Made from a <strong>cotton–polyester blend</strong>, the fabric feels soft, smooth, and naturally comfortable, allowing effortless movement throughout the day. A stylish, approachable everyday essential, this Henley adds texture, comfort, and a playful touch to your wardrobe. Effortless style for wherever your day takes you.</p>
+<p>&nbsp;</p>
+<p><strong style="font-size: 16px">Features:</strong></p>
+<div dir="auto">
+<div dir="auto">
+<ul>
+<li><b>Fit:</b> Regular Fit with Dropped Shoulders, <strong>Unisex</strong></li>
+<li><strong>Color: Soft White</strong></li>
+<li><strong>Pattern: </strong>Waffle</li>
+<li><b>Fabric:  </b>Cotton+Polyester Mix</li>
+<li><strong>GSM: </strong>200+</li>
+<li>Design: Full sleeve with button closure, includes an extra button for the shirt.</li>
+<li><b>Care:</b> Follow the care label.</li>
+<li><strong>A Gorur Ghash Original</strong></li>
+<li><strong style="font-size: 16px">Made in Bangladesh</strong></li>
+</ul>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="w-full pt-2 border-t md:border-t-0 dark:border-white/20 md:border-transparent md:dark:border-transparent md:pl-2 md:w-[calc(100%-.5rem)] absolute bottom-0 left-0 md:bg-vert-light-gradient bg-white dark:bg-gray-800 md:!bg-transparent dark:md:bg-vert-dark-gradient">
-<div class="relative flex h-full flex-1 items-stretch md:flex-col">
-<div class="flex w-full items-center">
-<div class="...">
-<div data-grammarly-part="button">
-<div>
-<div>
-<div class="amkYk">
-<div>
-<div class="ptGJG">
-<div></div>
-<div class="E_a24">
-<div class="VNMHv BWwwG">
-<div class="L704q">
-<div data-purpose="animation-wrapper">
-<div class="k1mI2">
-<div class="R7Ehf fspWv"></div>
-</div>
-<div class="fDZiE" data-grammarly-part="gbuttonBadge"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div data-grammarly-part="highlights">
-<div>
-<div></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<p>&nbsp;</p>
+<p><strong>Measurements of Henley T-shirt (in inches):</strong></p>
+<p>S : Length-26 | Chest- 42 | Sleeve length- 22.5<br />
+M : Length- 27 | Chest- 44 | Sleeve length- 23<br />
+L : Length- 28 | Chest- 46 | Sleeve length- 23.5<br />
+XL : Length- 29 | Chest- 48 | Sleeve length- 24<br />
+XXL: Length- 30 | Chest- 50 | Sleeve length- 24.5</p>
+					</div>
+				</div>
+			</div>
+								<div class="ast-single-tab additional_information_tab">
+				<h3 class="ast-accordion-header ast-tab-header ">
+					Additional information					<span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg></span><span aria-hidden="true" class="ahfb-svg-iconset ast-inline-flex"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24"><path d="M0 10h24v4h-24z" /></svg></span>				</h3>
+				<div class="ast-accordion-content  woocommerce-Tabs-panel woocommerce-Tabs-panel--additional_information panel entry-content wc-tab" id="tab-additional_information" role="tabpanel" aria-labelledby="tab-title-additional_information">
+					<div class="ast-accordion-wrap">
+					
+
+<table class="woocommerce-product-attributes shop_attributes" aria-label="Product Details">
+			<tr class="woocommerce-product-attributes-item woocommerce-product-attributes-item--attribute_pa_henley-t-shirts">
+			<th class="woocommerce-product-attributes-item__label" scope="row">Henley T-shirts</th>
+			<td class="woocommerce-product-attributes-item__value"><p>M, L, XL, S, XXL</p>
+</td>
+		</tr>
+	</table>
 					</div>
 				</div>
 			</div>
