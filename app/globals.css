@@ -2341,3 +2341,8 @@ body:has(.aboutPg),body:has(.aboutPg) #main-content{background:#fff}
 /* ref-toggle-radius: reference button radius is 12px */
 .navMenu .dtPlus{border-radius:12px}
 .navMenu .dtPlus::after,.navMenu .dtWrap .dtPlus::after{border-radius:12px}
+
+/* ref-menu-colors: reference menu colours (home page is lighter, current/tapped is black) + 5px icon gap */
+.navMenu a.nmLink,.navMenu .dtLink{color:#4e4e4e;padding-left:25.5px}
+.navHome .navMenu a.nmLink,.navHome .navMenu .dtLink{color:#7c7c7c}
+.navHome .navMenu a.nmLink.on,.navHome .navMenu a.nmLink:active,.navHome .navMenu .dtLink:active{color:#000}

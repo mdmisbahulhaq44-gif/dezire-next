@@ -36,7 +36,7 @@ export default function Header() {
   }
 
   return (
-    <nav className={isShop ? 'navShop navGrey' : 'navShop'}>
+    <nav className={(isShop ? 'navShop navGrey' : 'navShop') + (pathname === '/' ? ' navHome' : '')}>
       <div className="logo">HEAVEN</div>
       <div className="pdTopRight">
         <button type="button" className="pdTopIc" onClick={openMyAccount} aria-label="My account">
