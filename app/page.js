@@ -4,7 +4,6 @@ import CategoryTiles from "../components/CategoryTiles"
 import ProductGrid from "../components/ProductGrid"
 import PaymentReturnCheck from "../components/PaymentReturnCheck"
 import FlashSection from "../components/FlashSection"
-import RecentlyViewed from "../components/RecentlyViewed"
 import T from "../components/T"
 
 // Cache the homepage for a minute (like product pages) instead of
@@ -110,7 +109,6 @@ export default async function HomePage() {
         <ProductGrid products={products} noPreview showCat />
       </div>
 
-<RecentlyViewed />
       <section className="features">
         <div className="feature">
           <div style={{ fontSize: 25 }}>🚚</div>
