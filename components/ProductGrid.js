@@ -103,7 +103,7 @@ export default function ProductGrid({ products, replaceLinks, noPreview, tiles, 
               <Money n={p.price} />{" "}
               {p.old && <span className="old"><Money n={p.old} /></span>}
             </div>
-            {!soldOut && <span className="buyNow"><T>Buy Now</T></span>}
+            {!soldOut && <span className="buyNow"><T>Select options</T></span>}
             {lowStock && (
               <div style={{ fontSize: 11, color: "var(--red)", marginTop: 3 }}><T vars={{ n: p.stock }}>{'Only {n} left'}</T></div>
             )}
