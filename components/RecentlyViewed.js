@@ -43,8 +43,8 @@ export default function RecentlyViewed({ exclude, compact }) {
           <T>Recently Viewed</T>
         </h2>
       </div>
-      <div style={{ padding: '0 5% 40px' }}>
-        <ProductGrid products={products} noPreview />
+      <div className="homeGrid" style={{ padding: '20px 11.3px 40px' }}>
+        <ProductGrid products={products} noPreview showCat />
       </div>
     </>
   )
