@@ -2438,3 +2438,8 @@ footer.gf .gfList a{display:flex;align-items:center;color:#4e4e4e;font-size:inhe
 
 /* LatoRef: Lato Light, used by the product tabs like the reference */
 @font-face{font-family:'LatoRef';font-style:normal;font-weight:300;font-display:swap;src:url(/fonts/lato-300.woff2) format('woff2')}
+
+/* gorurghash match: sticky bar speed + meta divider */
+.pdBuyBar{opacity:0;transition:opacity .4s ease-in-out,transform .6s ease-in-out;box-shadow:0 -1px 10px rgba(0,0,0,.1),0 -1px 9px rgba(0,0,0,.06)}
+.pdBuyBar.show{opacity:1}
+.pdMeta{border-top:1px solid #ddd;padding-top:.5em;margin:0 0 .8em}
