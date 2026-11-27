@@ -199,6 +199,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const panelRef = useRef(null)
   const thumbsRef = useRef(null)
   const [thumbMore, setThumbMore] = useState(false)
+  const [thumbLess, setThumbLess] = useState(false)
   const [zoomOpen, setZoomOpen] = useState(false)
   const [ratios, setRatios] = useState({})
   const [galAnim, setGalAnim] = useState(false)
@@ -210,7 +211,11 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   }
   function onThumbScroll() {
     const el = thumbsRef.current
-    if (el) setThumbMore(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
+    if (el) { setThumbMore(el.scrollLeft + el.clientWidth < el.scrollWidth - 4); setThumbLess(el.scrollLeft > 4) }
+  }
+  function prevThumbs() {
+    const el = thumbsRef.current
+    if (el) el.scrollBy({ left: -el.clientWidth * 0.75, behavior: 'smooth' })
   }
   function nextThumbs() {
     const el = thumbsRef.current
@@ -434,6 +439,9 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
               </button>
               ))}
             </div>
+            {thumbLess && (
+              <button type="button" className="pdThumbPrev" aria-label="Previous photos" onClick={prevThumbs}><span /></button>
+            )}
             {thumbMore && (
               <button type="button" className="pdThumbNext" aria-label="More photos" onClick={nextThumbs}>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
