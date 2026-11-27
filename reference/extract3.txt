@@ -1,0 +1,44 @@
+=== THEIRS Lato ===
+.blog .entry-title,.blog .entry-title a,.archive .entry-title,.archive .entry-title a,.search .entry-title,.search .entry-title a{font-family:'Lato',sans-serif;line-height:1.23em;}
+.site-title,.site-title a{font-family:'Lato',sans-serif;line-height:1.23em;}
+.widget-area.secondary .sidebar-main .wp-block-heading,#secondary .widget-title,.woocommerce-page #secondary .widget .widget-title{font-family:'Lato',sans-serif;line-height:1.23em;}
+/* latin */
+@font-face{font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://gorurghash.com/wp-content/astra-local-fonts/lato/S6u9w4BMUTPHh7USSwiPGQ.woff2) format('woff2');
+}
+/* latin-ext */
+@font-face{font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://gorurghash.com/wp-content/astra-local-fonts/lato/S6u9w4BMUTPHh7USSwaPGR_p.woff2) format('woff2')}
+h1,.entry-content :where(h1),.entry-content :where(h1) a{font-size:67px;font-size:4.1875rem;font-family:'Lato',sans-serif;line-height:1.4em;}
+h1,h2,h3,h4,h5,h6,.entry-content :where(h1,h2,h3,h4,h5,h6),.entry-content :where(h1,h2,h3,h4,h5,h6) a,.site-title,.site-title a{font-family:'Lato',sans-serif;font-weight:300;line-height:1.8em;}
+h2,.entry-content :where(h2),.entry-content :where(h2) a{font-size:41px;font-size:2.5625rem;font-family:'Lato',sans-serif;line-height:1.3em;}
+h3,.entry-content :where(h3),.entry-content :where(h3) a{font-size:30px;font-size:1.875rem;font-family:'Lato',sans-serif;line-height:1.3em;}
+h4,.entry-content :where(h4),.entry-content :where(h4) a{font-size:20px;font-size:1.25rem;line-height:1.2em;font-family:'Lato',sans-serif;}
+h5,.entry-content :where(h5),.entry-content :where(h5) a{font-size:18px;font-size:1.125rem;line-height:1.2em;font-family:'Lato',sans-serif;}
+h6,.entry-content :where(h6),.entry-content :where(h6) a{font-size:17px;font-size:1.0625rem;line-height:1.25em;font-family:'Lato',sans-serif;}
+=== MINE Lato/font-q ===
+body{font-family:var(--font-q),var(--font-hind),Quicksand,sans-serif;
+color:var(--black);
+background:#fff;
+overflow-x:hidden}
+/* StaticPage */
+.staticPage{--black: #111;
+          --white: #fff;
+          --cream: #faf9f6;
+          --line: #e9e7e2;
+          --muted: #777;
+          --gold: #b89545;
+          font-family: var(--font-q), var(--font-hind}
+footer.gf .gfHead{margin:0 0 20px;padding:0;font-family:Lato,PoppinsRef,Poppins,sans-serif;font-weight:300;font-size:18.24px;line-height:1.2;color:#333;text-transform:none;letter-spacing:0}
+.rfHead{display:block;position:relative;width:100%;box-sizing:border-box;text-align:left;background:transparent;border:1px solid #ddd;border-bottom:0;border-radius:0;-webkit-appearance:none;appearance:none;pa}
+/* LatoRef: Lato Light, used by the product tabs like the reference */
+@font-face{font-family:'LatoRef';font-style:normal;font-weight:300;font-display:swap;src:url(/fonts/lato-300.woff2) format('woff2')}
+.pdTitle{font-family:LatoRef,Lato,PoppinsRef,Poppins,sans-serif;font-size:27.36px;font-weight:300;line-height:1.2;color:#000;margin:0 0 13.68px}
+esized bold of Light; same here. Table and top measurements like the reference */
+.rfWrap,.rfAttr,.pdMeasureTop,.pdOptLabel,.pdSizeSelect,.pdSizeClear{font-family:var(--font-q),sans-serif}
