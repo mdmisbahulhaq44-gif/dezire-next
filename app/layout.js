@@ -1,4 +1,4 @@
-import { Quicksand, Hind_Siliguri } from "next/font/google"
+import { Poppins, Hind_Siliguri } from "next/font/google"
 import "./globals.css"
 import Header from "../components/Header"
 import BottomNav from "../components/BottomNav"
@@ -25,7 +25,7 @@ import AppSplash from "../components/AppSplash"
 import AppNative from "../components/AppNative"
 import ServiceWorkerRegister from "../components/ServiceWorkerRegister"
 
-const quicksand = Quicksand({
+const quicksand = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
