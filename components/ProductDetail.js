@@ -34,6 +34,12 @@ function boldLabel(text, k) {
   return m ? <><strong>{m[1]}</strong>{m[2] ? ' ' + m[2] : ''}</> : text
 }
 
+function fmtWeight(g) {
+  const n = Number(g)
+  if (!g || !(n > 0)) return 'N/A'
+  return n >= 1000 ? String(+(n / 1000).toFixed(2)) + ' kg' : n + ' g'
+}
+
 function starString(rating) {
   const r = Math.round(rating)
   return '★★★★★'.slice(0, r) + '☆☆☆☆☆'.slice(0, 5 - r)
@@ -495,7 +501,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           {sizes.length > 0 && (
             <div ref={sizeRef} style={{ marginTop: 14 }}>
-              <span className="pdOptLabel">{t('Size')}</span>
+              <span className="pdOptLabel">{catSegs.length ? t(catSegs[catSegs.length - 1]) : t('Size')}</span>
               <select className="pdSizeSelect" value={size} onChange={e => setSize(e.target.value)}>
                 <option value="">{t('Choose an option')}</option>
                 {sizes.map(s => <option value={s} key={s}>{s}</option>)}
@@ -550,7 +556,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                   </div></div></div>
                 </div>
               )}
-              {sizes.length > 0 && (
+              {(
                 <div className={`rfTab${openInfo ? ' open' : ''}`}>
                   <button type="button" className="rfHead" aria-expanded={openInfo} onClick={() => setOpenInfo(o => !o)}>
                     <span>{lang === 'bn' ? t('Additional Information') : 'Additional information'}</span>
@@ -559,7 +565,8 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                   </button>
                   <div className="rfBody"><div className="rfInner"><div className="rfWrap">
                     <table className="rfAttr"><tbody>
-                      <tr><th>{t('Size')}</th><td><p>{sortSizes(sizes).join(', ')}</p></td></tr>
+                      <tr><th>{t('Weight')}</th><td><p>{fmtWeight(product.weight_g)}</p></td></tr>
+                      {sizes.length > 0 && <tr><th>{catSegs.length ? t(catSegs[catSegs.length - 1]) : t('Size')}</th><td><p>{sortSizes(sizes).join(', ')}</p></td></tr>}
                     </tbody></table>
                   </div></div></div>
                 </div>

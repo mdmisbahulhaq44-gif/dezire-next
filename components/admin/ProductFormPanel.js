@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
 
 function parseCatPath(p) {
@@ -91,7 +91,7 @@ function CatBuilder({ allProducts, gender, levels, custom, onChange }) {
 const BLANK = {
   id: '', name: '', brand: 'HEAVEN', gender: 'men',
   price: '', old: '', badge: '', stock: '', imgs: '', cost: '',
-  sku: '', fabric: '', description: '', features: '', sizes: '', color_name: '', color_group: '', size_chart: ''
+  sku: '', fabric: '', description: '', features: '', sizes: '', color_name: '', color_group: '', size_chart: '', weight_g: ''
 }
 
 export default function ProductFormPanel({ open, product, allProducts, onClose, onSaved, showToast }) {
@@ -99,9 +99,31 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
   const [catLevels, setCatLevels] = useState([''])
   const [catCustom, setCatCustom] = useState([false])
   const [busy, setBusy] = useState(false)
+  const wTouched = useRef(false)
+  const [catWeights, setCatWeights] = useState({})
+  useEffect(() => {
+    if (!open) return
+    supabase.from('category_weights').select('sub_category,weight_g').then(({ data }) => {
+      const m = {}
+      ;(data || []).forEach(r => { m[r.sub_category] = r.weight_g })
+      setCatWeights(m)
+    })
+  }, [open])
+  // the product's sub-category = last category level (the product's own name, if used as the last level, is skipped)
+  const subKey = (() => {
+    const segs = catLevels.map(v => (v || '').trim()).filter(Boolean)
+    if (segs.length > 1 && segs[segs.length - 1].toLowerCase() === (f.name || '').trim().toLowerCase()) segs.pop()
+    return segs.length ? segs[segs.length - 1].toLowerCase() : ''
+  })()
+  useEffect(() => {
+    if (open && !wTouched.current && subKey && f.weight_g === '' && catWeights[subKey] != null) {
+      setF(prev => (prev.weight_g === '' ? { ...prev, weight_g: String(catWeights[subKey]) } : prev))
+    }
+  }, [open, subKey, catWeights, f.weight_g])
 
   useEffect(() => {
     if (!open) return
+    wTouched.current = false
     if (product) {
       setF({
         id: product.id,
@@ -120,6 +142,7 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
         sizes: Array.isArray(product.sizes) ? product.sizes.join(', ') : '',
         color_name: product.color_name || '',
         color_group: product.color_group || '',
+        weight_g: product.weight_g ?? '',
         size_chart: (product.size_chart && Object.keys(product.size_chart).length) ? JSON.stringify(product.size_chart) : ''
       })
       const levels = parseCatPath(product)
@@ -177,7 +200,8 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
       sku: f.sku.trim() || null,
       sizes: sizesArr,
       color_name: f.color_name.trim() || null,
-      size_chart: sizeChartObj
+      size_chart: sizeChartObj,
+      weight_g: f.weight_g === '' || f.weight_g === null ? null : Math.max(0, Math.round(Number(f.weight_g)))
     }
     if (f.color_group.trim()) payload.color_group = f.color_group.trim()
 
@@ -199,6 +223,9 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
       } else if (f.id) {
         await supabase.from('product_costs').delete().eq('product_id', pid)
       }
+    }
+    if (!error && payload.weight_g != null && subKey && catWeights[subKey] == null) {
+      await supabase.from('category_weights').upsert({ sub_category: subKey, weight_g: payload.weight_g }, { onConflict: 'sub_category', ignoreDuplicates: true })
     }
     setBusy(false)
 
@@ -280,6 +307,9 @@ export default function ProductFormPanel({ open, product, allProducts, onClose, 
 
         <label>FABRIC (OPTIONAL)</label>
         <input type="text" placeholder="e.g. 100% Cotton" value={f.fabric} onChange={e => set('fabric', e.target.value)} />
+
+        <label>WEIGHT (GRAMS) — fills in by itself from the sub-category{subKey ? ' "' + subKey + '"' : ''}; shown on the product page under Additional information</label>
+        <input type="number" min="0" placeholder="e.g. 250" value={f.weight_g} onChange={e => { wTouched.current = true; set('weight_g', e.target.value) }} />
 
         <label>AVAILABLE SIZES (comma-separated, OPTIONAL)</label>
         <input type="text" placeholder="S, M, L, XL" value={f.sizes} onChange={e => set('sizes', e.target.value)} />
