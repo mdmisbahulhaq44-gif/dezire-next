@@ -530,17 +530,16 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             </button>
           </div>
 
-          {(product.sku || catSegs.length > 0) && (
+          {product.sku && (
             <div className="pdMeta">
-              {product.sku && <div style={{ marginBottom: catSegs.length > 0 ? 6 : 0 }}><b>SKU:</b> {product.sku}</div>}
-              {catSegs.length > 0 && <div><b>{t('Categories')}:</b> {catSegs.map(c => t(c)).join(', ')}</div>}
+              {product.sku && <div style={{ marginBottom: 0 }}><b>SKU:</b> {product.sku}</div>}
             </div>
           )}
 
 
           {(product.description || product.features || product.fabric || product.color_name || sizes.length > 0 || hasChart) && (
             <div className="rfAcc">
-              {(product.description || product.features) && (
+              {(product.description || product.features || hasChart) && (
                 <div className={`rfTab${openDesc ? ' open' : ''}`}>
                   <button type="button" className="rfHead" aria-expanded={openDesc} onClick={() => setOpenDesc(o => !o)}>
                     <span>{t('Description')}</span>
@@ -552,6 +551,11 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                       {renderDesc(product.description, t)}
                       {product.description && product.features && <p className="rfSp" aria-hidden="true">&nbsp;</p>}
                       {product.features && renderDesc(product.features.split('\n').filter(Boolean).map(l => '• ' + l.replace(/^[•\-*·]\s*/, '')).join('\n'), t)}
+                      {hasChart && (<>
+                        <p className="rfSp" aria-hidden="true">&nbsp;</p>
+                        <p><strong>{t('Measurements (in inches):')}</strong></p>
+                        {chartSizes.map(s => (<p key={s}>{s} : {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</p>))}
+                      </>)}
                     </div>
                   </div></div></div>
                 </div>
