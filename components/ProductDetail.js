@@ -49,7 +49,7 @@ function renderDesc(text, tr) {
   const t = (text || '').trim()
   if (!t) return tr ? tr('No description added yet.') : 'No description added yet.'
   const isBullet = l => /^[•\-*·]\s+/.test(l)
-  return t.split(/\n\s*\n/).map((block, bi) => {
+  return t.split(/\n\s*\n/).map((block, bi, all) => {
     const lines = block.split('\n').map(l => l.trim()).filter(Boolean)
     const out = []
     let para = []
@@ -61,6 +61,7 @@ function renderDesc(text, tr) {
       else { flushList(); para.push(l) }
     })
     flushPara(); flushList()
+    if (bi < all.length - 1) out.push(<p key={bi + 'sp'} className="rfSp" aria-hidden="true">&nbsp;</p>)
     return out
   })
 }
@@ -270,7 +271,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   // hide the buy bar once the footer's copyright row is reached (nothing floats over the footer's end)
   useEffect(() => {
     const root = panelRef.current
-    const el = root ? root.querySelector('.pdFooter .copy') : null
+    const el = root ? root.querySelector('.pdFooter .gfBottom') : null
     if (!el || typeof IntersectionObserver === 'undefined') return
     const io = new IntersectionObserver(([e]) => setAtEnd(e.isIntersecting), { root, threshold: 0 })
     io.observe(el)
@@ -532,31 +533,37 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
 
           {(product.description || product.features || product.fabric || product.color_name || sizes.length > 0 || hasChart) && (
-            <div className="pdAcc">
-              <div className={`pdAccBox${openDesc ? ' open' : ''}`}>
-                <button type="button" className="pdAccHead" aria-expanded={openDesc} onClick={() => setOpenDesc(o => !o)}>
-                  <span>{t('Description')}</span><i className="pdAccIc" aria-hidden="true" />
-                </button>
-                <div className="pdAccBody"><div className="pdAccInner"><div className="pdAccPad">
-                  <div className="pdDesc">
-                    {renderDesc(product.description, t)}
-                    {product.features && renderDesc(product.features.split('\n').filter(Boolean).map(l => '• ' + l.replace(/^[•\-*·]\s*/, '')).join('\n'), t)}
-                  </div>
-                </div></div></div>
-              </div>
-              <div className={`pdAccBox${openInfo ? ' open' : ''}`}>
-                <button type="button" className="pdAccHead" aria-expanded={openInfo} onClick={() => setOpenInfo(o => !o)}>
-                  <span>{t('Additional Information')}</span><i className="pdAccIc" aria-hidden="true" />
-                </button>
-                <div className="pdAccBody"><div className="pdAccInner"><div className="pdAccPad">
-                  <table className="pdInfoTable"><tbody>
-                    {product.fabric && <tr><th>{t('Fabric')}</th><td>{product.fabric}</td></tr>}
-                    {product.color_name && <tr><th>{t('Color')}</th><td>{product.color_name}</td></tr>}
-                    {sizes.length > 0 && <tr><th>{t('Sizes')}</th><td>{sizes.join(', ')}</td></tr>}
-                    {catSegs.length > 0 && <tr><th>{t('Category')}</th><td>{catSegs.map(c => t(c)).join(' › ')}</td></tr>}
-                  </tbody></table>
-                </div></div></div>
-              </div>
+            <div className="rfAcc">
+              {(product.description || product.features) && (
+                <div className={`rfTab${openDesc ? ' open' : ''}`}>
+                  <button type="button" className="rfHead" aria-expanded={openDesc} onClick={() => setOpenDesc(o => !o)}>
+                    <span>{t('Description')}</span>
+                    <svg className="rfPlus" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg>
+                    <svg className="rfMinus" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 10h24v4h-24z" /></svg>
+                  </button>
+                  <div className="rfBody"><div className="rfInner"><div className="rfWrap">
+                    <div className="rfDesc">
+                      {renderDesc(product.description, t)}
+                      {product.description && product.features && <p className="rfSp" aria-hidden="true">&nbsp;</p>}
+                      {product.features && renderDesc(product.features.split('\n').filter(Boolean).map(l => '• ' + l.replace(/^[•\-*·]\s*/, '')).join('\n'), t)}
+                    </div>
+                  </div></div></div>
+                </div>
+              )}
+              {sizes.length > 0 && (
+                <div className={`rfTab${openInfo ? ' open' : ''}`}>
+                  <button type="button" className="rfHead" aria-expanded={openInfo} onClick={() => setOpenInfo(o => !o)}>
+                    <span>{lang === 'bn' ? t('Additional Information') : 'Additional information'}</span>
+                    <svg className="rfPlus" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" /></svg>
+                    <svg className="rfMinus" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 10h24v4h-24z" /></svg>
+                  </button>
+                  <div className="rfBody"><div className="rfInner"><div className="rfWrap">
+                    <table className="rfAttr"><tbody>
+                      <tr><th>{t('Size')}</th><td><p>{sortSizes(sizes).join(', ')}</p></td></tr>
+                    </tbody></table>
+                  </div></div></div>
+                </div>
+              )}
             </div>
           )}
 

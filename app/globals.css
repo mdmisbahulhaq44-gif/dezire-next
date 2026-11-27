@@ -2408,3 +2408,29 @@ footer.gf .gfList a{display:flex;align-items:center;color:#4e4e4e;font-size:inhe
 }
 @media(min-width:768px) and (max-width:1024px){.gfCol{width:25%}}
 @media(min-width:1025px){.gfRow,.gfBRow{padding:0 10px}}
+
+
+/* ref-product-acc: Description / Additional information copied from the reference (Astra accordion). Text 14.592px, line 1.88, borders #ddd, blue #0170B9 */
+.rfAcc{border-bottom:1px solid #ddd;margin:0 0 29.184px}
+.rfAcc:empty{display:none}
+.rfHead{display:block;position:relative;width:100%;box-sizing:border-box;text-align:left;background:transparent;border:1px solid #ddd;border-bottom:0;border-radius:0;-webkit-appearance:none;appearance:none;padding:16.05px 20.87px;margin:0;font:400 16.05px/20.87px Lato,PoppinsRef,Poppins,sans-serif;letter-spacing:0;text-transform:none;color:#333;cursor:pointer;transition:.3s}
+.rfTab.open .rfHead{color:#0170B9}
+.rfHead svg{position:absolute;right:16.05px;top:50%;transform:translateY(-50%);width:16.05px;height:16.05px;fill:#0170B9;pointer-events:none}
+.rfMinus{display:none}
+.rfTab.open .rfPlus{display:none}
+.rfTab.open .rfMinus{display:block}
+.rfBody{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s;border:1px solid #ddd;border-top:0;border-bottom:0}
+.rfTab.open .rfBody{grid-template-rows:1fr}
+.rfInner{overflow:hidden;min-height:0}
+.rfWrap{padding:14.592px 18.97px 29.184px;font-family:PoppinsRef,Poppins,sans-serif;font-weight:300;font-size:14.592px;line-height:1.88;color:#000}
+.rfDesc p{margin:0 0 7.296px}
+.rfDesc ul{margin:0 0 21.888px 43.776px;padding:0;list-style:disc}
+.rfDesc li{margin:0;padding:0}
+.rfDesc strong,.rfDesc b{font-weight:700}
+.rfDesc a{color:#4e4e4e;text-decoration:none}
+.rfDesc>:last-child{margin-bottom:0}
+.rfAttr{width:100%;border-collapse:separate;border-spacing:0;border:0;border-top:1px solid #ddd;border-left:1px solid #ddd;margin:0}
+.rfAttr th,.rfAttr td{border:0;border-right:1px solid #ddd;border-bottom:1px solid #ddd;line-height:1.5;text-align:left;font-style:normal;vertical-align:middle}
+.rfAttr th{width:150px;padding:9.78px 19.55px 9.78px 13.13px;font-weight:300;color:#3a3a3a}
+.rfAttr td{padding:9.78px 19.55px;font-weight:300;color:#000}
+.rfAttr td p{margin:0;padding:0}
