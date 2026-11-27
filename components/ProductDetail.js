@@ -532,13 +532,14 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           {product.sku && (
             <div className="pdMeta">
-              {product.sku && <div style={{ marginBottom: 0 }}><b>SKU:</b> {product.sku}</div>}
+              {product.sku && <div style={{ marginBottom: 6 }}><b>SKU:</b> {product.sku}</div>}
+              {catSegs.length > 0 && <div><b>{t('Categories')}:</b> {catSegs.map(c => t(c)).join(', ')}</div>}
             </div>
           )}
 
 
           {(product.description || product.features || product.fabric || product.color_name || sizes.length > 0 || hasChart) && (
-            <div className="rfAcc">
+            <div className="rfAcc" style={{ marginTop: 32 }}>
               {(product.description || product.features || hasChart) && (
                 <div className={`rfTab${openDesc ? ' open' : ''}`}>
                   <button type="button" className="rfHead" aria-expanded={openDesc} onClick={() => setOpenDesc(o => !o)}>
