@@ -569,7 +569,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                   </div></div></div>
                 </div>
               )}
-              {(
+              {(Number(product.weight_g) > 0 || sizes.length > 0) && (
                 <div className={`rfTab${openInfo ? ' open' : ''}`}>
                   <button type="button" className="rfHead" aria-expanded={openInfo} onClick={() => setOpenInfo(o => !o)}>
                     <span>{lang === 'bn' ? t('Additional Information') : 'Additional information'}</span>
@@ -578,7 +578,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                   </button>
                   <div className="rfBody"><div className="rfInner"><div className="rfWrap">
                     <table className="rfAttr"><tbody>
-                      <tr><th>{t('Weight')}</th><td><p>{fmtWeight(product.weight_g)}</p></td></tr>
+                      {Number(product.weight_g) > 0 && <tr><th>{t('Weight')}</th><td><p>{fmtWeight(product.weight_g)}</p></td></tr>}
                       {sizes.length > 0 && <tr><th>{catSegs.length ? t(catSegs[catSegs.length - 1]) : t('Size')}</th><td><p>{sortSizes(sizes).join(', ')}</p></td></tr>}
                     </tbody></table>
                   </div></div></div>
