@@ -202,12 +202,18 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const [thumbLess, setThumbLess] = useState(false)
   const [zoomOpen, setZoomOpen] = useState(false)
   const [ratios, setRatios] = useState({})
+  const [probes, setProbes] = useState({})
   const [galAnim, setGalAnim] = useState(false)
   useEffect(() => { const id = setTimeout(() => setGalAnim(true), 700); return () => clearTimeout(id) }, [])
   function setRatio(i, el) {
     if (!el || !el.naturalWidth || !el.naturalHeight) return
     const r = el.naturalWidth / el.naturalHeight
     setRatios(o => (o[i] && Math.abs(o[i] - r) < 0.001 ? o : { ...o, [i]: r }))
+  }
+  function setProbe(i, el) {
+    if (!el || !el.naturalWidth || !el.naturalHeight) return
+    const r = el.naturalWidth / el.naturalHeight
+    setProbes(o => (o[i] ? o : { ...o, [i]: r }))
   }
   function onThumbScroll() {
     const el = thumbsRef.current
@@ -398,7 +404,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
       <div className={`panel${shown ? ' show' : ''}`} id="productPanel" ref={panelRef} style={{ overscrollBehavior: 'contain' }}>
         <PdTopBar onBack={closeProduct} />
 
-        <div className="pdGallery" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ aspectRatio: ratios[index] || 1, background: '#fff', transition: galAnim ? 'aspect-ratio .3s ease' : 'none' }}>
+        <div className="pdGallery" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ aspectRatio: ratios[index] || probes[index] || 1, background: '#fff', transition: galAnim ? 'aspect-ratio .5s cubic-bezier(.445,.05,.55,.95)' : 'none' }}>
           <div className="pdGalleryTrack" style={{ transform: `translateX(-${index * 100}%)` }}>
             {images.length ? images.map((url, i) => (
               <div className="pdSlide" key={i}>
@@ -435,7 +441,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           <div className="pdThumbsWrap">
             <div className="pdThumbs" ref={thumbsRef} onScroll={onThumbScroll}>
               {images.map((url, i) => (<button type="button" key={i} className={`pdThumb${i === index ? ' active' : ''}`} onClick={() => setIndex(i)} aria-label={`Photo ${i + 1}`}>
-                <Image src={cldOpt(url, 240)} alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} loading={i < 8 ? 'eager' : 'lazy'} quality={60} />
+                <Image src={cldOpt(url, 240)} alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} loading={i < 8 ? 'eager' : 'lazy'} quality={60} onLoad={e => setProbe(i, e.currentTarget)} />
               </button>
               ))}
             </div>
