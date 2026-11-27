@@ -2453,3 +2453,14 @@ footer.gf .gfList a{display:flex;align-items:center;color:#4e4e4e;font-size:inhe
 .pdCrumb{font-size:13.43px;line-height:1.88;color:#777;margin-bottom:14.592px}
 .pdCrumb a{color:#777}
 .pdTitle{font-family:LatoRef,Lato,PoppinsRef,Poppins,sans-serif;font-size:27.36px;font-weight:300;line-height:1.2;color:#000;margin:0 0 13.68px}
+
+
+/* ref-weights: the reference loads only Poppins Light, so every bold there is a synthesized bold of Light; same here. Table and top measurements like the reference */
+.rfWrap,.rfAttr,.pdMeasureTop,.pdOptLabel,.pdSizeSelect,.pdSizeClear{font-family:var(--font-q),sans-serif}
+.rfAttr{font-size:14.592px}
+.rfAttr th{text-transform:none;letter-spacing:0;font-size:14.592px;font-weight:300;color:#3a3a3a}
+.rfAttr td{font-size:14.592px}
+.rfAttr tr:hover td{background:none}
+.pdMeasureTop{margin:0 0 14.592px;font-size:14.592px;font-weight:300;line-height:1.88;color:#000}
+.pdMeasureTop p{margin:0 0 7.296px}
+.pdMeasureTop strong{font-weight:700}

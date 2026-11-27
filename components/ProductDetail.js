@@ -470,10 +470,8 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
 
           {hasChart && (
             <div className="pdMeasureTop">
-              <b>{t('Measurements (in inches):')}</b>
-              {chartSizes.map(s => (
-                <div key={s}><span>{s}</span> : {chartText(chart[s])}</div>
-              ))}
+              <p><strong>{t('Measurements (in inches):')}</strong></p>
+              <p>{chartSizes.map((s, i) => (<span key={s}>{i > 0 && <br />}{s} : {chartText(chart[s])}</span>))}</p>
             </div>
           )}
 

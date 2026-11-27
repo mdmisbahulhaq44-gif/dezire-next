@@ -27,7 +27,7 @@ import ServiceWorkerRegister from "../components/ServiceWorkerRegister"
 
 const quicksand = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300"],
   display: "swap",
   variable: "--font-q"
 })
