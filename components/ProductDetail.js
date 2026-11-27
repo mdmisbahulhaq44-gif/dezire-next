@@ -551,6 +551,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                     <div className="rfDesc">
                       {renderDesc(product.description, t)}
                       {product.description && product.features && <p className="rfSp" aria-hidden="true">&nbsp;</p>}
+                      {product.features && <p><strong>{t('Features:')}</strong></p>}
                       {product.features && renderDesc(product.features.split('\n').filter(Boolean).map(l => '• ' + l.replace(/^[•\-*·]\s*/, '')).join('\n'), t)}
                       {hasChart && (<>
                         <p className="rfSp" aria-hidden="true">&nbsp;</p>
