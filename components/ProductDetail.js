@@ -440,7 +440,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
       <div className={`panel${shown ? ' show' : ''}`} id="productPanel" ref={panelRef} style={{ overscrollBehavior: 'contain' }}>
         <PdTopBar onBack={closeProduct} />
 
-        <div className="pdGallery" ref={galRef} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ aspectRatio: ratios[index] || probes[index] || 1, background: '#fff' }}>
+        <div className="pdGallery" ref={galRef} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ width: '100%', aspectRatio: ratios[index] || probes[index] || 1, background: '#fff' }}>
           <div className="pdGalleryTrack" style={{ transform: `translateX(-${index * 100}%)` }}>
             {images.length ? images.map((url, i) => (
               <div className="pdSlide" key={i}>

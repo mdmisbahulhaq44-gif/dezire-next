@@ -2487,3 +2487,4 @@ h1,h2,h3,h4,h5,h6{font-family:LatoRef,var(--font-q),var(--font-hind),sans-serif;
 
 /* gorurghash match: photo slide speed and curve */
 .pdGalleryTrack{transition:transform .5s cubic-bezier(.795,-.035,0,1)}
+.panel#productPanel .pdThumbs{padding:0;scroll-padding:0}
