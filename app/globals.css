@@ -2443,3 +2443,13 @@ footer.gf .gfList a{display:flex;align-items:center;color:#4e4e4e;font-size:inhe
 .pdBuyBar{opacity:0;transition:opacity .4s ease-in-out,transform .6s ease-in-out;box-shadow:0 -1px 10px rgba(0,0,0,.1),0 -1px 9px rgba(0,0,0,.06)}
 .pdBuyBar.show{opacity:1}
 .pdMeta{border-top:1px solid #ddd;padding-top:.5em;margin:0 0 .8em}
+
+
+/* ref-summary: size label, select, title and breadcrumb sized like the reference (Poppins base 14.592px, Lato Light title 27.36px) */
+.rfVar{border-bottom:1px solid #ddd;margin-bottom:14.592px}
+.pdOptLabel{display:block;margin:0 0 7.296px;font-size:14.592px;font-weight:700;line-height:29.184px;color:#000}
+.pdSizeSelect{margin-top:0;padding:7.296px 29.184px 7.296px 11.67px;border:1px solid #ddd;border-radius:3px;font:300 14.592px/normal PoppinsRef,Poppins,sans-serif;color:#808285;background-position:right 12px center}
+.pdSizeClear{display:block;margin:0;padding:0;border:0;background:none;height:29.184px;font:300 10.944px/29.184px PoppinsRef,Poppins,sans-serif;text-transform:uppercase;text-decoration:none;letter-spacing:0;color:inherit;opacity:.6;cursor:pointer;text-align:left}
+.pdCrumb{font-size:13.43px;line-height:1.88;color:#777;margin-bottom:14.592px}
+.pdCrumb a{color:#777}
+.pdTitle{font-family:LatoRef,Lato,PoppinsRef,Poppins,sans-serif;font-size:27.36px;font-weight:300;line-height:1.2;color:#000;margin:0 0 13.68px}

@@ -509,13 +509,13 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
           )}
 
           {sizes.length > 0 && (
-            <div ref={sizeRef} style={{ marginTop: 14 }}>
+            <div ref={sizeRef} className="rfVar" style={{ marginTop: 14 }}>
               <span className="pdOptLabel">{catSegs.length ? t(catSegs[catSegs.length - 1]) : t('Size')}</span>
               <select className="pdSizeSelect" value={size} onChange={e => setSize(e.target.value)}>
                 <option value="">{t('Choose an option')}</option>
                 {sizes.map(s => <option value={s} key={s}>{s}</option>)}
               </select>
-              {size && <button type="button" className="pdSizeClear" onClick={() => setSize('')}>{t('Clear')}</button>}
+              <button type="button" className="pdSizeClear" style={{ visibility: size ? 'visible' : 'hidden' }} tabIndex={size ? 0 : -1} onClick={() => setSize('')}>{t('Clear')}</button>
               {measurements.length > 0 && (
                 <div style={{ marginTop: 10, fontSize: 12, color: '#333', lineHeight: 1.6 }}>
                   <b>{size}</b>: {chartText(chart[size])}
