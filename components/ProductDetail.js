@@ -176,6 +176,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const [size, setSize] = useState('')
   const [openDesc, setOpenDesc] = useState(true)
   const [openInfo, setOpenInfo] = useState(false)
+  const [pickedColor, setPickedColor] = useState(null)
   const [barOn, setBarOn] = useState(false)
   const [atEnd, setAtEnd] = useState(false)
   const addRef = useRef(null)
@@ -482,7 +483,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
                 {colors.map(c => {
                   const img = c.imgs ? c.imgs.split(',')[0].trim() : ''
-                  const active = c.id === product.id
+                  const active = pickedColor ? c.id === pickedColor : c.id === product.id
                   const out = Number(c.stock) <= 0
                   const box = (
                     <span style={{ display: 'block', position: 'relative', width: 46, height: 58, borderRadius: 6, overflow: 'hidden', border: active ? '2px solid #111' : '1px solid #ddd', opacity: out ? 0.45 : 1 }}>
@@ -494,6 +495,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                   ) : (
                     <Link
                       key={c.id}
+                      onClick={() => setPickedColor(c.id)}
                       href={`/product/${c.id}`}
                       replace
                       data-replace="1"

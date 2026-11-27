@@ -1,0 +1,266 @@
+=== THEIRS ===
+#ast-quick-view-modal .ast-qv-image-slider .flex-control-nav li{margin:0 6px;display:inline-block;zoom:1;vertical-align:middle}
+#ast-quick-view-modal .ast-qv-image-slider .flex-control-nav{margin:0;padding:0;width:100%;position:absolute;bottom:10px;text-align:center;z-index:2}
+#ast-quick-view-modal .ast-qv-image-slider .flex-control-paging li a.flex-active{background:#000;background:rgba(0,0,0,.9);cursor:default}
+#ast-quick-view-modal .ast-qv-image-slider .flex-control-paging li a{width:11px;height:11px;display:block;background:#666;background:rgba(0,0,0,.5);cursor:pointer;text-indent:-9999px;box-shadow:inset 0 0 3px rgba(0,0,0,.3);border-radius:20px}
+#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav .flex-next:before,#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav .flex-prev:before{speak:none;font-size:20px;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;position:absolute;visibility:visible}
+#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav .flex-next{right:-50px;text-align:right}
+#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav .flex-next{transform:rotate(-90deg);}
+#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav .flex-prev:before,#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav .flex-next:before{content:"\e900";font-family:Astra;font-size:20px;}
+#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav .flex-prev{left:-50px}
+#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav .flex-prev{transform:rotate(90deg);}
+#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav a{text-decoration:none;display:block;margin:-20px 0 0;position:absolute;top:50%;z-index:10;overflow:hidden;opacity:0;cursor:pointer;color:rgba(0,0,0,.8);text-shadow:1px 1px 0 rgba(255,255,255,.3);transition:all .3s ease-in-out;visibility:hidden}
+#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav a{width:20px;height:20px;}
+#ast-quick-view-modal .ast-qv-image-slider .flex-direction-nav{margin:0;padding:0;list-style:none}
+#ast-quick-view-modal .ast-qv-image-slider:hover .flex-direction-nav .flex-next,#ast-quick-view-modal .ast-qv-image-slider:hover .flex-direction-nav .flex-prev{opacity:.7}
+#ast-quick-view-modal .ast-qv-image-slider:hover .flex-direction-nav .flex-next{right:10px;}
+#ast-quick-view-modal .ast-qv-image-slider:hover .flex-direction-nav .flex-prev{left:10px;}
+#ast-vertical-thumbnail-wrapper .woocommerce-product-gallery-thumbnails__wrapper img{width: inherit;}
+,&quot;dimensions_html&quot;:&quot;N\/A&quot;,&quot;display_price&quot;:1800,&quot;display_regular_price&quot;:1800,&quot;gallery_image_ids&quot;:[],&quot;gallery_images_html&quot;:&quot;&quot;,&quot;image&quot;:{&quot;title&quot;:&quot;_DSC0713 copy2&quot;,&quot;caption&quot;:&quot;&quot;,&quot;url&quot;:&quot;https:\/\/gorurghash.com\/wp-content\/uploads\/2026\/05\/DSC0713-copy2.jpg&quot;,&quot;alt&quot;:&quot;_DSC0713 copy2&quot;,&quot;src&quot;:&quot;https:\/\/gorurghash.com\/wp-content\/uploads\/2026\/0}
+.ast-flex-direction-column-reverse{flex-direction:column-reverse}
+.ast-flex-direction-column{flex-direction:column}
+.ast-flex-direction-row-reverse{flex-direction:row-reverse}
+.ast-flex-direction-row{flex-direction:row}
+.ast-product-gallery-with-no-image .ast-single-product-thumbnails,.ast-product-gallery-with-no-image #ast-gallery-thumbnails{display: none;}
+.ast-single-product-thumbnails .ast-woocommerce-product-gallery__image > img,#ast-vertical-slider-inner img{cursor: pointer;}
+.ast-single-product-thumbnails .flex-direction-nav .flex-next:after{left: 8px;transform: rotate(135deg);}
+.ast-single-product-thumbnails .flex-direction-nav .flex-next{transform: translateY(-50%);right: -10px;}
+.ast-single-product-thumbnails .flex-direction-nav .flex-prev,.ast-single-product-thumbnails .flex-direction-nav .flex-next{transform: translateY(-50%);top: 50%;}
+.ast-single-product-thumbnails .flex-direction-nav .flex-prev:after{left: 12px;transform: rotate(-45deg);}
+.ast-single-product-thumbnails .flex-direction-nav .flex-prev{transform: translateY(-50%);left: -10px;}
+.ast-single-product-thumbnails .flex-direction-nav{list-style-type: none;margin: 0;}
+.ast-single-product-thumbnails.slider-disabled .flex-direction-nav{display: none;}
+.ast-woocommerce-product-gallery__image.flex-active-slide:after{content: "";position: absolute;top: 0;left: 0;right: 0;bottom: 0;border: 1px solid var( --ast-global-color-0 );}
+.ast-woocommerce-product-gallery__image.flex-active-slide{position: relative;}
+.eicon-gallery-grid:before{content:"\e830"}
+.eicon-gallery-group:before{content:"\e831"}
+.eicon-gallery-justified:before{content:"\e832"}
+.eicon-gallery-masonry:before{content:"\e833"}
+.eicon-instagram-gallery:before{content:"\e957"}
+.eicon-instagram-nested-gallery:before{content:"\e954"}
+.entry-content .blocks-gallery-item img{margin-bottom: auto;}
+.flex-direction-nav .flex-disabled,.ast-vertical-navigation-wrapper button.flex-disabled{display: none;}
+.hfe-counter-wrapper[style*="flex-direction: row"]{justify-content: center; /* horizontal alignment for row layouts */
+    align-items: center; /* vertical alignment for row layouts */}
+.hfe-counter-wrapper[style*="flex-direction: row-reverse"] .hfe-counter-title,
+.hfe-counter-wrapper[style*="flex-direction: row-reverse"] .hfe-counter-content{flex: 1;
+    min-width: 0;}
+.woocommerce div.product div.images .ast-single-product-thumbnails .flex-viewport{margin-bottom: 0;overflow: hidden;}
+.woocommerce div.product.ast-product-gallery-layout-vertical div.images .flex-control-thumbs li{width:100%;}
+.woocommerce div.product.ast-product-gallery-layout-vertical div.images .flex-control-thumbs{width:calc(25% - 1em);}
+.woocommerce div.product.ast-product-gallery-with-no-image .onsale{top:-.5em;left: -.5em;}
+.woocommerce-js div.product div.images .flex-control-thumbs li img.flex-active,.woocommerce-js div.product div.images .flex-control-thumbs li img:hover{opacity:1}
+.woocommerce-js div.product div.images .flex-control-thumbs li img{cursor:pointer;opacity:.5;margin:0}
+.woocommerce-js div.product div.images .flex-control-thumbs li{width:25%;float:left;margin:0;list-style:none}
+.woocommerce-js div.product div.images .flex-control-thumbs{overflow:hidden;zoom:1;margin:0;padding:0}
+.woocommerce-js div.product div.images .woocommerce-product-gallery__image:nth-child(n+2){width:25%;display:inline-block}
+.woocommerce-js div.product div.images .woocommerce-product-gallery__trigger:after{content:"";display:block;width:2px;height:8px;background:var(--ast-global-color-3);border-radius:6px;position:absolute;top:19px;left:22px;transform:rotate(-45deg);box-sizing:content-box}
+.woocommerce-js div.product div.images .woocommerce-product-gallery__trigger:before{content:"";display:block;width:10px;height:10px;border:2px solid var(--ast-global-color-3);border-radius:100%;position:absolute;top:9px;left:9px;box-sizing:content-box}
+.woocommerce-js div.product div.images .woocommerce-product-gallery__trigger{position:absolute;top:.5em;right:.5em;font-size:2em;z-index:9;width:36px;height:36px;background:var(--ast-global-color-primary,var(--ast-global-color-5));text-indent:-9999px;border-radius:100%;box-sizing:content-box;backface-visibility:hidden}
+.woocommerce-js div.product div.images .woocommerce-product-gallery__wrapper .zoomImg{background-color:#fff}
+.woocommerce-js div.product div.images .woocommerce-product-gallery__wrapper{transition:all cubic-bezier(.795, -.035, 0, 1) .5s;margin:0;padding:0}
+.woocommerce-js div.product div.images.woocommerce-product-gallery .flex-viewport{transform-style:preserve-3d;margin-bottom:1em}
+.woocommerce-js div.product div.images.woocommerce-product-gallery{position:relative}
+.woocommerce-js div.product div.woocommerce-product-gallery--columns-3 .flex-control-thumbs li:nth-child(3n){margin-right:0}
+.woocommerce-js div.product div.woocommerce-product-gallery--columns-3 .flex-control-thumbs li:nth-child(3n+1){clear:left}
+.woocommerce-js div.product div.woocommerce-product-gallery--columns-3 .flex-control-thumbs li{width:32%;width:calc(33.33% - .7em);margin-right:1em;margin-bottom:1em}
+.woocommerce-js div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li:nth-child(4n){margin-right:0}
+.woocommerce-js div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li:nth-child(4n+1){clear:left}
+.woocommerce-js div.product div.woocommerce-product-gallery--columns-4 .flex-control-thumbs li{width:24%;width:calc(25% - .75em);margin-right:1em;margin-bottom:1em}
+.woocommerce-js div.product div.woocommerce-product-gallery--columns-5 .flex-control-thumbs li:nth-child(5n){margin-right:0}
+.woocommerce-js div.product div.woocommerce-product-gallery--columns-5 .flex-control-thumbs li:nth-child(5n+1){clear:left}
+.woocommerce-js div.product div.woocommerce-product-gallery--columns-5 .flex-control-thumbs li{width:18.5%;width:calc(20% - .8em);margin-right:1em;margin-bottom:1em}
+.woocommerce-js.single-product .sale:not(.ast-product-gallery-layout-vertical-slider)>span.onsale{top:-.5em}
+.woocommerce-product-gallery .flex-direction-nav .flex-prev,.woocommerce-product-gallery .flex-direction-nav .flex-next,#ast-vertical-navigation-prev,#ast-vertical-navigation-next{position: absolute;width: 30px;height: 30px;padding: 0;color: transparent;background-color: var(--ast-global-color-primary,--ast-global-color-5);border-radius: 100%;font-size: 0;box-shadow: 0 0 5px 0px rgb(0 0 0 / 30%);z-index: 1;opacity: .8;}
+.woocommerce-product-gallery .flex-direction-nav .flex-prev:after,.woocommerce-product-gallery .flex-direction-nav .flex-next:after,#ast-vertical-navigation-prev:after,#ast-vertical-navigation-next:after{content: "";position: absolute;top: 10px;width: 10px;height: 10px;text-indent: -9999px;border-top: 2px solid var( --ast-global-color-3 );border-left: 2px solid var( --ast-global-color-3 );}
+.woocommerce-product-gallery .flex-direction-nav .flex-prev:focus,.woocommerce-product-gallery .flex-direction-nav .flex-next:focus,#ast-vertical-navigation-prev,#ast-vertical-navigation-next{color: transparent;}
+.woocommerce-product-gallery-thumbnails__wrapper{display: block;width: 100%;height: inherit;}
+.woocommerce-product-gallery{display: flex;flex-flow: column;}
+.wp-block-gallery,.blocks-gallery-grid{margin: 0;}
+/* Default alignments that will be overridden by controls */
+.hfe-counter-wrapper[style*="flex-direction: column"]{align-items: center; /* horizontal alignment for column layouts */
+    justify-content: center; /* vertical alignment for column layouts */}
+/* Equal width distribution for horizontal layouts */
+.hfe-counter-wrapper[style*="flex-direction: row"] .hfe-counter-title,
+.hfe-counter-wrapper[style*="flex-direction: row"] .hfe-counter-content{flex: 1;
+    min-width: 0;}
+://schema.org/WPFooter" itemscope="itemscope" id="colophon" role="contentinfo">
+			<div class='footer-width-fixer'><style>.elementor-1165 .elementor-element.elementor-element-012b4cf > .elementor-container > .elementor-column > .elementor-widget-wrap{align-content:center;align-items:center;}
+;
+//# sourceURL=wc-add-to-cart-variation-js-extra
+</script>
+<script id="wc-add-to-cart-variation-js-before">
+(window.wc_variation_gallery_defaults = window.wc_variation_gallery_defaults ||{}
+allery--with-images [data-controls="prev"]:focus-visible,.woocommerce-product-gallery--with-images [data-controls="next"]:focus-visible,.ast-builder-button-wrap:has(.ast-custom-button-link:focus),.ast-builder-button-wrap .ast-custom-button-link:focus{outline-style:dotted;outline-color:inherit;outline-width:thin;}
+at = true;
+//# sourceURL=jquery-ui-core-js-before
+</script>
+<script id="jquery-ui-core-js" src="https://gorurghash.com/wp-includes/js/jquery/ui/core.min.js?ver=1.14.2"></script>
+<script id="elementor-frontend-js-before">
+var elementorFrontendConfig ={"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false}
+body #ast-quick-view-modal div.product .flex-viewport{width:100%;float:none}
+gtag( 'js', new Date() );
+
+            gtag( 'config', 'AW-' );
+        </script>
+        <!--/noptimize-->
+			<noscript><style>.woocommerce-product-gallery{opacity: 1 !important;}
+initial wash.</strong></p>
+</div>
+
+<form class="variations_form cart" action="https://gorurghash.com/product/half-sleeve-embroidered-boxy-shirt-in-cream/" method="post" enctype='multipart/form-data' data-product_id="210609" data-product_variations="[{&quot;attributes&quot;:{&quot;attribute_pa_embroidered-boxy-shirts&quot;:&quot;s&quot;}
+=== THEIR JS FILES ===
+
+=== MINE ===
+/* PRODUCT DETAIL GALLERY */
+.pdGallery{position:relative;
+aspect-ratio:3/4;
+background:var(--cream);
+border-radius:12px;
+overflow:hidden}
+.pdGalleryTrack{display:flex;
+height:100%;
+transition:transform .3s ease}
+.pdGalleryTrack .pdSlide{min-width:100%;height:100%;
+display:flex;align-items:center;justify-content:center;
+font-size:60px}
+.pdGalleryTrack .pdSlide img{width:100%;height:100%;object-fit:cover}
+.pdArrow{position:absolute;top:50%;transform:translateY(-50%);
+width:36px;height:36px;border-radius:50%;
+border:0;background:rgba(255,255,255,.9);
+font-size:20px;cursor:pointer;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.pdArrowLeft{left:12px}
+.pdArrowRight{right:12px}
+.pdDots{position:absolute;bottom:14px;left:0;right:0;
+display:flex;justify-content:center;gap:6px}
+.pdDots span{width:7px;height:7px;border-radius:50%;
+background:rgba(255,255,255,.6);
+transition:.2s}
+.pdDots span.active{background:#fff;width:18px;border-radius:5px}
+/* PRODUCT PAGE: site header on top, photo grid, tabs, footer at the bottom */
+.pdTopBar{position:sticky;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;height:46px;margin:-25px -25px 16px;padding:0 4%;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.06)}
+.pdTopBar .logo{flex:none}
+.pdTopRight{display:flex;align-items:center;gap:4px;flex:1;justify-content:flex-end}
+.pdTopBar>.pdTopBtn:first-child{flex:1;justify-content:flex-start}
+.pdThumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+.pdThumb{position:relative;aspect-ratio:3/4;border:2px solid transparent;border-radius:6px;overflow:hidden;background:#f4f4f4;padding:0;cursor:pointer}
+.pdThumb.active{border-color:#111}
+/* product page header scrolls away with the page (not sticky) */
+.pdTopBar{position:relative;top:auto;background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{margin-left:-14px;margin-right:-14px}
+.panel#productPanel .pdGallery{border-radius:4px}
+.pdThumbs{gap:8px;margin-top:10px}
+.pdThumb{aspect-ratio:1/1;border:0;border-radius:2px;opacity:.38;transition:opacity .25s ease;outline:none;-webkit-tap-highlight-color:transparent}
+.pdThumb.active{opacity:1;border:0}
+.pdThumb:focus,.pdThumb:focus-visible{outline:none}
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{margin-left:-18px;margin-right:-18px;margin-bottom:42px}
+.panel#productPanel .pdGallery,.panel#productPreview .pdGallery{border-radius:0;aspect-ratio:780/1005}
+.pdThumbs{gap:14px;margin-top:14px}
+.pdThumb{border-radius:0}
+ws/dots (swipe still works), cart bag lower + softer shadow like the reference */
+#productPanel .pdArrow,#productPanel .pdDots,#productPreview .pdDots{display:none}
+ the left, empty middle, buttons on the right, then a light grey band above the photo */
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{height:84px;margin-bottom:70px;padding:0 6px 0 8px;border-bottom:1px solid #fbfbfb}
+.pdTopBar::after{content:"";position:absolute;left:0;right:0;top:100%;height:70px;background:#f9f9f9;pointer-events:none}
+.pdTopBar>.pdTopBtn:first-child{flex:none;width:34px;justify-content:flex-start;margin-left:6px}
+.pdTopBar .logo{font-size:22px;letter-spacing:4px;margin-left:8px}
+.pdTopRight{gap:5px}
+.pdTopRight .pdTopBtn{width:44px;height:44px;font-size:24px}
+.pdTopRight .pdTopBtn svg{width:22px;height:22px}
+/* product page: no back arrow (phone back gesture closes it, like the reference) */
+.pdTopBar>.pdTopBtn:first-child{display:none}
+.pdTopBar .logo{margin-left:8px}
+r than before), old button/logo sizes back, photo + first thumbnail row fit on screen */
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{height:71px;margin-bottom:59px;padding:0 8px}
+.pdTopBar::after{height:59px}
+.pdTopBar>.pdTopBtn:first-child{display:none}
+.pdTopBar .logo{font-size:20px;letter-spacing:4px;margin-left:0}
+.pdTopRight{gap:4px}
+.pdTopRight .pdTopBtn{width:34px;height:34px;font-size:19px}
+.pdTopRight .pdTopBtn:nth-child(2) svg{width:21px;height:21px}
+.pdTopRight .pdTopBtn:nth-child(3) svg{width:20px;height:20px}
+.panel#productPanel .pdGallery,.panel#productPreview .pdGallery{aspect-ratio:812/1000}
+uct page: thinner header and grey band (a little thicker than the very first version) */
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{height:56px;margin-bottom:48px}
+.pdTopBar::after{height:48px}
+.panel#productPanel .pdGallery,.panel#productPreview .pdGallery{aspect-ratio:780/1005}
+ove the photo has exactly the photo's width (same left and right edges) */
+.panel#productPanel .pdTopBar::after,.panel#productPreview .pdTopBar::after{left:18px;right:18px}
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{height:70px;margin-left:-20px;margin-right:-20px;margin-bottom:22px;background:#fff}
+.panel#productPanel .pdTopBar::after,.panel#productPreview .pdTopBar::after{display:none}
+.panel#productPanel .pdGallery,.panel#productPreview .pdGallery{aspect-ratio:4/5;background:#fff}
+.panel#productPanel .pdThumbs,.panel#productPreview .pdThumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:14px}
+.pdThumbs::-webkit-scrollbar{display:none}
+.panel#productPanel .pdThumb,.panel#productPreview .pdThumb{width:auto;min-width:0}
+arch + boxed menu button on the right (sizes and spacing measured from the reference) */
+.panel#productPanel .pdTopBar,.panel#productPreview .pdTopBar{padding:0 20px;background:#fff}
+.pdTopRight{flex:1;justify-content:flex-end;gap:23.5px}
+.pdTopRight .pdTopIc{display:inline-flex;align-items:center;justify-content:center;width:auto;height:auto;padding:0;margin:0;background:none;border:0;color:#2a2a2a;cursor:pointer}
+.pdTopRight .pdTopIc svg{display:block;width:16.5px;height:16.5px}
+.pdTopRight .pdTopSearch{color:#000;transform:translateY(-2.7px)}
+.pdTopRight .pdTopSearch svg{width:15.6px;height:15.6px}
+.pdTopRight .pdTopMenu{flex:none;width:37px;height:37px;padding:0;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:2.3px;background:none;border:1px solid #c7c4c5;border-radius:0;cursor:pointer}
+.pdTopRight .pdTopMenu span{display:block;width:13px;height:2px;background:#c7c4c5}
+/* menu like the reference (gorurghash.com): drops down under the header over the page, light list, chevron rows */
+nav.navShop,.pdTopBar{overflow:visible}
+.pdTopRight .pdTopMenu.open span:nth-child(2){display:none}
+.pdTopRight .pdTopMenu.open span:nth-child(1){transform:translateY(2.15px) rotate(45deg)}
+.pdTopRight .pdTopMenu.open span:nth-child(3){transform:translateY(-2.15px) rotate(-45deg)}
+page like the reference video: magnifier on the photo, one slidable row of thumbnails with a round arrow, measurements above the options */
+.pdZoomBtn{position:absolute;top:10px;right:10px;z-index:3;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:#222;cursor:pointer}
+/* thumbnails: back to the small 4-per-row grid under the big photo (no sideways scroll, no arrow) */
+.pdThumbsWrap{position:relative}
+.pdThumbsWrap .pdThumbs::-webkit-scrollbar{display:none}
+.pdThumbNext{display:none !important}
+.pdZoomLayer{position:fixed;inset:0;z-index:900;background:#fff;display:flex;align-items:center;justify-content:center}
+.pdZoomLayer img{max-width:100%;max-height:100%;object-fit:contain}
+.pdZoomClose{position:absolute;top:calc(10px + var(--sat));right:12px;width:40px;height:40px;border:0;background:none;font-size:30px;line-height:1;color:#111;cursor:pointer}
+* same HEAVEN logo size on every header (category pages and product page), so nothing jumps during the transition */
+nav.navShop .logo,.pdTopBar .logo{font-size:20px;font-weight:600;letter-spacing:4px;line-height:1.2;margin:0}
+p square corners everywhere */
+.productImage,.hubTiles .category,.hubTiles .catText,.hubTiles .leafImg,.cartImg,.miniItem .cartImg,.pdGallery,.pdThumb{border-radius:0!important}
+p square corners everywhere */
+.productImage,.hubTiles .category,.hubTiles .catText,.hubTiles .leafImg,.cartImg,.miniItem .cartImg,.pdGallery,.pdThumb{border-radius:0!important}
+/* header icons v2: sizes and weights copied from the reference (close box stays square) */
+.pdTopRight .pdTopIc{color:#383838}
+.pdTopRight .pdTopIc svg{width:16.9px;height:16.9px}
+.pdTopRight .pdTopIc:first-child{transform:translateY(.3px);margin-right:-1.1px}
+.pdTopRight .pdTopSearch{color:#000;transform:translateY(-2.4px);margin-right:-1.05px}
+.pdTopRight .pdTopSearch svg{width:17.7px;height:17.7px}
+.pdTopRight .pdTopSearch svg circle{stroke-width:2.2}
+.pdTopRight .pdTopSearch svg path{stroke-width:2.5}
+.pdTopRight .pdTopMenu.open span{width:11.4px;height:1.2px}
+.pdTopRight .pdTopMenu.open span:nth-child(1){transform:translateY(1.75px) rotate(45deg)}
+.pdTopRight .pdTopMenu.open span:nth-child(3){transform:translateY(-1.75px) rotate(-45deg)}
+/* header icons v3: head and shoulders with the white notch like the reference, thicker search lens and handle */
+.pdTopRight .pdTopIc:first-child{transform:translateY(.6px);margin-right:-1.35px}
+.pdTopRight .pdTopSearch{transform:translateY(-2.1px);margin-right:-1.3px}
+.pdTopRight .pdTopSearch svg{width:18.2px;height:18.2px}
+.pdTopRight .pdTopSearch svg circle{stroke-width:2.65}
+.pdTopRight .pdTopSearch svg path{stroke-width:3}
+/* header icons v4: search stroke weight and handle matched to the reference */
+.pdTopRight .pdTopSearch svg circle{stroke-width:2.25}
+.pdTopRight .pdTopSearch svg path{stroke-width:2.55}
+ v5: search lens a little smaller, ring a little thicker, handle slightly thinner (measured from the reference) */
+.pdTopRight .pdTopSearch svg circle{stroke-width:2.35}
+.pdTopRight .pdTopSearch svg path{stroke-width:2.47}
+/* user icon: body centred under the head (a 0.27px shift) */
+.pdTopRight .pdTopIc:first-child svg{overflow:visible}
+/* header search icon v6: traced from the reference, so positions are re-aligned */
+.pdTopRight .pdTopSearch svg{width:18.18px;height:18.18px}
+.pdTopRight .pdTopSearch{transform:translateY(-2.35px);margin-right:-1.11px}
+.pdTopRight .pdTopIc:first-child{margin-right:-1.16px}
+/* header search icon v7: a little bolder than the reference so it reads clearly from a distance */
+.pdTopRight .pdTopSearch svg path{stroke:currentColor;stroke-width:.75;stroke-linejoin:round;paint-order:stroke}
+.pdTopRight .pdTopSearch{color:#000}
+.pdTopRight .pdTopSearch{color:#000}
+.pdTopRight .pdTopSearch .astraSearch{display:block;position:relative;width:18.18px;height:18.18px}
+.pdTopRight .pdTopSearch .astraSearch::before{content:"\e8b6";font-family:AstraIc;font-size:22px;line-height:1;font-weight:400;font-style:normal;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);-webkit-font-smoothing:antialiased}
+/* ref-hamburger: reference icon is a 24x28 svg scaled into 15x15 -> bars 12.86 x 2.14, gap 2.14, colour #ccc2c2 */
+.pdTopRight .pdTopMenu{border-color:#ccc2c2;gap:2.14px}
+.pdTopRight .pdTopMenu span{width:12.86px;height:2.14px;border-radius:.54px;background:#ccc2c2}
+.pdTopRight .pdTopMenu.open span{width:11.4px;height:1.2px;border-radius:0}
+.pdTopRight .pdTopMenu.open span:nth-child(1){transform:translateY(1.67px) rotate(45deg)}
+.pdTopRight .pdTopMenu.open span:nth-child(3){transform:translateY(-1.67px) rotate(-45deg)}
