@@ -205,6 +205,42 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const [probes, setProbes] = useState({})
   const [galAnim, setGalAnim] = useState(false)
   useEffect(() => { const id = setTimeout(() => setGalAnim(true), 700); return () => clearTimeout(id) }, [])
+  const galRef = useRef(null)
+  const galAnimId = useRef(0)
+  const galH = useRef(null)
+  const curRatio = ratios[index] || probes[index] || 1
+  const curRatioRef = useRef(curRatio)
+  curRatioRef.current = curRatio
+  // photo area height animates like the reference (0.5s, swing easing, restarts from the current height)
+  useEffect(() => {
+    const el = galRef.current
+    if (!el) return
+    const target = el.clientWidth / curRatio
+    const from = galH.current == null ? el.getBoundingClientRect().height : galH.current
+    const still = !galAnim || Math.abs(from - target) < 1 || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+    if (still) { el.style.height = target + 'px'; galH.current = target; return }
+    const t0 = performance.now()
+    const step = now => {
+      const p = Math.min(1, (now - t0) / 500)
+      const h = from + (target - from) * (0.5 - Math.cos(p * Math.PI) / 2)
+      el.style.height = h + 'px'
+      galH.current = h
+      if (p < 1) galAnimId.current = requestAnimationFrame(step)
+    }
+    galAnimId.current = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(galAnimId.current)
+  }, [curRatio, galAnim])
+  useEffect(() => {
+    function onResize() {
+      const el = galRef.current
+      if (!el) return
+      const h = el.clientWidth / curRatioRef.current
+      el.style.height = h + 'px'
+      galH.current = h
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
   function setRatio(i, el) {
     if (!el || !el.naturalWidth || !el.naturalHeight) return
     const r = el.naturalWidth / el.naturalHeight
@@ -404,7 +440,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
       <div className={`panel${shown ? ' show' : ''}`} id="productPanel" ref={panelRef} style={{ overscrollBehavior: 'contain' }}>
         <PdTopBar onBack={closeProduct} />
 
-        <div className="pdGallery" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ aspectRatio: ratios[index] || probes[index] || 1, background: '#fff', transition: galAnim ? 'aspect-ratio .5s cubic-bezier(.445,.05,.55,.95)' : 'none' }}>
+        <div className="pdGallery" ref={galRef} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} style={{ aspectRatio: ratios[index] || probes[index] || 1, background: '#fff' }}>
           <div className="pdGalleryTrack" style={{ transform: `translateX(-${index * 100}%)` }}>
             {images.length ? images.map((url, i) => (
               <div className="pdSlide" key={i}>
