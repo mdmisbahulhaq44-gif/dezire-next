@@ -34,6 +34,13 @@ function boldLabel(text, k) {
   return m ? <><strong>{m[1]}</strong>{m[2] ? ' ' + m[2] : ''}</> : text
 }
 
+const CHART_ORDER = ['length', 'chest', 'sleeve', 'shoulder', 'collar', 'waist', 'hip', 'leg_opening']
+// measurement pairs in the reference order (Length, Chest, Sleeve length, Shoulder, Collar ...), unknown ones last in their own order
+function chartPairs(row) {
+  const rank = k => { const i = CHART_ORDER.indexOf(k); return i < 0 ? 99 : i }
+  return Object.entries(row || {}).map((e, i) => [e, i]).sort((a, b) => rank(a[0][0]) - rank(b[0][0]) || a[1] - b[1]).map(x => x[0])
+}
+
 function fmtWeight(g) {
   const n = Number(g)
   if (!g || !(n > 0)) return 'N/A'
@@ -156,6 +163,8 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
   const chart = product.size_chart && typeof product.size_chart === 'object' ? product.size_chart : {}
   const chartSizes = sortSizes(Object.keys(chart))
   const hasChart = chartSizes.length > 0
+  const chartLabel = k => (k === 'sleeve' && lang !== 'bn') ? 'Sleeve length' : t(LABELS[k] || (String(k).charAt(0).toUpperCase() + String(k).slice(1).replace(/_/g, ' ')))
+  const chartText = row => chartPairs(row).map(([k, v]) => `${chartLabel(k)}- ${v}`).join(' | ')
 
   // category path without the product's own name (some products have it as the last category, which showed the name twice)
   const gender = product.gender === 'women' ? 'women' : 'men'
@@ -463,7 +472,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
             <div className="pdMeasureTop">
               <b>{t('Measurements (in inches):')}</b>
               {chartSizes.map(s => (
-                <div key={s}><span>{s}</span> : {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</div>
+                <div key={s}><span>{s}</span> : {chartText(chart[s])}</div>
               ))}
             </div>
           )}
@@ -509,7 +518,7 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
               {size && <button type="button" className="pdSizeClear" onClick={() => setSize('')}>{t('Clear')}</button>}
               {measurements.length > 0 && (
                 <div style={{ marginTop: 10, fontSize: 12, color: '#333', lineHeight: 1.6 }}>
-                  <b>{size}</b>: {measurements.map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}
+                  <b>{size}</b>: {chartText(chart[size])}
                 </div>
               )}
             </div>
@@ -555,8 +564,8 @@ export default function ProductDetail({ product, related, saleEndsAt, colors = [
                       {product.features && renderDesc(product.features.split('\n').filter(Boolean).map(l => '• ' + l.replace(/^[•\-*·]\s*/, '')).join('\n'), t)}
                       {hasChart && (<>
                         <p className="rfSp" aria-hidden="true">&nbsp;</p>
-                        <p><strong>{t('Measurements (in inches):')}</strong></p>
-                        {chartSizes.map(s => (<p key={s}>{s} : {Object.entries(chart[s]).map(([k, v]) => `${t(LABELS[k] || k)}- ${v}`).join(' | ')}</p>))}
+                        <p><strong>{lang === 'bn' || !catSegs.length ? t('Measurements (in inches):') : `Measurements of ${catSegs[catSegs.length - 1]} (in inches):`}</strong></p>
+                        <p>{chartSizes.map((s, i) => (<span key={s}>{i > 0 && <br />}{s} : {chartText(chart[s])}</span>))}</p>
                       </>)}
                     </div>
                   </div></div></div>
