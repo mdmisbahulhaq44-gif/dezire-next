@@ -2464,3 +2464,6 @@ footer.gf .gfList a{display:flex;align-items:center;color:#4e4e4e;font-size:inhe
 .pdMeasureTop{margin:0 0 14.592px;font-size:14.592px;font-weight:300;line-height:1.88;color:#000}
 .pdMeasureTop p{margin:0 0 7.296px}
 .pdMeasureTop strong{font-weight:700}
+
+/* gorurghash match: all headings use Lato Light */
+h1,h2,h3,h4,h5,h6{font-family:LatoRef,var(--font-q),var(--font-hind),sans-serif;font-weight:300}
