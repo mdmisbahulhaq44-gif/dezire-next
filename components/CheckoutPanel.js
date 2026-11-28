@@ -56,6 +56,12 @@ export default function CheckoutPanel() {
   const [authChecked, setAuthChecked] = useState(false)
   const [walletBal, setWalletBal] = useState(0)
   const [useWallet, setUseWallet] = useState(true)
+  const [showCoupon, setShowCoupon] = useState(false)
+  const [tried, setTried] = useState(false)
+  const [seen, setSeen] = useState({})
+  const tt = x => t(x) || x
+  const seeIt = k => setSeen(o => ({ ...o, [k]: true }))
+  const bad = (k, v) => ((tried || seen[k]) && !String(v || '').trim() ? ' ckBad' : '')
 
   // wallet balance of the logged-in customer (the server re-checks it when the order is placed)
   useEffect(() => {
@@ -203,6 +209,7 @@ export default function CheckoutPanel() {
   async function placeOrder(e) {
     e.preventDefault()
     if (busy) return
+    setTried(true)
     if (!uid) { showToast(t('Please log in to place your order.')); return }
     if (!cart.length) { showToast(t('Your cart is empty.')); return }
     const nm = name.trim()
@@ -324,161 +331,216 @@ export default function CheckoutPanel() {
 
   return (
     <>
-      <div className={`panel${show ? ' show' : ''}`}>
-        <div className="panelHead">
-          <h2>{t('Checkout')}</h2>
+      <div className={`panel ckPanel${show ? ' show' : ''}`}>
+        <div className="ckHead">
+          <h2 className="ckTitle">{tt('Checkout')}</h2>
           <button className="close" onClick={closePanel}>×</button>
         </div>
 
         {authChecked && !uid && (
-          <div style={{ padding: '36px 22px', textAlign: 'center' }}>
-            <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 10 }}>{t('Log in to place your order')}</div>
-            <div style={{ fontSize: 13, color: '#666', lineHeight: 1.7, marginBottom: 20 }}>{t('Create a free account or log in to continue. Your cart is saved and will be waiting for you.')}</div>
-            <button type="button" className="btn" style={{ width: '100%' }} onClick={() => openAccount()}>{t('LOG IN / SIGN UP')}</button>
+          <div className="ckInfo">
+            {tt('Returning customer?')}{' '}
+            <a href="#" onClick={e => { e.preventDefault(); openAccount() }}>{tt('Click here to login')}</a>
           </div>
         )}
-        <form className="form" onSubmit={placeOrder} style={authChecked && !uid ? { display: 'none' } : undefined}>
-          <label>{t('FULL NAME')}</label>
-          <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder={t('Your full name')} required />
 
-          <label>{t('PHONE NUMBER')}</label>
-          <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="01XXXXXXXXX" required />
+        {authChecked && uid && (
+          <>
+            <div className="ckInfo">
+              {tt('Have a coupon?')}{' '}
+              <a href="#" onClick={e => { e.preventDefault(); setShowCoupon(v => !v) }}>{tt('Click here to enter your code')}</a>
+            </div>
+            {showCoupon && (
+              <div className="ckCoupon">
+                <p>{tt('If you have a coupon code, please apply it below.')}</p>
+                <p className="ckRow"><input type="text" className="ckIn" value={couponInput} onChange={e => setCouponInput(e.target.value)} placeholder={tt('Coupon code')} /></p>
+                <p className="ckRow"><button type="button" className="ckBtn" onClick={applyCoupon}>{tt('Apply coupon')}</button></p>
+                {couponMsg.text && <p className={`ckMsg${couponMsg.bad ? ' bad' : ''}`}>{cErr(couponMsg.text)}</p>}
+              </div>
+            )}
+          </>
+        )}
 
-          <label>{t('DELIVERY METHOD')}</label>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <label className="optionPick">
-              <input type="radio" name="coMethod" checked={method === 'home_delivery'} onChange={() => setMethod('home_delivery')} />
-              <span className="opIcon">{homeIcon}</span>
-              <span className="opTitle">{t('Home Delivery')}</span>
-            </label>
-            <label className="optionPick">
-              <input type="radio" name="coMethod" checked={method === 'pickup'} onChange={() => setMethod('pickup')} />
-              <span className="opIcon">{storeIcon}</span>
-              <span className="opTitle">{t('Store Pickup')}</span>
-              <span style={{ marginLeft: 'auto', fontSize: 12, fontWeight: 600, color: 'var(--muted)' }}>{t('Free')}</span>
-            </label>
+        {authChecked && !uid && (
+          <p className="ckNote">{tt('Log in or create a free account to place your order. Your cart is saved and will be waiting for you.')}</p>
+        )}
+
+        <form className="ckForm" onSubmit={placeOrder} noValidate style={authChecked && !uid ? { display: 'none' } : undefined}>
+          <h3 className="ckH3">{tt('Billing details')}</h3>
+
+          <p className="ckRow">
+            <label htmlFor="coName">{tt('Name')}&nbsp;<span className="ckReq">*</span></label>
+            <input id="coName" type="text" className={`ckIn${bad('name', name)}`} value={name} onChange={e => setName(e.target.value)} onBlur={() => seeIt('name')} autoComplete="name" />
+          </p>
+
+          <p className="ckRow">
+            <label htmlFor="coPhone">{tt('Phone')}&nbsp;<span className="ckReq">*</span></label>
+            <input id="coPhone" type="tel" className={`ckIn${bad('phone', phone)}`} value={phone} onChange={e => setPhone(e.target.value)} onBlur={() => seeIt('phone')} autoComplete="tel" />
+          </p>
+
+          <div className="ckRow">
+            <label>{tt('Delivery method')}</label>
+            <ul className="ckPayList ckShipList">
+              <li>
+                <label className="ckOpt">
+                  <input type="radio" name="coMethod" checked={method === 'home_delivery'} onChange={() => setMethod('home_delivery')} />
+                  {tt('Home Delivery')}
+                </label>
+              </li>
+              <li>
+                <label className="ckOpt">
+                  <input type="radio" name="coMethod" checked={method === 'pickup'} onChange={() => setMethod('pickup')} />
+                  {tt('Store Pickup')} ({tt('Free')})
+                </label>
+              </li>
+            </ul>
           </div>
 
           {method === 'home_delivery' ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <label htmlFor="coRegion">{t('REGION')}</label>
-              <select id="coRegion" aria-label="Select Region" value={region} onChange={e => onRegion(e.target.value)}>
-                <option value="">{t('Select Region')}</option>
-                {regions.map(r => <option key={r.id} value={r.label}>{r.label}</option>)}
-              </select>
+            <>
+              <p className="ckRow">
+                <label htmlFor="coRegion">{tt('Region')}&nbsp;<span className="ckReq">*</span></label>
+                <select id="coRegion" className={`ckIn ckSel${bad('region', region)}`} aria-label="Select Region" value={region} onChange={e => onRegion(e.target.value)} onBlur={() => seeIt('region')}>
+                  <option value="">{t('Select Region')}</option>
+                  {regions.map(r => <option key={r.id} value={r.label}>{r.label}</option>)}
+                </select>
+              </p>
 
-              <label htmlFor="coCity">{t('CITY')}</label>
-              <select id="coCity" aria-label="Select City" value={city} onChange={e => onCity(e.target.value)} disabled={!cities.length}>
-                <option value="">{t('Select City')}</option>
-                {cities.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
-              </select>
+              <p className="ckRow">
+                <label htmlFor="coCity">{tt('City / District')}&nbsp;<span className="ckReq">*</span></label>
+                <select id="coCity" className={`ckIn ckSel${bad('city', city)}`} aria-label="Select City" value={city} onChange={e => onCity(e.target.value)} onBlur={() => seeIt('city')} disabled={!cities.length}>
+                  <option value="">{t('Select City')}</option>
+                  {cities.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
+                </select>
+              </p>
 
-              <label htmlFor="coArea">{t('AREA')}</label>
-              <select id="coArea" aria-label="Select Area" value={area} onChange={e => onArea(e.target.value)} disabled={!areas.length}>
-                <option value="">{t('Select Area')}</option>
-                {areas.map(a => <option key={a.id} value={a.label}>{a.label}</option>)}
-              </select>
+              <p className="ckRow">
+                <label htmlFor="coArea">{tt('Area / Thana')}&nbsp;<span className="ckReq">*</span></label>
+                <select id="coArea" className={`ckIn ckSel${bad('area', area)}`} aria-label="Select Area" value={area} onChange={e => onArea(e.target.value)} onBlur={() => seeIt('area')} disabled={!areas.length}>
+                  <option value="">{t('Select Area')}</option>
+                  {areas.map(a => <option key={a.id} value={a.label}>{a.label}</option>)}
+                </select>
+              </p>
 
               {areas.length > 0 && (
-                <>
-                  <label htmlFor="coSubArea">{t(city === DHAKA_CITY ? 'SUB AREA (OPTIONAL)' : 'UNION')}</label>
-                  <select id="coSubArea" aria-label={city === DHAKA_CITY ? 'Select Subarea' : 'Select Union'} value={subArea} onChange={e => setSubArea(e.target.value)} disabled={!subAreas.length}>
+                <p className="ckRow">
+                  <label htmlFor="coSubArea">
+                    {city === DHAKA_CITY ? tt('Sub area') : tt('Union')}&nbsp;
+                    {city === DHAKA_CITY && <span className="ckOptional">({tt('optional')})</span>}
+                  </label>
+                  <select id="coSubArea" className="ckIn ckSel" aria-label={city === DHAKA_CITY ? 'Select Subarea' : 'Select Union'} value={subArea} onChange={e => setSubArea(e.target.value)} disabled={!subAreas.length}>
                     <option value="">{t(city === DHAKA_CITY ? 'Select Subarea' : 'Select Union')}</option>
                     {subAreas.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
-                </>
+                </p>
               )}
 
-              <label>{t('ADDRESS')}</label>
-              <textarea value={address} onChange={e => setAddress(e.target.value)} placeholder={t('Type House, Flat No, Road')} />
+              <p className="ckRow">
+                <label htmlFor="coAddress">{tt('Street address')}&nbsp;<span className="ckReq">*</span></label>
+                <textarea id="coAddress" rows="2" className={`ckIn${bad('address', address)}`} value={address} onChange={e => setAddress(e.target.value)} onBlur={() => seeIt('address')} placeholder={tt('House number and street name')} />
+              </p>
 
-              <label>{t('ADDRESS TYPE')}</label>
-              <div className="radioRow" style={{ gap: 10 }}>
-                <label className="optionPick" style={{ flex: 1 }}>
-                  <input type="radio" name="coAddrType" checked={addrType === 'Home'} onChange={() => setAddrType('Home')} />
-                  <span className="opIcon">{homeIcon}</span>
-                  <span className="opTitle">{t('Home')}</span>
-                </label>
-                <label className="optionPick" style={{ flex: 1 }}>
-                  <input type="radio" name="coAddrType" checked={addrType === 'Office'} onChange={() => setAddrType('Office')} />
-                  <span className="opIcon">{officeIcon}</span>
-                  <span className="opTitle">{t('Office')}</span>
-                </label>
+              <div className="ckRow">
+                <label>{tt('Address type')}</label>
+                <ul className="ckPayList ckShipList">
+                  <li>
+                    <label className="ckOpt">
+                      <input type="radio" name="coAddrType" checked={addrType === 'Home'} onChange={() => setAddrType('Home')} />
+                      {tt('Home')}
+                    </label>
+                  </li>
+                  <li>
+                    <label className="ckOpt">
+                      <input type="radio" name="coAddrType" checked={addrType === 'Office'} onChange={() => setAddrType('Office')} />
+                      {tt('Office')}
+                    </label>
+                  </li>
+                </ul>
               </div>
-            </div>
+            </>
           ) : (
-            <div style={{ fontSize: 12, color: 'var(--muted)', background: '#f5f4f1', padding: 14, borderRadius: 8 }}>
-              {t('Collect your order from our store:')}<br />
-              <b>{settings.pickup_address}</b>
+            <div className="ckPayBox ckPickBox">
+              <p>{tt('Collect your order from our store:')}<br /><b>{settings.pickup_address}</b></p>
             </div>
           )}
 
-          <label>{t('ORDER NOTE (OPTIONAL)')}</label>
-          <textarea value={note} onChange={e => setNote(e.target.value)} placeholder={t('Any special instruction...')} />
+          <h3 className="ckH3">{tt('Additional information')}</h3>
+          <p className="ckRow">
+            <label htmlFor="coNote">{tt('Order notes')}&nbsp;<span className="ckOptional">({tt('optional')})</span></label>
+            <textarea id="coNote" rows="2" className="ckIn" value={note} onChange={e => setNote(e.target.value)} placeholder={tt('Notes about your order, e.g. special notes for delivery.')} />
+          </p>
 
-          <label>{t('COUPON CODE (OPTIONAL)')}</label>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <input type="text" value={couponInput} onChange={e => setCouponInput(e.target.value)} placeholder={t('Enter coupon code')} style={{ flex: 1, textTransform: 'uppercase' }} />
-            <button type="button" className="btn light" style={{ padding: '14px 18px' }} onClick={applyCoupon}>{t('APPLY')}</button>
-          </div>
-          <div style={{ fontSize: 11, color: couponMsg.bad ? 'var(--red)' : 'var(--gold)' }}>{cErr(couponMsg.text)}</div>
+          <h3 className="ckH3 ckReviewHead">{tt('Your order')}</h3>
+          <div className="ckReview">
+            <table className="ckTable">
+              <thead>
+                <tr><th>{tt('Product')}</th><th>{tt('Subtotal')}</th></tr>
+              </thead>
+              <tbody>
+                {cart.map(i => (
+                  <tr key={`${i.id}-${i.size || ''}`}>
+                    <td className="ckName">
+                      <div className="ckNameIn">
+                        <div>{i.name}{i.size ? ` - ${i.size}` : ''}</div>&nbsp;
+                        <strong>×&nbsp;{i.qty}</strong>
+                      </div>
+                    </td>
+                    <td>৳{(Number(i.price) * i.qty).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <tfoot>
+                <tr><th>{tt('Subtotal')}</th><td>৳{cartSubtotal.toLocaleString()}</td></tr>
+                {discount > 0 && (
+                  <tr><th>{tt('Discount')} ({coupon.code})</th><td>−৳{discount.toLocaleString()}</td></tr>
+                )}
+                <tr><th>{tt(delivery.label)}</th><td>{delivery.isFree ? tt('FREE') : '৳' + delivery.charge.toLocaleString()}</td></tr>
+                {walletUse > 0 && (
+                  <tr><th>{tt('Wallet')}</th><td>−৳{walletUse.toLocaleString()}</td></tr>
+                )}
+                <tr><th>{tt('Total')}</th><td><strong>৳{payable.toLocaleString()}</strong></td></tr>
+              </tfoot>
+            </table>
 
-          {walletBal > 0 && (
-            <label style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 14px', border: '1px solid #ddd', borderRadius: 14, fontSize: 13, letterSpacing: 0, color: '#111', marginTop: 4 }}>
-              <input type="checkbox" checked={useWallet} onChange={e => setUseWallet(e.target.checked)} style={{ width: 18, height: 18, flex: 'none', padding: 0 }} />
-              <span style={{ flex: 1 }}>{t('Use my wallet balance')}</span>
-              <b>৳{walletBal.toLocaleString()}</b>
-            </label>
-          )}
-
-          <div style={{ marginTop: 8 }}>
-            <div className="summaryRow"><span>{t('Subtotal')}</span><span>৳{cartSubtotal.toLocaleString()}</span></div>
-            {discount > 0 && (
-              <div className="summaryRow" style={{ color: 'var(--gold)' }}>
-                <span>{t('Discount')} ({coupon.code})</span><span>−৳{discount.toLocaleString()}</span>
-              </div>
+            {walletBal > 0 && (
+              <p className="ckRow ckWallet">
+                <label className="ckOpt">
+                  <input type="checkbox" checked={useWallet} onChange={e => setUseWallet(e.target.checked)} />
+                  {tt('Use my wallet balance')} <b>৳{walletBal.toLocaleString()}</b>
+                </label>
+              </p>
             )}
-            <div className="summaryRow">
-              <span>{t(delivery.label)}</span>
-              <span>{delivery.isFree ? t('FREE') : '৳' + delivery.charge.toLocaleString()}</span>
+
+            <div className="ckPayment">
+              <ul className="ckPayList">
+                <li>
+                  <label className="ckOpt">
+                    <input type="radio" name="coPayment" checked={payment === 'COD'} onChange={() => setPayment('COD')} />
+                    {tt('Cash on delivery')}
+                  </label>
+                  {payment === 'COD' && (
+                    <div className="ckPayBox"><p>{tt('Pay with cash upon delivery.')}</p></div>
+                  )}
+                </li>
+                <li>
+                  <label className="ckOpt">
+                    <input type="radio" name="coPayment" checked={payment === 'ONLINE'} onChange={() => setPayment('ONLINE')} />
+                    {tt('Pay Online')}
+                    {(settings.payment_logos || []).map((url, i) => (
+                      <img key={i} src={url} alt="" onError={e => { e.currentTarget.style.display = 'none' }} />
+                    ))}
+                  </label>
+                  {payment === 'ONLINE' && (
+                    <div className="ckPayBox"><p>{tt('Pay securely by Credit/Debit card, Internet banking or Mobile banking through Paymently.')}</p></div>
+                  )}
+                </li>
+              </ul>
+
+              <button type="submit" className="ckPlace" disabled={busy || cart.length === 0}>
+                {busy ? tt('Placing order...') : tt('Place order')}
+              </button>
             </div>
-            {walletUse > 0 && (
-              <div className="summaryRow" style={{ color: 'var(--gold)' }}>
-                <span>{t('Wallet')}</span><span>−৳{walletUse.toLocaleString()}</span>
-              </div>
-            )}
-            <div className="summaryRow total"><span>{t('Total')}</span><span>৳{payable.toLocaleString()}</span></div>
           </div>
-
-          <label>{t('PAYMENT METHOD')}</label>
-          <div className="payMethodList">
-            <label className="payOption">
-              <div className="payOptionHead">
-                <input type="radio" name="coPayment" checked={payment === 'COD'} onChange={() => setPayment('COD')} />
-                <span className="payOptionTitle">{t('Cash on Delivery')}</span>
-              </div>
-              <div className="payOptionDesc">{t('Pay in cash when your order arrives at the door.')}</div>
-            </label>
-            <label className="payOption">
-              <div className="payOptionHead">
-                <input type="radio" name="coPayment" checked={payment === 'ONLINE'} onChange={() => setPayment('ONLINE')} />
-                <span className="payOptionTitle">{t('Pay Online')}</span>
-              </div>
-              <div className="payOptionDesc" style={{ display: 'block' }}>
-                🔒 {t('Secured & verified by Paymently')}
-                <div className="paymentLogosRow">
-                  {(settings.payment_logos || []).map((url, i) => (
-                    <img key={i} src={url} alt="" onError={e => { e.currentTarget.style.display = 'none' }} />
-                  ))}
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <button type="submit" className="btn light" disabled={busy || cart.length === 0}
-            style={{ border: '1.5px solid #111', padding: '14px 46px', marginTop: 10 }}>
-            {busy ? t('PLACING ORDER...') : t('PLACE ORDER')}
-          </button>
         </form>
       </div>
 

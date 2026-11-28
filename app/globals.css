@@ -2502,3 +2502,61 @@ h1,h2,h3,h4,h5,h6{font-family:LatoRef,var(--font-q),var(--font-hind),sans-serif;
 
 /* gorurghash match: centred note between the category tiles and the product grid */
 .homeNote{margin:68px 10px 0;text-align:center;font-family:PoppinsRef,Poppins,var(--font-hind),sans-serif;font-weight:300;font-size:16px;line-height:1.3;color:#3a3a3a;letter-spacing:0;text-transform:none}
+
+
+/* ===== ref-checkout: gorurghash checkout copied (yellow -> black) ===== */
+@font-face{font-family:'WooRef';src:url('/fonts/WooCommerce.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+.ckPanel{background:#f9f9f9;padding:20px 20px 48px;font-size:14.592px;line-height:1.88;font-weight:300;color:#000}
+.ckPanel,.ckPanel input,.ckPanel select,.ckPanel textarea,.ckPanel button{font-family:var(--font-q),'Poppins',sans-serif}
+.ckHead{position:relative;display:block;border:0;padding:0;margin:0 0 22px;text-align:center}
+.ckHead .close{position:absolute;right:-6px;top:-6px}
+.ckTitle{font-family:'LatoRef',sans-serif;font-weight:300;font-size:36.48px;line-height:51.072px;color:#54595f;margin:34px 0 0;padding:0;letter-spacing:0;text-transform:none}
+.ckPanel a{color:#4e4e4e;text-decoration:none}
+.ckPanel a:hover{color:#191970}
+.ckInfo{display:flex;flex-wrap:wrap;position:relative;padding:1em 2em 1em 3.5em;margin:0 0 2em;background:rgb(247,246,247);color:#515151;border-top:3px solid #4e4e4e;list-style:none}
+.ckInfo::before{font-family:'WooRef';content:"\e028";display:inline-block;position:absolute;top:1em;left:1.5em;color:#4e4e4e;line-height:1.88;font-weight:400}
+.ckNote{margin:0 0 14.592px;color:#000}
+.ckCoupon{padding:0 0 29.184px}
+.ckCoupon p{margin:0 0 7.296px}
+.ckCoupon .ckRow{margin:0 0 10px}
+.ckMsg{font-size:13px;color:#4e4e4e}
+.ckMsg.bad{color:#d65d67}
+.ckH3{font-family:'LatoRef',sans-serif;font-size:17.5104px;line-height:22.7635px;font-weight:700;color:#333;padding:20px 0 14px;margin:0 0 20px;border:0;border-bottom:1px solid #ddd;letter-spacing:0;text-transform:none}
+.ckForm{margin:0}
+.ckRow{margin:0 0 7.296px;padding:0;display:block}
+.ckRow>label{display:block;font-size:14.592px;font-weight:300;line-height:1.88;letter-spacing:0;text-transform:none;color:#000;margin:0}
+.ckReq{color:red;font-weight:700;border:0;text-decoration:none}
+.ckOptional{font-weight:300;color:#000}
+.ckIn{display:block;width:100%;box-sizing:border-box;margin:0;padding:10.944px;background:#fff;border:1px solid #ddd;border-radius:0;color:#666;font-size:14.592px;font-weight:300;line-height:1.88;outline:0;box-shadow:none;-webkit-appearance:none;appearance:none}
+.ckIn:focus{border-color:#4e4e4e;color:#111;background-color:#fff}
+.ckIn.ckBad{border-color:#d65d67}
+textarea.ckIn{resize:vertical;min-height:78.75px}
+.ckSel{padding:7.296px 29.184px 7.296px 11.6736px;border-radius:3px;line-height:normal;background:#fff url("data:image/svg+xml,%3Csvg class='ast-arrow-svg' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='26px' height='16.043px' fill='%234B4F58' viewBox='57 35.171 26 16.043' enable-background='new 57 35.171 26 16.043' xml:space='preserve' %3E%3Cpath d='M57.5,38.193l12.5,12.5l12.5-12.5l-2.5-2.5l-10,10l-10-10L57.5,38.193z'%3E%3C/path%3E%3C/svg%3E") no-repeat 98% 50%/11.6736px auto}
+.ckSel:disabled{opacity:1}
+.ckPayList{list-style:none;margin:0 0 14.592px;padding:0;text-align:left}
+.ckPayList li{margin:0;padding:0;line-height:2;font-weight:400;text-align:left}
+.ckPayList li input{cursor:pointer;margin:0 14.592px 0 0;width:13px;height:13px}
+.ckOpt{display:inline;cursor:pointer;font-weight:400;letter-spacing:0;text-transform:none;color:#000;font-size:14.592px}
+.ckPayList li img{vertical-align:middle;margin:-2px 0 0 .5em;padding:0;position:relative;box-shadow:none;max-height:2em;width:auto;max-width:25%}
+.ckShipList{margin:0 0 7.296px}
+.ckPayBox{position:relative;box-sizing:border-box;width:100%;padding:1em;margin:1em 0;font-size:.92em;line-height:1.5;font-weight:400;border-radius:2px;background:#efefef;color:#515151}
+.ckPayBox::before{content:"";display:block;border:1em solid #efefef;border-right-color:transparent;border-left-color:transparent;border-top-color:transparent;position:absolute;top:-1em;left:0;margin:-1em 0 0 2em}
+.ckPayBox p{margin:0}
+.ckPickBox{margin:0 0 14.592px}
+.ckReviewHead{margin:0;padding:26.2656px 26.2656px 17.5104px;border:2px solid #ddd;border-bottom:0}
+.ckReview{padding:0 29.184px;border:2px solid #ddd;border-top:0;margin:0 0 20px}
+.ckTable{width:100%;margin:0 0 21.888px;border-collapse:separate;border-spacing:0;border:0;table-layout:auto}
+.ckTable th{font-weight:600;font-size:14.592px;line-height:1.88;padding:14px 12px 14px 0;text-align:left;border:0;border-bottom:1px solid #ddd;vertical-align:middle;color:#000;letter-spacing:0;text-transform:none;background:transparent}
+.ckTable td{font-weight:300;font-size:14.592px;line-height:1.88;padding:10px 10px 10px 0;text-align:right;border:0;border-bottom:1px solid #ddd;vertical-align:middle;color:#000;background:transparent}
+.ckTable thead th:last-child{text-align:right}
+.ckTable td.ckName{text-align:left;font-weight:500}
+.ckNameIn{display:flex;flex-wrap:wrap}
+.ckNameIn strong{font-weight:400}
+.ckTable tfoot tr:last-child td strong{font-weight:700}
+.ckWallet{margin:0 0 14.592px}
+.ckPlace{display:block;width:100%;box-sizing:border-box;margin:0 0 14.592px;padding:8px;background:#000;color:#fff;border:0;border-radius:12px;font-size:14.592px;font-weight:700;line-height:14.592px;letter-spacing:1px;text-transform:none;cursor:pointer;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.ckPlace:hover{background:#222;color:#fff}
+.ckPlace:disabled{opacity:.5;cursor:not-allowed}
+.ckBtn{display:block;width:100%;box-sizing:border-box;margin:0;padding:10px 5px;background:#000;color:#fff;border:0;border-radius:12px;font-size:14.592px;font-weight:700;line-height:19.6992px;letter-spacing:1px;text-transform:none;cursor:pointer;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.ckBtn:hover{background:#222;color:#fff}
+.ckPayment{padding-bottom:29.184px}
