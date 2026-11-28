@@ -1,0 +1,77 @@
+=== CUSTOM CSS ===
+
+.ast-cart-menu-wrap .count, .ast-cart-menu-wrap .count:after {
+    border-color: #aaaaaa;
+    color: #aaaaaa;
+}
+
+input::placeholder {
+    overflow: visible;
+}
+
+div {
+    overflow: visible;
+    }
+
+option::text {
+	overflow: visible;
+}
+
+table td.value {
+	overflow: visible;
+}
+
+.woocommerce div.product form.cart .variations td {
+	overflow: visible;
+}
+
+.value-items {
+  overflow: visible;
+}
+
+html {
+	overflow: visible;
+}
+.stock { display:none; }
+
+
+
+=== BUTTON SIZE/WEIGHT RULES ===
+ .ast-button,.button,button,input,select,textarea{color:#808285;font-weight:400;font-size:100%;margin:0;vertical-align:baseline}
+ .button.fileinput-button input{position:absolute;top:0;right:0;margin:0;opacity:0;-ms-filter:"alpha(opacity=0)";font-size:200px;direction:ltr;cursor:pointer}
+ .hfe-woo-products-wrapper .hfe-product-add-to-cart .button{width: auto;
+	min-width: 100px;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;}
+ .woocommerce-js .widget_price_filter .price_slider_amount .button{font-size:.9em!important;padding:8px 18px}
+ .woocommerce-js .widget_price_filter .price_slider_amount .button{font-size:1.15em;float:left}
+ .woocommerce-js div.product form.cart .group_table .button{padding:.8em;font-weight:400;font-size:.9rem;white-space:nowrap}
+ [data-section*=section-fb-button-] .ast-builder-button-size-lg .ast-custom-button,[data-section*=section-hb-button-] .ast-builder-button-size-lg .ast-custom-button{font-size:19px;padding:20px 50px}
+ [data-section*=section-fb-button-] .ast-builder-button-size-md .ast-custom-button,[data-section*=section-hb-button-] .ast-builder-button-size-md .ast-custom-button{font-size:17px;padding:15px 45px}
+ [data-section*=section-fb-button-] .ast-builder-button-size-sm .ast-custom-button,[data-section*=section-hb-button-] .ast-builder-button-size-sm .ast-custom-button{font-size:15px;padding:10px 40px}
+ [data-section*=section-fb-button-] .ast-builder-button-size-xl .ast-custom-button,[data-section*=section-hb-button-] .ast-builder-button-size-xl .ast-custom-button{font-size:21px;padding:25px 55px}
+ [data-section*=section-fb-button-] .ast-builder-button-size-xs .ast-custom-button,[data-section*=section-hb-button-] .ast-builder-button-size-xs .ast-custom-button{font-size:13px;padding:8px 20px}
+ body,button,input,select,textarea,.ast-button,.ast-custom-button{font-family:'Poppins',sans-serif;font-weight:300;font-size:16px;font-size:1rem;line-height:var(--ast-body-line-height,1.88em);}
+ f-canvas-sidebar .widget_price_filter .price_slider_amount .button,.woocommerce-page .astra-off-canvas-sidebar-wrapper .astra-off-canvas-sidebar .widget_shopping_cart .woocommerce-mini-cart__buttons a{padding:10px 15px;font-weight:400}
+ min.css?ver=4.14.1' media='all' />
+<style id="woocommerce-general-inline-css">
+
+					.woocommerce-js a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce #respond input#submit{font-size: 100%;
+						line-height: 1;
+						text-decoration: none;
+						overflow: visible;
+						padding: 0.5em 0.75em;
+						font-weight: 700;
+						border-radius: 3px;
+						color: $secondarytext;
+						background-color: $secondary;
+						border: 0;}
