@@ -105,7 +105,9 @@ export default async function HomePage() {
 
       <div id="new" style={{ scrollMarginTop: 46 }} />
 
-      <div className="homeGrid" style={{ padding: "20px 11.3px 40px" }}>
+      <h4 className="homeNote"><T>Cash on delivery in all 64 districts!</T></h4>
+
+      <div className="homeGrid" style={{ padding: "20px 10px 40px" }}>
         <ProductGrid products={products} noPreview showCat />
       </div>
 
