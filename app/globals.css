@@ -2491,3 +2491,7 @@ h1,h2,h3,h4,h5,h6{font-family:LatoRef,var(--font-q),var(--font-hind),sans-serif;
 
 /* gorurghash match: home product names use Lato Light */
 .homeGrid .product h3{font-family:LatoRef,PoppinsRef,Poppins,var(--font-hind),sans-serif}
+
+/* gorurghash match: home "Select options" button shape (colour stays black) */
+.homeGrid .product .buyNow{display:inline-block;height:auto;margin-top:14.592px;margin-bottom:7.296px;padding:7.296px 10.944px;border:1px solid #111;border-radius:12px;background:#111;color:#fff;font-family:inherit;text-align:left;white-space:normal;text-transform:none;letter-spacing:0;line-height:0}
+.homeGrid .product .buyNow::after{content:"Select options";display:inline;font-size:14.592px;font-weight:700;letter-spacing:1px;line-height:1.3;color:#fff;white-space:normal}
